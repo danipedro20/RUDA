@@ -1,4 +1,0 @@
-RUDA
-====
-
-Proyecto de Tesis
