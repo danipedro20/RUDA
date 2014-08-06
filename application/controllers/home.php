@@ -9,7 +9,8 @@ class Home extends CI_Controller {
     function index() {
         $datos['carreras'] = $this->Carrera_model->lista_usuario();
         $datos['titulo'] = 'Ruda - Gestion de Aula';
-        $this->load->view('index',$datos);
+        $datos['contenido'] = 'index';
+        $this->load->view('plantillas/plantilla', $datos);
     }
     
     
