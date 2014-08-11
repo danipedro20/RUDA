@@ -1,6 +1,7 @@
 <?php
-
+//AQUI INICIA EL MODELADO DE LO QUE SE VA A PEDIR A LA BD DEL SISTEMA
 class Carrera_model extends CI_Model {
+    //Tambien inicializamos un constructor 
     public function __construct() {
         parent::__construct();
     }

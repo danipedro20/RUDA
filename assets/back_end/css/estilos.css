@@ -16,7 +16,7 @@ a:hover {
     margin: 0 auto;
 }
 header {
-    background: url('../img/fondo.png');
+    background: url('../img/fondoadmin.png');
     color: hsl(0,0%,100%);
     height: 200px;
 }

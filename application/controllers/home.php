@@ -1,6 +1,7 @@
 <?php
+//AQUI INICIA EL CONTROLADOR DE LA PAGINA PRINCIPAL
 class Home extends CI_Controller {
-    
+    //Se crea siempre un constructor al inicial un controlador
     public function __construct() {
         parent::__construct();
         $this->load->model('Carrera_model');
@@ -14,4 +15,4 @@ class Home extends CI_Controller {
     }
     
     
-}
+}  

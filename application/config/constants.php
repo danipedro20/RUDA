@@ -39,6 +39,15 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
+define('IS_SECURE', (string) (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'])== 'ON'));
+
+/*
+ * ---------------------------------------------
+ * Document root folders
+ * ---------------------------------------------
+ * These constants use existing location information to work out web root, etc.
+ */
+
 // Base URL (keeps this crazy sh*t out of the config.php
 if (isset($_SERVER['HTTP_HOST'])) {
     $base_url = 'http'
