@@ -21,7 +21,7 @@
                     <li><a href="#">Nosotros</a></li>
                     <li><a href="#">Registrarse</a></li>
                     <li><a href="#">Iniciar Sesión</a></li>
-                    <li><a href="http://ruda.edu.py/adhome">admin</a></li>
+                    <li><a href="http://ruda.edu.py/admin/adhome/index2">admin</a></li>
                 </ul>
             </section>
         </nav>
