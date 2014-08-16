@@ -1,23 +1,27 @@
 <aside>
     <ul>
-        <li>Menú Lateral 1</li>
-        <li><a href="#">Submenu 1</a></li>
-        <li><a href="#">Submenu 2</a></li>
-        <li><a href="#">Submenu 3</a></li>
-        <li><a href="#">Submenu 4</a></li>
-        <li><a href="#">Submenu 5</a></li>
+        <li>Aulas</li>
+        <li><a href="#">Crear Aulas</a></li>
+        <li><a href="#">Plan de Estudios</a></li>
+        <li><a href="#">Profesores</a></li>
+        <li><a href="#">Alumnos</a></li>
+        <li><a href="#">Tareas</a></li>
     </ul>
     <ul>
-        <li>Menú Lateral 2</li>
-        <li><a href="#">Submenu 6</a></li>
-        <li><a href="#">Submenu 7</a></li>
-        <li><a href="#">Submenu 8</a></li>
-        <li><a href="#">Submenu 9</a></li>
+        <li>Usuarios</li>
+        <li><a href="#">Registrar</a></li>
+        <li><a href="#">Listar</a></li>
+        <li><a href="#">Asignar Aulas</a></li>
+        <li><a href="#">Asignar Tareas</a></li>
     </ul>
     <ul>
-        <li>Menú Lateral 3</li>
-        <li><a href="#">Submenu 10</a></li>
-        <li><a href="#">Submenu 11</a></li>
-        <li><a href="#">Submenu 12</a></li>
+        <li>Informes</li>
+        <li><a href="#">Aulas</a></li>
+        <li><a href="#">Profesores</a></li>
+        <li><a href="#">Alumnos</a></li>
+        <li><a href="#">Tareas</a></li>
+        <li><a href="#">Materias</a></li>
+        <li><a href="#">Notas</a></li>
+        <li><a href="#">Asistencias</a></li>
     </ul>
 </aside>
