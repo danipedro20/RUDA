@@ -20,7 +20,7 @@
                     <li><a href="#">Aulas</a></li>
                     <li><a href="#">Profesores</a></li>
                     <li><a href="#">Tareas</a></li>
-                    <li><a href="#">Cerrar Sesión</a></li>
+                    <li><a href="http://ruda.edu.py/home/index">Cerrar Sesión</a></li>
                 </ul>
             </section>
         </nav>

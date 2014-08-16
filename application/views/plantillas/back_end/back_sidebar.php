@@ -1,7 +1,7 @@
 <aside>
     <ul>
         <li>Aulas</li>
-        <li><a href="#">Crear Aulas</a></li>
+        <li><a href="http://ruda.edu.py/admin/reg_aula/nueva_aula">Crear Aulas</a></li>
         <li><a href="#">Plan de Estudios</a></li>
         <li><a href="#">Profesores</a></li>
         <li><a href="#">Alumnos</a></li>

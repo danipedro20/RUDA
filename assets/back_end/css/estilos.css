@@ -134,3 +134,9 @@ footer a:hover {
     color: hsl(0,0%,100%);
     text-decoration: underline;
 }
+form {
+   text-align: center;
+   alignment-baseline: central;
+   border-left-color: #E13300;
+        
+}
