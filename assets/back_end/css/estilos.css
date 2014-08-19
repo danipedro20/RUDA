@@ -111,14 +111,14 @@ aside ul li a:hover {
     text-align: center;
         
 }
-.contenido h2 {
+/*.contenido h2 {
     margin-top: 0;
     color: hsl(192,7%,45%);
     font-size: 20px;
     text-align: center;
     font-weight: bold;
     text-decoration: none;
-}
+}*/
 .contenido article h2 {
     margin-top: 0;
 }
@@ -134,9 +134,41 @@ footer a:hover {
     color: hsl(0,0%,100%);
     text-decoration: underline;
 }
-form {
-   text-align: center;
-   alignment-baseline: central;
-   border-left-color: #E13300;
-        
-}
+form{
+    background: hsl(189,10%,97%);
+    padding: 25px;
+    text-align: right;
+    width: 800px;
+    border: 2px transparent;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    box-shadow: inset 0 0 10px #D0D0D0;
+    }
+    form h2{
+        text-align: center;
+        color: hsl(192,7%,45%);
+        font-weight: normal;
+        font-size: 30pt;
+        margin: 20px 0;
+    }
+    input {
+        padding-top: auto;
+        text-align: left;
+        width: 50%;
+        padding: 5px;
+        margin-right: 80px !important;
+        margin: 10px;
+        }
+        label {
+            float: left;
+            margin-left: 80px !important;
+            font-weight: bolder;
+            margin: 15px;
+        }
+    select{
+        margin-right: 80px !important;
+        width: 50%;
+        margin: 10px;
+        padding: 5px;
+    }
