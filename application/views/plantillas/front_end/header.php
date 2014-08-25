@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Gestión de Aula</title>
-        <link href="http://ruda.edu.py/assets/front_end/css/estilos.css" rel="stylesheet" type="text/css">
+        <link href="http://ruda.edu.py/assets/front_end/css/frontestilos.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <header>
@@ -15,13 +15,13 @@
         <nav>
             <section class="contenedor">
                 <ul>
-                    <li><a href="http://ruda.edu.py/home/index">Inicio</a></li>
+                    <li><a href="http://ruda.edu.py/frontend/home/index">Inicio</a></li>
                     <li><a href="#">Carreras</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Nosotros</a></li>
-                    <li><a href="#">Registrarse</a></li>
-                    <li><a href="http://ruda.edu.py/logueo/usuarios_control/index">Iniciar Sesión</a></li>
-                    <li><a href="http://ruda.edu.py/admin/adhome/index2">admin</a></li>
+                    <li><a href="http://ruda.edu.py/frontend/usuario_registro/index">Registrarse</a></li>
+                    <li><a href="http://ruda.edu.py/frontend/usuarios_control/index">Iniciar Sesión</a></li>
+                    <li><a href="http://ruda.edu.py/backend/adhome/index2">admin</a></li>
                 </ul>
             </section>
         </nav>
