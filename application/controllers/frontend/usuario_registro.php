@@ -6,7 +6,8 @@ class Usuario_registro extends CI_Controller {
         parent::__construct();
     }
 
-    public function registarme() {
+    public function registro() {
+       
         $datos['titulo'] = 'Ruda - Registrarse';
         $datos['contenido'] = 'registro_view';
         $this->load->view('plantillas/plantilla', $datos);
