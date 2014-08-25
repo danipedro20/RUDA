@@ -12,10 +12,4 @@ class Usuarios_control extends CI_Controller {
         $this->load->view('plantillas/plantilla', $datos);
     }
 
-    public function registarme() {
-        $datos['titulo'] = 'Ruda - Registrarse';
-        $datos['contenido'] = 'registro_view';
-        $this->load->view('plantillas/plantilla', $datos);
-    }
-
 }
