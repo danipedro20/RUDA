@@ -1,7 +1,8 @@
 <section class="contenido">
 
-        <h1>Iniciar Sesion</h1>
+        
         <form>
+            <h2>Iniciar Sesion</h2>
             <label for="Usuario">Usuario</label>
             <input type="text" name="user"/> <br/>
             <label for="Contraseña">Contraseña</label>
