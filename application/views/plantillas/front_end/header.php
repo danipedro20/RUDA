@@ -15,7 +15,7 @@
         <nav>
             <section class="contenedor">
                 <ul>
-                    <li><a href="#">Inicio</a></li>
+                    <li><a href="http://ruda.edu.py/home/index">Inicio</a></li>
                     <li><a href="#">Carreras</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Nosotros</a></li>
