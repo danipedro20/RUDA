@@ -1,7 +1,8 @@
 <section class="contenido">
 
-    <h1>Registrarse</h1>
     <form>
+        <h2>Registrarse</h2>
+        
         <label for="usunombre">Nombre:</label>
         <input type="text" name="usunombre"/> <br/>
 
