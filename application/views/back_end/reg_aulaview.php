@@ -1,6 +1,6 @@
 <section class="contenido">
    
-    <form action="reg_aula.php" method="post">
+    <form action="reg_aula.php" method="post" id="frmAula">
         <h2>AULA</h2>
         <fieldset>
             <label for="lbl_aulanombre">Nombre: </label>
@@ -34,6 +34,6 @@
 
     </form>
        
-       
+  </section>     
 
 
