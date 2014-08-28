@@ -6,10 +6,9 @@ class Reg_aula extends CI_Controller{
     }
     
     function nueva_aula() {
-        $datos['titulo'] = 'Ruda - Crear AULA';
+        $datos['titulo'] = 'Ruda - Aulas';
         $datos['contenido'] = 'reg_aulaview';
         $this->load->view('plantillas/adplantilla', $datos);
-        $this->load->helper('form');
     }
 
 }
