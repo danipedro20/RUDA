@@ -5,13 +5,14 @@ class Registro_control extends CI_Controller {
     public function __construct() {
         parent::__construct();
 
-        $this->load->model('frontend/registro_model');
+        $this->load->model('registro_model');
     }
 
     public function registro() {
 
         $datos['titulo'] = 'Ruda - Registrarse';
         $datos['contenido'] = 'registro_view';
+        $datos['mensaje']='';
         $this->load->view('plantillas/plantilla', $datos);
     }
 
@@ -26,13 +27,14 @@ class Registro_control extends CI_Controller {
             $this->form_validation->set_message('very_user', 'El Usuario con ese  %s ya existe');
             if ($this->form_validation->run() != FALSE) {
                 $this->registro_model->add_usuario();
-                $data = array('mensaje' => 'El Usuario se ha Registrado');
                 $datos['titulo'] = 'Ruda - Inicio Sesion';
+                $datos['mensaje']='el usuario ha sido insertado correctamente';
                 $datos['contenido'] = 'registro_view';
-                $this->load->view('plantillas/plantilla', $data, $datos);
+                $this->load->view('plantillas/plantilla', $datos);
             } else {
                 $datos['titulo'] = 'Ruda - Inicio Sesion';
                 $datos['contenido'] = 'registro_view';
+                 $datos['mensaje']='el usuario NO  ha sido insertado correctamente';
                 $this->load->view('plantillas/plantilla', $datos);
             }
         }
