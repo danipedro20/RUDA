@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Gestión de Aula</title>
+        <title><?php echo $titulo ?></title>
         <link href="http://ruda.edu.py/assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
     </head>
     <body>
