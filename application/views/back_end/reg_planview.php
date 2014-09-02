@@ -1,18 +1,26 @@
 <section class="contenido">
 
-<form action="<?php echo base_url(); ?> /backend/reg_plan/insertar_plan" method="post">
+<!--<form action="/backend/reg_plan/insertarplan" method="POST">-->
         
-    <h2>Plan de Estudio</h2>
-    
     <fieldset>
+        <h2>Plan de Estudio</h2>
+        <?php echo form_open("backend/reg_plan/insertarplan") ?>
             
-            <label for="lbl_plannombre">Nombre del Plan: </label>
-            <input type="text" name="inp_nombreplan" placeholder="Nombre del Plan de Estudio" required="" />
+            <label name="lbl_plannombre">Nombre del Plan: </label>
+            <input type="text" name="inp_nombreplan" placeholder="Nombre del Plan de Estudio" required="" value='<?php echo set_value('inp_nombreplan') ?>' />
+            
+            <!-- este input lo usaremos como referencia para la validacion -->
+            <input type="hidden" name="grabar" value="si" />
+            
+            <!--            En esta linea estamos configurando como se va a mostrar el error si algo no esta bien-->
+            <font color='red' style='font-weight: bold; font-size: 14px; text-decoration: underline'><?php echo validation_errors(); ?></font>
 
-            <input type="submit" value="Guardar" />
+            <input type="submit" name="btnguardarplan" value="Guardar" />
+            
+           <?php echo form_close() ?> 
 
-        </fieldset>
-</form>
+    </fieldset>
+<!--</form>-->
 
 </section>
 
