@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -87,4 +88,10 @@ usu_au.idaula=au.idaula  where idusuario='$z'");
 ?>
 
 
+=======
+<section class="contenido">
+    <h1>Sección en Construcción</h1>
+    
+</section>
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
 

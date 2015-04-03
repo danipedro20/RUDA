@@ -20,7 +20,12 @@
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Nosotros</a></li>
                     <li><a href="<?php echo base_url()?>frontend/registro_control/registro">Registrarse</a></li>
+<<<<<<< HEAD
                     <li><a href="<?php echo base_url()?>frontend/usuarios_control/logueo">Iniciar Sesión</a></li>
+=======
+                    <li><a href="<?php echo base_url()?>frontend/usuarios_control/index">Iniciar Sesión</a></li>
+                    <li><a href="<?php echo base_url()?>backend/adhome/index2">admin</a></li>
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
                 </ul>
             </section>
         </nav>

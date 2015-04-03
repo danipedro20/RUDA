@@ -1,6 +1,10 @@
 <?php
+<<<<<<< HEAD
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+=======
+
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
 class Registro_model extends CI_Model {
 
     public function __construct() {

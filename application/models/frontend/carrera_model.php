@@ -1,6 +1,9 @@
 <?php
+<<<<<<< HEAD
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+=======
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
 //AQUI INICIA EL MODELADO DE LO QUE SE VA A PEDIR A LA BD DEL SISTEMA
 class Carrera_model extends CI_Model {
     //Tambien inicializamos un constructor 
