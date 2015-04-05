@@ -4,12 +4,20 @@ body {
     font-size: 14px;
 }
 a {
+<<<<<<< HEAD
     color: hsl(120,100%,100%);
     text-decoration: none;
 }
 
 a:hover {
     color: hsl(120,0%,80%);
+=======
+    color: hsl(192,56%,53%);
+    text-decoration: none;
+}
+a:hover {
+    color: hsl(192,56%,38%);
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
     text-decoration: underline;
 }
 .contenedor {

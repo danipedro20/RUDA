@@ -1,6 +1,10 @@
 <aside>
     <ul>
         <li>Aulas</li>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
         <li><a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Crear Catedras</a></li>
         <li><a href="<?php echo base_url() ?>backend/asigcatedras_control/successasignacion">Asignar catedras a Profesores</a></li>
         <li><a href="<?php echo base_url() ?>backend/insplan_control/planestudio">Crear Plan de Estudio</a></li>
@@ -15,6 +19,22 @@
         <li><a href="<?php echo base_url() ?>backend/reg_usuario/registrousuario">Registrar</a></li>
         <li><a href="#">Perfiles</a></li>
         <li><a href="<?php echo base_url() ?>backend/listarusuarios/listarusuario">Listar</a></li>
+<<<<<<< HEAD
+=======
+=======
+        <li><a href="http://ruda.edu.py/backend/reg_aula/nueva_aula">Crear Aulas</a></li>
+        <li><a href="http://ruda.edu.py/backend/reg_plan/RegistrarPlan">Plan de Estudios</a></li>
+        <li><a href="#">Profesores</a></li>
+        <li><a href="#">Alumnos</a></li>
+        <li><a href="#">Tareas</a></li>
+    </ul>
+    <ul>
+        <li>Usuarios</li>
+        <li><a href="http://ruda.edu.py/backend/reg_usuario/registrousuario">Registrar</a></li>
+        <li><a href="#">Perfiles</a></li>
+        <li><a href="http://ruda.edu.py/backend/listarusuarios/listarusuario">Listar</a></li>
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
         <li><a href="#">Asignar Aulas</a></li>
         <li><a href="#">Asignar Tareas</a></li>
     </ul>
@@ -28,6 +48,14 @@
         <li><a href="#">Notas</a></li>
         <li><a href="#">Asistencias</a></li>
     </ul>
+<<<<<<< HEAD
 
 
+=======
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
 </aside>

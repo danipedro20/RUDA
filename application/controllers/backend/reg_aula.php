@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 class Reg_aula extends CI_Controller {
@@ -13,10 +17,27 @@ class Reg_aula extends CI_Controller {
         $datos['arrDatosplanes'] = $this->reg_aula_model->selplanes();
         $datos['arrDatoscarreras'] = $this->reg_aula_model->selcarreras();
           $datos['arrDatosalumnos'] = $this->reg_aula_model->selalumno();
+<<<<<<< HEAD
+=======
+=======
+//formulario para registro de aula
+class Reg_aula extends CI_Controller{
+    public function __construct() {
+        parent::__construct();
+    }
+    
+    function nueva_aula() {
+        $datos['titulo'] = 'Ruda - Aulas';
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
         $datos['contenido'] = 'reg_aulaview';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
     public function successaula() {
         $datos['titulo'] = 'Aulas';
         $datos['contenido'] = 'lisaulas_view';
@@ -57,3 +78,10 @@ class Reg_aula extends CI_Controller {
     }
 
 }
+<<<<<<< HEAD
+=======
+=======
+}
+
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9

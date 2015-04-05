@@ -1,10 +1,23 @@
 <?php
+<<<<<<< HEAD
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+=======
+<<<<<<< HEAD
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+=======
+
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
 class Registro_control extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
         $this->load->model('frontend/registro_model');
     }
 
@@ -52,10 +65,51 @@ class Registro_control extends CI_Controller {
                 $insert2 = $this->registro_model->inspregunta($g, $h, $e);
                    redirect(base_url('/frontend/registro_control/successusu/'));
                   
+<<<<<<< HEAD
+=======
+=======
+
+        $this->load->model('registro_model');
+    }
+
+    public function registro() {
+
+        $datos['titulo'] = 'Ruda - Registrarse';
+        $datos['contenido'] = 'registro_view';
+        $datos['mensaje']='';
+        $this->load->view('plantillas/plantilla', $datos);
+    }
+
+    public function registro_very() {
+        if ($this->input->post('submit_registro')) {
+            $this->form_validation->set_rules('usunombre', 'Nombre', 'required|trim|callback_very_user');
+            $this->form_validation->set_rules('usunrocedula', 'Número de cédula', 'required');
+            $this->form_validation->set_rules('usudireccion', 'Dirección', 'required');
+            $this->form_validation->set_rules('usutelefono', 'telefono', 'required');
+            $this->form_validation->set_rules('usuemail', 'Correo', 'required');
+            $this->form_validation->set_rules('usupassword', 'Password', 'required');
+            $this->form_validation->set_message('very_user', 'El Usuario con ese  %s ya existe');
+            if ($this->form_validation->run() != FALSE) {
+                $this->registro_model->add_usuario();
+                $datos['titulo'] = 'Ruda - Inicio Sesion';
+                $datos['mensaje']='el usuario ha sido insertado correctamente';
+                $datos['contenido'] = 'registro_view';
+                $this->load->view('plantillas/plantilla', $datos);
+            } else {
+                $datos['titulo'] = 'Ruda - Inicio Sesion';
+                $datos['contenido'] = 'registro_view';
+                 $datos['mensaje']='el usuario NO  ha sido insertado correctamente';
+                $this->load->view('plantillas/plantilla', $datos);
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
             }
         }
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
     function username_check($nombre) {
         $this->load->model('registro_model');
         if($this->registro_model->username_check($nombre)){
@@ -84,6 +138,18 @@ class Registro_control extends CI_Controller {
             }else{
                 return TRUE;
             }
+<<<<<<< HEAD
+=======
+=======
+    public function very_user($user) {
+        $variable = $this->registro_model->very_user($user);
+        if ($variable == TRUE) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+>>>>>>> 587a410884994d81ace192363fd4848d379c6813
+>>>>>>> 9b7466f99ed7079b09a3a81382941caba8394de9
     }
 
 }
