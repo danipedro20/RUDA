@@ -52,4 +52,3 @@ class Insplan_control extends CI_Controller {
 }
 
             }
-    
