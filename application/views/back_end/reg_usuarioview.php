@@ -50,3 +50,4 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
    <?php }else 
       redirect(base_url('/frontend/usuarios_control/logueo/'));
 ?>
+

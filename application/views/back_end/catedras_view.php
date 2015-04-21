@@ -16,6 +16,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <input type="text" name="cat_denominacion" placeholder="Nombre de catedra" required="" value='<?php echo set_value('cat_denominacion') ?>' />
         <label name="lbl_cat_diascatedra">Dias de catedra </label>
         <input type="text" name="cat_diascatedra" placeholder="Dia de Catedra" required="" value='<?php echo set_value('cat_diascatedra') ?>' />
+        <input type="hidden"  id="dire" name="dire"  value= <?php echo $_SERVER['HTTP_REFERER'];?>  />
          
         <!-- este input lo usaremos como referencia para la validacion -->
         <input type="hidden" name="grabar" value="si" />

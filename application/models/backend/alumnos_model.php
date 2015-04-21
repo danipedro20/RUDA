@@ -28,6 +28,11 @@ join usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios as profesor
     }
 
     public function seltareas() {
+        $z = $this->session->userdata('id');
+        $consulta = $this->db->query("select aulas.idaula from aulas join usu_au on
+aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario where usuarios.idusuario='$z';");
+        $fila = $consulta->row_array();
+        $k = $fila['idaula'];
         $b = $_POST['SEL'];
 
         $this->db->select('idcatedra')
@@ -36,8 +41,9 @@ join usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios as profesor
         $row = $query->row_array();
         $idtar = $row['idcatedra'];
 
-        $query = $this->db->query("select tareas.idtarea,tareas.tar_descripcion from tareas 
-left join catedras on tareas.idcatedra=catedras.idcatedra where catedras.idcatedra='$idtar'");
+        $query = $this->db->query("select tareas.idtarea,tareas.tar_descripcion from tareas join
+catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
+usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$idtar';");
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row)
                 $arrDatostarea[htmlspecialchars($row->idtarea, ENT_QUOTES)] = htmlspecialchars($row->tar_descripcion, ENT_QUOTES);
@@ -61,14 +67,58 @@ left join catedras on tareas.idcatedra=catedras.idcatedra where catedras.idcated
                 ->from('tareas');
         $query2 = $this->db->get();
         $query3 = $query2->row();
-      $j= $query3->tar_rutaarchivo;
-      $h=$query3->tar_nombrearchivo;
-    
+        $j = $query3->tar_rutaarchivo;
+        $h = $query3->tar_nombrearchivo;
+
 
         $datos = file_get_contents("$j"); // Leer el contenido del archivo
         $nombre = "$h";
 
         force_download($nombre, $datos);
+    }
+
+    public function editregistro($a, $c, $d, $e) {
+        $data = array(
+            'usu_nombre' => $a,
+            'usu_direccion' => $c,
+            'usu_telefono' => $d,
+            'usu_email' => $e
+        );
+
+        $this->db->where('idusuario', $this->session->userdata('id'));
+        $this->db->update('usuarios', $data);
+    }
+
+    public function editinscrip($a) {
+        $data = array(
+            'usu_nombre' => $a,
+        );
+
+        $this->db->where('usu_nombre', $this->session->userdata('nombre'));
+        $this->db->update('inscripciones', $data);
+    }
+
+    function correo_check($correo) {
+        $this->db->select('usu_email')
+                ->where('usu_email', $correo);
+        $query = $this->db->get('usuarios');
+        $row = $query->row_array();
+        $ingresado = $row['usu_email'];
+        if ($query->num_rows() > 0) {
+            $this->db->select('usu_email')
+                    ->where('idusuario', $this->session->userdata('id'));
+            $query1 = $this->db->get('usuarios');
+            $row = $query1->row_array();
+            $actual = $row['usu_email'];
+
+            if ($actual == $ingresado) {
+                return FALSE;
+            } else {
+                return TRUE;
+            }
+        } else {
+            return FALSE;
+        }
     }
 
 }

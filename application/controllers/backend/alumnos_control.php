@@ -9,8 +9,6 @@ class Alumnos_control extends CI_Controller {
         parent::__construct();
         $this->load->library('table');
         $this->load->model('backend/alumnos_model');
-     
-        
     }
 
     public function successalumnosplan() {
@@ -18,7 +16,18 @@ class Alumnos_control extends CI_Controller {
         $datos['contenido'] = 'lisaulasalumnos_view';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
-  
+
+    public function verperfil() {
+        $datos['titulo'] = 'Perfil';
+        $datos['contenido'] = 'perfil_view';
+        $this->load->view('plantillas/alumplantilla', $datos);
+    }
+
+    public function editarperfil() {
+        $datos['titulo'] = 'Editar Perfil';
+        $datos['contenido'] = 'ediperfil_view';
+        $this->load->view('plantillas/alumplantilla', $datos);
+    }
 
     public function successalumnostareas() {
         $datos['titulo'] = 'Tareas';
@@ -26,14 +35,59 @@ class Alumnos_control extends CI_Controller {
         $datos['contenido'] = 'alumtarea_view';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
-     public function successalumnoslis() {
+
+    public function successalumnoslis() {
         $datos['titulo'] = 'Tareas';
-         $datos['arrDatostar'] = $this->alumnos_model->seltareas();
+        $datos['arrDatostar'] = $this->alumnos_model->seltareas();
         $datos['contenido'] = 'listareasalumnos_view';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
-     public function Descargar_archivo() {
+
+    public function successedit() {
+        $datos['titulo'] = 'Tareas';
+        $datos['contenido'] = 'successview';
+        $this->load->view('plantillas/alumplantilla', $datos);
+    }
+
+    public function Descargar_archivo() {
         $this->alumnos_model->descarga();
+    }
+
+    public function editar() {
+        if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
+            //si existe el campo oculto llamado grabar creamos las validadciones
+            $this->form_validation->set_rules('usu_nombre', 'Nombre', 'trim|required');
+            $this->form_validation->set_rules('usu_direccion', 'Dirección', 'trim|required');
+            $this->form_validation->set_rules('usu_telefono', 'Teléfono', 'trim|required');
+            $this->form_validation->set_rules('usu_email', 'Email', 'trim|required|valid_email|callback_correo_check');
+            //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
+            $this->form_validation->set_message('required', 'El %s es requerido');
+            if ($this->form_validation->run() == FALSE) {
+                $this->editarperfil();
+            } else {
+                $a = $_POST['usu_nombre'];
+                $b = $_POST['usu_nrocedula'];
+                $c = $_POST['usu_direccion'];
+                $d = $_POST['usu_telefono'];
+                $e = $_POST['usu_email'];
+                $editar = $this->alumnos_model->editregistro($a, $c, $d, $e);
+                $inscreditar = $this->alumnos_model->editinscrip($a);
+                $this->session->set_userdata('nombre', $_POST['usu_nombre']);
+                $this->session->set_userdata('direccion', $_POST['usu_direccion']);
+                $this->session->set_userdata('telefono', $_POST['usu_telefono']);
+                $this->session->set_userdata('email', $_POST['usu_email']);
+                redirect(base_url('/backend/alumnos_control/successedit/'));
+            }
+        }
+    }
+     function correo_check($correo) {
+        $this->load->model('alumnos_model');
+        if ($this->alumnos_model->correo_check($correo)) {
+            $this->form_validation->set_message('correo_check', 'El Correo' . " " . $correo . " " . 'ya esta siendo utilizado');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }

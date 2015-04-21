@@ -13,3 +13,4 @@ class Carrera_model extends CI_Model {
         return $consulta->result();
     } 
 }
+

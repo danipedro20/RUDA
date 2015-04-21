@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -37,9 +38,16 @@ class Inscatedras_control extends CI_Controller {
                 $a = $this->input->post('cat_denominacion');
                 $b = $this->input->post('cat_diascatedra');
 
-                $insert = $this->catedras_model->insecatedra($a, $b);
 
-                redirect(base_url('/backend/inscatedras_control/successcatedra/'));
+                $insert = $this->catedras_model->insecatedra($a, $b);
+                if ($_POST['dire'] == base_url('/backend/planestudio_control/plan')) {
+                    redirect(base_url('/backend/planestudio_control/plan/'));
+                } elseif ($_POST['dire'] == base_url('/backend/asigcatedras_control/asigcatedras')){
+                    
+                    redirect(base_url('/backend/asigcatedras_control/asigcatedras/'));
+                }else{
+                    redirect(base_url('/backend/inscatedras_control/successcatedra/'));
+                }
             }
         }
     }

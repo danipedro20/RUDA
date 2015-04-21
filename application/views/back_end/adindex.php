@@ -29,22 +29,22 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <fieldset>
             <?php
             $z = $this->session->userdata('id');
-            $sql = $this->db->query("select catedras.idcatedra,catedras.cat_denominacion
+            $sql = $this->db->query("select catedras.idcatedra,aulas.idaula
 from aulas as au left join carreras on au.id_carrera=carreras.id_carrera
  join cate_plan on au.idplan=cate_plan.idplan
 join catedras on cate_plan.idcatedra=catedras.idcatedra  join usu_au on
-usu_au.idaula=au.idaula  where idusuario='$z'");
+usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuario='$z'");
             $cont = 0;
             foreach ($sql->result() as $fila) {
                 $g = $fila->idcatedra;
-                $j = $fila->cat_denominacion;
+                $p=$fila->idaula;
                 $this->db->where('idcatedra', $g)
+                        ->where('idaula', $p)
                         ->from('tareas');
                 $query = $this->db->get();
 
                 if ($query->num_rows() > 0) {
                     foreach ($query->result() as $que) {
-                        $a = $que->tar_descripcion;
 
                         $hoy = date('d-m-Y');
                         $fechahoy = date("Y-m-d", strtotime($hoy));
@@ -65,18 +65,18 @@ usu_au.idaula=au.idaula  where idusuario='$z'");
             <h3 ALIGN = CENTER > Perfil:  <?php echo $this->session->userdata('perfil'); ?> </h3>
             <h3 ALIGN = CENTER > id:  <?php echo $z; ?> </h3>
 
-    <?php
-    if ($cont > 0) {
-        ?>
+            <?php
+            if ($cont > 0) {
+                ?>
                 <div id="mini-notification">
 
 
                     <p><?php echo 'Tienes' . " " . $cont . " " . 'tarea/as ' ?></p>
 
                 </div>
-        <?php
-    }
-    ?>
+                <?php
+            }
+            ?>
 
         </fieldset>
     </section>
@@ -85,3 +85,6 @@ usu_au.idaula=au.idaula  where idusuario='$z'");
 } else
     redirect(base_url('/frontend/usuarios_control/logueo/'));
 ?>
+
+
+

@@ -7,24 +7,32 @@ class Profesor_control extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-    $this->load->model('backend/profesor_model');
-      $this->load->library('table');
+        $this->load->model('backend/profesor_model');
+        $this->load->library('table');
     }
-       
 
     public function creartareas() {
+        $datos['titulo'] = 'Ruda - Crear Tarea';
+        $datos['arrDatos'] = $this->profesor_model->veraulas();
+        $datos['contenido'] = 'profetarea_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function tareas() {
         $datos['titulo'] = 'Ruda - Crear Tarea';
         $datos['arrDatos'] = $this->profesor_model->vercatedras();
         $datos['contenido'] = 'tareas_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
-       public function listaralumnos() {
+
+    public function listaralumnos() {
         $datos['titulo'] = 'Ruda - Seleccione Catedra';
         $datos['arrDatosc'] = $this->profesor_model->vercatedras();
         $datos['contenido'] = 'profesorcatedras_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
-     public function lista() {
+
+    public function lista() {
         $datos['titulo'] = 'Ruda - Seleccione Catedra';
         $datos['contenido'] = 'listaalumnos_view';
         $this->load->view('plantillas/profplantilla', $datos);
@@ -63,17 +71,21 @@ class Profesor_control extends CI_Controller {
                     $a = $succ['full_path'];
                     $c = $this->input->post('tar_puntostarea');
                     $d = $this->input->post('tar_descripcion');
+
+
+
                     $insert = $this->profesor_model->instareas($c, $d, $a, $z);
+
                     redirect(base_url('backend/profesor_control/successtarea/'));
                 }
             }
         }
     }
-      public function liscatedras() {
+
+    public function liscatedras() {
         $datos['titulo'] = 'Lista de catedras';
         $datos['contenido'] = 'liscatedras_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
-
 
 }

@@ -41,7 +41,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             foreach ($arrDatoscarreras as $i => $carrera)
                 echo '<option values="', $i, '">', $carrera, '</option>';
             ?> 
-       </select>  <p></p>
+       </select>   <a href="<?php echo base_url() ?>backend/carreras_control/carreras/">Insertar una nueva carrera</a>
+            <p></p><p></p>
         <label for="lbl_plan">Plan de Estudio: </label>
             <select   class="chosen"   name="selplanes"  id="chosen" data-placeholder="Seleccione el Plan..."  required="" style="width: 200px;"> 
           
@@ -49,7 +50,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             foreach ($arrDatosplanes as $i => $plan)
                 echo '<option values="', $i, '">', $plan, '</option>';
             ?> 
-        </select>   <p></p>
+        </select>   <a href="<?php echo base_url() ?>backend/insplan_control/planestudio/">Insertar un Nuevo Plan</a>
+            <p></p>
               <label name="lbl_alunmos">alunmos:</label>
                <p></p>
             <select class="chosen" name="chosen[]" data-placeholder="Seleccione Alunmos..." required=" " style="width: 200px;" multiple="true">

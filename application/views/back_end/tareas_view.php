@@ -38,7 +38,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h1>Crear tarea</h1>
             <form action="<?php echo base_url(); ?>backend/profesor_control/insertarea" method="post" enctype="multipart/form-data" >
 
-
                 <label name="lbl_tar_descripcion">Descripción de la Tarea:</label>
                 <textarea name="tar_descripcion" id="tar_descripcion" cols="35" rows="10" required="" value='<?php echo set_value('tar_descripcion') ?>'></textarea>
                 <label name="lbl_idcatedra">Catedra:</label>
@@ -56,6 +55,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <input type="text" name="tar_puntostarea" placeholder="Puntos de la tarea" required="" value='<?php echo set_value('tar_puntostarea') ?>' />
                 <label for="userfile">Archivo Adjunto:</label>
                 <input type="file" name="userfile"  id="userfile" required=""/>
+                
+                <input type="hidden" id="aula" name="aula"  value='<?php echo $_POST['selAula']?>' />
 
                 <!-- este input lo usaremos como referencia para la validacion -->
                 <input type="hidden" name="grabar" value="si" />

@@ -23,4 +23,3 @@ class Adhome extends CI_Controller {
     }
 
 }
-

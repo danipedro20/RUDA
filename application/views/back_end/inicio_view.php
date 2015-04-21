@@ -12,8 +12,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h3 ALIGN = CENTER > Perfil:  <?php echo $this->session->userdata('perfil'); ?> </h3>
             <h3 ALIGN = CENTER > id:  <?php echo$this->session->userdata('id');; ?> </h3>
 
-
-        </fieldset>
     </section>
 
     <?php

@@ -35,7 +35,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 ?> 
 
             </select>
-            <a href="http://ruda.edu.py/backend/insplan_control/planestudio">Insertar un Nuevo Plan</a>
+            <a href="<?php echo base_url() ?>backend/insplan_control/planestudio">Insertar un Nuevo Plan</a>
             <p></p> 
             <label name="lbl_idcatedra">Catedras:</label>
             <select class="chosen" name="chosen[]" data-placeholder="Seleccione Catedras..." required=" " style="width: 200px;" multiple="true">
@@ -44,7 +44,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                     echo '<option values="', $i, '">', $catedra, '</option>';
                 ?> 
             </select>
-            <a href="http://ruda.edu.py/backend/inscatedras_control/catedra">Insertar una Nueva Catedra</a>
+            <a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Insertar una Nueva Catedra</a>
             <input type="submit" name="btnguardarplan" value="Guardar" />
 
 

@@ -37,7 +37,12 @@ class Carreras_control extends CI_Controller {
             } else {
                 $a = $this->input->post('car_denominacion');
                 $insert = $this->carreras_model->insecarreras($a);
-                redirect(base_url('/backend/carreras_control/successcarreras/'));
+                if ($_POST['dircarr'] == base_url('/backend/reg_aula/nueva_aula')) {
+                    redirect(base_url('/backend/reg_aula/nueva_aula'));
+                } else {
+
+                    redirect(base_url('/backend/carreras_control/successcarreras/'));
+                }
             }
         }
     }

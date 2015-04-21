@@ -14,6 +14,7 @@ class Catedras_model extends CI_Model {
             
         );
         return $this->db->insert('catedras', $data);
+       
     }
 
     function catedra_check($catedra) {

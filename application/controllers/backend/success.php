@@ -12,3 +12,4 @@ class Success extends CI_Controller{
         $this->load->view('plantillas/adplantilla', $datos);
     }
 }
+
