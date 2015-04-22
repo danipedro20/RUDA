@@ -1,4 +1,9 @@
 <aside>
+  <ul>
+        <li>Información General</li>
+        <li><a href="<?php echo base_url() ?>backend/alumnos_control/verperfil">Perfil de Usuario</a></li>
+       
+    </ul>
     <ul>
         <li>Aulas</li>
         <li><a href="<?php echo base_url() ?>backend/alumnos_control/successalumnosplan">Plan de Estudios</a></li>
