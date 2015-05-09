@@ -10,6 +10,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <h2> Lista de Tareas</h2>
         <?php
         $z = $this->session->userdata('id');
+         $l = $this->session->userdata('turno');
         $consulta = $this->db->query("select aulas.idaula from aulas join usu_au on
 aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario where usuarios.idusuario='$z';");
         $fila = $consulta->row_array();
@@ -32,7 +33,7 @@ aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario 
         $id = $row['idcatedra'];
         $consulta = $this->db->query("select tareas.tar_descripcion,tareas.tar_fechaasignacion,tareas.tar_fechaentrega,tareas.tar_puntostarea from tareas join
 catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
-usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$id';");
+usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$id'and tareas.idturno='$l';");
         $tmpl = array(
             'table_open' => '<table border="1" cellpadding="4" cellspacing="10">',
             'heading_row_start' => '<tr>',

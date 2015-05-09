@@ -9,18 +9,20 @@ class Registro_model extends CI_Model {
         parent::__construct();
     }
 
-    public function insregistro($a, $b, $c, $d, $e, $f) {
-        $data = array(
+    public function insregistro($a, $b, $c, $d, $e, $f,$l) {
+ $data = array(
             'usu_nombre' => $a,
             'usu_nrocedula' => $b,
             'usu_direccion' => $c,
             'usu_telefono' => $d,
             'usu_email' => $e,
             'usu_password' => $f,
-            'idperfil' => '1',
+            'idperfil' => '3',
+            'idturno' => $l,
            
         );
         return $this->db->insert('usuarios', $data);
+
     }
 
     public function insinscri($a,$k) {

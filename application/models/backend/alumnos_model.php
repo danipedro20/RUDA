@@ -29,6 +29,7 @@ join usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios as profesor
 
     public function seltareas() {
         $z = $this->session->userdata('id');
+        $l= $this->session->userdata('turno');
         $consulta = $this->db->query("select aulas.idaula from aulas join usu_au on
 aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario where usuarios.idusuario='$z';");
         $fila = $consulta->row_array();
@@ -43,7 +44,7 @@ aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario 
 
         $query = $this->db->query("select tareas.idtarea,tareas.tar_descripcion from tareas join
 catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
-usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$idtar';");
+usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$idtar' and tareas.idturno='$l';");
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row)
                 $arrDatostarea[htmlspecialchars($row->idtarea, ENT_QUOTES)] = htmlspecialchars($row->tar_descripcion, ENT_QUOTES);

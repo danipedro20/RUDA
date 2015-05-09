@@ -3,9 +3,9 @@ header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 ?>
 
-<?php if($this->session->userdata('nombre')){
-?>
-  
+<?php if ($this->session->userdata('nombre')) {
+    ?>
+
     <section class="contenido">
         <link rel="stylesheet" href="<?php echo base_url() ?>/assets/front_end/jquery-ui/jquery-ui.css"/>
         <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
@@ -55,8 +55,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <input type="text" name="tar_puntostarea" placeholder="Puntos de la tarea" required="" value='<?php echo set_value('tar_puntostarea') ?>' />
                 <label for="userfile">Archivo Adjunto:</label>
                 <input type="file" name="userfile"  id="userfile" required=""/>
-                
-                <input type="hidden" id="aula" name="aula"  value='<?php echo $_POST['selAula']?>' />
+               
+                <input type="hidden" id="aula" name="aula"  value='<?php echo $_POST['selAula'] ?>' />
 
                 <!-- este input lo usaremos como referencia para la validacion -->
                 <input type="hidden" name="grabar" value="si" />
@@ -77,6 +77,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         </fieldset>
     </section>
 
-   <?php }else 
-      redirect(base_url('/frontend/usuarios_control/logueo/'));
+<?php
+} else
+    redirect(base_url('/frontend/usuarios_control/logueo/'));
 ?>

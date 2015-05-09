@@ -26,6 +26,7 @@ class Usuario_model extends CI_Model {
             $this->session->set_userdata('direccion', $query->usu_direccion);
             $this->session->set_userdata('telefono', $query->usu_telefono);
             $this->session->set_userdata('cedula', $query->usu_nrocedula);
+             $this->session->set_userdata('turno', $query->idturno);
 
             if ($query->idperfil == 1) {
                 return 'ADMIN';

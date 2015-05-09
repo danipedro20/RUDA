@@ -28,6 +28,7 @@ class Profesor_control extends CI_Controller {
     public function listaralumnos() {
         $datos['titulo'] = 'Ruda - Seleccione Catedra';
         $datos['arrDatosc'] = $this->profesor_model->vercatedras();
+         $datos['arrDatos'] = $this->profesor_model->veraulas();
         $datos['contenido'] = 'profesorcatedras_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
@@ -71,6 +72,7 @@ class Profesor_control extends CI_Controller {
                     $a = $succ['full_path'];
                     $c = $this->input->post('tar_puntostarea');
                     $d = $this->input->post('tar_descripcion');
+                    
 
 
 

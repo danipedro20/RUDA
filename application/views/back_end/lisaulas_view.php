@@ -4,7 +4,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 ?>
 <?php if($this->session->userdata('nombre')){
 ?>
-  
 <section class="contenido">
     <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
      <link rel="stylesheet" href="<?php echo base_url() ?>/assets/front_end/jquery/data-tables/css/jquery.dataTables.css"/>
@@ -18,7 +17,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 "columns": [
                     {"data": "aul_denominacion"},
                     {"data": "car_denominacion"},
-                     {"data": "cat_denominacion"},
+                     {"data": "pla_denominacion"},
+                      {"data": "tur_denominacion"},
                    
                    
                 ]
@@ -41,7 +41,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                         <tr>
                             <th>Aula</th>
                              <th>Carrera</th>
-                            <th>Catedra</th>
+                            <th>Plan de Estudio</th>
+                            <th>Turno</th>
                           
                           
                         </tr>
@@ -49,8 +50,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                     <tbody>
                     </tbody>  
                 </table>
-        <a href="http://ruda.edu.py/backend/reg_aula/nueva_aula">Insertar una Nueva Aula</a>
-        </form>
+        <a href="<?php echo base_url() ?>backend/reg_aula/nueva_aula">Insertar una Nueva Aula</a>
 
     </fieldset>
 </section>

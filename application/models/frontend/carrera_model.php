@@ -12,5 +12,6 @@ class Carrera_model extends CI_Model {
         $consulta = $this->db->get('carreras');
         return $consulta->result();
     } 
+    
 }
 

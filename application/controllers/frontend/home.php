@@ -17,6 +17,4 @@ class Home extends CI_Controller{
         $this->load->view('plantillas/plantilla', $datos);
        
     }
-    
-    
 }  

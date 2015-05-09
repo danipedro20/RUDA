@@ -49,9 +49,6 @@
                     <li><a href="#">Tareas</a></li>
                     <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesión</a></li>
                 </ul>
-                <div id="notification">
-                    <p>The notification has been successfully displayed</p>
-                </div>
             </section>
         </nav>
         <section class="contenedor">

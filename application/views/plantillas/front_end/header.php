@@ -17,10 +17,9 @@
             <section class="contenedor">
                 <ul>
                     <li><a href="<?php echo base_url()?>frontend/home/index">Inicio</a></li>
-                    <li><a href="#">Carreras</a></li>
+                    <li><a href="<?php echo base_url()?>frontend/suscripcion_control/suscripcioncarreras">Carreras Disponibles</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Nosotros</a></li>
-                    <li><a href="<?php echo base_url()?>frontend/registro_control/registro">Registrarse</a></li>
                     <li><a href="<?php echo base_url()?>frontend/usuarios_control/logueo">Iniciar Sesión</a></li>
                 </ul>
             </section>

@@ -45,6 +45,7 @@ class Registro_control extends CI_Controller {
             $this->form_validation->set_rules('usu_telefono', 'Teléfono', 'trim|required');
             $this->form_validation->set_rules('usu_email', 'Email', 'trim|required|callback_email_check|valid_email');
             $this->form_validation->set_rules('usu_pass', 'Contraseña', 'trim|required');
+            $this->form_validation->set_rules('idturno', 'Contraseña', 'required');
             $this->form_validation->set_rules('pregunta', 'Email', 'trim|required');
             $this->form_validation->set_rules('respuesta', 'Contraseña', 'required');
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
@@ -59,18 +60,29 @@ class Registro_control extends CI_Controller {
                 $d = $this->input->post('usu_telefono');
                 $e = $this->input->post('usu_email');
                 $f = md5($this->input->post('usu_pass'));
+                $l = $this->input->post('idturno');
                 $g = $this->input->post('pregunta');
                 $h = md5($this->input->post('respuesta'));
                 $this->db->select('usu_nombre')
                         ->where('usu_nombre', $a);
                 $query1 = $this->db->get('inscripciones');
                 if ($query1->num_rows() > 0) {
-                    $insert = $this->registro_model->insregistro($a, $b, $c, $d, $e, $f);
+                    $insert = $this->registro_model->insregistro($a, $b, $c, $d, $e, $f, $l);
                     $insert2 = $this->registro_model->inspregunta($g, $h, $e);
+                    //enviar correo de solicitud
+                    $z = 'Solicitud De Suscripcion al Sistema RUDA';
+                    $n = 'Usted' . " " . $a . " " . 'solicita suscribirse al aula' . " " . $_POST['regisaula'] . " " . ' de la carrera ' . " " . $_POST['regiscarrera'] . " " . 'su pedido fue recibido coorectamente obtedra respuesta dentro de las 24 u 48 horas siguientes';
+
+                    $this->load->library('email');
+                    $this->email->from('gestiondeaularuda@gmail.com', 'Ruda Gestión de Aulas');
+                    $this->email->to("$e");
+                    $this->email->subject("$z");
+                    $this->email->message("$n");
+                    $this->email->send();
                     redirect(base_url('/frontend/registro_control/successusu/'));
+                    echo $n;
                 } else {
-                     redirect(base_url('/frontend/registro_control/registrofail/'));
-                    
+                    redirect(base_url('/frontend/registro_control/registrofail/'));
                 }
             }
         }

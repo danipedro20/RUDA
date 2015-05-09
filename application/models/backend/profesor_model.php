@@ -11,13 +11,13 @@ class Profesor_model extends CI_Model {
 
     public function vercatedras() {
         $a = $this->session->userdata('id');
-        $b = $_POST['selAula'];
+     
         $query = $this->db->query("select catedras.idcatedra,catedras.cat_denominacion
 from catedras  
 join cate_plan on catedras.idcatedra=cate_plan.idcatedra
 join plan_estudios on cate_plan.idplan=plan_estudios.idplan join aulas on plan_estudios.idplan=aulas.idplan join usu_cate on catedras.idcatedra=usu_cate.idcatedra join
 usuarios on usu_cate.idusuario=usuarios.idusuario
- where aulas.aul_denominacion='$b' and usuarios.idusuario='$a';");
+ where  usuarios.idusuario='$a';");
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row)
                 $arrDatos[htmlspecialchars($row->idcatedra, ENT_QUOTES)] = htmlspecialchars($row->cat_denominacion, ENT_QUOTES);
@@ -47,7 +47,12 @@ usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios on usu_cate.idus
         $query = $this->db->get('aulas');
             $row = $query->row_array();
             $idau = $row['idaula'];
-        
+         
+             $this->db->select('idturno')
+                ->where('aul_denominacion', $_POST['aula']);
+        $query = $this->db->get('aulas');
+            $row = $query->row_array();
+            $idturno = $row['idturno'];
         
         $this->db->select('idcatedra')
                 ->where('cat_denominacion', $_POST['selCatedras']);
@@ -67,6 +72,7 @@ usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios on usu_cate.idus
                 'tar_rutaarchivo' => $a,
                 'tar_nombrearchivo' => $z,
                 'idaula' => $idau,
+                 'idturno' => $idturno,
          
                
                 

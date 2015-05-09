@@ -7,6 +7,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     ?>
     <section class="contenido">
         <?php
+       $l= $this->session->userdata('turno');
         $d = $this->session->userdata('nombre');
         $this->db->where('usu_nombre', $d)
                 ->from('inscripciones');
@@ -20,6 +21,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         $query = $this->db->get();
         $query = $query->row();
         $k = $query->car_denominacion;
+        
+        $this->db->select('tur_denominacion')
+                ->where('idturno', $l);
+        $query = $this->db->get('turnos');
+        $row = $query->row_array();
+        $turno = $row['tur_denominacion'];
         ?>
 
         <h2 ALIGN = CENTER> Perfil del Usuario </h2>
@@ -28,6 +35,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <h4 ALIGN = Left >Direccion:  <?php echo $this->session->userdata('direccion'); ?> </h4>
         <h4 ALIGN = Left >Correo:  <?php echo $this->session->userdata('email'); ?> </h4>
         <h4 ALIGN = Left >Número de Teléfono:  <?php echo $this->session->userdata('telefono'); ?> </h4>
+        <h4 ALIGN = Left >Turno:  <?php echo $turno; ?> </h4>
         <h4 ALIGN = Left >Fecha de Inscripción:  <?php echo $j; ?> </h5>
             <h4 ALIGN = Left >Carrera:  <?php echo $k; ?> </h4>
             <h4 ALIGN = left ><a href=<?php echo base_url() ?>backend/alumnos_control/editarperfil/" >Editar Perfil</a></h4>

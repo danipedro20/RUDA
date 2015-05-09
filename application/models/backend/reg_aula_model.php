@@ -1,6 +1,8 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 class Reg_aula_model extends CI_Model {
 
     public function __construct() {
@@ -27,19 +29,7 @@ class Reg_aula_model extends CI_Model {
         }
     }
 
-   
-
-    public function selalumno() {
-        $query = $this->db->query('SELECT idusuario,usu_nombre FROM usuarios where idperfil=3');
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatosalumno[htmlspecialchars($row->idusuario, ENT_QUOTES)] = htmlspecialchars($row->usu_nombre, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatosalumno;
-        }
-    }
-
-    public function insaula($c, $d, $a) {
+    public function insaula($c, $d, $a, $e) {
         $this->db->select('id_carrera')
                 ->where('car_denominacion', $_POST['selCarreras']);
         $query1 = $this->db->get('carreras');
@@ -58,42 +48,22 @@ class Reg_aula_model extends CI_Model {
                     'aul_plazashabilitadas' => $a,
                     'id_carrera' => $id,
                     'idplan' => $idplan,
+                    'idturno' => $e,
                 );
                 return $this->db->insert('aulas', $data);
             }
         }
     }
 
-    function aula_check($aula) {
-        $this->db->where('aul_denominacion', $aula);
-        $query = $this->db->get('aulas');
+//    function aula_check($aula) {
+//        $this->db->where('aul_denominacion', $aula);
+//        $query = $this->db->get('aulas');
+//
+//        if ($query->num_rows() > 0) {
+//            return TRUE;
+//        }
+//    }
+//
 
-        if ($query->num_rows() > 0) {
-            return TRUE;
-        }
-    }
-
-    public function inserau_usu($c) {
-
-        $this->db->select('idaula')
-                ->where('aul_denominacion', $c);
-        $query2 = $this->db->get('aulas');
-        $row = $query2->row_array();
-        $idaula = $row['idaula'];
-        $a = $_POST['chosen'];
-        foreach ($a as $indice => $valor) {
-
-            $this->db->select('idusuario')
-                    ->where('usu_nombre', $valor);
-            $query4 = $this->db->get('usuarios');
-            $row = $query4->row_array();
-            $idusuario = $row['idusuario'];
-
-            $sql2 = "INSERT IGNORE INTO usu_au (idusuario,idaula)
-        VALUES (" . $this->db->escape($idusuario) . ", " . $this->db->escape($idaula) . ")";
-
-            $this->db->query($sql2);
-        }
-    }
 
 }
