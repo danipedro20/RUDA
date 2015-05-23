@@ -2,6 +2,7 @@
   <ul>
         <li>Información General</li>
         <li><a href="<?php echo base_url() ?>backend/alumnos_control/verperfil">Perfil de Usuario</a></li>
+        <li><a href="<?php echo base_url() ?>backend/verificacion_control/verificacion">Cambiar contraseña</a></li>
        
     </ul>
     <ul>

@@ -23,10 +23,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         </script>
         <fieldset>
-            <h2>AULA</h2>
-            <?php echo form_open("backend/reg_aula/inseraula") ?>
-            <label for="lbl_aulanombre">Nombre: </label>
+            <h2>AULA Editar</h2>
+            <?php echo form_open("backend/reg_aula/editar_aula") ?>
+            <label for="lbl_aulanombre">Nombre Actual: </label>
             <input type="text" name="aul_denominacion" id="inp_nombreaula" placeholder="Nombre del Aula" required=""  value='<?php echo set_value('aul_denominacion') ?>'/>
+             <label for="lbl_aulanombre">Nombre Nuevo: </label>
+            <input type="text" name="nvo_aul_denominacion" id="inp_nombreaula" placeholder="Nombre del Aula" required=""  value='<?php echo set_value('nvo_aul_denominacion') ?>'/>
 
             <label for="lbl_plazahabilitada">Plaza Habilitadas: </label>
             <input type="text" name="aul_plazahabilitada" id="inp_plazahabilitada" placeholder="Ingrese los lugares habilitados" required="required" value='<?php echo set_value('aul_plazahabilitada') ?>'/>
@@ -62,7 +64,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <!-- este input lo usaremos como referencia para la validacion -->
             <input type="hidden" name="grabar" value="si" />
 
-            <input type="submit" value="Guardar"  />
+            <input type="submit" value="Guardar Cambios"  />
             <?php echo form_close() ?> 
 
         </fieldset>

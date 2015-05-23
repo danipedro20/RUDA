@@ -8,7 +8,8 @@
     <body>
         <header>
             <section class="contenedor">
-				<h1><a href="<?php echo base_url()?>">RUDA</a></h1>
+				<--! comentario de prueba -->
+                <h1><a href="<?php echo base_url()?>">RUDA</a></h1>
                 <p>Sistema de Gestión de Aula</p>
             </section>
         </header>

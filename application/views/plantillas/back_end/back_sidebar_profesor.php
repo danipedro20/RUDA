@@ -1,4 +1,10 @@
 <aside>
+      <ul>
+        <li>Información General</li>
+         <li><a href="<?php echo base_url() ?>backend/profesor_control/verperfil">Perfil de Usuario</a></li>
+        <li><a href="<?php echo base_url() ?>backend/verificacion_control/verificacionprofesor">Cambiar contraseña</a></li>
+       
+    </ul>
     <ul>
         <li>Aulas</li>
        <li><a href="<?php echo base_url()?>backend/profesor_control/liscatedras">Catedras</a></li>

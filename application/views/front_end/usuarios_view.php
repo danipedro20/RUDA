@@ -17,7 +17,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <!-- este input lo usaremos como referencia para la validacion -->
             <input type="hidden" name="ingresar" value="si" />
             <P ALIGN=RIGHT><a href="<?php echo base_url() ?>frontend/recuperacion_control/recuperacion">¿Has olvidado tu contraseña?</a></p>
-            <P ALIGN=RIGHT><a href="<?php echo base_url() ?>frontend/verificacion_control/verificacion">¿Deseas cambiar tu contraseña?</a></p>
             <!--            En esta linea estamos configurando como se va a mostrar el error si algo no esta bien-->
             <font color='red' style='font-weight: bold; font-size: 14px; text-decoration: underline'><?php echo validation_errors(); ?></font>
 

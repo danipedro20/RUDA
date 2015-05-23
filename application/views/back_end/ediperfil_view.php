@@ -13,7 +13,14 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     <fieldset>
 
         <h1>Editar Perfil</h1>
-        <?php echo form_open("backend/alumnos_control/editar ")
+        <?php
+        if ($this->session->userdata('perfil') == 1) {
+            echo form_open("backend/adhome/editar ");
+        } elseif ($this->session->userdata('perfil') == 2) {
+            echo form_open("backend/profesor_control/editar ");
+        } elseif ($this->session->userdata('perfil') == 3) {
+            echo form_open("backend/alumnos_control/editar ");
+        }
         ?>
         <label name="lbl_usu_nombre">Nombre/s y Apellido/s: </label>
         <input type="text" name="usu_nombre" placeholder="Nombre" required="" value='<?php echo $this->session->userdata('nombre'); ?>' />

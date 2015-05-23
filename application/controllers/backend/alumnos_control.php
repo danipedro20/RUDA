@@ -19,7 +19,7 @@ class Alumnos_control extends CI_Controller {
 
     public function verperfil() {
         $datos['titulo'] = 'Perfil';
-        $datos['contenido'] = 'perfil_view';
+        $datos['contenido'] = 'perfilalum_view';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
 
@@ -48,6 +48,13 @@ class Alumnos_control extends CI_Controller {
         $datos['contenido'] = 'successview';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
+    
+    public function sintarea() {
+        $datos['titulo'] = 'Tareas';
+        $datos['contenido'] = 'sintareas_view';
+        $this->load->view('plantillas/alumplantilla', $datos);
+    }
+
 
     public function Descargar_archivo() {
         $this->alumnos_model->descarga();
@@ -66,7 +73,6 @@ class Alumnos_control extends CI_Controller {
                 $this->editarperfil();
             } else {
                 $a = $_POST['usu_nombre'];
-                $b = $_POST['usu_nrocedula'];
                 $c = $_POST['usu_direccion'];
                 $d = $_POST['usu_telefono'];
                 $e = $_POST['usu_email'];

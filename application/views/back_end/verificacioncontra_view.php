@@ -15,7 +15,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     <fieldset>
         <h1>Cambio de Contraseña</h1>
 
-        <form method="post" action=" <?php echo base_url(); ?>frontend/verificacion_control/verificacioncontra">
+        <form method="post" action=" <?php echo base_url(); ?>backend/verificacion_control/verificacioncontra">
             <label name="lbl_usu_email">Email: </label>
             <input type="text" name="usu_email" placeholder="Correo"  required="" id="usu_email" required="" value="<?php echo set_value('usu_email') ?>" />
             <label name="lbl_usu_pass">Contraseña: </label>
@@ -27,7 +27,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <!--            En esta linea estamos configurando como se va a mostrar el error si algo no esta bien-->
             <font color='red' style='font-weight: bold; font-size: 14px; text-decoration: underline'><?php echo validation_errors(); ?></font>
 
-            <input type="submit" name="btningresar" value="Ingresar" />
+            <input type="submit" name="btningresar" value="Guardar Cambios" />
 
 
         </form>

@@ -11,6 +11,5 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 </script>
 <section class="contenido">
     
-    <h1>Contraseña o Email incorrecto</h1>
-      <P ALIGN=CENTER><a href="<?php echo base_url(); ?>frontend/verificacion_control/verificacion">Volver a intentar</a></p>
+    <h2>Esta Catedras No tiene Tareas actualmente</h2>
 </section>
