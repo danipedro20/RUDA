@@ -23,7 +23,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         </script>
         <fieldset>
-            <h2>AULA Editar</h2>
+            <h2> Editar Aula</h2>
             <?php echo form_open("backend/reg_aula/editar_aula") ?>
             <label for="lbl_aulanombre">Nombre Actual: </label>
             <input type="text" name="aul_denominacion" id="inp_nombreaula" placeholder="Nombre del Aula" required=""  value='<?php echo set_value('aul_denominacion') ?>'/>

@@ -14,8 +14,8 @@
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/reg_aula/listar_aulas">Ver Aulas</a></li>
             <li><a href="<?php echo base_url() ?>backend/reg_aula/nueva_aula">Crear Aula</a></li>
-              <li><a href="<?php echo base_url() ?>backend/reg_aula/editaraula">Editar Aula</a></li>
-             <li><a href="<?php echo base_url() ?>backend/reg_aula/eliminaraula">Eliminar Aula</a></li>
+            <li><a href="<?php echo base_url() ?>backend/reg_aula/editaraula">Editar Aula</a></li>
+            <li><a href="<?php echo base_url() ?>backend/reg_aula/eliminaraula">Eliminar Aula</a></li>
             <li><a href="<?php echo base_url() ?>frontend/solicitud_control/versolicitudes">Solicitudes</a></li>
         </ul> 
 </ul>
@@ -27,12 +27,16 @@
             <li><a href="<?php echo base_url() ?>backend/inscatedras_control/elicatedra">Eliminar Catedras</a></li>
             <li><a href="<?php echo base_url() ?>backend/asigcatedras_control/successasignacion">Ver catedras asignadas a Profesores</a></li>
             <li><a href="<?php echo base_url() ?>backend/asigcatedras_control/asigcatedras">Asignar catedras a Profesores</a></li>
+            <li><a href="<?php echo base_url() ?>backend/asigcatedras_control/editarcatedras">Editar catedras asignadas  a Profesores</a></li>
+            <li><a href="<?php echo base_url() ?>backend/asigcatedras_control/eliminarcatedras">Eliminar catedras asignadas  a Profesores</a></li>
         </ul> 
 </ul>
 <ul class="navegador">
     <li><a class="desplegable" title="Plan_estudio">Plan de Estudios</a>
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/insplan_control/planestudio">Crear Plan de Estudio</a></li>
+            <li><a href="<?php echo base_url() ?>backend/insplan_control/editarplanestudio">Editar Plan de Estudio</a></li>
+            <li><a href="<?php echo base_url() ?>backend/insplan_control/eliminarplanestudio">Eliminar Plan de Estudio</a></li>
             <li><a href="<?php echo base_url() ?>backend/planestudio_control/success"> Ver Catedras y Plan de Estudios</a></li>
             <li><a href="<?php echo base_url() ?>backend/planestudio_control/plan"> Agregar Catedras a Plan de Estudios</a></li>
         </ul> 
@@ -40,7 +44,11 @@
 <ul class="navegador">
     <li><a class="desplegable" title="Carreras">Carreras</a>
         <ul class="subnavegador">
+            <li><a href="<?php echo base_url() ?>backend/carreras_control/vercarreras">Ver Carreras</a></li>
             <li><a href="<?php echo base_url() ?>backend/carreras_control/carreras">Crear Carreras</a></li>
+            <li><a href="<?php echo base_url() ?>backend/carreras_control/editarcarreras">Editar Carreras</a></li>
+            <li><a href="<?php echo base_url() ?>backend/carreras_control/eliminarcarreras">Eliminar Carreras</a></li>
+
         </ul> 
 </ul>
 <ul>

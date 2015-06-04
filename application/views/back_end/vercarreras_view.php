@@ -14,10 +14,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         $(document).ready(function() {
             $('#example').dataTable({
-                "ajax": "<?php echo base_url() ?>/assets/funciones.php",
+                "ajax": "<?php echo base_url() ?>/assets/funcioncarreras.php",
                 "columns": [
-                    {"data": "pla_denominacion"},
-                    {"data": "cat_denominacion"},
+                    {"data": "car_denominacion"},
                    
                 ]
 
@@ -32,20 +31,20 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
    
   
     <fieldset>
-        <h1>Lista de Planes de Estudio con sus Catedras</h1>
+        <h1>Lista de Carreras</h1>
        
-                <table id="example" class="display" width="100%" cellspacing="0">
+                <table id="example" class="display" width="50%" cellspacing="1">
                     <thead>
                         <tr>
-                            <th>Plan de Estudio</th>
-                            <th>Catedra</th>
+                            <th>Carreras</th>
+                         
                           
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>  
                 </table>
-        <a href="<?php echo base_url() ?>backend/planestudio_control/plan">Insertar Catedra/as a un Plan de Estudio</a>
+        <a href="<?php echo base_url() ?>backend/carreras_control/carreras">Insertar  una Nueva Carrera</a>
         </form>
 
     </fieldset>

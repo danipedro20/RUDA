@@ -39,7 +39,7 @@
             <header>
                 <section class="contenedor">
 
-                    <h1><a href="<?php echo base_url() ?>">RUDA</a></h1>
+                    <h1><a href="<?php echo base_url() ?>backend/adhome/index2">RUDA</a></h1>
                     <p>Sistema de Gestión de Aula</p>
             </header>
             <nav>

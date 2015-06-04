@@ -19,7 +19,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <form id="act" name="eliminarcatedra" method="POST" action="<?php echo base_url() ?>backend/reg_aula/eliminar_aula" onsubmit="return confirmation()">
 
                 <fieldset>
-                    <h2>AULA Eliminar</h2>
+                    <h2>Eliminar Aula</h2>
                     <label for="lbl_aulanombre">Nombre: </label>
                     <input type="text" name="aul_denominacion" id="inp_nombreaula" placeholder="Nombre del Aula" required=""  value='<?php echo set_value('aul_denominacion') ?>'/>
 

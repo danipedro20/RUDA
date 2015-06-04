@@ -7,14 +7,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
     <section class="contenido">
 
-        <?php if ($_SERVER['HTTP_REFERER'] == base_url('/backend/inscatedras_control/elicatedra')) { ?>
+        <?php if ($_SERVER['HTTP_REFERER'] == base_url('/backend/asigcatedras_control/eliminarcatedras')) { ?>
             <h2>Se ha Eliminado  con Exito!!!</h2>
-        <?php } elseif ($_SERVER['HTTP_REFERER'] == base_url('/backend/inscatedras_control/catedra')) { ?> 
+        <?php } elseif ($_SERVER['HTTP_REFERER'] == base_url('/backend/asigcatedras_control/asigcatedras')) { ?> 
             <h2>Se ha insertado con Exito!!!</h2>
-            <P ALIGN=CENTER><a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Insertar otra catedra</a></p>
             <P ALIGN=CENTER><a href="<?php echo base_url() ?>backend/asigcatedras_control/asigcatedras">Asignar catedras a Profesores</a></li></p>
             <P ALIGN=CENTER><a href="<?php echo base_url() ?>backend/planestudio_control/plan">Agregar Catedras a un Plan De Estudio</a></p>
-        <?php } elseif ($_SERVER['HTTP_REFERER'] == base_url('/backend/inscatedras_control/edicatedra')) { ?> 
+        <?php } elseif ($_SERVER['HTTP_REFERER'] == base_url('/backend/asigcatedras_control/editarcatedras')) { ?> 
             <h2>Se ha Editado  con Exito!!!</h2> 
         <?php } ?>
     </section>

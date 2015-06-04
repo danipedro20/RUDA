@@ -9,7 +9,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 
     <fieldset>
-        <h1>Eliminar Catedra</h1>
+        <h1>Editar Catedra</h1>
         <?php echo form_open("backend/inscatedras_control/editarcatedra") ?>
 
         <label name="lbl_cat_denominacion">Nombre Actual de Catedra: </label>

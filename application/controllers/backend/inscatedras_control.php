@@ -55,8 +55,9 @@ class Inscatedras_control extends CI_Controller {
                 if ($_POST['dire'] == base_url('/backend/planestudio_control/plan')) {
                     redirect(base_url('/backend/planestudio_control/plan/'));
                 } elseif ($_POST['dire'] == base_url('/backend/asigcatedras_control/asigcatedras')) {
-
                     redirect(base_url('/backend/asigcatedras_control/asigcatedras/'));
+                } elseif ($_POST['dire'] == base_url('/backend/asigcatedras_control/editarcatedras')) {
+                    redirect(base_url('/backend/asigcatedras_control/editarcatedras/'));
                 } else {
                     redirect(base_url('/backend/inscatedras_control/successcatedra/'));
                 }
@@ -90,8 +91,8 @@ class Inscatedras_control extends CI_Controller {
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             //si existe el campo oculto llamado grabar creamos las validadciones
             $this->form_validation->set_rules('cate_denominacion', 'Nombre de Catedra', 'trim|required|callback_catedraedi_check');
-              $this->form_validation->set_rules('cat_diascatedra', 'Dias de catera', 'trim|required');
-                $this->form_validation->set_rules('nvo_cat_denominacion', 'Dias de catera', 'trim|required');
+            $this->form_validation->set_rules('cat_diascatedra', 'Dias de catedra', 'trim|required');
+            $this->form_validation->set_rules('nvo_cat_denominacion', 'Nuevo Nombre  de catedra', 'trim|required');
 
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
@@ -129,7 +130,8 @@ class Inscatedras_control extends CI_Controller {
             return TRUE;
         }
     }
-     function catedraedi_check($catedra) {
+
+    function catedraedi_check($catedra) {
         $this->load->model('catedras_model');
         if ($this->catedras_model->catedraedi_check($catedra)) {
             $this->form_validation->set_message('catedraedi_check', 'La catedra' . " " . $catedra . " " . 'no se encuentra en la base de datos');
