@@ -1,6 +1,7 @@
 <?php
 header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
+date_default_timezone_set('America/Asuncion');
 ?>
 <?php if ($this->session->userdata('nombre')) {
     ?>
@@ -29,32 +30,66 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <fieldset>
             <?php
             $z = $this->session->userdata('id');
+            $hoy = date('d-m-Y');
+            $fechahoy = date("Y-m-d", strtotime($hoy));
+            $sql = $this->db->query("select aulas.idaula from aulas join usu_au on
+aulas.idaula=usu_au.idaula join usuarios on 
+usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
+            $query = $sql->row();
+            $query2 = $this->db->query("select evento from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" .$z . "' and idaula='" . $query->idaula . "')  or ( fecha='" . $fechahoy . "' and prioridad=2 and idaula='" . $query->idaula . "')");
             $sql = $this->db->query("select catedras.idcatedra,aulas.idaula
 from aulas as au left join carreras on au.id_carrera=carreras.id_carrera
  join cate_plan on au.idplan=cate_plan.idplan
 join catedras on cate_plan.idcatedra=catedras.idcatedra  join usu_au on
 usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuario='$z'");
-            $cont = 0;
-            foreach ($sql->result() as $fila) {
-                $g = $fila->idcatedra;
-                $p=$fila->idaula;
-                $this->db->where('idcatedra', $g)
-                        ->where('idaula', $p)
-                        ->from('tareas');
-                $query = $this->db->get();
+            $cont1 = 0;
+            $cont2 = 0;
+            if ($sql->num_rows() > 0 and $query2->num_rows() > 0) {
+                foreach ($query2->result() as $que) {
+                    $cont2 = $cont2 + 1;
+                }
+                foreach ($sql->result() as $fila) {
+                    $g = $fila->idcatedra;
+                    $p = $fila->idaula;
+                    $this->db->where('idcatedra', $g)
+                            ->where('idaula', $p)
+                            ->from('tareas');
+                    $query = $this->db->get();
 
-                if ($query->num_rows() > 0) {
-                    foreach ($query->result() as $que) {
+                    if ($query2->num_rows() > 0) {
+                        foreach ($query->result() as $que) {
+                            if ($que->tar_fechaentrega >= $fechahoy and $que->tar_fechaasignacion <= $fechahoy) {
 
-                        $hoy = date('d-m-Y');
-                        $fechahoy = date("Y-m-d", strtotime($hoy));
+                                $cont1 = $cont1 + 1;
+                                ?>
 
-                        if ($que->tar_fechaentrega >= $fechahoy and $que->tar_fechaasignacion <= $fechahoy) {
+                                <?php
+                            }
+                        }
+                    }
+                }
+            } elseif ($sql->num_rows() == 0 and $query2->num_rows() > 0) {
+                foreach ($query2->result() as $que) {
+                    $cont2 = $cont2 + 1;
+                }
+            } elseif ($query2->num_rows() == 0 and $sql->num_rows() > 0) {
+                foreach ($sql->result() as $fila) {
+                    $g = $fila->idcatedra;
+                    $p = $fila->idaula;
+                    $this->db->where('idcatedra', $g)
+                            ->where('idaula', $p)
+                            ->from('tareas');
+                    $query = $this->db->get();
 
-                            $cont = $cont + 1;
-                            ?>
+                    if ($query->num_rows() > 0) {
+                        foreach ($query->result() as $que) {
+                            if ($que->tar_fechaentrega >= $fechahoy and $que->tar_fechaasignacion <= $fechahoy) {
 
-                            <?php
+                                $cont1 = $cont1 + 1;
+                                ?>
+
+                                <?php
+                            }
                         }
                     }
                 }
@@ -66,17 +101,39 @@ usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuari
             <h3 ALIGN = CENTER > id:  <?php echo $z; ?> </h3>
 
             <?php
-            if ($cont > 0) {
+            if ($cont1 > 0 and $cont2 > 0) {
                 ?>
                 <div id="mini-notification">
 
 
-                    <p><?php echo 'Tienes' . " " . $cont . " " . 'tarea/as ' ?></p>
+                    <p><?php echo 'Tienes' . "" . $cont1 . " " . 'tarea/as y ' . "" . $cont2 . " " . 'Actividades en tu agenda ' ?></p>
+
+                </div>
+                <?php
+            } elseif ($cont1 == 0 and $cont2 > 0) {
+                ?>
+                <div id="mini-notification">
+
+
+                    <p><?php echo 'Tienes ' . "" . $cont2 . " " . 'Actividad/es en tu agenda ' ?></p>
+
+                </div>
+                <?php
+            } elseif ($cont1 > 0 and $cont2 == 0) {
+                ?>
+                <div id="mini-notification">
+
+
+                    <p><?php echo 'Tienes ' . "" . $cont1 . " " . ' tarea/s pediente/s' ?></p>
 
                 </div>
                 <?php
             }
             ?>
+
+
+
+
 
         </fieldset>
     </section>

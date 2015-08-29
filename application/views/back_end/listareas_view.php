@@ -22,21 +22,18 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <h2> Lista de Tareas</h2>
         <?php
         $z = $this->session->userdata('id');
-
-        $consulta = $this->db->query("select aulas.idaula from aulas join usu_au on
-aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario where usuarios.idusuario='$z';");
-        $fila = $consulta->row_array();
-        $k = $fila['idaula'];
         $b = $this->input->post('selcatedra');
+        $k = $this->input->post('selaula2');
         $hoy = date('d-m-Y');
         $fechahoy = date("Y-m-d", strtotime($hoy));
         $c = $this->input->post('ver_rango');
         if ($c == 1) {
-            $consulta1 = $this->db->query("select tareas.tar_descripcion,tareas.tar_fechaasignacion,tareas.tar_fechaentrega,tareas.tar_puntostarea from tareas join
-catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
-usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b' and tareas.tar_fechaasignacion='$fechahoy';");
+            $consulta1 = $this->db->query("select ta.tar_descripcion,ta.tar_fechaasignacion,ta.tar_fechaentrega,ta.tar_puntostarea from tareas as ta join
+catedras as cate on ta.idcatedra=cate.idcatedra join aulas as au on ta.idaula=au.idaula join usu_cate as usca on 
+usca.idcatedra=cate.idcatedra join usuarios as usu on  usu.idusuario=usca.idusuario
+where usu.idusuario='$z'and au.idaula='$k' and cate.idcatedra='$b' and ta.tar_fechaasignacion='$fechahoy';");
             if ($consulta1->num_rows() == 0) {
-                redirect(base_url('/backend/alumnos_control/sintarea/'));
+                redirect(base_url('/backend/profesor_control/sintarea/'));
             } else {
 
                 $tmpl = array(
@@ -60,11 +57,12 @@ usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.
                 echo $this->table->generate($consulta1);
             }
         } elseif ($c == 2) {
-            $consulta1 = $this->db->query("select tareas.tar_descripcion,tareas.tar_fechaasignacion,tareas.tar_fechaentrega,tareas.tar_puntostarea from tareas join
-catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
-usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b' and tareas.tar_fechaentrega>='$fechahoy';");
+            $consulta1 = $this->db->query("select ta.tar_descripcion,ta.tar_fechaasignacion,ta.tar_fechaentrega,ta.tar_puntostarea from tareas as ta join
+catedras as cate on ta.idcatedra=cate.idcatedra join aulas as au on ta.idaula=au.idaula join usu_cate as usca on 
+usca.idcatedra=cate.idcatedra join usuarios as usu on  usu.idusuario=usca.idusuario
+where usu.idusuario='$z'and au.idaula='$k' and cate.idcatedra='$b' and ta.tar_fechaentrega>='$fechahoy';");
             if ($consulta1->num_rows() == 0) {
-                redirect(base_url('/backend/alumnos_control/sintarea/'));
+                redirect(base_url('/backend/profesor_control/sintarea/'));
             } else {
 
                 $tmpl = array(
@@ -88,11 +86,12 @@ usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.
                 echo $this->table->generate($consulta1);
             }
         } elseif ($c == 3) {
-            $consulta1 = $this->db->query("select tareas.tar_descripcion,tareas.tar_fechaasignacion,tareas.tar_fechaentrega,tareas.tar_puntostarea from tareas join
-catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
-usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b'");
+            $consulta1 = $this->db->query("select ta.tar_descripcion,ta.tar_fechaasignacion,ta.tar_fechaentrega,ta.tar_puntostarea from tareas as ta join
+catedras as cate on ta.idcatedra=cate.idcatedra join aulas as au on ta.idaula=au.idaula join usu_cate as usca on 
+usca.idcatedra=cate.idcatedra join usuarios as usu on  usu.idusuario=usca.idusuario
+where usu.idusuario='$z'and au.idaula='$k' and cate.idcatedra='$b'");
             if ($consulta1->num_rows() == 0) {
-                redirect(base_url('/backend/alumnos_control/sintarea/'));
+                redirect(base_url('/backend/profesor_control/sintarea/'));
             } else {
 
                 $tmpl = array(
@@ -123,8 +122,10 @@ usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.
                     <option value="<?php echo $tarea->idtarea ?>"><?php echo $tarea->tar_descripcion ?>
                     </option><?php endforeach; ?>
             </select>
-             <input type="submit" name="Descargar" id="Descargar" value="Descargar Archivos"  dir="<?php echo base_url(); ?>backend/alumnos_control/descargar_archivo"/>
-            <input type="submit" name="comentarios" id="comentarios" value="Ver Comentarios"  dir="<?php echo base_url(); ?>backend/alumnos_control/comen" />
+
+            <input type="submit" name="Descargar" id="Descargar" value="Descargar Archivos"  dir="<?php echo base_url(); ?>backend/profesor_control/accion"/>
+            
+            <input type="submit" name="comentarios" id="comentarios" value="Ir a Comentarios"  dir="<?php echo base_url(); ?>backend/profesor_control/comen" />
 
 
 

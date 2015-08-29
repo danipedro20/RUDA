@@ -19,6 +19,7 @@ class Suscripcion_control extends CI_Controller {
     public function suscripcionaulas () {
         $datos['titulo'] = 'Ruda - Suscripcion';
         $datos['arrDatosaulas'] = $this->suscripcion_model->listaraulas();
+         $datos['generateaulas'] = $this->suscripcion_model->generatetableaulas();
         $datos['contenido'] = 'aulascarrerasdisponibles_view';
         $this->load->view('plantillas/plantilla', $datos);
     }

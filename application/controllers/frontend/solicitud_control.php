@@ -8,6 +8,7 @@ class Solicitud_control extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('table');
+        $this->load->library("email");
         $this->load->model('frontend/solicitud_model');
     }
 
@@ -122,6 +123,28 @@ class Solicitud_control extends CI_Controller {
 //                $query1 = $this->db->get('inscripciones');
 //                if ($query1->num_rows() > 0) {
                 $insert = $this->solicitud_model->insertsoli($a, $b, $c, $d, $e, $f, $g, $h, $i, $j);
+
+
+                //configuracion para gmail
+                $config = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.gmail.com',
+                    'smtp_port' => 465,
+                    'smtp_user' => 'gestion.ruda@gmail.com',
+                    'smtp_pass' => 'gestionruda',
+                    'mailtype' => 'html',
+                    'charset' => 'utf-8',
+                    'newline' => "\r\n"
+                );
+
+                $this->email->initialize($config);
+                $this->email->from('Ruda Gestion de Aulas');
+                $this->email->to($e);
+                $this->email->subject('Bienvenido/a a RUDA');
+                $this->email->message('<h2>' . $a . ' gracias enviar tu solicitud  a RUDA</h2><hr><br><br>
+				Tu solicitud a sido recibida por el administrador tendras respuesta en las siguientes 24 u 48 horas');
+                $this->email->send();
+                var_dump($this->email->print_debugger());
 //                    $insert2 = $this->registro_model->inspregunta($g, $h, $e);
                 //enviar correo de solicitud
 //                    $z = 'Solicitud De Suscripcion al Sistema RUDA';
@@ -201,19 +224,24 @@ class Solicitud_control extends CI_Controller {
     }
 
     public function verificarsolicitud() {
-        $nombre = $_POST['selsolicitud'];
-        $ingreso = $this->solicitud_model->verificardatos($nombre);
+        $id = $this->input->post('selsolicitud');
+        $ingreso = $this->solicitud_model->verificardatos($id);
         switch ($ingreso) {
             case 'CORRECTO':
-                $registro = $this->solicitud_model->insertarregistro($nombre);
-                $recuperacion = $this->solicitud_model->insertarrecuperacion($nombre);
-                $registroaula = $this->solicitud_model->insertaraula($nombre);
-                $lugaresaula = $this->solicitud_model->lugaresaulas($nombre);
-                $eliminar = $this->solicitud_model->eliminarsolicitud($nombre);
+                       $registro = $this->solicitud_model->insertarregistro($id);
+                       $recuperacion = $this->solicitud_model->insertarrecuperacion($id);
+                       $registroaula = $this->solicitud_model->insertaraula($id);
+                       $lugaresaula = $this->solicitud_model->lugaresaulas($id);
+                        $correo = $this->solicitud_model->enviarcorreo($id);
+                     $eliminar = $this->solicitud_model->eliminarsolicitud($id);
+
+
                 redirect(base_url('/frontend/solicitud_control/solicitudaceptada/'));
                 break;
             case 'INCORRECTO':
-                 $eliminar = $this->solicitud_model->eliminarsolicitud($nombre);
+                 $correo = $this->solicitud_model->enviarcorreo($id);
+                $eliminar = $this->solicitud_model->eliminarsolicitud($id);
+
                 redirect(base_url('/frontend/solicitud_control/solicitudrechazada/'));
                 break;
         }

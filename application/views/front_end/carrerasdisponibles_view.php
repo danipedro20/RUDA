@@ -17,14 +17,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     ?>
     <form action="<?php echo base_url(); ?>frontend/suscripcion_control/suscripcionaulas" method="post">
         <label name="lbl_idcatedra">Carrera:</label>
-        <select  class="chosen"   name="selcarrera"  id="chosen" data-placeholder="Seleccione la carrera"  required="" > 
-
-            <?php
-            foreach ($arrDatoscarreras as $i => $carreras)
-                echo '<option values="', $i, '">', $carreras, '</option>';
-            ?> 
-
-        </select>
+                <select name='selcarreras' id='selcarreras'><?php foreach ($arrDatoscarreras as $dpto) : ?><option value=" <?php echo $dpto->id_carrera
+        ?> "><?php echo $dpto->car_denominacion ?></option><?php endforeach; ?></select>
 
         <input type="submit" name="suscribir" value="Suscribirse" />
 

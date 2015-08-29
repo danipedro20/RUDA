@@ -54,6 +54,11 @@ class Alumnos_control extends CI_Controller {
         $datos['contenido'] = 'sintareas_view';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
+      public function agenda() {
+        $datos['titulo'] = 'Agenda';
+        $datos['contenido'] = 'agendaalumno_view';
+        $this->load->view('plantillas/alumplantilla', $datos);
+    }
 
 
     public function Descargar_archivo() {
@@ -94,6 +99,28 @@ class Alumnos_control extends CI_Controller {
         } else {
             return TRUE;
         }
+    }
+     public function comen() {
+        $datos['titulo'] = 'Comentarios';
+        $datos['comentarios'] = $this->alumnos_model->selta();
+        $datos['contenido'] = 'tarea_comen_alum';
+        $this->load->view('plantillas/alumplantilla', $datos);
+    }
+    public function ver_comentarios() {
+        $entry_id = $this->uri->segment(4);
+        $data['titulo'] = 'Comentarios';
+        $data['entry'] = $this->alumnos_model->tareas($entry_id);
+        $data['comments'] = $this->alumnos_model->comentarios($entry_id);
+        $data['contenido'] = 'comen_alum_view';
+        $this->load->view('plantillas/profplantilla', $data);
+    }
+       public function comentario() {
+        $id = $this->input->post('idtarea');
+        $au = $this->session->userdata('nombre');
+        $come = $this->input->post('comentario');
+        $fe = date('Y-m-d H:i:s');
+        $insert = $this->alumnos_model->inscomentario($id, $au, $come, $fe);
+        redirect(base_url('backend/profesor_control/ver_comentarios/' . $id));
     }
 
 }

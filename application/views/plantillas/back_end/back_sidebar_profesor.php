@@ -9,7 +9,9 @@
         <li>Aulas</li>
        <li><a href="<?php echo base_url()?>backend/profesor_control/liscatedras">Catedras</a></li>
         <li><a href="<?php echo base_url()?>backend/profesor_control/listaralumnos">Listar Alumnos</a></li>
-        <li><a href="<?php echo base_url()?>backend/profesor_control/creartareas">Tareas</a></li>
+        <li><a href="<?php echo base_url()?>backend/profesor_control/creartareas">Crear Tareas</a></li>
+        <li><a href="<?php echo base_url()?>backend/profesor_control/vertareas">Ver Tareas</a></li>
+        <li><a href="<?php echo base_url()?>backend/profesor_control/agenda">Agenda</a></li>
     </ul>
     <ul>
         <li>Informes</li>

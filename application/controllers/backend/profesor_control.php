@@ -13,22 +13,50 @@ class Profesor_control extends CI_Controller {
 
     public function creartareas() {
         $datos['titulo'] = 'Ruda - Crear Tarea';
-        $datos['arrDatos'] = $this->profesor_model->veraulas();
+        $datos['arrDatos'] = $this->profesor_model->verlasaulas();
         $datos['contenido'] = 'profetarea_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function vertareas() {
+        $datos['titulo'] = 'Ruda - Ver Tarea';
+        $datos['arrDatos'] = $this->profesor_model->verlasaulas();
+        $datos['contenido'] = 'vertarea_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function selecaulatarea() {
+        $datos['titulo'] = 'Ruda - Ver Tarea';
+        $datos['arrDatos'] = $this->profesor_model->verlascatedras();
+        $datos['contenido'] = 'selcatetarea_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function listatareas() {
+        $datos['titulo'] = 'Tareas';
+        $datos['arrDatostar'] = $this->profesor_model->seltareas();
+        $datos['contenido'] = 'listareas_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function agenda() {
+        $datos['titulo'] = 'Ruda - Agenda';
+        $datos['arrDatos'] = $this->profesor_model->verlasaulas();
+        $datos['contenido'] = 'agendaprofesor_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
 
     public function tareas() {
         $datos['titulo'] = 'Ruda - Crear Tarea';
         $datos['arrDatos'] = $this->profesor_model->vercatedras();
-        $datos['contenido'] = 'tareas_view';
+        $datos['contenido'] = 'creartareas_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
 
     public function listaralumnos() {
         $datos['titulo'] = 'Ruda - Seleccione Catedra';
         $datos['arrDatosc'] = $this->profesor_model->vercatedras();
-        $datos['arrDatos'] = $this->profesor_model->veraulas();
+        $datos['arrDatos'] = $this->profesor_model->verlasaulas();
         $datos['contenido'] = 'profesorcatedras_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
@@ -45,6 +73,10 @@ class Profesor_control extends CI_Controller {
         $this->load->view('plantillas/profplantilla', $datos);
     }
 
+    public function accion() {
+        $this->profesor_model->descarga();
+    }
+
     public function insertarea() {
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             $config['upload_path'] = './assets/uploads/';
@@ -53,7 +85,7 @@ class Profesor_control extends CI_Controller {
             if (!$this->upload->do_upload()) {
                 $datos['error'] = $this->upload->display_errors();
                 $datos['arrDatos'] = $this->profesor_model->vercatedras();
-                $datos['contenido'] = 'tareas_view';
+                $datos['contenido'] = 'creartareas_view';
                 $this->load->view('plantillas/profplantilla', $datos);
             } else {
 
@@ -72,11 +104,13 @@ class Profesor_control extends CI_Controller {
                     $a = $succ['full_path'];
                     $c = $this->input->post('tar_puntostarea');
                     $d = $this->input->post('tar_descripcion');
+                    $y = $this->input->post('selcatedra');
+                    $p = $this->input->post('aula');
 
 
 
 
-                    $insert = $this->profesor_model->instareas($c, $d, $a, $z);
+                    $insert = $this->profesor_model->instareas($c, $d, $a, $z, $y, $p);
 
                     redirect(base_url('backend/profesor_control/successtarea/'));
                 }
@@ -101,11 +135,13 @@ class Profesor_control extends CI_Controller {
         $datos['contenido'] = 'ediperfil_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
-     public function successedit() {
+
+    public function successedit() {
         $datos['titulo'] = 'Editar';
         $datos['contenido'] = 'successview';
         $this->load->view('plantillas/profplantilla', $datos);
     }
+
     public function editar() {
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             //si existe el campo oculto llamado grabar creamos las validadciones
@@ -132,7 +168,14 @@ class Profesor_control extends CI_Controller {
             }
         }
     }
-     function correo_check($correo) {
+
+    public function sintarea() {
+        $datos['titulo'] = 'Tareas';
+        $datos['contenido'] = 'sintareas_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    function correo_check($correo) {
         $this->load->model('profesor_model');
         if ($this->profesor_model->correo_check($correo)) {
             $this->form_validation->set_message('correo_check', 'El Correo' . " " . $correo . " " . 'ya esta siendo utilizado');
@@ -141,5 +184,32 @@ class Profesor_control extends CI_Controller {
             return TRUE;
         }
     }
+
+    public function comentario() {
+        $id = $this->input->post('idtarea');
+        $au = $this->session->userdata('nombre');
+        $come = $this->input->post('comentario');
+        $fe = date('Y-m-d H:i:s');
+        $insert = $this->profesor_model->inscomentario($id, $au, $come, $fe);
+        redirect(base_url('backend/profesor_control/ver_comentarios/' . $id));
+    }
+
+    public function comen() {
+        $datos['titulo'] = 'Comentarios';
+        $datos['contenido'] = 'tarea_comen';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function ver_comentarios() {
+        $entry_id = $this->uri->segment(4);
+        $data['titulo'] = 'Comentarios';
+        $data['entry'] = $this->profesor_model->tareas($entry_id);
+        $data['comments'] = $this->profesor_model->comentarios($entry_id);
+        $data['contenido'] = 'comen_view';
+        $this->load->view('plantillas/profplantilla', $data);
+    }
+    
+
+ 
 
 }

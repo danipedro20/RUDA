@@ -19,12 +19,7 @@ usu_au.idaula=au.idaula  join usuarios as alumno on usu_au.idusuario=alumno.idus
 join usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios as profesor on usu_cate.idusuario=profesor.idusuario
  join catedras as cate on usu_cate.idcatedra=cate.idcatedra
     where alumno.usu_nombre='$a';");
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatoscate[htmlspecialchars($row->idcatedra, ENT_QUOTES)] = htmlspecialchars($row->cat_denominacion, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatoscate;
-        }
+        return $query->result();
     }
 
     public function seltareas() {
@@ -34,37 +29,35 @@ join usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios as profesor
 aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario where usuarios.idusuario='$z';");
         $fila = $consulta->row_array();
         $k = $fila['idaula'];
-        $b = $_POST['SEL'];
+        $b = $this->input->post('selcatedra');
+        $c = $this->input->post('ver_rango');
+        $hoy = date('d-m-Y');
+        $fechahoy = date("Y-m-d", strtotime($hoy));
 
-        $this->db->select('idcatedra')
-                ->where('cat_denominacion', $b);
-        $query = $this->db->get('catedras');
-        $row = $query->row_array();
-        $idtar = $row['idcatedra'];
-
-        $query = $this->db->query("select tareas.idtarea,tareas.tar_descripcion from tareas join
+        if ($c == 1) {
+            $query = $this->db->query("select tareas.idtarea, tareas.tar_descripcion,tareas.tar_fechaasignacion from tareas join
 catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
-usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$idtar';");
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatostarea[htmlspecialchars($row->idtarea, ENT_QUOTES)] = htmlspecialchars($row->tar_descripcion, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatostarea;
+usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b' and tareas.tar_fechaasignacion='$fechahoy';");
+            return $query->result();
+        } elseif ($c == 2) {
+            $query = $this->db->query("select tareas.idtarea, tareas.tar_descripcion,tareas.tar_fechaentrega from tareas join
+catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
+usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b' and tareas.tar_fechaentrega>='$fechahoy';");
+            return $query->result();
+        } elseif ($c == 3) {
+            $query = $this->db->query("select  tareas.idtarea,tareas.tar_descripcion from tareas join
+catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
+usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b'");
+            return $query->result();
         }
     }
 
     public function descarga() {
         $this->load->helper('download');
-        $c = $_POST['SELtarea'];
-
-        $this->db->select('idtarea')
-                ->where('tar_descripcion', $c);
-        $query = $this->db->get('tareas');
-        $row = $query->row_array();
-        $idtar = $row['idtarea'];
+        $c = $this->input->post('seltarea');
 
 
-        $this->db->where('idtarea', $idtar)
+        $this->db->where('idtarea', $c)
                 ->from('tareas');
         $query2 = $this->db->get();
         $query3 = $query2->row();
@@ -121,5 +114,32 @@ usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.
             return FALSE;
         }
     }
+     public function selta() {
+        $c = $this->input->post('seltarea');
+        $query = $this->db->query("select * from tareas where idtarea='$c';");
+        return $query->result();
+    }
+     public function comentarios($id) {
+        $this->db->where('idtarea', $id);
+
+        return $this->db->get('comments')->result();
+    }
+
+    public function inscomentario($id, $au, $come, $fe) {
+        $data = array(
+            'idtarea' => $id,
+            'autor' => $au,
+            'comentario' => $come,
+            'fecha' => $fe,
+        );
+        return $this->db->insert('comments', $data);
+    }
+
+    public function tareas($id) {
+        $this->db->where('idtarea', $id);
+
+        return $this->db->get('tareas')->row();
+    }
+
 
 }

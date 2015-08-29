@@ -64,42 +64,27 @@ class Solicitud_model extends CI_Model {
         }
     }
 
-    function verificardatos($nombre) {
+    function verificardatos($id) {
 
-        $this->db->where('usu_nombre', $nombre)
+        $this->db->where('idsolicitud', $id)
+                ->from('solicitud');
+        $query = $this->db->get();
+        $query = $query->row();
+        echo $query->sol_nombre;
+        echo $query->sol_carrera;
+        echo $query->sol_turno;
+        $this->db->where('usu_nombre', $query->sol_nombre)
                 ->from('inscripciones');
         $query4 = $this->db->get();
 
         if ($query4->num_rows() > 0) {
             $query4 = $query4->row();
-            $query4->usu_nombre;
-            $query4->id_carrera;
-            $query4->idturno;
-
-
-            $this->db->where('sol_nombre', $nombre)
-                    ->from('solicitud');
-            $query = $this->db->get();
-            $query = $query->row();
-
-
-
-
-            $this->db->where('car_denominacion', $query->sol_carrera)
-                    ->from('carreras');
-            $query2 = $this->db->get();
-            $query2 = $query2->row();
-            $query2->id_carrera;
-
-            $this->db->where('tur_denominacion', $query->sol_turno)
-                    ->from('turnos');
-            $query3 = $this->db->get();
-            $query3 = $query3->row();
-            $query3->idturno;
-
-            if ($query->sol_nombre == $query4->usu_nombre and $query2->id_carrera == $query4->id_carrera and $query3->idturno == $query4->idturno) {
+            echo $query4->usu_nombre;
+            echo $query4->id_carrera;
+            echo $query4->idturno;
+            if (($query->sol_nombre == $query4->usu_nombre) and ($query->sol_carrera == $query4->id_carrera) and ($query->sol_turno == $query4->idturno)) {
                 return 'CORRECTO';
-            } elseif ($query->sol_nombre != $query4->usu_nombre or $query2->id_carrera != $query4->id_carrera or $query3->idturno != $query4->idturno) {
+            } elseif (($query->sol_nombre != $query4->usu_nombre) or ($query->sol_carrera != $query4->id_carrera) or ($query->sol_turno != $query4->idturno)) {
                 return 'INCORRECTO';
             }
         } else {
@@ -107,8 +92,8 @@ class Solicitud_model extends CI_Model {
         }
     }
 
-    public function insertarregistro($nombre) {
-        $this->db->where('sol_nombre', $nombre)
+    public function insertarregistro($id) {
+        $this->db->where('idsolicitud', $id)
                 ->from('solicitud');
         $query = $this->db->get();
         $query = $query->row();
@@ -124,8 +109,8 @@ class Solicitud_model extends CI_Model {
         return $this->db->insert('usuarios', $data);
     }
 
-    public function insertarrecuperacion($nombre) {
-        $this->db->where('sol_nombre', $nombre)
+    public function insertarrecuperacion($id) {
+        $this->db->where('idsolicitud', $id)
                 ->from('solicitud');
         $query2 = $this->db->get();
         $query2 = $query2->row();
@@ -133,7 +118,7 @@ class Solicitud_model extends CI_Model {
 
 
         $this->db->select('idusuario')
-                ->where('usu_nombre', $nombre);
+                ->where('usu_nombre', $query2->sol_nombre);
         $query = $this->db->get('usuarios');
         $row = $query->row_array();
         $data = array(
@@ -144,38 +129,32 @@ class Solicitud_model extends CI_Model {
         return $this->db->insert('recuperacion', $data);
     }
 
-    public function insertaraula($nombre) {
+    public function insertaraula($id) {
 
-        $this->db->where('sol_nombre', $nombre)
+        $this->db->where('idsolicitud', $id)
                 ->from('solicitud');
         $query = $this->db->get();
         $query = $query->row();
-
-        $this->db->select('idaula')
-                ->where('aul_denominacion', $query->sol_aula);
-        $query2 = $this->db->get('aulas');
-        $row = $query2->row_array();
-
         $this->db->select('idusuario')
-                ->where('usu_nombre', $nombre);
+                ->where('usu_nombre', $query->sol_nombre);
         $query3 = $this->db->get('usuarios');
         $row2 = $query3->row_array();
         $data = array(
             'idusuario' => $row2['idusuario'],
-            'idaula' => $row['idaula'],
+            'idaula' => $query->sol_aula,
         );
         return $this->db->insert('usu_au', $data);
     }
 
-    public function lugaresaulas($nombre) {
+    public function lugaresaulas($id) {
 
-        $this->db->where('sol_nombre', $nombre)
+        $this->db->where('idsolicitud', $id)
                 ->from('solicitud');
         $query = $this->db->get();
         $query = $query->row();
 
         $this->db->select('aul_plazasdisponibles')
-                ->where('aul_denominacion', $query->sol_aula);
+                ->where('idaula', $query->sol_aula);
         $query2 = $this->db->get('aulas');
         $row = $query2->row_array();
         $lugares = $row['aul_plazasdisponibles'] - 1;
@@ -187,10 +166,59 @@ class Solicitud_model extends CI_Model {
         $this->db->update('aulas', $data);
     }
 
-    public function eliminarsolicitud($nombre) {
+    public function eliminarsolicitud($id) {
 
-        $this->db->where('sol_nombre', $nombre);
+        $this->db->where('idsolicitud', $id);
         $this->db->delete('solicitud');
+    }
+
+    public function enviarcorreo($id) {
+
+        $this->db->where('idsolicitud', $id)
+                ->from('solicitud');
+        $query = $this->db->get();
+        $query = $query->row();
+        $email = $query->sol_email;
+
+        $this->db->where('usu_nombre', $query->sol_nombre)
+                ->where('usu_email', $query->sol_email)
+                ->from('usuarios');
+        $query2 = $this->db->get();
+
+
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'gestion.ruda@gmail.com',
+            'smtp_pass' => 'gestionruda',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        );
+
+
+        if ($query2->num_rows() == 1) {
+
+            $this->email->initialize($config);
+            $this->email->from('Ruda Gestion de Aulas');
+            $this->email->to($email);
+            $this->email->subject('Bienvenido/a a RUDA');
+            $this->email->message('<h2>' . $query->sol_nombre . ' gracias tu solicitud ha sido recibida</h2><hr><br><br>
+				Los datos enviados  corresponden a los datos que tenemos sobre ti podes acceder con tu usuario y contraseña  
+                                <a href="' . base_url() . 'frontend/usuarios_control/logueo">aqui</a>');
+            $this->email->send();
+            var_dump($this->email->print_debugger());
+        } else {
+            $this->email->initialize($config);
+            $this->email->from('Ruda Gestion de Aulas');
+            $this->email->to($email);
+            $this->email->subject('Bienvenido/a a RUDA');
+            $this->email->message('<h2>' . $a . ' gracias tu solicitud ha sido recibida</h2><hr><br><br>
+				Los datos enviados no corresponde a los datos que tenemos sonbre ti. Tu solicitud a sido rechazada');
+            $this->email->send();
+            var_dump($this->email->print_debugger());
+        }
     }
 
 //    public function insinscri($a,$k) {
@@ -254,16 +282,13 @@ class Solicitud_model extends CI_Model {
     public function listarsolicitud() {
 
         $query = $this->db->query("select idsolicitud,sol_nombre from solicitud where sol_visto='0';");
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatossolicitud[htmlspecialchars($row->idsolicitud, ENT_QUOTES)] = htmlspecialchars($row->sol_nombre, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatossolicitud;
-        }
+        return $query->result();
     }
 
     public function generatetablesolicitud() {
-        return $this->db->query("select sol_nombre,sol_carrera,sol_aula,sol_turno from solicitud where sol_visto='0';");
+        return $this->db->query("select so.sol_nombre,ca.car_denominacion, au.aul_denominacion, tu.tur_denominacion from carreras as ca
+join solicitud as so on ca.id_carrera=so.sol_carrera join aulas as au on au.idaula=so.sol_aula join turnos as tu
+on  tu.idturno=so.sol_turno where so.sol_visto='0';");
     }
 
 }

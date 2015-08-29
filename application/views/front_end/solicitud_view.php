@@ -121,10 +121,10 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <label name="lbl_pregunta">Pregunta Secreta: </label>
         <input type="text" name="pregunta" placeholder="Pregunta Secreta" required="" value='<?php echo set_value('pregunta') ?>' /><br>
         <label name="respuesta">Respuesta Secreta: </label>
-        <input type="text" name="respuesta" placeholder="Respuesta Secreta" required="" value='<?php echo set_value('respuesta') ?>' /> <br> 
+        <input type="password" name="respuesta" placeholder="Respuesta Secreta" required="" value='<?php echo set_value('respuesta') ?>' /> <br> 
 
-        <input type="hidden" id="regiscarrera" name="regiscarrera"  value='<?php echo $_POST['suscarrera'] ?>' /><br>
-        <input type="hidden" id="regisaula" name="regisaula"  value='<?php echo $_POST['susaula'] ?>' /><br>
+        <input type="hidden" id="regiscarrera" name="regiscarrera"  value='<?php echo $this->input->post('suscarreras'); ?>' /><br>
+        <input type="hidden" id="regisaula" name="regisaula"  value='<?php echo $this->input->post('susaulas'); ?>' /><br>
 
         <!-- este input lo usaremos como referencia para la validacion -->
         <input type="hidden" name="grabar" value="si" />

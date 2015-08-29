@@ -9,12 +9,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     <section class="contenido">
 
         <fieldset>
-            <h1>Crear tarea</h1>
-            <form action="<?php echo base_url(); ?>backend/profesor_control/tareas" method="post" enctype="multipart/form-data" >
+            <h1>Ver tarea</h1>
+            <form action="<?php echo base_url(); ?>backend/profesor_control/selecaulatarea" method="post" enctype="multipart/form-data" >
 
 
 
-                <label name="lbl_idcatedra">Seleccione el aula:</label>
+                <label name="lbl_aula">Seleccione el aula:</label>
                 <select name='selaula' id='selaula'><?php foreach ($arrDatos as $catedra) : ?>
                         <option value="<?php echo $catedra->idaula ?>"><?php echo $catedra->aul_denominacion ?>
                         </option><?php endforeach; ?>

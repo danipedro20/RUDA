@@ -11,8 +11,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     <h2> <?php echo 'Lista de alumnos de la catedra'." ".$_POST['catedras']." " ?> </h2>
     <?php
      
-    $a = $_POST['catedras'];
-    $b=$_POST['selAula'];
+    $a = $this->input->post('catedras');
+    $b=$this->input->post('selaula');
 
     $consulta = $this->db->query("select alumno.usu_nombre, alumno.usu_nrocedula
 from aulas as au left join carreras on au.id_carrera=carreras.id_carrera
@@ -20,7 +20,7 @@ from aulas as au left join carreras on au.id_carrera=carreras.id_carrera
 join catedras on cate_plan.idcatedra=catedras.idcatedra  join usu_au on
 usu_au.idaula=au.idaula  join usuarios as alumno on usu_au.idusuario=alumno.idusuario
 join usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios as profesor on usu_cate.idusuario=profesor.idusuario
- join catedras as cate on usu_cate.idcatedra=cate.idcatedra where catedras.cat_denominacion='$a' and au.aul_denominacion='$b';");
+ join catedras as cate on usu_cate.idcatedra=cate.idcatedra where catedras.idcatedra='$a' and au.idaula='$b';");
     $tmpl = array(
         'table_open' => '<table border="1" cellpadding="4" cellspacing="10">',
         'heading_row_start' => '<tr>',
