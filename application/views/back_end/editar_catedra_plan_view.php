@@ -22,21 +22,23 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h1>Editar Catedra/Plan</h1>
             <form method="post">
 
-                <label name="lbl_cat_denominacion">Nombre Actual de Catedra: </label>
+                <label name="lbl_cat_denominacion">Nombre de Catedra: </label>
                 <input type="text" name="cate_denominacion" placeholder="Nombre Actual de catedra" required="" readonly="readonly" value='<?php echo $catedra_plan->cat_denominacion; ?>' />
                 <input type="hidden" name="idcatedra"  value='<?php echo $catedra_plan->idcatedra; ?>' />
+                <label name="lbl_cat_denominacion">Dia de Catedra: </label>
+                <input type="text" name="diascatedra" id="diascatedra" required="" value='<?php echo $catedra_plan->diascatedra; ?>' />
+
                 <label for="lbl_profesor">Plan De Estudio: </label>
                 <select name='selplan' id='selplan'>
                     <option value="<?php echo $catedra_plan->idplan ?>"><?php echo $catedra_plan->pla_denominacion ?></option>
-                  <?php
+                    <?php
                     foreach ($planes as $i) :
                         if ($i->idplan != $catedra_plan->idplan) {
                             ?>
                             <option value="<?php echo $i->idplan ?>"><?php echo $i->pla_denominacion ?>
                             </option><?php }endforeach; ?> 
                 </select>
-
-
+               
                 <!-- este input lo usaremos como referencia para la validacion -->
                 <input type="hidden" name="grabar" value="si" />
 

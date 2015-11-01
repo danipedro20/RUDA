@@ -12,7 +12,7 @@ class Insplan_control extends CI_Controller {
 
     public function planestudio() {
         $datos['titulo'] = 'Ruda - Crear  Plan de Estudios';
-        $datos['contenido'] = 'planestudio_view';
+        $datos['contenido'] = 'crear_planestudio_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
@@ -62,9 +62,10 @@ class Insplan_control extends CI_Controller {
                 $this->planestudio();
             } else {
                 $a = $this->input->post('pla_denominacion');
+                $fecha = date("Y-m-d", strtotime($_POST['fecha']));
+                $fecha_fin = date("Y-m-d", strtotime($_POST['fecha_fin']));
 
-
-                $insert = $this->plan_model->inseplan($a);
+                $insert = $this->plan_model->inseplan($a, $fecha, $fecha_fin);
                 redirect(base_url('/backend/insplan_control/successplan/'));
             }
         }
@@ -85,12 +86,14 @@ class Insplan_control extends CI_Controller {
                 $this->editar_plan_estudio($b);
             } else {
                 $a = $this->input->post('pla_denominacion');
+                $fecha = date("Y-m-d", strtotime($_POST['fecha']));
+                $fecha_fin = date("Y-m-d", strtotime($_POST['fecha_fin']));
                 $b = $this->input->post('idplan');
 
 
 
 
-                $insert = $this->plan_model->editarplanestudio($a, $b);
+                $insert = $this->plan_model->editarplanestudio($a, $b,$fecha,$fecha_fin);
                 // $insertplan = $this->plan_model->ediplan_catedra($b, $d);
                 redirect(base_url('/backend/insplan_control/listar_plan_estudios/'));
             }

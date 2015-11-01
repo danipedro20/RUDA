@@ -9,16 +9,20 @@ class Plan_model extends CI_Model {
         parent::__construct();
     }
 
-    public function inseplan($a) {
+    public function inseplan($a,$fecha,$fecha_fin) {
         $data = array(
             'pla_denominacion' => $a,
+            'pla_fechainicio' => $fecha,
+            'pla_fechafin' => $fecha_fin,
         );
         return $this->db->insert('plan_estudios', $data);
     }
 
-    public function editarplanestudio($a, $b) {
+    public function editarplanestudio($a, $b,$fecha,$fecha_fin) {
         $data = array(
             'pla_denominacion' => $a,
+            'pla_fechainicio' => $fecha,
+            'pla_fechafin' => $fecha_fin,
         );
 
         $this->db->where('idplan', $b);

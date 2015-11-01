@@ -9,10 +9,10 @@ class Catedras_model extends CI_Model {
         parent::__construct();
     }
 
-    public function insecatedra($a, $b) {
+    public function insecatedra($a) {
         $data = array(
             'cat_denominacion' => $a,
-            'cat_diascatedra' => $b,
+         
         );
         return $this->db->insert('catedras', $data);
     }
@@ -38,10 +38,10 @@ class Catedras_model extends CI_Model {
         $this->db->delete($tablas);
     }
 
-    public function edicatedra($a, $c, $d) {
+    public function edicatedra($a,$d) {
         $data = array(
             'cat_denominacion' => $a,
-            'cat_diascatedra' => $c,
+        
         );
 
         $this->db->where('idcatedra', $d);
@@ -59,7 +59,7 @@ class Catedras_model extends CI_Model {
     }
 
     public function lista() {
-        $consulta = $this->db->query("select ca.idcatedra,ca.cat_denominacion,ca.cat_diascatedra,usu.idusuario,usu.usu_nombre from catedras as ca join
+        $consulta = $this->db->query("select ca.idcatedra,ca.cat_denominacion,usu.idusuario,usu.usu_nombre from catedras as ca join
 usu_cate as usca on  usca.idcatedra=ca.idcatedra join usuarios as usu  on usca.idusuario=usu.idusuario;");
         return $consulta->result();
     }
@@ -70,12 +70,12 @@ usu_cate as usca on  usca.idcatedra=ca.idcatedra join usuarios as usu  on usca.i
     }
 
     public function catedra_profesor($idca, $idusu) {
-        $consulta = $this->db->query("select ca.idcatedra,ca.cat_denominacion,ca.cat_diascatedra,usu.idusuario,usu.usu_nombre from catedras as ca join
+        $consulta = $this->db->query("select ca.idcatedra,ca.cat_denominacion,usu.idusuario,usu.usu_nombre from catedras as ca join
 usu_cate as usca on  usca.idcatedra=ca.idcatedra join usuarios as usu  on usca.idusuario=usu.idusuario where ca.idcatedra='$idca' and usu.idusuario='$idusu'");
         return $consulta->row();
     }
       public function catedra($id) {
-        $consulta = $this->db->query("select *from catedras where idcatedra='$id';");
+        $consulta = $this->db->query("select * from catedras where idcatedra='$id';");
         return $consulta->row();
     }
 

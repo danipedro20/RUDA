@@ -21,14 +21,14 @@ if ($this->session->userdata('nombre')) {
 
                     <table id="paginar" table border="1" cellpadding="2" cellspacing="1" WIDTH="100%">
 
-                        <thead><tr><th>Catedra</th><th>Dias de Catedra</th><th>Editar</th><th>Eliminar</th>
+                        <thead><tr><th>Catedra</th><th>Editar</th><th>Eliminar</th>
 
                             </tr></thead>
                         <tbody id="filtrar">
                             <?php foreach ($lista as $i) : ?>
                                 <tr>
                                     <td><?php echo $i->cat_denominacion; ?></td>
-                                    <td><?php echo $i->cat_diascatedra; ?></td>
+                                  
                                     <td><?= anchor(base_url() . 'backend/inscatedras_control/editar_catedra/' . $i->idcatedra, 'Editar') ?></td>
                                     <td><a href="<?php echo base_url() . 'backend/inscatedras_control/eliminarcatedra/' . $i->idcatedra ?>" onclick="return confirm('¿Estás seguro que desea eliminar esta Cátedra?')">Eliminar</a></td> 
                                 <?php endforeach; ?></tr>

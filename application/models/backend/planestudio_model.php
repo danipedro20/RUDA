@@ -29,7 +29,7 @@ class Planestudio_model extends CI_Model {
     }
 
     public function selplacate() {
-        $consulta = $this->db->query("select plan_estudios.idplan,plan_estudios.pla_denominacion,catedras.idcatedra,catedras.cat_denominacion from cate_plan inner join catedras on
+        $consulta = $this->db->query("select cate_plan.diascatedra, plan_estudios.idplan,plan_estudios.pla_denominacion,catedras.idcatedra,catedras.cat_denominacion from cate_plan inner join catedras on
 cate_plan.idcatedra=catedras.idcatedra inner join plan_estudios on
 cate_plan.idplan=plan_estudios.idplan");
         return $consulta->result();
@@ -41,26 +41,30 @@ ca.idcatedra=cate.idcatedra where cate.idcatedra is null;");
 
         return $query->result();
     }
-      public function planes() {
+
+    public function planes() {
         $consulta = $this->db->query("select * from plan_estudios;");
         return $consulta->result();
     }
 
     public function catedra_plan($idca, $idpla) {
-        $consulta = $this->db->query("select ca.idcatedra,ca.cat_denominacion,pla.idplan,pla.pla_denominacion from catedras as ca join
+        $consulta = $this->db->query("select capla.diascatedra, ca.idcatedra,ca.cat_denominacion,pla.idplan,pla.pla_denominacion from catedras as ca join
 cate_plan as capla on  capla.idcatedra=ca.idcatedra join plan_estudios as pla  on capla.idplan=pla.idplan where ca.idcatedra='$idca' and pla.idplan='$idpla'");
         return $consulta->row();
     }
-      public function editar_catedraplan($a,$b) {
+
+    public function editar_catedraplan($a, $b, $c) {
 
         $data = array(
             'idplan' => $a,
+            'diascatedra' => $c,
         );
 
         $this->db->where('idcatedra', $b);
         $this->db->update('cate_plan', $data);
     }
-       public function eliminar_asignacion($a, $b) {
+
+    public function eliminar_asignacion($a, $b) {
         $this->db->where('idcatedra', $a);
         $this->db->where('idplan', $b);
         $this->db->delete('cate_plan');

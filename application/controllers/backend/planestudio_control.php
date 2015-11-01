@@ -66,19 +66,20 @@ class Planestudio_control extends CI_Controller {
 
             $a = $this->input->post('selplan');
             $b = $this->input->post('idcatedra');
+            $c = $this->input->post('diascatedra');
 
 
-            $updatecatedras = $this->planestudio_model->editar_catedraplan($a, $b);
+            $updatecatedras = $this->planestudio_model->editar_catedraplan($a, $b,$c);
             //   $updateusuario = $this->catedras_model->ediusuario($b, $d);
             redirect(base_url('/backend/planestudio_control/listar_catedras_planes/'));
         }
     }
-        public function eliminarasignacion() {
+
+    public function eliminarasignacion() {
         $a = $this->uri->segment(4);
         $b = $this->uri->segment(5);
         $eliminar = $this->planestudio_model->eliminar_asignacion($a, $b);
         redirect(base_url('/backend/planestudio_control/listar_catedras_planes/'));
     }
-
 
 }

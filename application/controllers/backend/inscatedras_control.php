@@ -12,7 +12,7 @@ class Inscatedras_control extends CI_Controller {
 
     public function catedra() {
         $datos['titulo'] = 'Ruda - Crear Catedra';
-        $datos['contenido'] = 'catedras_view';
+        $datos['contenido'] = 'crear_catedras_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
@@ -59,7 +59,7 @@ class Inscatedras_control extends CI_Controller {
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             //si existe el campo oculto llamado grabar creamos las validadciones
             $this->form_validation->set_rules('cat_denominacion', 'Nombre de Catedra', 'trim|required|callback_catedra_check');
-            $this->form_validation->set_rules('cat_diascatedra', 'Dias de catera', 'trim|required');
+       //     $this->form_validation->set_rules('cat_diascatedra', 'Dias de catera', 'trim|required');
 
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
@@ -68,10 +68,10 @@ class Inscatedras_control extends CI_Controller {
                 $this->catedra();
             } else {
                 $a = $this->input->post('cat_denominacion');
-                $b = $this->input->post('cat_diascatedra');
+          //      $b = $this->input->post('cat_diascatedra');
 
 
-                $insert = $this->catedras_model->insecatedra($a, $b);
+                $insert = $this->catedras_model->insecatedra($a);
                 if ($_POST['dire'] == base_url('/backend/planestudio_control/plan')) {
                     redirect(base_url('/backend/planestudio_control/plan/'));
                 } elseif ($_POST['dire'] == base_url('/backend/asigcatedras_control/asigcatedras')) {
@@ -103,7 +103,7 @@ class Inscatedras_control extends CI_Controller {
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             //si existe el campo oculto llamado grabar creamos las validadciones
             $this->form_validation->set_rules('cate_denominacion', 'Nombre de Catedra', 'trim|required');
-            $this->form_validation->set_rules('cat_diascatedra', 'Dias de catedra', 'trim|required');
+          ///  $this->form_validation->set_rules('cat_diascatedra', 'Dias de catedra', 'trim|required');
 
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
@@ -113,11 +113,11 @@ class Inscatedras_control extends CI_Controller {
             } else {
                 $a = $this->input->post('cate_denominacion');
                 //   $b = $this->input->post('selprofesor');
-                $c = $this->input->post('cat_diascatedra');
+              //  $c = $this->input->post('cat_diascatedra');
                 $d = $this->input->post('idcatedra');
 
 
-                $updatecatedras = $this->catedras_model->edicatedra($a, $c, $d);
+                $updatecatedras = $this->catedras_model->edicatedra($a, $d);
                 //   $updateusuario = $this->catedras_model->ediusuario($b, $d);
                 redirect(base_url('/backend/inscatedras_control/listar_catedras/'));
             }

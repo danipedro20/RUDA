@@ -19,7 +19,7 @@ if ($this->session->userdata('nombre')) {
 
                     <table id="paginar" table border="1" cellpadding="2" cellspacing="1" WIDTH="100%">
 
-                        <thead><tr><th>Plan de Estudio</th><th>Editar</th><th>Eliminar</th>
+                        <thead><tr><th>Plan de Estudio</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Editar</th><th>Eliminar</th>
 
                             </tr></thead>
                         <tbody id="filtrar">
@@ -27,6 +27,22 @@ if ($this->session->userdata('nombre')) {
                                 <tr>
 
                                     <td><?php echo $i->pla_denominacion; ?></td>
+                                     <td><?php 
+                                            $fechainicio=$i->pla_fechainicio; 
+                                             echo date("d-m-Y", strtotime($fechainicio) );
+                                            ?>
+                                     </td>
+                                      <td><?php 
+                                      $fechafin= $i->pla_fechafin;('d/m/Y'); 
+                                      
+                                      echo date("d-m-Y", strtotime($fechafin) );
+                                      
+                                      ?>
+                                     
+
+                                      
+                                      
+                                      </td>
                                     <td><?= anchor(base_url() . 'backend/insplan_control/editar_plan_estudio/' . $i->idplan, 'Editar') ?></td>
                                     <td><a href="<?php echo base_url() . 'backend/insplan_control/eliminar_plan_estudio/' . $i->idplan?>" onclick="return confirm('¿Estás seguro que desea eliminar este Plan?')">Eliminar</a></td>
                                 <?php endforeach; ?></tr>

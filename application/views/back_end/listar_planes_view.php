@@ -20,14 +20,18 @@ if ($this->session->userdata('nombre')) {
 
                     <table id="paginar" table border="1" cellpadding="2" cellspacing="1" WIDTH="100%">
 
-                        <thead><tr><th>Plan de Estudio</th><th>Catedra</th><th>Editar</th><th>Eliminar</th>
+                        <thead><tr><th>Plan de Estudio</th><th>Catedra</th><th>Dias Catedra</th><th>Editar</th><th>Eliminar</th>
 
                             </tr></thead>
                         <tbody id="filtrar">
                             <?php foreach ($arrDatosplaca as $placa) : ?>
                                 <tr>
 
-                                    <td><?php echo $placa->pla_denominacion; ?></td><td><?php echo $placa->cat_denominacion; ?></td><td><?= anchor(base_url() . 'backend/planestudio_control/editar_catedras_planes/' . $placa->idcatedra . '/' . $placa->idplan, 'Editar') ?></td><td><a href="<?php echo base_url() . 'backend/planestudio_control/eliminarasignacion/' . $placa->idcatedra.'/'.$placa->idplan?>" onclick="return confirm('¿Estás seguro que desea eliminar esta Asignación?')">Eliminar</a></td>
+                                    <td><?php echo $placa->pla_denominacion; ?></td>
+                                    <td><?php echo $placa->cat_denominacion; ?></td>
+                                       <td><?php echo $placa->diascatedra; ?></td>
+                                    <td><?= anchor(base_url() . 'backend/planestudio_control/editar_catedras_planes/' . $placa->idcatedra . '/' . $placa->idplan, 'Editar') ?></td>
+                                    <td><a href="<?php echo base_url() . 'backend/planestudio_control/eliminarasignacion/' . $placa->idcatedra.'/'.$placa->idplan?>" onclick="return confirm('¿Estás seguro que desea eliminar esta Asignación?')">Eliminar</a></td>
                                 <?php endforeach; ?></tr>
                         </tbody>                      
 
