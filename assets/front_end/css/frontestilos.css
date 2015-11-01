@@ -132,7 +132,7 @@ aside ul li a:hover {
     color: hsl(260,7%,45%);
     font-size: 20px;
     text-align: center;
-    font-weight: bold;
+    font-weight: normal;
     text-decoration: none;
 }
 .contenido article h2 {
@@ -142,8 +142,8 @@ aside ul li a:hover {
 
 /*css de la 1era parte de la division en el home*/
 .contenido1 {
-    width: 30%;
-    float: left;
+    width: 90%;
+    float: center;
     background: hsl(200,33%,97%); 
     border-radius: 5px;
     margin: 5px;
@@ -156,7 +156,7 @@ aside ul li a:hover {
 .contenido1 h1 {
     margin-top: 10px;
     color: hsl(200, 31%, 53%);
-    font-size: 40px;
+    font-size: 20px;
     text-align: center;
         
 }
@@ -165,73 +165,12 @@ aside ul li a:hover {
     color: hsl(260,7%,45%);
     font-size: 20px;
     text-align: center;
-    font-weight: bold;
+    font-weight: normal;
     text-decoration: none;
 }
 .contenido1 article h2 {
     margin-top: 0;
-}
-
-/*css de la 2da parte de la division en el home*/
-.contenido2 {
-    width: 30%;
-    float: left;
-    background: hsl(200,33%,97%);
-    border-radius: 5px;
-     margin: 5px;
-}
-.contenido2 article {
-    padding: 15px 30px;
-    text-align: justify;
-}
-.contenido2 h1 {
-    margin-top: 10px;
-    color: hsl(200, 31%, 53%);
-    font-size: 40px;
-    text-align: center;
-        
-}
-.contenido2 h2 {
-    margin-top: 0;
-    color: hsl(260,7%,45%);
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    text-decoration: none;
-}
-.contenido2 article h2 {
-    margin-top: 0;
-}
-
-/*css de la 3era parte de la division en el home*/
-.contenido3 {
-    width: 30%;
-    float: left;
-    background: hsl(200,33%,97%);
-    border-radius: 5px;
-     margin: 5px;
-}
-.contenido3 article {
-    padding: 15px 30px;
-    text-align: justify;
-}
-.contenido3 h1 {
-    margin-top: 10px;
-    color: hsl(200, 31%, 53%);
-    font-size: 40px;
-    text-align: center;
-        
-}
-.contenido3 h2 {
-    margin-top: 0;
-    color: hsl(260,7%,45%);
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    text-decoration: none;
-}
-.contenido3 article h2 {
-    margin-top: 0;
+    text-transform: none;
 }
 
 footer {
@@ -280,7 +219,7 @@ form {
 h2 {
    font-size: 35px; 
    color: #445668; 
-   text-transform: uppercase;
+   text-transform: none;
    text-align: center; 
    margin: 0 0 35px 0; 
    text-shadow: 0px 1px 0px #f2f2f2;
@@ -293,7 +232,7 @@ label {
    text-align: right; 
    font-size: 20px; 
    color: #445668;
-   text-transform: uppercase; 
+   text-transform: none; 
    text-shadow: 0px 1px 0px #f2f2f2;
    }
 
@@ -313,12 +252,12 @@ input {
    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
    font-family: sans-serif; 
    font-size: 16px; color: #000 !important;
-   text-transform: uppercase; 
+   text-transform: none; 
    text-shadow: 0px -1px 0px #334f71;
    }
 
 input::-webkit-input-placeholder  {
-   color: #ddd; 
+   color: #3c3c3c; 
    text-shadow: 0px -1px 0px #38506b; 
    text-transform:capitalize;
    }
@@ -344,7 +283,7 @@ textarea {
    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
    font-family: sans-serif; font-size: 16px;
     color: #983a3a; 
-   text-transform: uppercase; 
+   text-transform: none; 
    text-shadow: 0px -1px 0px #334f71;
    resize:none;
    }
@@ -399,7 +338,7 @@ input[type=submit]:hover {
    text-align: right; 
    font-size: 16px; 
    color: #445668;
-   text-transform: uppercase; 
+   text-transform: none; 
    text-shadow: 0px 1px 0px #f2f2f2;
    }
 
@@ -418,7 +357,7 @@ input {
    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
    font-family: sans-serif; 
    font-size: 16px; color: #f2f2f2;
-   text-transform: uppercase; 
+   text-transform: none; 
    text-shadow: 0px -1px 0px #334f71;
    }
 
@@ -449,7 +388,7 @@ textarea {
    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
    font-family: sans-serif; font-size: 16px;
     color: #f2f2f2; 
-   text-transform: uppercase; 
+   text-transform: none; 
    text-shadow: 0px -1px 0px #334f71;
    resize:none;
    }
@@ -514,7 +453,7 @@ input[type=submit]:hover {
    font-family: sans-serif; 
    font-size: 16px; 
    color: #000;
-   text-transform: uppercase; 
+   text-transform: none; 
    text-shadow: 0px -1px 0px #334f71;
    }
    select::-webkit-input-placeholder  {
