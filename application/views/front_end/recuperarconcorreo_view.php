@@ -7,7 +7,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     <fieldset>
         <h1>Recuperar Contraseña con Correo</h1>
 
-        <form method="post" action=" <?php echo base_url(); ?>frontend/usuarios_control/ingreso">
+        <form method="post" action=" <?php echo base_url(); ?>frontend/recuperacion_control/correo">
 
 
             <label name="lbl_usu_email">Email: </label>

@@ -1,4 +1,4 @@
-<?php
+ <?php
 header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 ?>
@@ -10,29 +10,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <link rel="stylesheet" href="<?php echo base_url() ?>/assets/front_end/jquery-ui/jquery-ui.css"/>
         <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
         <script src="<?php echo base_url() ?>/assets/front_end/jquery-ui/jquery-ui.js"></script>
-        <script>
-            $.datepicker.regional['es'] = {
-                closeText: 'Cerrar',
-                prevText: '<Ant',
-                nextText: 'Sig>',
-                currentText: 'Hoy',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
-                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-                weekHeader: 'Sm',
-                dateFormat: 'yy/mm/dd',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''
-            };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-            $(function() {
-                $("#fecha").datepicker();
-            });
-        </script>
+        <script src="<?php echo base_url() ?>/assets/calendario/datapicker.js"></script>
 
         <fieldset>
             <h1>Suspención de Cuenta</h1>
@@ -42,12 +20,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <label name="lbl_bamotivo">Motivo de Suspención:</label>
                 <input  type="text" name="bamotivo" id="bamotivo" cols="35" rows="10"  placeholder="Motivo de suspención" required="" value='<?php echo set_value('bamotivo') ?>'>
                 <label name="lbl_usu_correo">Correo del Usuario:</label>
-                <select  required="" name="selcorreo" value='' >
-                    <?php
-                    foreach ($arrDatosusuario as $i => $email)
-                        echo '<option values="', $i, '">', $email, '</option>';
-                    ?> 
-                </select>  
+                <select name='idusuario' id='idusuario'>
+             
+                    <?php foreach ($arrDatosusuario as $i) : ?>
+                    <option value="<?php echo $i->idusuario; ?>"><?php echo $i->usu_email; ?>
+
+                    </option><?php endforeach; ?>
+            </select>
 
                 <label name="fecha">Fecha de fin de la Suspención:</label>
                 <input type="text" id="fecha" required="" name="fecha"  placeholder="Fecha Fin de suspención" value='<?php echo set_value('bafechafin') ?>' />

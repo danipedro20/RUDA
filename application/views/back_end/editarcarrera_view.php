@@ -4,32 +4,45 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 ?>
 <?php if ($this->session->userdata('nombre')) {
     ?>
+  
 
     <section class="contenido">
+          <script>
+        $(document).ready(function() {
+
+            $("input[type=submit]").click(function() {
+                var accion = $(this).attr('dir');
+                $('form').attr('action', accion);
+                $('form').submit();
+            });
+
+        });
+    </script>
 
 
         <fieldset>
-            <h1>Editar Carreras</h1>
-            <?php echo form_open("backend/carreras_control/editar_carrera") ?>
-
-            <label name="lbl_car_denominacion">Nombre Actual  de la Carrera: </label>
-            <input type="text" name="car_denominacion" placeholder="Nombre Actual de la carrera" required="" value='<?php echo set_value('car_denominacion') ?>' />
-              <label name="lbl_car_denominacion">Nombre Nuevo de la Carrera: </label>
-            <input type="text" name="nvo_car_denominacion" placeholder="Nombre Nuevo de la carrera" required="" value='<?php echo set_value('nvo_car_denominacion') ?>' />
+            <form method="post">
+                <h1>Editar Carrera</h1>
 
 
-            <!-- este input lo usaremos como referencia para la validacion -->
-            <input type="hidden" name="grabar" value="si" />
+                <label name="lbl_car_denominacion">Nombre: </label>
+                <input type="text" name="car_denominacion" placeholder="Nombre Actual de la carrera" required="" value='<?php echo $carrera->car_denominacion; ?>' />
+                <input type="hidden" name="id_carrera" id="id_carrera" required="" value='<?php echo $carrera->id_carrera; ?>' />
 
-            <!--            En esta linea estamos configurando como se va a mostrar el error si algo no esta bien-->
-            <font color='red' style='font-weight: bold; font-size: 14px; text-decoration: underline'><?php echo validation_errors(); ?></font>
+                <!-- este input lo usaremos como referencia para la validacion -->
+                <input type="hidden" name="grabar" value="si" />
 
-            <input type="submit" name="btnguardar" value="Guardar Cambios" />
+                <!--            En esta linea estamos configurando como se va a mostrar el error si algo no esta bien-->
+                <font color='red' style='font-weight: bold; font-size: 14px; text-decoration: underline'><?php echo validation_errors(); ?></font>
+                <input type="submit" name="guardarcambios" id="guardarcambios" value="Guardar Cambios"  dir="<?php echo base_url(); ?>backend/carreras_control/editar_carrera/"/>
 
-            <?php echo form_close() ?> 
+                <input type="submit" name="cancelar" id="cancelar" value="Cancelar"  dir="<?php echo base_url(); ?>backend/carreras_control/vercarreras/" />
+
+
+            </form> 
 
         </fieldset>
     </section>
-<?php
+    <?php
 } else
     redirect(base_url('/frontend/usuarios_control/logueo/'));

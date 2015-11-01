@@ -1,6 +1,8 @@
 <?php
+
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
 class Planestudio_model extends CI_Model {
 
     public function __construct() {
@@ -9,46 +11,59 @@ class Planestudio_model extends CI_Model {
 
     public function selplan() {
         $query = $this->db->query('SELECT idplan,pla_denominacion FROM plan_estudios');
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatosplan[htmlspecialchars($row->idplan, ENT_QUOTES)] = htmlspecialchars($row->pla_denominacion, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatosplan;
-        }
+        return $query->result();
     }
 
     public function selcatedras() {
         $query = $this->db->query('SELECT idcatedra,cat_denominacion FROM catedras');
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatoscate[htmlspecialchars($row->idcatedra, ENT_QUOTES)] = htmlspecialchars($row->cat_denominacion, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatoscate;
-        }
+        return $query->result();
     }
-    public function inserplan() {
-        
-        $b = $_POST['SELplan'];
-        $this->db->select('idplan')
-                ->where('pla_denominacion', $b);
-        $query = $this->db->get('plan_estudios');
-        $row = $query->row_array();
-        $idplan = $row['idplan'];
 
-        $a = $_POST['chosen'];
-        foreach ($a as $indice => $valor) {
+    public function inserplan($a, $b) {
 
-            $this->db->select('idcatedra')
-                    ->where('cat_denominacion', $valor);
-            $query = $this->db->get('catedras');
-            $row = $query->row_array();
-             $id = $row['idcatedra'];
-         
-            $sql = "INSERT IGNORE INTO cate_plan (idcatedra,idplan)
-        VALUES (" . $this->db->escape($id) . ", " . $this->db->escape($idplan) . ")";
-
-            $this->db->query($sql);
-          
-        }
+        $data = array(
+            'idplan' => $a,
+            'idcatedra' => $b,
+        );
+        return $this->db->insert('cate_plan', $data);
     }
+
+    public function selplacate() {
+        $consulta = $this->db->query("select plan_estudios.idplan,plan_estudios.pla_denominacion,catedras.idcatedra,catedras.cat_denominacion from cate_plan inner join catedras on
+cate_plan.idcatedra=catedras.idcatedra inner join plan_estudios on
+cate_plan.idplan=plan_estudios.idplan");
+        return $consulta->result();
+    }
+
+    public function verlascatedras($id) {
+        $query = $this->db->query("select ca.idcatedra,ca.cat_denominacion from cate_plan as cate right join catedras as ca on
+ca.idcatedra=cate.idcatedra where cate.idcatedra is null;");
+
+        return $query->result();
+    }
+      public function planes() {
+        $consulta = $this->db->query("select * from plan_estudios;");
+        return $consulta->result();
+    }
+
+    public function catedra_plan($idca, $idpla) {
+        $consulta = $this->db->query("select ca.idcatedra,ca.cat_denominacion,pla.idplan,pla.pla_denominacion from catedras as ca join
+cate_plan as capla on  capla.idcatedra=ca.idcatedra join plan_estudios as pla  on capla.idplan=pla.idplan where ca.idcatedra='$idca' and pla.idplan='$idpla'");
+        return $consulta->row();
+    }
+      public function editar_catedraplan($a,$b) {
+
+        $data = array(
+            'idplan' => $a,
+        );
+
+        $this->db->where('idcatedra', $b);
+        $this->db->update('cate_plan', $data);
+    }
+       public function eliminar_asignacion($a, $b) {
+        $this->db->where('idcatedra', $a);
+        $this->db->where('idplan', $b);
+        $this->db->delete('cate_plan');
+    }
+
 }

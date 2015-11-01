@@ -37,7 +37,7 @@ date_default_timezone_set('America/Asuncion');
 
 
         <?php
-        $cont = 0;
+     
         $hoy = date('d-m-Y');
         $fechahoy = date("Y-m-d", strtotime($hoy));
         $j = $this->session->userdata('id');
@@ -46,24 +46,29 @@ on aulas.idplan=plan_estudios.idplan join cate_plan on
 plan_estudios.idplan=cate_plan.idplan join catedras on cate_plan.idcatedra=catedras.idcatedra join
 usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios on usu_cate.idusuario=usuarios.idusuario where usuarios.idusuario='$j'");
 
-
+   $cont = 0;
 
         foreach ($query3->result() as $fila) {
-            $query = $this->db->query("select evento from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" . $this->session->userdata('id') . "' and idaula='" . $fila->idaula . "')  or ( fecha='" . $fechahoy . "' and prioridad=2  and idaula='" . $fila->idaula . "')");
+            $query = $this->db->query("select evento from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" . $this->session->userdata('id') . "' and idaula='" . $fila->idaula . "')  or ( fecha='" . $fechahoy . "' and prioridad= 2  and idaula='". $fila->idaula ."')");
             if ($query->num_rows() > 0) {
                 foreach ($query->result() as $que) {
-                    $cont = $cont + 1;
+                  $cont = $cont + 1;
                 }
-            }if ($cont > 0) {
-            ?>
-            <div id="mini-notification">
-                <p><?php if ($cont > 0) {
-            echo 'Tienes' . " " . $cont . " " . ' Acontencimiento/s en tu Agenda el dia de Hoy ';
-        } ?></p>
+        }}
+           
+            if ($cont > 0) {
+                ?>
+                <div id="mini-notification">
+                    <p><?php
+                        
+                            echo 'Tienes' . " " . $cont . " " . ' Acontencimiento/s en tu Agenda el dia de Hoy ';
+                        
+                        ?></p>
 
-            </div>
+                </div>
 
-        <?php }} ?>
+        <?php }
+     ?>
 
 
     </section>

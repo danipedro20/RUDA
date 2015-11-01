@@ -11,6 +11,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 </script>
 <section class="contenido">
     
-    <h2>Contraseña Recuperada!!!</h2>
+    <h2>Contraseña Recuperada !!!<br>
+    <a href="<?php echo base_url() ?>frontend/usuarios_control/logueo">Iniciar Sesión</a> </h2></h2>
     
 </section>

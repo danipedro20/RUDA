@@ -28,16 +28,17 @@ class Baneo_control extends CI_Controller {
 
             //si existe el campo oculto llamado grabar creamos las validadciones
             $this->form_validation->set_rules('bamotivo', 'Motivo de Suspención', 'trim|required');
-            $this->form_validation->set_rules('selcorreo', 'Seleccione una Correo', 'trim');
+            $this->form_validation->set_rules('idusuario', 'Seleccione una Correo', 'trim');
             $this->form_validation->set_rules('fecha', 'Seleccione la Fecha', 'trim|required');
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
             if ($this->form_validation->run() == FALSE) {
                 $this->baneo();
             } else {
+                $a = $this->input->post('idusuario');
                 $c = $this->input->post('bamotivo');
 
-                $insert = $this->baneo_model->insbaneo($c);
+                $insert = $this->baneo_model->insbaneo($a,$c);
                 redirect(base_url('backend/baneo_control/successbaneo/'));
             }
         }

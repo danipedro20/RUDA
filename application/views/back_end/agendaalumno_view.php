@@ -42,7 +42,6 @@ if ($this->session->userdata('nombre')) {
 aulas.idaula=usu_au.idaula join usuarios on 
 usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
         $query = $sql->row();
-        
         ?>
 
         <script>
@@ -52,7 +51,7 @@ usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
                 agenda.html("<img src='<?php echo base_url(); ?>assets/agenda/images/loading.gif'>");
                 $.ajax({
                     type: "GET",
-                    url: "<?php echo base_url(); ?>assets/agenda/ajax_calendario_alum.php",
+                    url: "<?php echo base_url(); ?>assets/agenda/agenda_alumno.php",
                     cache: false,
                     data: {mes: mes, anio: anio, accion: "generar_calendario"}
                 }).done(function(respuesta)
@@ -84,7 +83,7 @@ usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
                     var fecha = $(this).attr('rel');
 
 
-                    $('#mask').fadeIn(1000).html("<div id='nuevo_evento' class='window' rel='" + fecha + "'>Agregar un evento el " + formatDate(fecha) + "</h2><a href='#' class='close' rel='" + fecha + "'>&nbsp;</a><div id='respuesta_form'></div><form class='formeventos'><label name='evento_nombre'>Evento</label><input type='text' name='evento_titulo' id='evento_titulo' class='required'><label name='prioridad_nombre'>Prioridad</label><SELECT  name='prioridad' id='prioridad' style='width: 460px;'><OPTION VALUE='1'>Privada</OPTION><OPTION VALUE='2'>Publico</OPTION> class='required'></SELECT><br><input type='button' name='Enviar' value='Guardar' class='enviar'><input type='hidden' name='evento_fecha' id='evento_fecha' value='" + fecha + "'></form></div>");
+                    $('#mask').fadeIn(1000).html("<div id='nuevo_evento' class='window' rel='" + fecha + "'>Agregar un evento el " + formatDate(fecha) + "</h2><a href='#' class='close' rel='" + fecha + "'>&nbsp;</a><div id='respuesta_form'></div><form class='formeventos'><label name='evento_nombre'>Evento</label><input type='text' name='evento_titulo' id='evento_titulo' class='required'><label name='prioridad_nombre'>Para</label><SELECT  name='prioridad' id='prioridad' style='width: 460px;'><OPTION VALUE='1'>Mi</OPTION><OPTION VALUE='2'>Todas</OPTION><OPTION VALUE='3'>Administrador</OPTION> class='required'></SELECT><br><input type='button' name='Enviar' value='Guardar' class='enviar'><input type='hidden' name='evento_fecha' id='evento_fecha' value='" + fecha + "'></form></div>");
                 });
 
                 /* LISTAR EVENTOS DEL DIA */
@@ -95,9 +94,9 @@ usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
                     $('#mask').fadeIn(1000).html("<div id='nuevo_evento' class='window' rel='" + fecha + "'>Eventos del " + formatDate(fecha) + "</h2><a href='#' class='close' rel='" + fecha + "'>&nbsp;</a><div id='respuesta'></div><div id='respuesta_form'></div></div>");
                     $.ajax({
                         type: "GET",
-                        url: "<?php echo base_url(); ?>assets/agenda/ajax_calendario_alum.php",
+                        url: "<?php echo base_url(); ?>assets/agenda/agenda_alumno.php",
                         cache: false,
-                        data: {fecha: fecha, usuario: '<?php echo $this->session->userdata('id') ?>',aula: '<?php echo  $query->idaula; ?>', accion: "listar_evento"}
+                        data: {fecha: fecha, usuario: '<?php echo $this->session->userdata('id') ?>', aula: '<?php echo $query->idaula; ?>', accion: "listar_evento"}
                     }).done(function(respuesta)
                     {
                         $("#respuesta_form").html(respuesta);
@@ -128,14 +127,14 @@ usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
                         var evento = $("#evento_titulo").val();
                         var prioridad = $("#prioridad").val();
                         var fecha = $("#evento_fecha").val();
-       
+
 
 
                         $.ajax({
                             type: "GET",
-                            url: "<?php echo base_url(); ?>assets/agenda/ajax_calendario_alum.php",
+                            url: "<?php echo base_url(); ?>assets/agenda/agenda_alumno.php",
                             cache: false,
-                            data: {evento: evento, prioridad: prioridad, usuario: '<?php echo $this->session->userdata('id') ?>', aula: '<?php echo  $query->idaula; ?>', fecha: fecha, accion: "guardar_evento"}
+                            data: {evento: evento, prioridad: prioridad, usuario: '<?php echo $this->session->userdata('id') ?>', aula: '<?php echo $query->idaula; ?>', fecha: fecha, accion: "guardar_evento"}
                         }).done(function(respuesta2)
                         {
                             $("#respuesta_form").html(respuesta2);
@@ -159,7 +158,7 @@ usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
                     var id = $(this).attr("rel");
                     $.ajax({
                         type: "GET",
-                        url: "<?php echo base_url(); ?>assets/agenda/ajax_calendario.php",
+                        url: "<?php echo base_url(); ?>assets/agenda/agenda_alumno.php",
                         cache: false,
                         data: {id: id, usuario: '<?php echo $this->session->userdata('id') ?>', accion: "borrar_evento"}
                     }).done(function(respuesta2)

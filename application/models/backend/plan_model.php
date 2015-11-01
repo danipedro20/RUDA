@@ -16,25 +16,37 @@ class Plan_model extends CI_Model {
         return $this->db->insert('plan_estudios', $data);
     }
 
-    public function ediplanestudio($a, $b) {
+    public function editarplanestudio($a, $b) {
         $data = array(
-            'pla_denominacion' => $b,
+            'pla_denominacion' => $a,
         );
 
-        $this->db->where('pla_denominacion', $a);
+        $this->db->where('idplan', $b);
         $this->db->update('plan_estudios', $data);
     }
-        public function elimiplanestudios($a) {
-        $this->db->select('idplan')
-                ->where('pla_denominacion', $a);
-        $query = $this->db->get('plan_estudios');
-        $row = $query->row_array();
-        $id = $row['idplan'];
 
+    public function ediplan_catedra($b, $d) {
+
+        $data = array(
+            'idcatedra' => $d,
+        );
+
+
+        $this->db->where('idplan', $b);
+        $this->db->update('cate_plan', $data);
+    }
+
+    public function elimiplan_catedra($a, $b) {
+        $this->db->where('idplan', $a);
+        $this->db->where('idcatedra', $b);
+        $this->db->delete('cate_plan');
+    }
+
+    public function eliminarplan($a) {
         $tablas = array('aulas', 'cate_plan', 'plan_estudios');
-        $this->db->where('idplan', $id);
+        $this->db->where('idplan', $a);
         $this->db->delete($tablas);
-    }    
+    }
 
     function plan_check($plan) {
         $this->db->where('pla_denominacion', $plan);
@@ -45,20 +57,40 @@ class Plan_model extends CI_Model {
         }
     }
 
-    function planeditar_check($plan) {
-        $this->db->where('pla_denominacion', $plan);
-        $query = $this->db->get('plan_estudios');
-
-        if ($query->num_rows() == 0) {
-            return TRUE;
-        }
+    public function editar_plan($id) {
+        $consulta = $this->db->query("select *from plan_estudios where idplan='$id';");
+        return $consulta->row();
     }
-     function planeliminar_check($plan) {
-        $this->db->where('pla_denominacion', $plan);
-        $query = $this->db->get('plan_estudios');
+ 
 
-        if ($query->num_rows() == 0) {
-            return TRUE;
+    public function lista_catedra() {
+        $consulta = $this->db->query("select * from catedras;");
+        return $consulta->result();
+    }
+
+    public function listar_planes() {
+        $consulta = $this->db->query("select * from plan_estudios;");
+        return $consulta->result();
+    }
+
+    function editarplan_check($plan) {
+        $this->db->select('pla_denominacion')
+                ->where('pla_denominacion', $plan);
+        $query = $this->db->get('plan_estudios');
+        $row = $query->row();
+        $ingresado = $row->pla_denominacion;
+        if ($query->num_rows() > 0) {
+            $consulta = $this->db->query("select * from plan_estudios;");
+            $array = $consulta->result();
+            foreach ($array as $i) :
+                if ($ingresado == $i->pla_denominacion) {
+                    return FALSE;
+                } else {
+                    return TRUE;
+                }
+            endforeach;
+        } else {
+            return FALSE;
         }
     }
 

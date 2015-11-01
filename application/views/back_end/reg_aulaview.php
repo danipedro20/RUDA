@@ -7,7 +7,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
     <section class="contenido">
 
-
+<!--
         <link rel="stylesheet" href="<?php echo base_url() ?>/assets/front_end/jquery/choosen/chosen.css"/>
         <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
         <script src="<?php echo base_url() ?>/assets/front_end/jquery/choosen/chosen.jquery.min.js"></script>
@@ -21,7 +21,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 
 
-        </script>
+        </script>-->
         <fieldset>
             <h2>AULA</h2>
             <?php echo form_open("backend/reg_aula/inseraula") ?>
@@ -32,29 +32,28 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <input type="text" name="aul_plazahabilitada" id="inp_plazahabilitada" placeholder="Ingrese los lugares habilitados" required="required" value='<?php echo set_value('aul_plazahabilitada') ?>'/>
 
             <label for="lbl_carrera">Carrera: </label>
-            <select   class="chosen"   name="selCarreras"  id="chosen" data-placeholder="Seleccione el Plan..."  required="" style="width: 200px;"> 
+             <select name='selcarrera' id='selcarrera'>
+             
+                    <?php foreach ($arrDatoscarreras as $car) : ?>
+                    <option value="<?php echo $car->id_carrera; ?>"><?php echo $car->car_denominacion; ?>
 
-                <?php
-                foreach ($arrDatoscarreras as $i => $carrera)
-                    echo '<option values="', $i, '">', $carrera, '</option>';
-                ?> 
-            </select>   <a href="<?php echo base_url() ?>backend/carreras_control/carreras/">Insertar una nueva carrera</a>
+                    </option><?php endforeach; ?>
+            </select>   <a href="<?php echo base_url() ?>backend/carreras_control/carreras/">Insertar carrera</a>
             <p></p><p></p>
             <label for="lbl_plan">Plan de Estudio: </label>
-            <select   class="chosen"   name="selplanes"  id="chosen" data-placeholder="Seleccione el Plan..."  required="" style="width: 200px;"> 
-
-                <?php
-                foreach ($arrDatosplanes as $i => $plan)
-                    echo '<option values="', $i, '">', $plan, '</option>';
-                ?> 
-            </select>   <a href="<?php echo base_url() ?>backend/insplan_control/planestudio/">Insertar un Nuevo Plan</a>
+            <select name='selplan' id='selplan'>
+                    <?php foreach ($arrDatosplanes as $pla) : 
+                       ?>
+                
+                    <option value="<?php echo $pla->idplan ?>"><?php echo $pla->pla_denominacion ?>
+                    </option><?php endforeach; ?>    </select>   <a href="<?php echo base_url() ?>backend/insplan_control/planestudio/">Insertar Plan</a>
             <p></p><p></p>
             <label for="idturno">Turno:</label>
             <select    name="idturno"  id="idturno" placeholder="Seleccione el Turno..."  required="" > 
                 <option value="" selected="selected">Seleccione un Turno</option>
-                <option value="1" <?php echo set_select('idturno', '1'); ?>>Mañana</option>
-                <option value="2" <?php echo set_select('idturno', '2'); ?>>Tarde</option>
-                <option value="3" <?php echo set_select('idturno', '3'); ?>>Noche</option>
+                <option value="M" <?php echo set_select('idturno', 'M'); ?>>MAÑANA</option>
+                <option value="T" <?php echo set_select('idturno', 'T'); ?>>TARDE</option>
+                <option value="N" <?php echo set_select('idturno', 'N'); ?>>NOCHE</option>
             </select> 
 
 

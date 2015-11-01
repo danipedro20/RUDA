@@ -96,7 +96,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 <section class="contenido">
     <fieldset>
-        <h1>Complete el Formulario</h1>
+        <h1>Complete el Formulario de Inscripción</h1>
         <?php // if ($_SERVER['HTTP_REFERER'] != base_url('/frontend/registro_control/inscripcion')) { ?>
             <!--<h3 ALIGN = CENTER>Si aun no estas inscripto, Inscribete <a href = "<?php echo base_url() ?>frontend/registro_control/inscripcion">Aqui</a></h3>-->
         <?php // } ?>
@@ -123,8 +123,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <label name="respuesta">Respuesta Secreta: </label>
         <input type="password" name="respuesta" placeholder="Respuesta Secreta" required="" value='<?php echo set_value('respuesta') ?>' /> <br> 
 
-        <input type="hidden" id="regiscarrera" name="regiscarrera"  value='<?php echo $this->input->post('suscarreras'); ?>' /><br>
-        <input type="hidden" id="regisaula" name="regisaula"  value='<?php echo $this->input->post('susaulas'); ?>' /><br>
+        <input type="hidden" id="idcarrera" name="idcarrera"  value='<?php echo $idcarrera; ?>' /><br>
+        <input type="hidden" id="idaula" name="idaula"  value='<?php echo $idaula; ?>' /><br>
+         <input type="hidden" id="idplan" name="idplan"  value='<?php echo $idplan; ?>' /><br>
 
         <!-- este input lo usaremos como referencia para la validacion -->
         <input type="hidden" name="grabar" value="si" />

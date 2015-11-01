@@ -1,47 +1,124 @@
-<?php
+    <?php
 header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
+date_default_timezone_set('America/Asuncion');
 ?>
 
-<section class="contenido">
-    <link rel="stylesheet" href="<?php echo base_url() ?>/assets/back_end/css/table.css"/>
+    <script src="<?php echo base_url(); ?>assets/front_end/jquery/jquery.js"></script>
+    <section class="contenido">
+        <STYLE type="text/css">
+            .paging-nav {
+                text-align: right;
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
 
-    <h2> Aulas  Habilitadas </h2>
-    <?php
-    $tmpl = array(
-        'table_open' => '<table border="1" cellpadding="4" cellspacing="10">',
-        'heading_row_start' => '<tr>',
-        'heading_row_end' => '</tr>',
-        'heading_cell_start' => '<th>',
-        'heading_cell_end' => '</th>',
-        'row_start' => '<tr>',
-        'row_end' => '</tr>',
-        'cell_start' => '<td>',
-        'cell_end' => '</td>',
-        'row_alt_start' => '<tr>',
-        'row_alt_end' => '</tr>',
-        'cell_alt_start' => '<td>',
-        'cell_alt_end' => '</td>',
-        'table_close' => '</table>'
-    );
-    if ($generateaulas->num_rows() == 0) {
-        redirect(base_url('/frontend/suscripcion_control/suscripcionsinaula/'));
-    } else {
+            .paging-nav a {
+                margin: auto 1px;
+                text-decoration: none;
+                display: inline-block;
+                padding: 1px 7px;
+                background:#337ab7;
+                color: white;
+                border-radius: 3px;
+            }
 
-        $this->table->set_template($tmpl);
-        $this->table->set_heading('Aula', 'Plan de Estudio', 'Plaza Disponible', 'Turno');
-        echo $this->table->generate($generateaulas);
-    }
-    ?>
-    <form action="<?php echo base_url(); ?>frontend/solicitud_control/solicitudregistro" method="post">
-        <input type="hidden" id="suscarreras" name="suscarreras"  value='<?php echo $this->input->post('selcarreras'); ?>' />
-        <label name="lbl_idcatedra">Seleccione el aula:</label>
-             <select name='susaulas' id='susaulas'><?php foreach ($arrDatosaulas as $dpto) : ?><option value=" <?php echo $dpto->idaula
-        ?> "><?php echo $dpto->aul_denominacion ?></option><?php endforeach; ?></select>
+            .paging-nav .active {
+                background: black;
+                font-weight: bold;
+            }
 
-        <input type="submit" name="suscribir" value="Siguiente" />
+            .paging-nav,
+            #tableData {
+                width: 400px;
+                margin: 0 auto;
+                font-family: Arial, sans-serif;
+            }
+        </style>
 
 
 
-    </form>
-</section>
+
+
+        <?php if (!empty($listaaulas)) : ?>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><h2 style="float: center;">Lista de Aulas (Click Sobre el aula)</h2><span style="float: right;">Filtrar<input id="filtro" type="text" title="Reconoce Mayúsculas" data-content="Ej.: Juan, juan, JUAN..."></span></div>
+
+                <div class="panel-content">
+
+                    <table id="paginar" table border="1" cellpadding="2" cellspacing="1" WIDTH="100%">
+
+                        <thead><tr><th>Aula</th><th>Plan de Estudio</th><th>Plazas Disponibles</th><th>Turno</th>
+
+                            </tr></thead>
+                        <tbody id="filtrar">
+                            <?php foreach ($listaaulas as $lis) : ?>
+                                <tr>
+
+                                    <td><?= anchor(base_url().'frontend/solicitud_control/solicitudregistro/'.$lis->idaula.'/'.$id.'/'.$lis->idplan,$lis->aul_denominacion)?></td><td><?php echo $lis->pla_denominacion;?></td><td><?php echo $lis->aul_plazasdisponibles;?></td><td><?php echo $lis->idturno;?></td>
+                                <?php endforeach; ?></tr>
+                        </tbody>                      
+
+                    </table>
+                </div>
+
+            <?php else : ?>
+                <h1>No hay aulas para esta carrera</h1>
+            <?php endif; ?>
+            <script>
+                $("#filtro").keyup(function() {
+                    var data = this.value.split(" ");
+                    var jo = $("#filtrar").find("tr");
+                    if (this.value == "") {
+                        jo.show();
+                        return;
+                    }
+                    jo.hide();
+
+                    jo.filter(function(i, v) {
+                        var $t = $(this);
+                        for (var d = 0; d < data.length; ++d) {
+                            if ($t.is(":contains('" + data[d] + "')")) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    })
+                            .show();
+                }).focus(function() {
+                    this.value = "";
+                    $(this).css({
+                        "color": "black"
+                    });
+                    $(this).unbind('focus');
+                }).css({
+                    "color": "#C0C0C0"
+                });
+            </script>
+            <script>
+                $('#paginar').after('<div class="paging-nav" id="nav"></div>');
+                var rowsShown = 20;
+                var rowsTotal = $('#paginar tbody tr').length;
+                var numPages = rowsTotal / rowsShown;
+                for (i = 0; i < numPages; i++) {
+                    var pageNum = i + 1;
+                    $('#nav').append('<a href="#" rel="' + i + '">' + pageNum + '</a> ');
+                }
+                $('#paginar tbody tr').hide();
+                $('#paginar tbody tr').slice(0, rowsShown).show();
+                $('#nav a:first').addClass('active');
+                $('#nav a').bind('click', function() {
+
+                    $('#nav a').removeClass('active');
+                    $(this).addClass('active');
+                    var currPage = $(this).attr('rel');
+                    var startItem = currPage * rowsShown;
+                    var endItem = startItem + rowsShown;
+                    $('#paginar tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+                            css('display', 'table-row').animate({opacity: 1}, 300);
+                });
+            </script>
+    </section>
+

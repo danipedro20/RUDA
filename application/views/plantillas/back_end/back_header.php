@@ -7,8 +7,8 @@
         <meta http-equiv="Expires" content="0" /> 
         <meta http-equiv="Pragma" content="no-cache" />
         <title><?php echo $titulo ?></title>
-        <link href="<?php echo base_url() ?>/assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
-        <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
+        <link href="<?php echo base_url() ?>assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
+        <script src="<?php echo base_url() ?>assets/front_end/jquery/jquery.js"></script>
         <script Language="JavaScript">
             if (history.forward(-1)) {
                 history.replace(history.forward(-1));
@@ -32,7 +32,7 @@
         <head>
 
             <title><?php echo $titulo ?></title>
-            <link href="<?php echo base_url(); ?>/assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
+            <link href="<?php echo base_url(); ?>assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
 
         </head>
         <body>

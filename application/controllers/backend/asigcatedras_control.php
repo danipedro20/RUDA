@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -18,7 +17,6 @@ class Asigcatedras_control extends CI_Controller {
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
-
     public function editarcatedras() {
         $datos['titulo'] = 'Ruda - Editar Asignación de catedras a profesores';
         $datos['arrDatoscatedra'] = $this->asigcatedras_model->selcate();
@@ -26,6 +24,7 @@ class Asigcatedras_control extends CI_Controller {
         $datos['contenido'] = 'editarcatedraasig_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
+
     public function eliminarcatedras() {
         $datos['titulo'] = 'Ruda - Eliminar Asignación de catedras a profesores';
         $datos['arrDatoscatedra'] = $this->asigcatedras_model->selcate();
@@ -34,15 +33,24 @@ class Asigcatedras_control extends CI_Controller {
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
-
     public function successasignacion() {
         $datos['titulo'] = 'Plan de estudios';
         $datos['contenido'] = 'successasigcatedras_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
+    public function mostrar() {
+        $datos['titulo'] = 'Plan de estudios';
+        $datos['contenido'] = 'lista_catedras_profesores_view';
+        $datos['lista'] = $this->asigcatedras_model->lista();
+        $this->load->view('plantillas/adplantilla', $datos);
+    }
+
     public function asignacion() {
-        $this->asigcatedras_model->inserasignacion();
+        $a = $this->input->post('profe');
+        $b = $this->input->post('catedra');
+
+        $this->asigcatedras_model->inserasignacion($a,$b);
         redirect(base_url('/backend/asigcatedras_control/successasignacion/'));
     }
 
@@ -52,7 +60,7 @@ class Asigcatedras_control extends CI_Controller {
             //si existe el campo oculto llamado grabar creamos las validadciones
             $this->form_validation->set_rules('cat_denominacion_nueva', 'Nombre de Catedra', 'trim|required|callback_catedraeditar_check');
             $this->form_validation->set_rules('cat_denominacion_vieja', 'Nombre', 'trim|required|callback_catedraedi_check');
-            $this->form_validation->set_rules('SELprofe', 'Nombre de profesor', 'trim|required');
+            $this->form_validation->set_rules('profe', 'Nombre de profesor', 'trim|required');
 
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
@@ -60,20 +68,21 @@ class Asigcatedras_control extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $this->editarcatedras();
             } else {
-                $a=$_POST['SELprofe'];
-                $b=$_POST['cat_denominacion_vieja'];
-                $c=$_POST['cat_denominacion_nueva'];
-                $insert = $this->asigcatedras_model->ediasigcatedra($a,$b,$c);
-                 redirect(base_url('/backend/asigcatedras_control/successasignacion/'));
+                $a = $this->input->post('profe');
+                $b = $this->input->post('cat_denominacion_vieja');
+                $c = $this->input->post('cat_denominacion_nueva');
+                $insert = $this->asigcatedras_model->ediasigcatedra($a, $b, $c);
+                redirect(base_url('/backend/asigcatedras_control/successasignacion/'));
             }
         }
     }
+
     public function eliminar_catedras() {
 
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             //si existe el campo oculto llamado grabar creamos las validadciones
-             $this->form_validation->set_rules('cat_denominacion', 'Nombre de Catedra', 'trim|required|callback_catedraeli_check');
-            $this->form_validation->set_rules('SELprofe', 'Nombre de profesor', 'trim|required');
+            $this->form_validation->set_rules('cat_denominacion', 'Nombre de Catedra', 'trim|required|callback_catedraeli_check');
+            $this->form_validation->set_rules('profe', 'Nombre de profesor', 'trim|required');
 
 
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
@@ -82,11 +91,11 @@ class Asigcatedras_control extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $this->eliminarcatedras();
             } else {
-                $a=$_POST['SELprofe'];
-                $b=$_POST['cat_denominacion'];
+                $a = $this->input->post('profe');
+                $b = $this->input->post('cat_denominacion');
 
 
-                $insert = $this->asigcatedras_model->elimiasigcatedra($a,$b);
+                $insert = $this->asigcatedras_model->elimiasigcatedra($a, $b);
                 redirect(base_url('/backend/asigcatedras_control/successasignacion/'));
             }
         }
@@ -111,7 +120,7 @@ class Asigcatedras_control extends CI_Controller {
             return TRUE;
         }
     }
-    
+
     function catedraeli_check($catedra) {
         $this->load->model('asigcatedras_model');
         if ($this->asigcatedras_model->catedraeli_check($catedra)) {
@@ -119,6 +128,20 @@ class Asigcatedras_control extends CI_Controller {
             return FALSE;
         } else {
             return TRUE;
+        }
+    }
+
+    public function llenar() {
+
+        if ($this->input->post('profe')) {
+            $id = $this->input->post('profe');
+            $catedras = $this->asigcatedras_model->verlascatedras($id);
+            foreach ($catedras as $a) {
+                ?>
+                <option value="<?php echo $a->idcatedra ?>"><?php echo $a->cat_denominacion ?></option>
+
+                <?php
+            }
         }
     }
 

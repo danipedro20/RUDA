@@ -9,32 +9,28 @@ class Solicitud_model extends CI_Model {
         parent::__construct();
     }
 
-    public function insertsoli($a, $b, $c, $d, $e, $f, $g, $h, $i, $j) {
-        $this->db->where('aul_denominacion', $j);
+    public function insertsoli($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k) {
+        $this->db->where('idaula', $j);
         $consulta = $this->db->get('aulas');
         $row = $consulta->row();
         $idturno = $row->idturno;
 
-        $this->db->where('idturno', $idturno);
-        $consulta = $this->db->get('turnos');
-        $row = $consulta->row();
-        $turno = $row->tur_denominacion;
-
         $data = array(
-            'sol_nombre' => $a,
-            'sol_nrocedula' => $b,
-            'sol_direccion' => $c,
-            'sol_telefono' => $d,
-            'sol_email' => $e,
-            'sol_password' => $f,
-            'sol_pregunta' => $g,
-            'sol_respuesta' => $h,
-            'sol_carrera' => $i,
-            'sol_aula' => $j,
-            'sol_turno' => $turno,
-            'sol_visto' => '0',
+            'ins_nombre' => $a,
+            'ins_nrocedula' => $b,
+            'ins_direccion' => $c,
+            'ins_telefono' => $d,
+            'ins_email' => $e,
+            'ins_password' => $f,
+            'ins_pregunta' => $g,
+            'ins_respuesta' => $h,
+            'id_carrera' => $i,
+            'idaula' => $j,
+            'idplan' => $k,
+            'ins_turno' => $idturno,
+            'ins_visto' => '0',
         );
-        return $this->db->insert('solicitud', $data);
+        return $this->db->insert('inscripcion', $data);
     }
 
     public function verifica_username($username) {
@@ -66,64 +62,57 @@ class Solicitud_model extends CI_Model {
 
     function verificardatos($id) {
 
-        $this->db->where('idsolicitud', $id)
-                ->from('solicitud');
+        $this->db->where('idinscripcion', $id)
+                ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
-        echo $query->sol_nombre;
-        echo $query->sol_carrera;
-        echo $query->sol_turno;
-        $this->db->where('usu_nombre', $query->sol_nombre)
-                ->from('inscripciones');
+        $this->db->where('idaula', $query->idaula)
+                ->where('idplan', $query->idplan)
+                ->where('id_carrera', $query->id_carrera)
+                ->where('idturno', $query->ins_turno)
+                ->from('aulas');
         $query4 = $this->db->get();
 
         if ($query4->num_rows() > 0) {
-            $query4 = $query4->row();
-            echo $query4->usu_nombre;
-            echo $query4->id_carrera;
-            echo $query4->idturno;
-            if (($query->sol_nombre == $query4->usu_nombre) and ($query->sol_carrera == $query4->id_carrera) and ($query->sol_turno == $query4->idturno)) {
-                return 'CORRECTO';
-            } elseif (($query->sol_nombre != $query4->usu_nombre) or ($query->sol_carrera != $query4->id_carrera) or ($query->sol_turno != $query4->idturno)) {
-                return 'INCORRECTO';
-            }
+
+            return 'CORRECTO';
         } else {
             return 'INCORRECTO';
         }
     }
 
     public function insertarregistro($id) {
-        $this->db->where('idsolicitud', $id)
-                ->from('solicitud');
+        $this->db->where('idinscripcion', $id)
+                ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
         $data = array(
-            'usu_nombre' => $query->sol_nombre,
-            'usu_nrocedula' => $query->sol_nrocedula,
-            'usu_direccion' => $query->sol_direccion,
-            'usu_telefono' => $query->sol_telefono,
-            'usu_email' => $query->sol_email,
-            'usu_password' => $query->sol_password,
+            'usu_nombre' => $query->ins_nombre,
+            'usu_nrocedula' => $query->ins_nrocedula,
+            'usu_direccion' => $query->ins_direccion,
+            'usu_telefono' => $query->ins_telefono,
+            'usu_email' => $query->ins_email,
+            'usu_password' => $query->ins_password,
             'idperfil' => '3',
         );
         return $this->db->insert('usuarios', $data);
     }
 
     public function insertarrecuperacion($id) {
-        $this->db->where('idsolicitud', $id)
-                ->from('solicitud');
+        $this->db->where('idinscripcion', $id)
+                ->from('inscripcion');
         $query2 = $this->db->get();
         $query2 = $query2->row();
 
 
 
         $this->db->select('idusuario')
-                ->where('usu_nombre', $query2->sol_nombre);
+                ->where('usu_nombre', $query2->ins_nombre);
         $query = $this->db->get('usuarios');
         $row = $query->row_array();
         $data = array(
-            'recupregunta' => $query2->sol_pregunta,
-            'recurespuesta' => $query2->sol_respuesta,
+            'recupregunta' => $query2->ins_pregunta,
+            'recurespuesta' => $query2->ins_respuesta,
             'idusuario' => $row['idusuario']
         );
         return $this->db->insert('recuperacion', $data);
@@ -131,30 +120,30 @@ class Solicitud_model extends CI_Model {
 
     public function insertaraula($id) {
 
-        $this->db->where('idsolicitud', $id)
-                ->from('solicitud');
+        $this->db->where('idinscripcion', $id)
+                ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
         $this->db->select('idusuario')
-                ->where('usu_nombre', $query->sol_nombre);
+                ->where('usu_nombre', $query->ins_nombre);
         $query3 = $this->db->get('usuarios');
         $row2 = $query3->row_array();
         $data = array(
             'idusuario' => $row2['idusuario'],
-            'idaula' => $query->sol_aula,
+            'idaula' => $query->idaula,
         );
         return $this->db->insert('usu_au', $data);
     }
 
     public function lugaresaulas($id) {
 
-        $this->db->where('idsolicitud', $id)
-                ->from('solicitud');
+        $this->db->where('idinscripcion', $id)
+                ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
 
         $this->db->select('aul_plazasdisponibles')
-                ->where('idaula', $query->sol_aula);
+                ->where('idaula', $query->idaula);
         $query2 = $this->db->get('aulas');
         $row = $query2->row_array();
         $lugares = $row['aul_plazasdisponibles'] - 1;
@@ -162,26 +151,26 @@ class Solicitud_model extends CI_Model {
             'aul_plazasdisponibles' => $lugares,
         );
 
-        $this->db->where('aul_denominacion', $query->sol_aula);
+        $this->db->where('idaula', $query->idaula);
         $this->db->update('aulas', $data);
     }
 
     public function eliminarsolicitud($id) {
 
-        $this->db->where('idsolicitud', $id);
-        $this->db->delete('solicitud');
+        $this->db->where('idinscripcion', $id);
+        $this->db->delete('inscripcion');
     }
 
     public function enviarcorreo($id) {
 
-        $this->db->where('idsolicitud', $id)
-                ->from('solicitud');
+        $this->db->where('idinscripcion', $id)
+                ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
-        $email = $query->sol_email;
+        $email = $query->ins_email;
 
-        $this->db->where('usu_nombre', $query->sol_nombre)
-                ->where('usu_email', $query->sol_email)
+        $this->db->where('usu_nombre', $query->ins_nombre)
+                ->where('usu_email', $query->ins_email)
                 ->from('usuarios');
         $query2 = $this->db->get();
 
@@ -204,7 +193,7 @@ class Solicitud_model extends CI_Model {
             $this->email->from('Ruda Gestion de Aulas');
             $this->email->to($email);
             $this->email->subject('Bienvenido/a a RUDA');
-            $this->email->message('<h2>' . $query->sol_nombre . ' gracias tu solicitud ha sido recibida</h2><hr><br><br>
+            $this->email->message('<h2>' . $a . ' gracias tu solicitud ha sido recibida</h2><hr><br><br>
 				Los datos enviados  corresponden a los datos que tenemos sobre ti podes acceder con tu usuario y contraseña  
                                 <a href="' . base_url() . 'frontend/usuarios_control/logueo">aqui</a>');
             $this->email->send();
@@ -281,14 +270,14 @@ class Solicitud_model extends CI_Model {
 //lista las carreras disponibles
     public function listarsolicitud() {
 
-        $query = $this->db->query("select idsolicitud,sol_nombre from solicitud where sol_visto='0';");
+        $query = $this->db->query("select idinscripcion,ins_nombre from inscripcion where ins_visto='0';");
         return $query->result();
     }
 
     public function generatetablesolicitud() {
-        return $this->db->query("select so.sol_nombre,ca.car_denominacion, au.aul_denominacion, tu.tur_denominacion from carreras as ca
-join solicitud as so on ca.id_carrera=so.sol_carrera join aulas as au on au.idaula=so.sol_aula join turnos as tu
-on  tu.idturno=so.sol_turno where so.sol_visto='0';");
+        $query = $this->db->query("select so.idinscripcion,so.ins_nombre,ca.car_denominacion, au.aul_denominacion, so.ins_turno from carreras as ca
+join inscripcion as so on ca.id_carrera=so.id_carrera join aulas as au on au.idaula=so.idaula where so.ins_visto='0';");
+        return $query->result();
     }
 
 }

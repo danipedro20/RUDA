@@ -21,7 +21,7 @@ class Usuarios_control extends CI_Controller {
 
     function sitioadmin() {
         $datos['titulo'] = 'Ruda - Administración';
-        $datos['contenido'] = 'inicioadmin_view';
+        $datos['contenido'] = 'inicio_admin_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 

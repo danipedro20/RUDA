@@ -16,15 +16,35 @@ class Inscatedras_control extends CI_Controller {
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
-    public function elicatedra() {
-        $datos['titulo'] = 'Ruda - Eliminar Catedra';
-        $datos['contenido'] = 'eliminarcatedra_view';
+    public function listar_catedras_profesores() {
+        $datos['titulo'] = 'Ruda - Lista';
+        $datos['lista'] = $this->catedras_model->lista();
+        $datos['contenido'] = 'listar_catedras_profesor_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
-    public function edicatedra() {
-        $datos['titulo'] = 'Ruda - Eliminar Catedra';
-        $datos['contenido'] = 'editarcatedra_view';
+    public function listar_catedras() {
+        $datos['titulo'] = 'Ruda - Lista';
+        $datos['lista'] = $this->catedras_model->lista_catedras();
+        $datos['contenido'] = 'listar_catedras_view';
+        $this->load->view('plantillas/adplantilla', $datos);
+    }
+
+    public function editar_catedra() {
+        $id = $this->uri->segment(4);
+        $datos['titulo'] = 'Ruda - Editar Catedra';
+        $datos['catedra'] = $this->catedras_model->catedra($id);
+        $datos['contenido'] = 'editar_catedra_view';
+        $this->load->view('plantillas/adplantilla', $datos);
+    }
+
+    public function editar_catedras_profesores() {
+        $idca = $this->uri->segment(4);
+        $idusu = $this->uri->segment(5);
+        $datos['titulo'] = 'Ruda - Editar Catedra/Profesor';
+        $datos['profesores'] = $this->catedras_model->profesores();
+        $datos['catedra_profesor'] = $this->catedras_model->catedra_profesor($idca, $idusu);
+        $datos['contenido'] = 'editar_catedra_profesor_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
@@ -65,48 +85,62 @@ class Inscatedras_control extends CI_Controller {
         }
     }
 
+    public function eliminarasignacion() {
+        $a = $this->uri->segment(4);
+        $b = $this->uri->segment(5);
+        $eliminar = $this->catedras_model->eliminar_asignacion($a, $b);
+        redirect(base_url('/backend/inscatedras_control/listar_catedras_profesores/'));
+    }
+
     public function eliminarcatedra() {
-
-        if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
-            //si existe el campo oculto llamado grabar creamos las validadciones
-            $this->form_validation->set_rules('cat_denominacion', 'Nombre de Catedra', 'trim|required|callback_catedraeli_check');
-
-            //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
-            $this->form_validation->set_message('required', 'El %s es requerido');
-
-            if ($this->form_validation->run() == FALSE) {
-                $this->elicatedra();
-            } else {
-                $a = $this->input->post('cat_denominacion');
-
-
-                $insert = $this->catedras_model->elimicatedra($a);
-                redirect(base_url('/backend/inscatedras_control/successcatedra/'));
-            }
-        }
+        $a = $this->uri->segment(4);
+        $eliminar = $this->catedras_model->elimicatedra($a);
+        redirect(base_url('/backend/inscatedras_control/listar_catedras_profesores/'));
     }
 
     public function editarcatedra() {
 
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             //si existe el campo oculto llamado grabar creamos las validadciones
-            $this->form_validation->set_rules('cate_denominacion', 'Nombre de Catedra', 'trim|required|callback_catedraedi_check');
+            $this->form_validation->set_rules('cate_denominacion', 'Nombre de Catedra', 'trim|required');
             $this->form_validation->set_rules('cat_diascatedra', 'Dias de catedra', 'trim|required');
-            $this->form_validation->set_rules('nvo_cat_denominacion', 'Nuevo Nombre  de catedra', 'trim|required');
 
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
 
             if ($this->form_validation->run() == FALSE) {
-                $this->edicatedra();
+                $this->editar_catedra();
             } else {
                 $a = $this->input->post('cate_denominacion');
-                $b = $this->input->post('nvo_cat_denominacion');
+                //   $b = $this->input->post('selprofesor');
                 $c = $this->input->post('cat_diascatedra');
+                $d = $this->input->post('idcatedra');
 
 
-                $insert = $this->catedras_model->edicatedra($a, $b, $c);
-                redirect(base_url('/backend/inscatedras_control/successcatedra/'));
+                $updatecatedras = $this->catedras_model->edicatedra($a, $c, $d);
+                //   $updateusuario = $this->catedras_model->ediusuario($b, $d);
+                redirect(base_url('/backend/inscatedras_control/listar_catedras/'));
+            }
+        }
+    }
+
+    public function editarcatedraprofesor() {
+
+        if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
+            //si existe el campo oculto llamado grabar creamos las validadciones
+         
+
+            //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
+          
+
+       
+                $b = $this->input->post('selprofesor');
+                $d = $this->input->post('idcatedra');
+
+
+                $updatecatedras = $this->catedras_model->editar_catedraprofesor($b, $d);
+                //   $updateusuario = $this->catedras_model->ediusuario($b, $d);
+                redirect(base_url('/backend/inscatedras_control/listar_catedras_profesores/'));
             }
         }
     }
@@ -121,24 +155,4 @@ class Inscatedras_control extends CI_Controller {
         }
     }
 
-    function catedraeli_check($catedra) {
-        $this->load->model('catedras_model');
-        if ($this->catedras_model->catedraeli_check($catedra)) {
-            $this->form_validation->set_message('catedraeli_check', 'La catedra' . " " . $catedra . " " . 'no se encuentra en la base de datos');
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
 
-    function catedraedi_check($catedra) {
-        $this->load->model('catedras_model');
-        if ($this->catedras_model->catedraedi_check($catedra)) {
-            $this->form_validation->set_message('catedraedi_check', 'La catedra' . " " . $catedra . " " . 'no se encuentra en la base de datos');
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
-
-}

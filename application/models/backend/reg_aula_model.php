@@ -11,107 +11,75 @@ class Reg_aula_model extends CI_Model {
 
     public function selplanes() {
         $query = $this->db->query('SELECT idplan,pla_denominacion FROM plan_estudios');
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatosplan[htmlspecialchars($row->idplan, ENT_QUOTES)] = htmlspecialchars($row->pla_denominacion, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatosplan;
-        }
+        return $query->result();
     }
 
     public function selcarreras() {
         $query = $this->db->query('SELECT id_carrera,car_denominacion FROM carreras');
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row)
-                $arrDatosplan[htmlspecialchars($row->id_carrera, ENT_QUOTES)] = htmlspecialchars($row->car_denominacion, ENT_QUOTES);
-            $query->free_result();
-            return $arrDatosplan;
-        }
+        return $query->result();
     }
 
-    public function insaula($c, $a, $e) {
-        $this->db->select('id_carrera')
-                ->where('car_denominacion', $_POST['selCarreras']);
-        $query1 = $this->db->get('carreras');
-        if ($query1->num_rows() > 0) {
-            $row = $query1->row_array();
-            $id = $row['id_carrera'];
-            $this->db->select('idplan')
-                    ->where('pla_denominacion', $_POST['selplanes']);
-            $query = $this->db->get('plan_estudios');
-            if ($query->num_rows() > 0) {
-                $row = $query->row_array();
-                $idplan = $row['idplan'];
+    public function insaula($a,$b,$c,$d,$e) {
                 $data = array(
-                    'aul_denominacion' => $c,
-                    'aul_plazasdisponibles' => $a,
-                    'aul_plazashabilitadas' => $a,
-                    'id_carrera' => $id,
-                    'idplan' => $idplan,
-                    'idturno' => $e,
+                    'aul_denominacion' => $a,
+                    'aul_plazasdisponibles' => $b,
+                    'aul_plazashabilitadas' => $b,
+                    'id_carrera' => $e,
+                    'idplan' => $d,
+                    'idturno' => $c,
                 );
                 return $this->db->insert('aulas', $data);
             }
-        }
-    }
-
-    public function ediaula($c, $a, $e, $d) {
-        $this->db->select('id_carrera')
-                ->where('car_denominacion', $_POST['selCarreras']);
-        $query1 = $this->db->get('carreras');
-        if ($query1->num_rows() > 0) {
-            $row = $query1->row_array();
-            $id = $row['id_carrera'];
-            $this->db->select('idplan')
-                    ->where('pla_denominacion', $_POST['selplanes']);
-            $query = $this->db->get('plan_estudios');
-            if ($query->num_rows() > 0) {
-                $row = $query->row_array();
-                $idplan = $row['idplan'];
-                $data = array(
-                    'aul_denominacion' => $c,
-                    'aul_plazasdisponibles' => $a,
-                    'aul_plazashabilitadas' => $a,
-                    'id_carrera' => $id,
-                    'idplan' => $idplan,
-                    'idturno' => $e,
-                );
-
-                $this->db->where('aul_denominacion', $d);
-                $this->db->update('aulas', $data);
-            }
-        }
-    }
-
-    public function elimiaula($a) {
-        $this->db->select('idaula')
+      public function usu_au($a,$e) {
+           $this->db->select('idaula')
                 ->where('aul_denominacion', $a);
         $query = $this->db->get('aulas');
         $row = $query->row_array();
-        $id = $row['idaula'];
+        $aula = $row['idaula'];
+               
+          $data = array(
+                    'idaula' => $aula,
+                    'idturno' => $e,
+                );
+                return $this->db->insert('tur_aulas', $data);
+            }
 
-        $tablas = array('usu_au', 'aulas');
-        $this->db->where('idaula', $id);
+    public function ediaula($a, $b, $c, $d, $e, $f, $g) {
+
+        $data = array(
+            'aul_denominacion' => $a,
+            'aul_plazasdisponibles' => $g,
+            'aul_plazashabilitadas' => $d,
+            'id_carrera' => $b,
+            'idplan' => $c,
+            'idturno' => $e,
+        );
+
+        $this->db->where('idaula', $f);
+        $this->db->update('aulas', $data);
+    }
+
+    public function elimiaula($a){
+
+        $tablas = array('usu_au', 'aulas','tareas');
+        $this->db->where('idaula', $a);
         $this->db->delete($tablas);
     }
 
-    function aulaeli_check($aula) {
-        $this->db->where('aul_denominacion', $aula);
-        $query = $this->db->get('aulas');
 
-        if ($query->num_rows() == 0) {
-            return TRUE;
-        }
+    public function lista() {
+        $query = $this->db->query("select aulas.idaula,aulas.aul_denominacion,carreras.car_denominacion,plan_estudios.pla_denominacion,aulas.idturno
+from aulas inner join carreras on aulas.id_carrera=carreras.id_carrera
+inner join plan_estudios on aulas.idplan=plan_estudios.idplan;");
+        return $query->result();
     }
 
-    function aulaedi_check($aula) {
-        $this->db->where('aul_denominacion', $aula);
-        $query = $this->db->get('aulas');
-
-        if ($query->num_rows() == 0) {
-            return TRUE;
-        }
+    public function aula($id) {
+        $query = $this->db->query("select au.idaula,au.aul_plazasdisponibles,au.aul_denominacion,au.aul_plazashabilitadas,ca.id_carrera,ca.car_denominacion,pla.idplan,pla.pla_denominacion,au.idturno
+from aulas as au join carreras as ca on au.id_carrera=ca.id_carrera join plan_estudios as pla on au.idplan=pla.idplan where  au.idaula='$id';");
+        return $query->row();
     }
+
 
 //    function aula_check($aula) {
 //        $this->db->where('aul_denominacion', $aula);

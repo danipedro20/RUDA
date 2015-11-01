@@ -4,18 +4,19 @@ body {
     font-size: 14px;
 }
 a {
-    color: hsl(120,100%,100%);
+    color: #474343;
     text-decoration: none;
 }
 
 a:hover {
-    color: hsl(120,0%,80%);
+    color: #474343;
     text-decoration: none;
 }
 a:hover {
-    color: hsl(208,56%,38%);
+    color: #474343;
     text-decoration: underline;
 }
+ 
 .contenedor {
     width: 1100px;
     margin: 0 auto;
@@ -23,11 +24,13 @@ a:hover {
 header {
 
     background: url('../img/fondo_cabecera.png');
+    background-size: 100%;
     color: hsl(0,0%,100%);
     height: 200px;
     }
-header .contenedor {
+header .contenedor a {
     padding-top: 40px;
+    color: #fff;
 }
 header h1 {
     font-size: 70px;
@@ -68,7 +71,7 @@ nav ul li a:hover {
     text-decoration: none;
 }
 aside {
-    width: 280px;
+    width: 0 auto;
     float: left;
     background: hsl(264,33%,97%);
     border-radius: 5px;
@@ -104,20 +107,14 @@ aside ul li a:hover {
 
 /*css para el contenido general*/
 .contenido {
-    width: 800px;
+    width: 70%;
     float: left;
     background: hsl(264,33%,97%); 
     border-radius: 5px;
     margin: 5px;
     margin-left: 70px;
 }
-.contenido {
-    width: 800px;
-    float: left;
-    background: hsl(264,33%,97%);
-    border-radius: 5px;
 
-}
 .contenido article {
     padding: 15px 30px;
     text-align: justify;
@@ -145,7 +142,7 @@ aside ul li a:hover {
 
 /*css de la 1era parte de la division en el home*/
 .contenido1 {
-    width: 300px;
+    width: 30%;
     float: left;
     background: hsl(200,33%,97%); 
     border-radius: 5px;
@@ -177,7 +174,7 @@ aside ul li a:hover {
 
 /*css de la 2da parte de la division en el home*/
 .contenido2 {
-    width: 300px;
+    width: 30%;
     float: left;
     background: hsl(200,33%,97%);
     border-radius: 5px;
@@ -208,7 +205,7 @@ aside ul li a:hover {
 
 /*css de la 3era parte de la division en el home*/
 .contenido3 {
-    width: 300px;
+    width: 30%;
     float: left;
     background: hsl(200,33%,97%);
     border-radius: 5px;
@@ -238,11 +235,15 @@ aside ul li a:hover {
 }
 
 footer {
-    background: hsl(200, 31%, 53%);
+    background: hsl(100, 31%, 53%);
+
+    
 }
 footer {
-    background: hsl(264,34%,30%);
-
+    background: hsl(200, 31%, 53%);
+    width: 100%;
+    position: absolute;
+    margin-top: 70%;  
     clear: both;
     color: hsl(0,0%,100%);
     padding: 20px 0;
@@ -252,6 +253,7 @@ footer {
 footer a:hover {
     color: hsl(0,0%,100%);
     text-decoration: underline;
+
 }
 
 section, h2, form, fieldset, input, textarea{
@@ -341,7 +343,7 @@ textarea {
    -moz-box-shadow: 0px 1px 0px #f2f2f2;
    -webkit-box-shadow: 0px 1px 0px #f2f2f2;
    font-family: sans-serif; font-size: 16px;
-    color: #f2f2f2; 
+    color: #983a3a; 
    text-transform: uppercase; 
    text-shadow: 0px -1px 0px #334f71;
    resize:none;

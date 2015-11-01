@@ -15,16 +15,32 @@ class Insplan_control extends CI_Controller {
         $datos['contenido'] = 'planestudio_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
-      public function editarplanestudio() {
-        $datos['titulo'] = 'Ruda - Editar Plan de Estudios ';
-        $datos['contenido'] = 'editarplanestudio_view';
+
+    public function listar_plan_estudios() {
+        $datos['titulo'] = 'Ruda - Crear  Plan de Estudios';
+        $datos['plan'] = $this->plan_model->listar_planes();
+        $datos['contenido'] = 'listar_plan_estudios_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
-     public function eliminarplanestudio() {
+
+    public function editar_plan_estudio($b) {
+        $id = $this->uri->segment(4);
         $datos['titulo'] = 'Ruda - Editar Plan de Estudios ';
-        $datos['contenido'] = 'eliminarplanestudios_view';
+        $datos['plan'] = $this->plan_model->editar_plan($id);
+        $datos['id'] = $b;
+        $datos['contenido'] = 'editar_plan_estudio_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
+
+//        public function editarplanestudio() {
+//        $id = $this->uri->segment(4);
+//        $idca = $this->uri->segment(5);
+//        $datos['titulo'] = 'Ruda - Editar Plan de Estudios ';
+//        $datos['plan'] = $this->plan_model->plan_catedra($id, $idca);
+//        $datos['catedra'] = $this->plan_model->lista_catedra();
+//        $datos['contenido'] = 'editarplanestudio_view';
+//        $this->load->view('plantillas/adplantilla', $datos);
+//    }
 
     public function successplan() {
         $datos['titulo'] = 'Plan de Estudios';
@@ -49,65 +65,55 @@ class Insplan_control extends CI_Controller {
 
 
                 $insert = $this->plan_model->inseplan($a);
-                if ($_POST['direccion'] == base_url('/backend/planestudio_control/plan')) {
-                    redirect(base_url('/backend/planestudio_control/plan/'));
-                } elseif ($_POST['direccion'] == base_url('/backend/reg_aula/nueva_aula')) {
-                    redirect(base_url('/backend/reg_aula/nueva_aula'));
-                } else {
-                    redirect(base_url('/backend/insplan_control/successplan/'));
-                }
+                redirect(base_url('/backend/insplan_control/successplan/'));
             }
         }
     }
-      public function editar_planestudio() {
+
+    public function editar_planestudio() {
 
         if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
             //si existe el campo oculto llamado grabar creamos las validadciones
-            $this->form_validation->set_rules('pla_denominacion', 'Nombre de Plan ', 'trim|required|callback_planeditar_check');
-            $this->form_validation->set_rules('nvo_pla_denominacion', 'Nuevo Nombre de Plan', 'trim|required');
+            $this->form_validation->set_rules('pla_denominacion', 'Nombre de Plan ', 'trim|required|callback_editar_plan_check');
 
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
 
             if ($this->form_validation->run() == FALSE) {
-                $this->editarplanestudio();
+                $b = $this->input->post('idplan');
+
+                $this->editar_plan_estudio($b);
             } else {
                 $a = $this->input->post('pla_denominacion');
-                $b = $this->input->post('nvo_pla_denominacion');
+                $b = $this->input->post('idplan');
 
 
 
-                $insert = $this->plan_model->ediplanestudio($a,$b);
-              redirect(base_url('/backend/insplan_control/successplan/'));
-            }
-        }
-    }
-     public function eliminar_planestudio() {
 
-        if (isset($_POST['grabar']) and $_POST['grabar'] === 'si') {
-            //si existe el campo oculto llamado grabar creamos las validadciones
-            $this->form_validation->set_rules('pla_denominacion', 'Nombre del Plan de Estudios', 'trim|required|callback_planeliminar_check');
-
-
-            //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
-            $this->form_validation->set_message('required', 'El %s es requerido');
-
-            if ($this->form_validation->run() == FALSE) {
-                $this->eliminarplanestudio();
-            } else {
-                $a = $this->input->post('pla_denominacion');
-
-
-
-                $insert = $this->plan_model->elimiplanestudios($a);
-                  redirect(base_url('/backend/insplan_control/successplan/'));
+                $insert = $this->plan_model->editarplanestudio($a, $b);
+                // $insertplan = $this->plan_model->ediplan_catedra($b, $d);
+                redirect(base_url('/backend/insplan_control/listar_plan_estudios/'));
             }
         }
     }
 
+//    public function eliminar_planestudio_catedra() {
+//        $a = $this->uri->segment(4);
+//        $b = $this->uri->segment(5);
+//
+//
+//        $eliminar = $this->plan_model->elimiplan_catedra($a, $b);
+//        redirect(base_url('/backend/planestudio_control/success/'));
+//    }
 
+    public function eliminar_planestudio() {
+        $a = $this->uri->segment(4);
+        $eliminar = $this->plan_model->eliminarplan($a);
+        redirect(base_url('/backend/insplan_control/listar_plan_estudios/'));
+    }
 
     function plan_check($plan) {
+
         $this->load->model('plan_model');
         if ($this->plan_model->plan_check($plan)) {
             $this->form_validation->set_message('plan_check', 'El plan de Estudio' . " " . $plan . " " . 'ya se encuentra en la base de datos');
@@ -116,20 +122,16 @@ class Insplan_control extends CI_Controller {
             return TRUE;
         }
     }
-     function planeditar_check($plan) {
+
+    function editar_plan_check($plan) {
+
         $this->load->model('plan_model');
-        if ($this->plan_model->planeditar_check($plan)) {
-            $this->form_validation->set_message('planeditar_check', 'El Plan de Estudios' . " " . $plan . " " . 'no se encuentra en la base de datos');
+        if ($this->plan_model->editarplan_check($plan)) {
+            $this->form_validation->set_message('editar_plan_check', 'El plan de Estudio' . " " . $plan . " " . 'ya se encuentra en la base de datos');
             return FALSE;
         } else {
             return TRUE;
-    }}
- function planeliminar_check($plan) {
-        $this->load->model('plan_model');
-        if ($this->plan_model->planeliminar_check($plan)) {
-            $this->form_validation->set_message('planeliminar_check', 'El Plan de Estudios' . " " . $plan . " " . 'no se encuentra en la base de datos');
-            return FALSE;
-        } else {
-            return TRUE;
-    }}
+        }
+    }
+
 }

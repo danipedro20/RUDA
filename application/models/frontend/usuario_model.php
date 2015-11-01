@@ -26,7 +26,7 @@ class Usuario_model extends CI_Model {
             $this->session->set_userdata('direccion', $query->usu_direccion);
             $this->session->set_userdata('telefono', $query->usu_telefono);
             $this->session->set_userdata('cedula', $query->usu_nrocedula);
-             $this->session->set_userdata('turno', $query->idturno);
+           
 
             if ($query->idperfil == 1) {
                 return 'ADMIN';
@@ -43,7 +43,14 @@ class Usuario_model extends CI_Model {
     }
 
     function verybaneo($email) {
-        $this->db->where('usu_email', $email)
+         $this->db->where('usu_email', $email)
+                ->from('usuarios');
+        $query1 = $this->db->get();
+        $query1 = $query1->row();
+        
+        
+        
+        $this->db->where('idusuario', $query1->idusuario)
                 ->from('baneo');
         $query = $this->db->get();
         $query = $query->row();
@@ -53,7 +60,7 @@ class Usuario_model extends CI_Model {
 
 
         $this->db->select('bafechafin')
-                ->where('usu_email', $email)
+                ->where('idusuario', $query1->idusuario)
                 ->where('baestado', 'activo');
         $query = $this->db->get('baneo');
 
@@ -66,7 +73,7 @@ class Usuario_model extends CI_Model {
                     'baestado' => 'desactivado',
                 );
 
-                $this->db->where('usu_email', $email);
+                $this->db->where('idusuario', $query1->idusuario);
                 $this->db->update('baneo', $data);
                 return TRUE;
             }

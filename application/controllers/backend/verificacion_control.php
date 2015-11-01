@@ -68,7 +68,6 @@ class Verificacion_control extends CI_Controller {
     public function verificacioncontra() {
 
         //si existe el campo oculto llamado grabar creamos las validadciones
-        $this->form_validation->set_rules('usu_email', 'Email', 'trim|required');
         $this->form_validation->set_rules('usu_pass', 'Contraseña', 'trim|required');
         $this->form_validation->set_rules('usu_passnuevo', 'La  Nueva Contraseña', 'trim|required');
         //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
@@ -77,44 +76,37 @@ class Verificacion_control extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->verificacion();
         } else {
-            $email = $this->input->post('usu_email');
+
             $pass = md5($this->input->post('usu_pass'));
             $passnuevo = md5($this->input->post('usu_passnuevo'));
-            if ($this->session->userdata('correo') == $email) {
-                $verificacion = $this->verificacion_model->verycontra($email, $pass);
-                switch ($verificacion) {
-                    case TRUE:
-                        $cambio = $this->verificacion_model->cambio($passnuevo, $email);
-                        if ($this->session->userdata('perfil') == 1) {
-                            redirect(base_url('/backend/verificacion_control/sitioactualizadoadmin/'));
-                        } elseif ($this->session->userdata('perfil') == 2) {
-                            redirect(base_url('/backend/verificacion_control/sitioactualizadoprofesor/'));
-                        } elseif ($this->session->userdata('perfil') == 3) {
+            $email = $this->session->userdata('correo');
+            $verificacion = $this->verificacion_model->verycontra($email, $pass);
+            switch ($verificacion) {
+                case TRUE:
+                    $cambio = $this->verificacion_model->cambio($passnuevo, $email);
+                    if ($this->session->userdata('perfil') == 1) {
+                        redirect(base_url('/backend/verificacion_control/sitioactualizadoadmin/'));
+                    } elseif ($this->session->userdata('perfil') == 2) {
+                        redirect(base_url('/backend/verificacion_control/sitioactualizadoprofesor/'));
+                    } elseif ($this->session->userdata('perfil') == 3) {
 
-                            redirect(base_url('/backend/verificacion_control/sitioactualizado/'));
-                        }
-                        break;
-                    case false:
+                        redirect(base_url('/backend/verificacion_control/sitioactualizado/'));
+                    }
+                    break;
+                case false:
 
-                        if ($this->session->userdata('perfil') == 1) {
-                            redirect(base_url('/backend/verificacion_control/sitioerroradmin/'));
-                        } elseif ($this->session->userdata('perfil') == 2) {
-                            redirect(base_url('/backend/verificacion_control/sitioerrorprofesor/'));
-                        } elseif ($this->session->userdata('perfil') == 3) {
+                    if ($this->session->userdata('perfil') == 1) {
+                        redirect(base_url('/backend/verificacion_control/sitioerroradmin/'));
+                    } elseif ($this->session->userdata('perfil') == 2) {
+                        redirect(base_url('/backend/verificacion_control/sitioerrorprofesor/'));
+                    } elseif ($this->session->userdata('perfil') == 3) {
 
-                            redirect(base_url('/backend/verificacion_control/sitioerror/'));
-                        }
+                        redirect(base_url('/backend/verificacion_control/sitioerror/'));
+                    }
 
-                        break;
-                }
-            } elseif ($this->session->userdata('perfil') == 1) {
-                redirect(base_url('/backend/verificacion_control/sitioerroradmin/'));
-            } elseif ($this->session->userdata('perfil') == 2) {
-                redirect(base_url('/backend/verificacion_control/sitioerrorprofesor/'));
-            } elseif ($this->session->userdata('perfil') == 3) {
-
-                redirect(base_url('/backend/verificacion_control/sitioerror/'));
+                    break;
             }
+           
         }
     }
 
