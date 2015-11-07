@@ -293,6 +293,7 @@ class Profesor_control extends CI_Controller {
         $datos['titulo'] = 'Ruda - Seleccione Catedra';
         $datos['asistencias'] = $this->profesor_model->datos_lista($a, $b, $c);
         $datos['verificar'] = $this->profesor_model->verificar_lista($a, $b, $c);
+        $datos['nombre'] = $this->profesor_model->nombrecatedra($a);
         $datos['contenido'] = 'editar_lista_alumnos_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
@@ -322,7 +323,7 @@ class Profesor_control extends CI_Controller {
 
             $insert = $this->profesor_model->editar_asistencia($idusuario, $idcatedra, $estado, $Justificacion, $fecha, $aula);
         }
-        redirect(base_url('/backend/profesor_control/vertareas/'));
+        redirect(base_url('/backend/profesor_control/listaralumnos/'));
     }
 
     public function puntajes() {

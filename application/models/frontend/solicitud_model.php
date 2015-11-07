@@ -66,6 +66,10 @@ class Solicitud_model extends CI_Model {
                 ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
+         echo $query->idaula;
+          echo $query->idplan;
+        
+        
         $this->db->where('idaula', $query->idaula)
                 ->where('idplan', $query->idplan)
                 ->where('id_carrera', $query->id_carrera)

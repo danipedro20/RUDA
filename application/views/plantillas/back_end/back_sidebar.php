@@ -10,11 +10,16 @@
         </ul> 
 </ul>
 <ul class="navegador">
-    <li><a class="desplegable" title="Editar Cuentas">Cuentas de  Usuarios</a>
+    <li><a class="desplegable" title="Editar Cuentas">Cuentas</a>
         <ul class="subnavegador">
-            <li><a href="<?php echo base_url() ?>backend/adhome/registrar_profesores">Registar Profesores</a></li>
+           <li><a class="desplegable" title="Alumnos">Alumnos</a>
             <li><a href="<?php echo base_url() ?>backend/adhome/mostrar_alumnos">Alumnos</a></li>
-            <li><a href="<?php echo base_url() ?>backend/adhome/mostrar_profesores">Profesores</a></li>
+
+        </ul> 
+         <ul class="subnavegador">
+              <li><a class="desplegable" title="Profesores">Profesor</a>
+            <li><a href="<?php echo base_url() ?>backend/adhome/registrar_profesores">Registar Profesores</a></li>
+           
 
         </ul> 
 </ul>
@@ -57,11 +62,10 @@
 
 <ul>
     <li>Informes</li>
-    <li><a href="#">Aulas</a></li>
+    <li><a href="#">Materias</a></li>
     <li><a href="#">Profesores</a></li>
     <li><a href="#">Alumnos</a></li>
     <li><a href="#">Tareas</a></li>
-    <li><a href="#">Materias</a></li>
     <li><a href="#">Notas</a></li>
     <li><a href="#">Asistencias</a></li>
 </ul>
