@@ -1,6 +1,8 @@
 body {
     margin: 0;
-    font-family: "Helvetica";
+    font-family: "Arial";
+    background: url('../img/fondo_claro.jpg');
+    
     font-size: 14px;
 }
 a {
@@ -18,14 +20,14 @@ a:hover {
 }
  
 .contenedor {
-    width: 1100px;
+    width: 100%;
     margin: 0 auto;
 }
 header {
 
-    background: url('../img/fondo_cabecera.png');
+    background: url('../img/header-background.jpg');
     background-size: 100%;
-    color: hsl(0,0%,100%);
+    color: #474343;
     height: 200px;
     }
 header .contenedor a {
@@ -43,7 +45,8 @@ header p {
 }
 nav {
 
-    background: hsl(200, 31%, 53%);
+    /*background: hsl(200, 31%, 53%);*/
+    background-color: #1F0A0A;
     height: 49px;
     margin-bottom: 30px;
     font-family: cursive;
@@ -52,6 +55,7 @@ nav ul {
     list-style: none;
     float: left;
     padding: 0;
+    margin-left: 50px;
 }
 nav ul li {
     float: left;
@@ -144,10 +148,13 @@ aside ul li a:hover {
 .contenido1 {
     width: 90%;
     float: center;
-    background: hsl(200,33%,97%); 
+    /*background: hsl(200,33%,97%);*/
+    background-color: transparent; 
     border-radius: 5px;
     margin: 5px;
     margin-left: 70px;
+    box-shadow: 10px 10px 5px #888888;
+    border: 1px solid #E0DCDC;
 }
 .contenido1 article {
     padding: 15px 30px;
@@ -174,12 +181,14 @@ aside ul li a:hover {
 }
 
 footer {
-    background: hsl(100, 31%, 53%);
+    /*background: hsl(100, 31%, 53%);*/
+    background-color: #1F0A0A;
 
     
 }
 footer {
-    background: hsl(200, 31%, 53%);
+    /*background: hsl(200, 31%, 53%);*/
+    background-color: #1F0A0A;
     width: 100%;
     position: absolute;
     margin-top: 70%;  
@@ -481,4 +490,18 @@ table {
   width: 480px; 
   text-align: left;    
   border-collapse: collapse; 
+}
+
+img {
+    width: 250px;
+    height: 165px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    margin-left: 80px;
+}
+
+ #mensaje_header {
+    font-size: 25px;
+    margin-top: 5px;
+    margin-left: 20px;
 }

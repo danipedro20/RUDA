@@ -58,6 +58,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
          <?php else : ?>
                 <h1>No hay Aulas</h1>
             <?php endif; ?>
+            
+
+
     </section>
 
     <?php

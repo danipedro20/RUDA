@@ -25,7 +25,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 margin: 0 auto;
             }
         </style>
-        <form method="post" action="<?php echo base_url(); ?>backend/profesor_control/guardar_lista">
+        <form id="lista_alumno" method="post" action="<?php echo base_url(); ?>backend/profesor_control/guardar_lista">
             <?php if (empty($asistencias)) : ?>
                 <?php if (!empty($arrDatosalum)) : ?>
              <h1><?php echo $nombre->cat_denominacion; ?></h1>
