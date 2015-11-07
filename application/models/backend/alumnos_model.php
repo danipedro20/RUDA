@@ -33,7 +33,7 @@ where alumno.idusuario='$a';");
     public function lista_planes_alumnos() {
         $a = $this->session->userdata('id');
 
-        $consulta = $this->db->query("select ca.cat_denominacion,profesor.usu_nombre,pla.pla_denominacion,au.aul_denominacion,car.car_denominacion,alumno.idusuario from usu_cate as cate
+        $consulta = $this->db->query("select ca.idcatedra,pla.idplan,capa.diascatedra,ca.cat_denominacion,profesor.usu_nombre,pla.pla_denominacion,au.aul_denominacion,car.car_denominacion,alumno.idusuario from usu_cate as cate
 right join catedras as ca on ca.idcatedra=cate.idcatedra
 left join usuarios as profesor on cate.idusuario=profesor.idusuario
 left join cate_plan as capa on ca.idcatedra=capa.idcatedra
@@ -48,7 +48,6 @@ where alumno.idusuario='$a';");
 
     public function seltareas() {
         $z = $this->session->userdata('id');
-        $l = $this->session->userdata('turno');
         $consulta = $this->db->query("select aulas.idaula from aulas join usu_au on
 aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario where usuarios.idusuario='$z';");
         $fila = $consulta->row_array();
@@ -57,13 +56,7 @@ aulas.idaula=usu_au.idaula join usuarios on usuarios.idusuario=usu_au.idusuario 
         $c = $this->input->post('ver_rango');
         $hoy = date('d-m-Y');
         $fechahoy = date("Y-m-d", strtotime($hoy));
-
-        if ($c == 1) {
-            $query = $this->db->query("select tareas.idtarea, tareas.tar_descripcion,tareas.tar_fechaasignacion,tareas.tar_fechaentrega,tareas.tar_puntostarea,tareas.tar_nombrearchivo from tareas join
-catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
-usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b' and tareas.tar_fechaasignacion='$fechahoy';");
-            return $query->result();
-        } elseif ($c == 2) {
+        if ($c == 2) {
             $query = $this->db->query("select tareas.idtarea, tareas.tar_descripcion,tareas.tar_fechaasignacion,tareas.tar_fechaentrega,tareas.tar_puntostarea,tareas.tar_nombrearchivo from tareas join
 catedras on tareas.idcatedra=catedras.idcatedra join aulas on tareas.idaula=aulas.idaula join 
 usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.idusuario where usuarios.idusuario='$z' and aulas.idaula='$k' and catedras.idcatedra='$b' and tareas.tar_fechaentrega>='$fechahoy';");
@@ -187,5 +180,19 @@ usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.
 
         force_download($nombre, $datos);
     }
+
+    public function listar_notas($idcatedra, $idplan) {
+        $c = $this->session->userdata('id');
+        $query = $this->db->query("select * from notas_examenes where idcatedra='$idcatedra' and idplan='$idplan' and idusuario='$c';");
+        return $query->result();
+    }
+     public function nombrecatedra($a) {
+       
+            $this->db->where('idcatedra', $a);
+
+            return $this->db->get('catedras')->row();
+        
+    }
+
 
 }

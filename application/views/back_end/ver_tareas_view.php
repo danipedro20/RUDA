@@ -26,7 +26,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <input type="hidden" id="selaula2" name="selaula2"  value='<?php echo $b = $this->input->post('selaula'); ?>' /><br>  
 
             <label name="lbl_ver">Ver:</label>
-            <SELECT  name='ver_rango' id='ver_rango' style='width: 200px;'><OPTION VALUE='1'>Activa</OPTION><OPTION VALUE='2'>Pendientes</OPTION><OPTION VALUE='3'>Todas</OPTION></SELECT>
+            <SELECT  name='ver_rango' id='ver_rango' style='width: 200px;'><OPTION VALUE='2'>Pendientes</OPTION><OPTION VALUE='3'>Todas</OPTION></SELECT>
             <input type="submit" name="btnguardarplan" value="Ir a Tareas" />
 
 

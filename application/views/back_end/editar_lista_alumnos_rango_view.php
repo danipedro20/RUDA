@@ -41,7 +41,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                 </select><p></p>
 
-                <label name="fecha">Fecha de entrega:</label>
+                <label name="fecha">Fecha:</label>
                 <input type="text" id="fecha" required="" name="fecha"  placeholder="Seleccione la Fecha" value='<?php echo set_value('tar_fecha entrega') ?>' />
 
                 <!-- este input lo usaremos como referencia para la validacion -->
@@ -55,7 +55,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 }
                 ?></font>
 
-                <input type="submit" name="btnguardarplan" value="Guardar" />
+                <input type="submit" name="btnguardarplan" value="Ir" />
 
 
             </form>

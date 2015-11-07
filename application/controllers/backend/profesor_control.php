@@ -44,7 +44,16 @@ class Profesor_control extends CI_Controller {
         $datos['contenido'] = 'lista_alumnos_catedra_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
-      public function editar_listas_alumnos_con_rango() {
+
+    public function listar_catedras_profesor() {
+        $datos['titulo'] = 'Ruda - Seleccione Catedra';
+        $datos['lista'] = $this->profesor_model->lista_catedras();
+        $datos['contenido'] = 'listar_catedras_por_profesor_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function editar_listas_alumnos_con_rango() {
+        $a = "";
         $datos['titulo'] = 'Ruda - Seleccione Datos';
         $datos['arrDatos'] = $this->profesor_model->verlasaulas();
         $datos['contenido'] = 'editar_lista_alumnos_rango_view';
@@ -52,11 +61,13 @@ class Profesor_control extends CI_Controller {
     }
 
     public function lista() {
-        $a="";$b="";$c="";
+        $a = "";
+        $b = "";
+        $c = "";
         $datos['titulo'] = 'Ruda - Seleccione Datos';
         $datos['arrDatosalum'] = $this->profesor_model->veralumnos();
-        $datos['nombre'] = $this->profesor_model->nombrecatedra();
-        $datos['asistencias'] = $this->profesor_model->verificar_lista($a,$b,$c);
+        $datos['nombre'] = $this->profesor_model->nombrecatedra($a);
+        $datos['asistencias'] = $this->profesor_model->verificar_lista($a, $b, $c);
         $datos['contenido'] = 'listar_alumnos_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
@@ -272,9 +283,7 @@ class Profesor_control extends CI_Controller {
             $fecha = date("Y-m-d", strtotime($hoy));
             $insert = $this->profesor_model->insert_asistencia($idusuario, $idcatedra, $estado, $Justificacion, $fecha, $aula);
         }
-        ?> 
-        <a href="<?php echo base_url() ?>backend/profesor_control/listaralumnos/">volver</a>
-        <?php
+        redirect(base_url('/backend/profesor_control/listaralumnos/'));
     }
 
     public function editar_lista_alumnos() {
@@ -282,24 +291,25 @@ class Profesor_control extends CI_Controller {
         $b = $this->uri->segment(5);
         $c = $this->uri->segment(6);
         $datos['titulo'] = 'Ruda - Seleccione Catedra';
-        $datos['asistencias'] = $this->profesor_model->datos_lista($a,$b,$c);
-         $datos['verificar'] = $this->profesor_model->verificar_lista($a,$b,$c);
+        $datos['asistencias'] = $this->profesor_model->datos_lista($a, $b, $c);
+        $datos['verificar'] = $this->profesor_model->verificar_lista($a, $b, $c);
         $datos['contenido'] = 'editar_lista_alumnos_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
-       public function editar_lista_alumnos_rango() {
-         $a =$this->input->post('catedra');
-        $b =$this->input->post('aula'); 
-        $c = $this->input->post('fecha');
-       $datos['titulo'] = 'Ruda - Seleccione Catedra';
-        $datos['asistencias'] = $this->profesor_model->datos_lista($a,$b,$c);
-         $datos['verificar'] = $this->profesor_model->verificar_lista($a,$b,$c);
-        $datos['contenido'] = 'editar_lista_alumnos_view';
-        $this->load->view('plantillas/profplantilla', $datos);
-    
 
+    public function editar_lista_alumnos_rango() {
+        $a = $this->input->post('catedra');
+        $b = $this->input->post('aula');
+        $c = $this->input->post('fecha');
+        $datos['titulo'] = 'Ruda - Seleccione Catedra';
+        $datos['asistencias'] = $this->profesor_model->datos_lista($a, $b, $c);
+        $datos['verificar'] = $this->profesor_model->verificar_lista($a, $b, $c);
+        $datos['nombre'] = $this->profesor_model->nombrecatedra($a);
+        $datos['contenido'] = 'editar_lista_alumnos_view';
+        $this->load->view('plantillas/profplantilla', $datos);
     }
-     public function editar_lista() {
+
+    public function editar_lista() {
         $hoy = date('d-m-Y');
         $total = count($this->input->post('catedra'));
         for ($i = 0; $i < $total; $i++) {
@@ -307,13 +317,81 @@ class Profesor_control extends CI_Controller {
             $idcatedra = $this->input->post('catedra')[$i];
             $estado = $this->input->post('estado')[$i];
             $Justificacion = $this->input->post('justificacion')[$i];
+            $fecha = $this->input->post('fecha')[$i];
             $aula = $this->input->post('aula')[$i];
-      $fecha = date("Y-m-d", strtotime($hoy));
-          $insert = $this->profesor_model->editar_asistencia($idusuario, $idcatedra, $estado, $Justificacion, $fecha, $aula);
+
+            $insert = $this->profesor_model->editar_asistencia($idusuario, $idcatedra, $estado, $Justificacion, $fecha, $aula);
         }
-        ?> 
-        <a href="<?php echo base_url() ?>backend/profesor_control/listaralumnos/">volver</a>
-        <?php
+        redirect(base_url('/backend/profesor_control/vertareas/'));
+    }
+
+    public function puntajes() {
+        $a = $this->uri->segment(4);
+        $datos['titulo'] = 'Ruda - Dar Puntajes';
+        $datos['idtarea'] = $a;
+        $datos['lista'] = $this->profesor_model->lista_dar_puntajes($a);
+        $datos['contenido'] = 'lista_dar_puntajes_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function editar_puntajes() {
+        $a = $this->uri->segment(4);
+        $datos['titulo'] = 'Ruda - Dar Puntajes';
+        $datos['idtarea'] = $a;
+        $datos['lista'] = $this->profesor_model->listar_puntaje($a);
+        $datos['contenido'] = 'editar_puntajes_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function guardar_puntajes() {
+        $total = count($this->input->post('idusuario'));
+        for ($i = 0; $i < $total; $i++) {
+            $idusuario = $this->input->post('idusuario')[$i];
+            $idtarea = $this->input->post('tarea')[$i];
+            $idcatedra = $this->input->post('catedra')[$i];
+            $puntos = $this->input->post('tar_puntostarea')[$i];
+            $puntos_logrados = $this->input->post('tar_puntoslogrados')[$i];
+            $insert = $this->profesor_model->guardar_notas_tarea($idusuario, $idcatedra, $idtarea, $puntos, $puntos_logrados);
+        }
+        redirect(base_url('/backend/profesor_control/vertareas/'));
+    }
+
+    public function editar_puntaje() {
+        $total = count($this->input->post('idusuario'));
+        for ($i = 0; $i < $total; $i++) {
+            $id = $this->input->post('id')[$i];
+            $puntos_logrados = $this->input->post('tar_puntoslogrados')[$i];
+            $insert = $this->profesor_model->editar_notas_tarea($id, $puntos_logrados);
+        }
+        redirect(base_url('/backend/profesor_control/vertareas/'));
+    }
+
+    public function notas_examenes() {
+
+        $plan = $this->uri->segment(4);
+        $catedra = $this->uri->segment(5);
+        $aula = $this->uri->segment(6);
+        $idtipo = $this->uri->segment(7);
+        $id = $this->uri->segment(8);
+        $datos['titulo'] = 'Ruda - Dar Puntajes';
+        $datos['lista'] = $this->profesor_model->listar_alumnos_nota($plan, $catedra, $aula);
+        $datos['nombre'] = $this->profesor_model->nombrecatedra($catedra);
+        $datos['idtipo'] = $idtipo;
+        $datos['id'] = $id;
+        $datos['contenido'] = 'notas_examenes_view';
+        $this->load->view('plantillas/profplantilla', $datos);
+    }
+
+    public function editar_notas_examenes() {
+        $plan = $this->uri->segment(4);
+        $catedra = $this->uri->segment(5);
+        $idtipo = $this->uri->segment(6);
+        $datos['titulo'] = 'Ruda - Dar Puntajes';
+        $datos['lista'] = $this->profesor_model->listar_notas_examen($plan, $catedra);
+        $datos['nombre'] = $this->profesor_model->nombrecatedra($catedra);
+        $datos['idtipo'] = $idtipo;
+        $datos['contenido'] = 'editar_notas_examenes_view';
+        $this->load->view('plantillas/profplantilla', $datos);
     }
 
     public function llenar() {
@@ -328,6 +406,143 @@ class Profesor_control extends CI_Controller {
                 <?php
             }
         }
+    }
+
+    public function guardar_notas_examenes() {
+
+        $total = count($this->input->post('idusuario'));
+        for ($i = 0; $i < $total; $i++) {
+            $idtipo = $this->input->post('idtipo')[$i];
+            if ($idtipo == 2) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->guardar_nota_parcial($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 3) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $consuta1 = $this->db->query("select * from notas_examenes where idcatedra='$idcatedra' and idplan='$idplan'and idusuario='$idusuario'");
+                if ($consuta1->num_rows() > 0) {
+                    $editar = $this->profesor_model->editar_nota_recuperatorio($idusuario, $idplan, $idcatedra, $logrados);
+                } else {
+                    $insertar = $this->profesor_model->guardar_nota_recuperatorio($idusuario, $idplan, $idcatedra, $logrados);
+                }
+            } elseif ($idtipo == 4) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->guardar_nota_primer_ordinario($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 5) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->guardar_nota_segundo_ordinario($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 6) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $consuta1 = $this->db->query("select * from notas_examenes where idcatedra='$idcatedra' and idplan='$idplan'and idusuario='$idusuario'");
+                if ($consuta1->num_rows() > 0) {
+                    $editar = $this->profesor_model->editar_nota_complementario($idusuario, $idplan, $idcatedra, $logrados);
+                } else {
+                    $insertar = $this->profesor_model->guardar_nota_complementario($idusuario, $idplan, $idcatedra, $logrados);
+                }
+            } elseif ($idtipo == 7) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $consuta1 = $this->db->query("select * from notas_examenes where idcatedra='$idcatedra' and idplan='$idplan'and idusuario='$idusuario'");
+                if ($consuta1->num_rows() > 0) {
+                    $editar = $this->profesor_model->editar_nota_extraordinario($idusuario, $idplan, $idcatedra, $logrados);
+                } else {
+                    $insertar = $this->profesor_model->guardar_nota_extraordinario($idusuario, $idplan, $idcatedra, $logrados);
+                }
+            } elseif ($idtipo == 8) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $consuta1 = $this->db->query("select * from notas_examenes where idcatedra='$idcatedra' and idplan='$idplan'and idusuario='$idusuario'");
+                if ($consuta1->num_rows() > 0) {
+                    echo $logrados = $this->input->post('logrados')[$i];
+
+                    $editar = $this->profesor_model->editar_nota_mesa($idusuario, $idplan, $idcatedra, $logrados);
+                } else {
+                    $insertar = $this->profesor_model->guardar_nota_mesa($idusuario, $idplan, $idcatedra, $logrados);
+                }
+            }
+        }
+        redirect(base_url('/backend/profesor_control/listar_catedras_profesor/'));
+    }
+
+    public
+            function editar_nota_examen() {
+
+        $total = count($this->input->post('idusuario'));
+        for ($i = 0; $i < $total; $i++) {
+            $idtipo = $this->input->post('idtipo')[$i];
+            if ($idtipo == 2) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->editar_nota_parcial($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 3) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->editar_nota_recuperatorio($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 4) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->editar_nota_primer_ordinario($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 5) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->editar_nota_segundo_ordinario($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 6) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->editar_nota_complementario($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 7) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->editar_nota_extraordinario($idusuario, $idplan, $idcatedra, $logrados);
+            } elseif ($idtipo == 8) {
+                $idusuario = $this->input->post('idusuario')[$i];
+                $idplan = $this->input->post('idplan')[$i];
+                $idcatedra = $this->input->post('idcatedra')[$i];
+                $logrados = $this->input->post('logrados')[$i];
+                $editar = $this->profesor_model->editar_nota_mesa($idusuario, $idplan, $idcatedra, $logrados);
+            }
+        }
+        redirect(base_url('/backend/profesor_control/listar_catedras_profesor/'));
+    }
+
+    public function ver_notas_examenes() {
+        $plan = $this->uri->segment(4);
+        $catedra = $this->uri->segment(5);
+        $datos['titulo'] = 'Ruda - Dar Puntajes';
+        $datos['lista'] = $this->profesor_model->listar_notas_examen($plan, $catedra);
+        $datos['nombre'] = $this->profesor_model->nombrecatedra($catedra);
+        $datos['contenido'] = 'ver_notas_profesor_view';
+        $this->load->view('plantillas/profplantilla', $datos);
     }
 
 }
