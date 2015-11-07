@@ -59,8 +59,9 @@ class Catedras_model extends CI_Model {
     }
 
     public function lista() {
-        $consulta = $this->db->query("select ca.idcatedra,ca.cat_denominacion,usu.idusuario,usu.usu_nombre from catedras as ca join
-usu_cate as usca on  usca.idcatedra=ca.idcatedra join usuarios as usu  on usca.idusuario=usu.idusuario;");
+        $consulta = $this->db->query("select capa.diascatedra,ca.idcatedra,ca.cat_denominacion,usu.idusuario,usu.usu_nombre from catedras as ca join
+usu_cate as usca on  usca.idcatedra=ca.idcatedra join usuarios as usu  on usca.idusuario=usu.idusuario
+join cate_plan as capa on ca.idcatedra=capa.idcatedra;");
         return $consulta->result();
     }
     

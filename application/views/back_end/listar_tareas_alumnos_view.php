@@ -16,7 +16,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
             <label name="lbl_ver">Ver:</label>
             <SELECT  name='ver_rango' id='ver_rango' style='width: 200px;'>
-                <OPTION VALUE='1'>Activas</OPTION>
                 <OPTION VALUE='2'>Pendientes</OPTION>
                 <OPTION VALUE='3'>Todas</OPTION>
             </SELECT>

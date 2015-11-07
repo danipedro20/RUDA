@@ -7,11 +7,11 @@
     </ul>
     <ul>
         <li>Aulas</li>
-       <li><a href="<?php echo base_url()?>backend/profesor_control/liscatedras">Catedras</a></li>
+       <li><a href="<?php echo base_url()?>backend/profesor_control/listar_catedras_profesor">Catedras/Notas</a></li>
         <li><a href="<?php echo base_url()?>backend/profesor_control/listaralumnos">Listar Alumnos</a></li>
           <li><a href="<?php echo base_url()?>backend/profesor_control/editar_listas_alumnos_con_rango">Editar listas de Alumnos</a></li>
         <li><a href="<?php echo base_url()?>backend/profesor_control/tareas">Crear Tareas</a></li>
-        <li><a href="<?php echo base_url()?>backend/profesor_control/vertareas">Ver Tareas</a></li>
+        <li><a href="<?php echo base_url()?>backend/profesor_control/vertareas">Ver Tareas/Notas Tareas</a></li>
         <li><a href="<?php echo base_url()?>backend/profesor_control/agenda">Agenda</a></li>
     </ul>
     <ul>

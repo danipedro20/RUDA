@@ -19,7 +19,7 @@ class Alumnos_control extends CI_Controller {
 
     public function listar_plan_por_alumno() {
         $datos['titulo'] = 'Plan de Estudio';
-         $datos['plan'] = $this->alumnos_model->lista_planes_alumnos();
+        $datos['plan'] = $this->alumnos_model->lista_planes_alumnos();
         $datos['contenido'] = 'lista_planes_por_alumno_view';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
@@ -165,6 +165,16 @@ class Alumnos_control extends CI_Controller {
     public function descargar() {
         $entry_id = $this->uri->segment(4);
         $this->alumnos_model->descargaadjunto($entry_id);
+    }
+
+    public function ver_nota() {
+        $idcatedra = $this->uri->segment(4);
+        $idplan = $this->uri->segment(5);
+        $datos['titulo'] = 'Notas';
+        $datos['lista'] = $this->alumnos_model->listar_notas($idcatedra,$idplan);
+         $datos['nombre'] = $this->alumnos_model->nombrecatedra($idcatedra);
+        $datos['contenido'] = 'ver_notas_alumno_view';
+        $this->load->view('plantillas/alumplantilla', $datos);
     }
 
 }

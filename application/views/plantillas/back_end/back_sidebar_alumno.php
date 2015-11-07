@@ -7,7 +7,7 @@
     </ul>
     <ul>
         <li>Aulas</li>
-        <li><a href="<?php echo base_url() ?>backend/alumnos_control/listar_plan_por_alumno">Plan de Estudios</a></li>
+        <li><a href="<?php echo base_url() ?>backend/alumnos_control/listar_plan_por_alumno">Cátedras/Notas</a></li>
         <li><a href="<?php echo base_url() ?>backend/alumnos_control/successalumnosprofesores">Profesores</a></li>
         <li><a href="<?php echo base_url() ?>backend/alumnos_control/successalumnostareas">Tareas</a></li>
          <li><a href="<?php echo base_url() ?>backend/alumnos_control/agenda">Agenda</a></li>
