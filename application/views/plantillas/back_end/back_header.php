@@ -39,7 +39,7 @@
             <header>
                 <section class="contenedor">
 
-                     <a href="<?php echo base_url()?>backend/home/index"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
+                     <a href="<?php echo base_url()?>backend/adhome/index2"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
             </header>
             <nav>
                 <section class="contenedor">
