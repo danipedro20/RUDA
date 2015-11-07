@@ -31,8 +31,7 @@
 
         <header>
             <section class="contenedor">
-                <h1>RUDA</h1>
-                <p>Sistema de Gestión de Aula</p>
+                 <a href="<?php echo base_url()?>backend/home/index"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
 
             </section>
         </header>
