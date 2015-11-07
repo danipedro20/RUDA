@@ -8,7 +8,7 @@ class Insplan_control extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('backend/plan_model');
-         $this->load->library('pdf');
+        $this->load->library('pdf');
     }
 
     public function planestudio() {
@@ -94,7 +94,7 @@ class Insplan_control extends CI_Controller {
 
 
 
-                $insert = $this->plan_model->editarplanestudio($a, $b,$fecha,$fecha_fin);
+                $insert = $this->plan_model->editarplanestudio($a, $b, $fecha, $fecha_fin);
                 // $insertplan = $this->plan_model->ediplan_catedra($b, $d);
                 redirect(base_url('/backend/insplan_control/listar_plan_estudios/'));
             }
@@ -137,8 +137,9 @@ class Insplan_control extends CI_Controller {
             return TRUE;
         }
     }
-     public function reporte_planes() {
-     
+
+    public function reporte_planes() {
+
 
         $plan = $this->plan_model->listar_planes();
 
@@ -179,8 +180,8 @@ class Insplan_control extends CI_Controller {
 
         $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
         $this->pdf->Cell(100, 7, 'Descripcion', 'TBL', 0, 'C', '1');
-        $this->pdf->Cell(50, 7, 'Fecha Inicio', 'TBL', 0, 'C', '1');
-        $this->pdf->Cell(80, 7, 'Fecha Fin', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(30, 7, 'Fecha Inicio', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(30, 7, 'Fecha Fin', 'TBLR', 0, 'C', '1');
         $this->pdf->Ln(7);
         // La variable $x se utiliza para mostrar un número consecutivo
         $x = 1;
@@ -189,10 +190,10 @@ class Insplan_control extends CI_Controller {
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
             $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
-           
+
             $this->pdf->Cell(100, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
-              $this->pdf->Cell(80, 5, utf8_decode($i->pla_fechainicio), 'TBLR', 0, 'C', 0);
-              $this->pdf->Cell(100, 5, utf8_decode($i->pla_fechafin), 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode($i->pla_fechainicio), 'TBL', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode($i->pla_fechafin), 'TBLR', 0, 'C', 0);
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
         }
