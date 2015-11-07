@@ -120,13 +120,13 @@ class Solicitud_control extends CI_Controller {
                 $h = md5($this->input->post('respuesta'));
                 $i = $this->input->post('idcarrera');
                 $j = $this->input->post('idaula');
-                $k = $this->input->post('idaula');
+                $k = $this->input->post('idplan');
 
 //                $this->db->select('usu_nombre')
 //                        ->where('usu_nombre', $a);
 //                $query1 = $this->db->get('inscripciones');
 //                if ($query1->num_rows() > 0) {
-                $insert = $this->solicitud_model->insertsoli($a, $b, $c, $d, $e, $f, $g, $h, $i, $j,$k);
+                $insert = $this->solicitud_model->insertsoli($a, $b, $c, $d, $e, $f, $g, $h, $i, $j, $k);
 
 
                 //configuracion para gmail
@@ -236,14 +236,15 @@ class Solicitud_control extends CI_Controller {
                 $recuperacion = $this->solicitud_model->insertarrecuperacion($id);
                 $registroaula = $this->solicitud_model->insertaraula($id);
                 $lugaresaula = $this->solicitud_model->lugaresaulas($id);
-                //    $correo = $this->solicitud_model->enviarcorreo($id);
+                $correo = $this->solicitud_model->enviarcorreo($id);
                 $eliminar = $this->solicitud_model->eliminarsolicitud($id);
 
 
                 redirect(base_url('/frontend/solicitud_control/solicitudaceptada/'));
                 break;
             case 'INCORRECTO':
-                //        $correo = $this->solicitud_model->enviarcorreo($id);
+                //  echo  $id = $this->uri->segment(4);
+                $correo = $this->solicitud_model->enviarcorreo($id);
                 $eliminar = $this->solicitud_model->eliminarsolicitud($id);
 
                 redirect(base_url('/frontend/solicitud_control/solicitudrechazada/'));

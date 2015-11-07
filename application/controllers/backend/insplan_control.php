@@ -8,6 +8,7 @@ class Insplan_control extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('backend/plan_model');
+         $this->load->library('pdf');
     }
 
     public function planestudio() {
@@ -135,6 +136,76 @@ class Insplan_control extends CI_Controller {
         } else {
             return TRUE;
         }
+    }
+     public function reporte_planes() {
+     
+
+        $plan = $this->plan_model->listar_planes();
+
+        // Creacion del PDF
+
+        /*
+         * Se crea un objeto de la clase Pdf, recuerda que la clase Pdf
+         * heredó todos las variables y métodos de fpdf
+         */
+        ob_end_clean();
+
+        $this->pdf = new Pdf();
+
+        // Agregamos una página
+        $this->pdf->AddPage();
+
+        // Define el alias para el número de página que se imprimirá en el pie
+        $this->pdf->AliasNbPages();
+
+        /* Se define el titulo, márgenes izquierdo, derecho y
+         * el color de relleno predeterminado
+         */
+        $this->pdf->SetTitle("Lista de Planes");
+        $this->pdf->SetLeftMargin(15);
+        $this->pdf->SetLineWidth(.3);
+        $this->pdf->SetDrawColor(15, 0, 0);
+        $this->pdf->SetRightMargin(15);
+        $this->pdf->SetTextColor(0);
+        $this->pdf->SetFillColor(200, 200, 200);
+
+        // Se define el formato de fuente: Arial, negritas, tamaño 9
+        $this->pdf->SetFont('Arial', 'B', 12);
+        /*
+         * TITULOS DE COLUMNAS
+         *
+         * $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
+         */
+
+        $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(100, 7, 'Descripcion', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(50, 7, 'Fecha Inicio', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(80, 7, 'Fecha Fin', 'TBL', 0, 'C', '1');
+        $this->pdf->Ln(7);
+        // La variable $x se utiliza para mostrar un número consecutivo
+        $x = 1;
+
+        foreach ($plan as $i) {
+            // se imprime el numero actual y despues se incrementa el valor de $x en uno
+            $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
+            // Se imprimen los datos de cada Catedra
+           
+            $this->pdf->Cell(100, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
+              $this->pdf->Cell(80, 5, utf8_decode($i->pla_fechainicio), 'TBLR', 0, 'C', 0);
+              $this->pdf->Cell(100, 5, utf8_decode($i->pla_fechafin), 'TBLR', 0, 'C', 0);
+            //Se agrega un salto de linea
+            $this->pdf->Ln(5);
+        }
+        /*
+         * Se manda el pdf al navegador
+         *
+         * $this->pdf->Output(nombredelarchivo, destino);
+         *
+         * I = Muestra el pdf en el navegador
+         * D = Envia el pdf para descarga
+         *
+         */
+        $this->pdf->Output("Lista de Planes.pdf", 'I');
     }
 
 }

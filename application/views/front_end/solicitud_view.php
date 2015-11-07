@@ -39,31 +39,31 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function(){
-    var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
-    $('#email').focusout( function(){
-        if( $("#email").val() == "" || !emailreg.test($("#email").val()) )
-        {
-            $('#msgEmail').html("<span style='color:#f00'>Ingrese un email correcto</span>");
-        }else{
-            $.ajax({
-                type: "POST",
-               url: "<?php echo base_url() ?>frontend/solicitud_control/comprobar_email_ajax",
-                data: "email="+$('#email').val(),
-                beforeSend: function(){
-                    $('#msgEmail').html('Verificando...');
-                },
-                success: function( respuesta ){
-                    if(respuesta == '<div style="display:none">1</div>')
-                        $('#msgEmail').html("<span style='color:#0f0'>Email disponible</span>");
-                    else
-                        $('#msgEmail').html("<span style='color:#f00'> ESte Email Ya ESta siendo utilizado</span>");
-                }
-            });
-            return false;
-        }
+    $(document).ready(function() {
+        var emailreg = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/;
+        $('#email').focusout(function() {
+            if ($("#email").val() == "" || !emailreg.test($("#email").val()))
+            {
+                $('#msgEmail').html("<span style='color:#f00'>Ingrese un email correcto</span>");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url() ?>frontend/solicitud_control/comprobar_email_ajax",
+                    data: "email=" + $('#email').val(),
+                    beforeSend: function() {
+                        $('#msgEmail').html('Verificando...');
+                    },
+                    success: function(respuesta) {
+                        if (respuesta == '<div style="display:none">1</div>')
+                            $('#msgEmail').html("<span style='color:#0f0'>Email disponible</span>");
+                        else
+                            $('#msgEmail').html("<span style='color:#f00'> ESte Email Ya ESta siendo utilizado</span>");
+                    }
+                });
+                return false;
+            }
+        });
     });
-});
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -117,15 +117,19 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <input type="email" name="email" id="email" placeholder="Email" required="" value='<?php echo set_value('email') ?>' /><br> 
         <label name="lbl_usu_pass">Contraseña: </label>
         <input type="password" name="usu_pass" placeholder="Contraseña" required="" value='<?php echo set_value('usu_pass') ?>' /><br>
+        <label name="pregunta">Pregunta Secreta: </label>
+        <select name='pregunta' id='pregunta'>
+            <option value="Cual es tu heroe Favorito">Cual es tu heroe Favorito</option>
+            <option value="El nombre de tu perro">El nombre de tu perro</option>
+            <option value="El Apelllido de Soltera de tu madre">El Apelllido de Soltera de tu madre</option>
+        </select>
 
-        <label name="lbl_pregunta">Pregunta Secreta: </label>
-        <input type="text" name="pregunta" placeholder="Pregunta Secreta" required="" value='<?php echo set_value('pregunta') ?>' /><br>
         <label name="respuesta">Respuesta Secreta: </label>
         <input type="password" name="respuesta" placeholder="Respuesta Secreta" required="" value='<?php echo set_value('respuesta') ?>' /> <br> 
 
         <input type="hidden" id="idcarrera" name="idcarrera"  value='<?php echo $idcarrera; ?>' /><br>
         <input type="hidden" id="idaula" name="idaula"  value='<?php echo $idaula; ?>' /><br>
-         <input type="hidden" id="idplan" name="idplan"  value='<?php echo $idplan; ?>' /><br>
+        <input type="hidden" id="idplan" name="idplan"  value='<?php echo $idplan; ?>' /><br>
 
         <!-- este input lo usaremos como referencia para la validacion -->
         <input type="hidden" name="grabar" value="si" />

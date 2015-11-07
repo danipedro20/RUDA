@@ -281,7 +281,7 @@ where ta.idtarea='$a';");
     public function nombrecatedra($a) {
 
         if (empty($a)) {
-            $p = $this->input->post('idcatedra');
+            $p = $this->input->post('catedra');
             $this->db->where('idcatedra', $p);
 
             return $this->db->get('catedras')->row();
