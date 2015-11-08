@@ -10,7 +10,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <link rel="stylesheet" href="<?php echo base_url() ?>/assets/front_end/jquery-ui/jquery-ui.css"/>
         <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
         <script src="<?php echo base_url() ?>/assets/front_end/jquery-ui/jquery-ui.js"></script>
-        <script src="<?php echo base_url() ?>/assets/calendario/datapicker.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#aula").change(function() {
@@ -27,8 +26,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         </script>
 
         <fieldset>
-            <h1>Editar Lista de Asistencias</h1>
-            <form action="<?php echo base_url(); ?>backend/profesor_control/editar_lista_alumnos_rango" method="post">
+            <h1>Generar Reportes de Asistencias</h1>
+            <form action="<?php echo base_url(); ?>backend/profesor_control/generar_reporte_tareas" method="post" target="_blank">
                 <label name="lbl_idcatedra">Seleccione el aula:</label>
                 <select name='aula' id='aula'>
                     <option value="">Seleccione un Aula
@@ -41,8 +40,25 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                 </select><p></p>
 
-                <label name="fecha">Fecha:</label>
-                <input type="text" id="fecha" required="" name="fecha"  placeholder="Seleccione la Fecha" value='<?php echo set_value('tar_fecha entrega') ?>' />
+                <label name="fecha">Mes:</label>
+                <select name='mes' id='mes'>
+                    <option value="">Seleccione un mes
+                    <option value="1">Enero
+                    <option value="2">Febrero
+                    <option value="3">Marzo
+                    <option value="4">Abril
+                    <option value="5">Mayo
+                    <option value="6">Junio
+                    <option value="7">Julio
+                    <option value="8">Agosto
+                    <option value="9">Septiembre
+                    <option value="10">Octubre
+                    <option value="11">Noviembre
+                    <option value="12">Diciembre
+
+                    </option>
+                </select>
+
 
                 <!-- este input lo usaremos como referencia para la validacion -->
                 <input type="hidden" name="grabar" value="si" />
@@ -55,7 +71,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 }
                 ?></font>
 
-                <input type="submit" name="btn" value="Ir" />
+                <input type="submit" name="btnguardarplan"   value="Ir" />
 
 
             </form>

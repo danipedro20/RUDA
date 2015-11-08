@@ -46,7 +46,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                     echo $plan->pla_fechainicio;
                     ;
                 }
-                ?>' />
+                ?>' /><p>
                 <label name="lbl_fecha">Fecha Fin: </label>
                 <input type="text" name="fecha_fin" id="fecha_fin" placeholder= required="" value='<?php
                 if ($rest == 'http://' . $_SERVER['HTTP_HOST'] . '/backend/insplan_control/editar_plan_estudio/') {

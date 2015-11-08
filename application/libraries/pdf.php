@@ -14,7 +14,7 @@
             $this->Cell(30);
             $this->Cell(120,10,'RUDA',0,0,'C');
             $this->Ln('7');
-            $this->SetFont('Arial','B',15);
+            $this->SetFont('Arial','B',10);
             $this->Cell(30);
             $this->Cell(120,10,'Sistema de Gestion de Aula',0,0,'C');
             $this->Ln(20);

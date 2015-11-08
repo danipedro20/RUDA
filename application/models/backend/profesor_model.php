@@ -481,4 +481,36 @@ from notas_examenes as n join usuarios as usu on n.idusuario=usu.idusuario where
         return $query->result();
     }
 
+    public function insert_recuperacion($idusuario, $pregunta, $respuesta) {
+        $data = array(
+            'idusuario' => $idusuario,
+            'recupregunta' => $pregunta,
+            'recurespuesta' => $respuesta,
+        );
+        return $this->db->insert('recuperacion', $data);
+    }
+
+    public function generar_asistencias($a, $b, $c) {
+
+
+        $query = $this->db->query("select  * FROM vista_asistencias where month(asi_fecha)='$c' and idaula=$a and idcatedra='$b';");
+        return $query->result();
+    }
+
+    public function generar_tareas($a, $b, $c) {
+
+
+        $query = $this->db->query("select  * FROM vista_tareas where month(tar_fechaasignacion)='$c' and idaula='$a' and idcatedra='$b';");
+        return $query->result();
+    }
+
+    public function plan($a, $catedra) {
+
+
+        $query = $this->db->query("select pla.idplan from plan_estudios as pla join cate_plan as capa
+on capa.idplan=pla.idplan join catedras as ca on ca.idcatedra=capa.idcatedra
+join aulas as au on au.idplan=pla.idplan where au.idaula='$a' and ca.idcatedra='$catedra';");
+        return $query->row();
+    }
+
 }

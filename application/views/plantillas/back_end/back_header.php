@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Expires" content="0" /> 
@@ -39,7 +38,7 @@
             <header>
                 <section class="contenedor">
 
-                     <a href="<?php echo base_url()?>backend/home/index"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
+                     <a href="<?php echo base_url()?>backend/adhome/index2"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
             </header>
             <nav>
                 <section class="contenedor">
@@ -51,7 +50,7 @@
                         <li><a href="#">Profesores</a></li>
                         <li><a href="#">Tareas</a></li>
 
-                        <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar SesiÃ³n</a></li>
+                        <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesión</a></li>
                     </ul>
 
 

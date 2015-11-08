@@ -15,6 +15,5 @@ class Home extends CI_Controller{
         $datos['titulo'] = 'Ruda - Gestion de Aula';
         $datos['contenido'] = 'index';
         $this->load->view('plantillas/plantilla', $datos);
-       
     }
 }  

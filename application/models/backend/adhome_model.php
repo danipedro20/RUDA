@@ -21,7 +21,6 @@ class Adhome_model extends CI_Model {
         $this->db->update('usuarios', $data);
     }
 
-
     function correo_check($correo) {
         $this->db->select('usu_email')
                 ->where('usu_email', $correo);
@@ -112,23 +111,30 @@ carreras as car on au.id_carrera=car.id_carrera where  usu.idusuario='$entry_id'
         return $this->db->insert('usuarios', $data);
     }
 
-    public function insert_recuperacion($a, $g, $h) {
+//
+//    public function insert_recuperacion($a, $g, $h) {
+//
+//        $this->db->select('idusuario')
+//                ->where('usu_nombre', $a);
+//        $query = $this->db->get('usuarios');
+//        $row = $query->row_array();
+//        $ingresado = $row['idusuario'];
+//
+//        $data = array(
+//            'recupregunta' => $g,
+//            'recurespuesta' => $h,
+//            'idusuario' => $ingresado,
+//        );
+//        return $this->db->insert('recuperacion', $data);
+//    }
+
+    public function enviar_correo($a, $z, $e, $g) {
 
         $this->db->select('idusuario')
-                ->where('usu_nombre', $a);
+                ->where('usu_email', $e);
         $query = $this->db->get('usuarios');
         $row = $query->row_array();
         $ingresado = $row['idusuario'];
-
-        $data = array(
-            'recupregunta' => $g,
-            'recurespuesta' => $h,
-            'idusuario' => $ingresado,
-        );
-        return $this->db->insert('recuperacion', $data);
-    }
-
-    public function enviar_correo($a, $z, $e, $g) {
         //configuracion para gmail
         $config = array(
             'protocol' => 'smtp',
@@ -146,13 +152,14 @@ carreras as car on au.id_carrera=car.id_carrera where  usu.idusuario='$entry_id'
         $this->email->to($e);
         $this->email->subject('Bienvenido/a a RUDA');
         $this->email->message('<h2> Señor  ' . $a . ' su cuenta ha sido creada en el sistema </h2><hr><br><br>
-				su contraseña es  ' . $z . ' puede cambiarla una vez que ingrese al sistema su pregunta de recuperacion de contraseña es  ' . $g . ''
-                . 'puede ingresar al sistema con su usuario  y contraseña  <a href="' . base_url() . 'frontend/usuarios_control/logueo">Aqui</a>');
+				su contraseña es  ' . $z . ' puede cambiarla una vez que ingrese al Sistema para generar su pregunta de recuperacion  <a href="' . base_url() . 'backend/profesor_control/recuperacion/' . $ingresado . '">Aqui</a>'
+                . ' una vez generado puede ingresar al sistema con su usuario  y contraseña  <a href="' . base_url() . 'frontend/usuarios_control/logueo">Aqui</a>');
         $this->email->send();
         var_dump($this->email->print_debugger());
     }
-        public function aulas() {
- 
+
+    public function aulas() {
+
         $query = $this->db->query("select * from aulas ");
         return $query->result();
     }

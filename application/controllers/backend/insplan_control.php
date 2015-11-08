@@ -132,9 +132,9 @@ class Insplan_control extends CI_Controller {
         $this->load->model('plan_model');
         if ($this->plan_model->editarplan_check($plan)) {
             $this->form_validation->set_message('editar_plan_check', 'El plan de Estudio' . " " . $plan . " " . 'ya se encuentra en la base de datos');
-            return FALSE;
-        } else {
             return TRUE;
+        } else {
+            return FALSE;
         }
     }
 
@@ -190,10 +190,12 @@ class Insplan_control extends CI_Controller {
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
             $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
-
+            $fechainicio = $i->pla_fechainicio;
+            $fechafin= $i->pla_fechafin; 
+            
             $this->pdf->Cell(100, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
-            $this->pdf->Cell(30, 5, utf8_decode($i->pla_fechainicio), 'TBL', 0, 'C', 0);
-            $this->pdf->Cell(30, 5, utf8_decode($i->pla_fechafin), 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode( date("d-m-Y", strtotime($fechainicio))), 'TBL', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode(date("d-m-Y", strtotime($fechafin) )), 'TBLR', 0, 'C', 0);
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
         }

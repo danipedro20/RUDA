@@ -50,6 +50,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 </tbody>
 
             </table>
+         <button><a href="<?php echo base_url() ?>backend/carreras_control/reporte_carreras"  target="_blank">Generar Reporte</a></button>
         <?php else : ?>
             <h1>No hay Carreras</h1>
         <?php endif; ?>

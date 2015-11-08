@@ -20,7 +20,7 @@ class Usuarios_control extends CI_Controller {
     }
 
     function sitioadmin() {
-        $datos['titulo'] = 'Ruda - Administración';
+        $datos['titulo'] = 'Ruda - Administraci�n';
         $datos['contenido'] = 'inicio_admin_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
@@ -38,13 +38,13 @@ class Usuarios_control extends CI_Controller {
     }
 
     function sitioalumno() {
-        $datos['titulo'] = 'Ruda - Sección Alumno';
+        $datos['titulo'] = 'Ruda - Secci�n Alumno';
         $datos['contenido'] = 'adindex';
         $this->load->view('plantillas/alumplantilla', $datos);
     }
 
     function sitioprofesor() {
-        $datos['titulo'] = 'Ruda - Sección Profesor';
+        $datos['titulo'] = 'Ruda - Secci�n Profesor';
         $datos['contenido'] = 'inicio_view';
         $this->load->view('plantillas/profplantilla', $datos);
     }
@@ -53,7 +53,7 @@ class Usuarios_control extends CI_Controller {
 
         //si existe el campo oculto llamado grabar creamos las validadciones
         $this->form_validation->set_rules('usu_email', 'Email', 'trim|required');
-        $this->form_validation->set_rules('usu_pass', 'Contraseña', 'trim|required');
+        $this->form_validation->set_rules('usu_pass', 'Contrase�a', 'trim|required');
 
         //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
         $this->form_validation->set_message('required', 'El %s es requerido');

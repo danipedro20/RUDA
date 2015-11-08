@@ -8,34 +8,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     <section class="contenido">
 
 <script type="text/javascript" src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        //comprobamos si el usuario existe en la base de datos
-        $('#car_denominacion').focusout(function() {
-            if ($("#car_denominacion").val().length < 2)
-            {
 
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo base_url() ?>backend/carreras_control/comprobar_carrera_ajax",
-                    data: "car_denominacion=" + $('#car_denominacion').val(),
-                    beforeSend: function() {
-                        $('#msgUsuario').html('<span>Verificando...</span>');
-                    },
-                    success: function(respuesta) {
-                        if (respuesta == '<div style="display:none">1</div>')
-                            $('#msgUsuario').html("<span style='color:#0f0'>Nombre de Carrera disponible</span>");
-                        else
-                            $('#msgUsuario').html('<span style="color:#f00">Este Carrera ya esta en los registros</span>');
-                    }
-
-                });
-                return false;
-            }
-        });
-    });
-</script>
         <fieldset>
             <h1>Crear Carreras</h1>
             <?php echo form_open("backend/carreras_control/insercarreras") ?>

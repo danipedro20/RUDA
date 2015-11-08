@@ -15,11 +15,10 @@
         <li><a href="<?php echo base_url()?>backend/profesor_control/agenda">Agenda</a></li>
     </ul>
     <ul>
-        <li>Informes</li>
-        <li><a href="#">Aulas</a></li>
-        <li><a href="<?php echo base_url()?>frontend/repalumnos_control/reporalumno"  target="_blank">Alumnos</a></li>
-        <li><a href="#">Tareas</a></li>
-        <li><a href="#">Notas</a></li>
-        <li><a href="<?php echo base_url()?>asistencias.php">Asistencias</a></li>
+        <li>Reportes</li>
+        <li><a href="<?php echo base_url()?>backend/profesor_control/reporte">Asistencias</a></li>
+        <li><a href="<?php echo base_url()?>backend/profesor_control/tarea_reporte">Tareas</a></li>
+        <li><a href="<?php echo base_url()?>backend/profesor_control/notas_reporte">Notas</a></li>
+       
     </ul>
 </aside>

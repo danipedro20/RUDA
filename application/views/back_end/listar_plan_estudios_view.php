@@ -47,7 +47,7 @@
                                             ?>
                                      </td>
                                       <td><?php 
-                                      $fechafin= $i->pla_fechafin;('d/m/Y'); 
+                                      $fechafin= $i->pla_fechafin; 
                                       
                                       echo date("d-m-Y", strtotime($fechafin) );
                                       
