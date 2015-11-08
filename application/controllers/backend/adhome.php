@@ -16,7 +16,7 @@ class Adhome extends CI_Controller {
     }
 
     function index2() {
-        $datos['titulo'] = 'Ruda - Administración';
+        $datos['titulo'] = 'Ruda - Administraciï¿½n';
         $datos['contenido'] = 'inicio_admin_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
@@ -234,7 +234,7 @@ class Adhome extends CI_Controller {
         $this->pdf->SetFillColor(200, 200, 200);
 
         // Se define el formato de fuente: Arial, negritas, tamaÃ±o 9
-        $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 7);
         /*
          * TITULOS DE COLUMNAS
          *

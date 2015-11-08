@@ -615,7 +615,7 @@ class Profesor_control extends CI_Controller {
         $this->pdf->SetFillColor(200, 200, 200);
 
         // Se define el formato de fuente: Arial, negritas, tamaño 9
-        $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 7);
         /*
          * TITULOS DE COLUMNAS
          *
@@ -701,7 +701,7 @@ class Profesor_control extends CI_Controller {
         $this->pdf->SetFillColor(200, 200, 200);
 
         // Se define el formato de fuente: Arial, negritas, tamaño 9
-        $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 7);
         /*
          * TITULOS DE COLUMNAS
          *
@@ -933,7 +933,7 @@ class Profesor_control extends CI_Controller {
          * D = Envia el pdf para descarga
          *
          */
-        $this->pdf->Output("Lista de Tareas.pdf", 'I');
+        $this->pdf->Output("Lista de Notas.pdf", 'I');
     }
 
 }

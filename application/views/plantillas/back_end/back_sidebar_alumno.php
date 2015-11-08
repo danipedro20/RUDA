@@ -14,12 +14,8 @@
         
     </ul>
     <ul>
-        <li>Informes</li>
-        <li><a href="#">Aulas</a></li>
-        <li><a href="#">Profesores</a></li>
-        <li><a href="#">Tareas</a></li>
-        <li><a href="<?php echo base_url() ?>frontend/repmaterias_control/reporte" target="_blank" >Materias</a></li>
-        <li><a href="#">Notas</a></li>
-        <li><a href="#">Asistencias</a></li>
+        <li>Reportes</li>
+       <li><a href="<?php echo base_url() ?>backend/alumnos_control/reporte_notas_alumno" target="_blank" >Notas</a></li>
+        <li><a href="<?php echo base_url() ?>backend/alumnos_control/reporte_asistencias_alumno" target="_blank" >Asistencias</a></li>
     </ul>
 </aside>

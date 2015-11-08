@@ -15,6 +15,7 @@ class Alumnos_control extends CI_Controller {
         parent::__construct();
         $this->load->library('table');
         $this->load->model('backend/alumnos_model');
+        $this->load->library('pdf');
     }
 
     public function listar_plan_por_alumno() {
@@ -171,10 +172,271 @@ class Alumnos_control extends CI_Controller {
         $idcatedra = $this->uri->segment(4);
         $idplan = $this->uri->segment(5);
         $datos['titulo'] = 'Notas';
-        $datos['lista'] = $this->alumnos_model->listar_notas($idcatedra,$idplan);
-         $datos['nombre'] = $this->alumnos_model->nombrecatedra($idcatedra);
+        $datos['lista'] = $this->alumnos_model->listar_notas($idcatedra, $idplan);
+        $datos['nombre'] = $this->alumnos_model->nombrecatedra($idcatedra);
         $datos['contenido'] = 'ver_notas_alumno_view';
         $this->load->view('plantillas/alumplantilla', $datos);
+    }
+
+    public function reporte_notas_alumno() {
+
+        $lista = $this->alumnos_model->reportes_notas();
+        // Creacion del PDF
+
+        /*
+         * Se crea un objeto de la clase Pdf, recuerda que la clase Pdf
+         * heredó todos las variables y métodos de fpdf
+         */
+        ob_end_clean();
+
+        $this->pdf = new Pdf();
+
+        // Agregamos una página
+        $this->pdf->AddPage();
+
+        // Define el alias para el número de página que se imprimirá en el pie
+        $this->pdf->AliasNbPages();
+
+        /* Se define el titulo, márgenes izquierdo, derecho y
+         * el color de relleno predeterminado
+         */
+        $this->pdf->SetTitle("Lista de Notas");
+        $this->pdf->SetLeftMargin(15);
+        $this->pdf->SetLineWidth(.3);
+        $this->pdf->SetDrawColor(15, 0, 0);
+        $this->pdf->SetRightMargin(15);
+        $this->pdf->SetTextColor(0);
+        $this->pdf->SetFillColor(200, 200, 200);
+
+        // Se define el formato de fuente: Arial, negritas, tamaño 9
+        $this->pdf->SetFont('Arial', 'B', 7);
+        /*
+         * TITULOS DE COLUMNAS
+         *
+         * $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
+         */
+
+        $this->pdf->Cell(8, 7, '#', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(40, 7, 'Catedra', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, 'Parcial', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, 'Recup.', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, '1er Ord.', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, '2er Ord.', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, 'Nota Ord.', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, 'Ptos Compl.', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, 'Nota Compl.', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, 'Ptos Mesa', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(15, 7, 'Nota Mesa', 'TBL', 0, 'C', '1');
+
+
+
+        $this->pdf->Ln(7);
+        // La variable $x se utiliza para mostrar un número consecutivo
+        $x = 1;
+
+        foreach ($lista as $i) {
+            // se imprime el numero actual y despues se incrementa el valor de $x en uno
+            $this->pdf->Cell(8, 5, $x++, 'TBL', 0, 'C', 0);
+            // Se imprimen los datos de cada Catedra
+
+            $this->pdf->Cell(40, 5, utf8_decode($i->cat_denominacion), 'TBLR', 0, 'C', 0);
+            if (!empty($i->parcial)) {
+                $this->pdf->Cell(15, 5, utf8_decode($i->parcial), 'TBLR', 0, 'C', 0);
+            } else {
+                $this->pdf->Cell(15, 5, utf8_decode('Sin Nota'), 'TBLR', 0, 'C', 0);
+            } if (!empty($i->recuperatorio)) {
+                $this->pdf->Cell(15, 5, utf8_decode($i->recuperatorio), 'TBLR', 0, 'C', 0);
+            } else {
+                $this->pdf->Cell(15, 5, utf8_decode('Sin Nota'), 'TBLR', 0, 'C', 0);
+            } if (!empty($i->primer_ordinario)) {
+                $this->pdf->Cell(15, 5, utf8_decode($i->primer_ordinario), 'TBLR', 0, 'C', 0);
+            } else {
+                $this->pdf->Cell(15, 5, utf8_decode('Sin Nota'), 'TBLR', 0, 'C', 0);
+            }if (!empty($i->segundo_ordinario)) {
+                $this->pdf->Cell(15, 5, utf8_decode($i->segundo_ordinario), 'TBLR', 0, 'C', 0);
+            } else {
+                $this->pdf->Cell(15, 5, utf8_decode('Sin Nota'), 'TBLR', 0, 'C', 0);
+            }
+            if ($i->parcial >= $i->recuperatorio) {
+                $puntos_parcial = $i->parcial;
+            } else {
+                $puntos_parcial = $i->recuperatorio;
+            }
+            if ($i->primer_ordinario >= $i->segundo_ordinario) {
+                $puntos_ordinario = $i->primer_ordinario;
+            } else {
+                $puntos_ordinario = $i->segundo_ordinario;
+            }
+            $nota_ordinario = $puntos_parcial + $puntos_ordinario;
+            if ((((empty($i->parcial)) ) and ((empty($i->recuperatorio)) )) or (((empty($i->primer_ordinario)) ) and ((empty($i->segundo_ordinario)) ))) {
+                $this->pdf->Cell(15, 5, utf8_decode('Sin Nota'), 'TBLR', 0, 'C', 0);
+            } else {
+                switch ($nota_ordinario) {
+                    case $nota_ordinario >= 0 and $nota_ordinario <= 59:
+
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 1'), 'TBLR', 0, 'C', 0);
+
+                        break;
+                    case $nota_ordinario >= 60 and $nota_ordinario <= 69:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 2'), 'TBLR', 0, 'C', 0);
+                        break;
+
+                    case $nota_ordinario >= 70 and $nota_ordinario <= 79:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 3'), 'TBLR', 0, 'C', 0);
+                        break;
+                    case $nota_ordinario >= 80 and $nota_ordinario <= 89:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 4'), 'TBLR', 0, 'C', 0);
+                        break;
+                    case $nota_ordinario >= 90 and $nota_ordinario <= 100:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 5'), 'TBLR', 0, 'C', 0);
+                        break;
+                }
+            }
+            if (!empty($i->complementario)) {
+                $this->pdf->Cell(15, 5, utf8_decode($i->complentario), 'TBLR', 0, 'C', 0);
+
+                switch ($i->complementario) {
+                    case $i->complementario >= 0 and $i->complementario <= 59:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 1'), 'TBLR', 0, 'C', 0);
+
+                        break;
+                    case $i->complementario >= 60 and $i->complementario <= 69:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 2'), 'TBLR', 0, 'C', 0);
+                        break;
+
+                    case $i->complementario >= 70 and $i->complementario <= 79:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 3'), 'TBLR', 0, 'C', 0);
+                        break;
+                    case $i->complementario >= 80 and $i->complementario <= 89:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 4'), 'TBLR', 0, 'C', 0);
+                        break;
+                    case $i->complementario >= 90 and $i->complementario <= 100:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 5'), 'TBLR', 0, 'C', 0);
+                        break;
+                }
+            } else {
+
+                $this->pdf->Cell(15, 5, utf8_decode('Sin Nota'), 'TBLR', 0, 'C', 0);
+                $this->pdf->Cell(15, 5, utf8_decode('Sin Nota'), 'TBLR', 0, 'C', 0);
+            }
+            if (!empty($i->mesa_especial)) {
+                $this->pdf->Cell(15, 5, utf8_decode($i->mesa_especial), 'TBLR', 0, 'C', 0);
+                switch ($i->mesa_especial) {
+                    case $i->mesa_especial >= 0 and $i->mesa_especial <= 59:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 1'), 'TBLR', 0, 'C', 0);
+                        break;
+                    case $i->mesa_especial >= 60 and $i->mesa_especial <= 69:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 2'), 'TBLR', 0, 'C', 0);
+                        break;
+
+                    case $i->mesa_especial >= 70 and $i->mesa_especial <= 79:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 3'), 'TBLR', 0, 'C', 0);
+                        break;
+                    case $i->mesa_especial >= 80 and $i->mesa_especial <= 89:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 4'), 'TBLR', 0, 'C', 0);
+                        break;
+                    case $i->mesa_especial >= 90 and $i->mesa_especial <= 100:
+                        $this->pdf->Cell(15, 5, utf8_decode('Nota 5'), 'TBLR', 0, 'C', 0);
+                        break;
+                }
+            } else {
+                $this->pdf->Cell(15, 5, utf8_decode('Sin nota'), 'TBLR', 0, 'C', 0);
+                $this->pdf->Cell(15, 5, utf8_decode('Sin nota'), 'TBLR', 0, 'C', 0);
+            }
+
+
+
+
+
+
+            //Se agrega un salto de linea
+            $this->pdf->Ln(5);
+        }
+        /*
+         * Se manda el pdf al navegador
+         *
+         * $this->pdf->Output(nombredelarchivo, destino);
+         *
+         * I = Muestra el pdf en el navegador
+         * D = Envia el pdf para descarga
+         *
+         */
+        $this->pdf->Output("Lista de Notas.pdf", 'I');
+    }
+
+    public function reporte_asistencias_alumno() {
+
+        $asistencias = $this->alumnos_model->reportes_asistencias();
+
+        // Creacion del PDF
+
+        /*
+         * Se crea un objeto de la clase Pdf, recuerda que la clase Pdf
+         * heredó todos las variables y métodos de fpdf
+         */
+        ob_end_clean();
+
+        $this->pdf = new Pdf();
+
+        // Agregamos una página
+        $this->pdf->AddPage();
+
+        // Define el alias para el número de página que se imprimirá en el pie
+        $this->pdf->AliasNbPages();
+
+        /* Se define el titulo, márgenes izquierdo, derecho y
+         * el color de relleno predeterminado
+         */
+        $this->pdf->SetTitle("Lista de Asistencias");
+        $this->pdf->SetLeftMargin(15);
+        $this->pdf->SetLineWidth(.3);
+        $this->pdf->SetDrawColor(15, 0, 0);
+        $this->pdf->SetRightMargin(15);
+        $this->pdf->SetTextColor(0);
+        $this->pdf->SetFillColor(200, 200, 200);
+
+        // Se define el formato de fuente: Arial, negritas, tamaño 9
+        $this->pdf->SetFont('Arial', 'B', 7);
+        /*
+         * TITULOS DE COLUMNAS
+         *
+         * $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
+         */
+
+        $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(60, 7, 'Catedra', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(30, 7, 'Fecha', 'TBLR', 0, 'C', '1');
+        $this->pdf->Cell(20, 7, 'Estado', 'TBLR', 0, 'C', '1');
+        $this->pdf->Cell(30, 7, 'Justificacion', 'TBLR', 0, 'C', '1');
+        $this->pdf->Ln(7);
+        // La variable $x se utiliza para mostrar un número consecutivo
+        $x = 1;
+
+        foreach ($asistencias as $i) {
+            // se imprime el numero actual y despues se incrementa el valor de $x en uno
+            $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
+            // Se imprimen los datos de cada Catedra
+
+            $fecha = $i->asi_fecha;
+            $this->pdf->Cell(60, 5, utf8_decode($i->cat_denominacion), 'TBL', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode(date("d-m-Y", strtotime($fecha))), 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(20, 5, utf8_decode($i->asi_estado), 'TBLR', 0, 'C', 0);
+             $this->pdf->Cell(30, 5, utf8_decode($i->asi_justificacion), 'TBLR', 0, 'C', 0);
+
+
+            //Se agrega un salto de linea
+            $this->pdf->Ln(5);
+        }
+        /*
+         * Se manda el pdf al navegador
+         *
+         * $this->pdf->Output(nombredelarchivo, destino);
+         *
+         * I = Muestra el pdf en el navegador
+         * D = Envia el pdf para descarga
+         *
+         */
+        $this->pdf->Output("Lista de Asistencias.pdf", 'I');
     }
 
 }

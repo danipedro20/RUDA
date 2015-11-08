@@ -186,13 +186,32 @@ usu_au on aulas.idaula=usu_au.idaula join usuarios on usu_au.idusuario=usuarios.
         $query = $this->db->query("select * from notas_examenes where idcatedra='$idcatedra' and idplan='$idplan' and idusuario='$c';");
         return $query->result();
     }
-     public function nombrecatedra($a) {
-       
-            $this->db->where('idcatedra', $a);
 
-            return $this->db->get('catedras')->row();
-        
+    public function nombrecatedra($a) {
+
+        $this->db->where('idcatedra', $a);
+
+        return $this->db->get('catedras')->row();
     }
 
-
+    public function reportes_notas() {
+        $c = $this->session->userdata('id');
+        $query = $this->db->query("select distinct ca.idcatedra,ca.cat_denominacion,n.parcial,n.recuperatorio,n.primer_ordinario,n.segundo_ordinario,n.complementario,n.extraordinario,n.mesa_especial  from usu_cate as cate
+right join catedras as ca on ca.idcatedra=cate.idcatedra
+left join usuarios as profesor on cate.idusuario=profesor.idusuario
+left join cate_plan as capa on ca.idcatedra=capa.idcatedra
+left join plan_estudios as pla on pla.idplan=capa.idplan
+left join aulas as au on au.idplan=pla.idplan
+left join carreras as car on car.id_carrera=au.id_carrera
+left join usu_au as usca on usca.idaula=au.idaula
+left join usuarios as alumno on usca.idusuario=alumno.idusuario
+left join notas_examenes as n on n.idcatedra=ca.idcatedra
+where alumno.idusuario='$c';");
+        return $query->result();
+    }
+   public function reportes_asistencias() {
+        $c = $this->session->userdata('id');
+        $query = $this->db->query("select * from vista_asistencias where idusuario='$c';");
+        return $query->result();
+    }
 }

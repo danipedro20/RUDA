@@ -1,0 +1,1 @@
+select  * from ruda.vista_tareas
