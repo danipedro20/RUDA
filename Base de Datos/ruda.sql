@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2015 a las 23:48:05
+-- Tiempo de generación: 08-11-2015 a las 04:13:59
 -- Versión del servidor: 5.5.36
 -- Versión de PHP: 5.4.27
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `asistencias` (
   KEY `fk_ASISTENCIAS_CATEDRAS1_idx` (`idcatedra`),
   KEY `fk_ASISTENCIAS_USUARIOS1_idx` (`idusuario`),
   KEY `fk_asistencias_aulas1_idx` (`idaula`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalle de asistencias' AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalle de asistencias' AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `asistencias`
@@ -46,7 +46,9 @@ CREATE TABLE IF NOT EXISTS `asistencias` (
 
 INSERT INTO `asistencias` (`idasistencia`, `asi_estado`, `asi_fecha`, `asi_justificacion`, `idcatedra`, `idusuario`, `idaula`) VALUES
 (14, 'A', '2015-11-01', 'NO justifico', 1, 7, 2),
-(15, 'P', '2015-11-02', 'cambio', 1, 7, 2);
+(15, 'P', '2015-10-02', 'cambio', 1, 7, 2),
+(16, 'A', '2015-11-07', '', 1, 8, 2),
+(17, 'P', '2015-11-07', '', 1, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `aulas` (
 
 INSERT INTO `aulas` (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES
 (2, 'Aula 1', 49, 50, 1, 1, 'M'),
-(3, 'Aula 2', 50, 50, 1, 2, 'M');
+(3, 'Aula 2', 49, 50, 1, 2, 'M');
 
 -- --------------------------------------------------------
 
@@ -209,8 +211,8 @@ INSERT INTO `cate_plan` (`idplan`, `idcatedra`, `diascatedra`) VALUES
 (3, 11, NULL),
 (3, 12, NULL),
 (3, 13, NULL),
-(4, 14, NULL),
-(4, 15, NULL),
+(4, 14, 'Martes'),
+(4, 15, 'Jueves'),
 (4, 16, NULL),
 (4, 17, NULL),
 (5, 18, NULL),
@@ -323,17 +325,15 @@ CREATE TABLE IF NOT EXISTS `notas_examenes` (
   KEY `fk_notas_examenes_catedras1_idx` (`idcatedra`),
   KEY `fk_notas_examenes_plan_estudios1_idx` (`idplan`),
   KEY `fk_notas_examenes_usuarios1_idx` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
 --
 -- Volcado de datos para la tabla `notas_examenes`
 --
 
 INSERT INTO `notas_examenes` (`id`, `idcatedra`, `idplan`, `idusuario`, `parcial`, `recuperatorio`, `primer_ordinario`, `segundo_ordinario`, `complementario`, `extraordinario`, `mesa_especial`) VALUES
-(48, 1, 1, 8, NULL, 40, 60, NULL, 100, NULL, 100),
-(49, 1, 1, 7, NULL, 40, 60, NULL, 100, NULL, 100),
-(50, 2, 1, 8, NULL, NULL, NULL, NULL, NULL, NULL, 100),
-(51, 2, 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, 50);
+(58, 1, 1, 8, 20, NULL, 50, NULL, NULL, NULL, NULL),
+(59, 1, 1, 7, 20, NULL, 50, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -359,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `notas_tarea` (
 --
 
 INSERT INTO `notas_tarea` (`id`, `puntos_asignados`, `puntos_logrados`, `idcatedra`, `idtarea`, `idusuario`) VALUES
-(1, 100, 100, 1, 7, 7);
+(1, 100, 50, 1, 7, 7);
 
 -- --------------------------------------------------------
 
@@ -380,14 +380,14 @@ CREATE TABLE IF NOT EXISTS `plan_estudios` (
 --
 
 INSERT INTO `plan_estudios` (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES
-(1, 'Enfermeria Primer Módulo uno', NULL, NULL),
-(2, 'Enfermeria Segundo Módulo', NULL, NULL),
-(3, 'Enfermeria Tercer  Módulo', NULL, NULL),
-(4, 'Enfermeria Cuarto   Módulo', NULL, NULL),
-(5, 'Enfermeria Quinto Módulo', NULL, NULL),
-(6, 'Enfermeria Sexto Módulo', NULL, NULL),
-(7, 'Enfermeria Séptimo Módulo', NULL, NULL),
-(8, 'Enfermeria Octavo Módulo', NULL, NULL);
+(1, 'Enfermeria Primer Módulo', '2015-11-07', '2015-11-30'),
+(2, 'Enfermeria Segundo Módulo', '2015-11-07', '2015-11-21'),
+(3, 'Enfermeria Tercer  Módulo', '2015-11-08', '2015-11-30'),
+(4, 'Enfermeria Cuarto   Módulo', '2015-11-07', '2015-11-21'),
+(5, 'Enfermeria Quinto Módulo', '2015-11-13', '2015-11-30'),
+(6, 'Enfermeria Sexto Módulo', '2015-11-07', '2015-11-30'),
+(7, 'Enfermeria Séptimo Módulo', '2015-11-07', '2015-11-30'),
+(8, 'Enfermeria Octavo Módulo', '2015-11-07', '2015-11-25');
 
 -- --------------------------------------------------------
 
@@ -402,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `recuperacion` (
   `idusuario` int(10) NOT NULL,
   PRIMARY KEY (`idrecuperacion`),
   KEY `fk_RECUPERACION_USUARIOS1_idx` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `recuperacion`
@@ -410,7 +410,9 @@ CREATE TABLE IF NOT EXISTS `recuperacion` (
 
 INSERT INTO `recuperacion` (`idrecuperacion`, `recupregunta`, `recurespuesta`, `idusuario`) VALUES
 (1, 'Su numero de cedula es?', 'fcea920f7412b5da7be0cf42b8c93759', 8),
-(2, 'gato', '3b24fa7e14555a1912e5bc2198f8e075', 7);
+(2, 'gato', '3b24fa7e14555a1912e5bc2198f8e075', 7),
+(3, 'Cual es tu heroe Favorito', 'ec0e2603172c73a8b644bb9456c1ff6e', 9),
+(4, 'El nombre de tu perro', '666442f1bbc965815c5017a5d7bbd669', 11);
 
 -- --------------------------------------------------------
 
@@ -502,7 +504,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `idperfil` varchar(1) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`idusuario`),
   UNIQUE KEY `nro_cedula_UNIQUE` (`usu_nrocedula`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de los usuarios' AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de los usuarios' AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -512,7 +514,9 @@ INSERT INTO `usuarios` (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direcci
 (4, 'admin', 123456, 'luque', 123, 'admin@admin.com', '202cb962ac59075b964b07152d234b70', '1'),
 (6, 'Ing. Freddy Aguero', 123, 'Fernando de la Mora', 123, 'freddy@profesor.com', '202cb962ac59075b964b07152d234b70', '2'),
 (7, 'ruben', 4345503, 'magallanes', 123, 'ruben@alumno.com', '202cb962ac59075b964b07152d234b70', '3'),
-(8, 'Ing. Diego Casco', 1234567, 'luque', 123, 'toledorubendario91@gmail.com', '202cb962ac59075b964b07152d234b70', '3');
+(8, 'Ing. Diego Casco', 1234567, 'luque', 123, 'toledorubendario921@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
+(9, 'Daniel Ferreira', 1234, 'luque', 123, 'danipedro23@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
+(11, 'jose ma', 12345, 'luque', 123, 'toledorubendario91@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2');
 
 -- --------------------------------------------------------
 
@@ -534,7 +538,8 @@ CREATE TABLE IF NOT EXISTS `usu_au` (
 
 INSERT INTO `usu_au` (`idusuario`, `idaula`) VALUES
 (7, 2),
-(8, 2);
+(8, 2),
+(9, 3);
 
 -- --------------------------------------------------------
 
@@ -603,8 +608,8 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `inscripcion`
   ADD CONSTRAINT `fk_inscripcion_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_inscripcion_carreras1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_inscripcion_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_inscripcion_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_inscripcion_carreras1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `notas_examenes`
@@ -638,8 +643,8 @@ ALTER TABLE `reset`
 -- Filtros para la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  ADD CONSTRAINT `fk_tareas_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_TAREAS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_TAREAS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tareas_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tcalendario`
