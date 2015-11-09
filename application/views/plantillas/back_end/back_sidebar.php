@@ -1,6 +1,6 @@
 <aside>
 </ul>
-<ul class="navegador">
+<ul class="parent">
     <li><a class="desplegable" title="Cuenta">Cuenta</a>
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/adhome/verperfil">Perfil de Usuario</a></li>
@@ -9,7 +9,7 @@
                <li><a href="<?php echo base_url()?>backend/adhome/agenda">Agenda</a></li>
         </ul> 
 </ul>
-<ul class="navegador">
+<ul class="parent">
     <li><a class="desplegable" title="Editar Cuentas">Cuentas</a>
         <ul class="subnavegador">
            <li><a class="desplegable" title="Alumnos">Alumnos</a>
@@ -24,7 +24,7 @@
         </ul> 
 </ul>
 
-<ul class="navegador">
+<ul class="parent">
     <li><a class="desplegable" title="Aulas">Aulas</a>
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/reg_aula/listar_aulas">Ver Aulas</a></li>
@@ -32,7 +32,7 @@
             <li><a href="<?php echo base_url() ?>frontend/solicitud_control/versolicitudes">Solicitudes</a></li>
         </ul> 
 </ul>
-<ul class="navegador">
+<ul class="parent">
     <li><a class="desplegable" title="Catedras">Catedras</a>
         <ul class="subnavegador">
              <li><a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Crear Catedras</a></li>
@@ -41,7 +41,7 @@
             <li><a href="<?php echo base_url() ?>backend/asigcatedras_control/asigcatedras">Asignar catedras a Profesores</a></li>
         </ul> 
 </ul>
-<ul class="navegador">
+<ul class="parent">
     <li><a class="desplegable" title="Plan_estudio">Plan de Estudios</a>
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/insplan_control/planestudio">Crear Plan de Estudio</a></li>
@@ -50,7 +50,7 @@
             <li><a href="<?php echo base_url() ?>backend/planestudio_control/plan"> Agregar Catedras a Plan de Estudios</a></li>
         </ul> 
 </ul>
-<ul class="navegador">
+<ul class="parent">
     <li><a class="desplegable" title="Carreras">Carreras</a>
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/carreras_control/vercarreras">Ver Carreras</a></li>

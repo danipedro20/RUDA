@@ -14,17 +14,17 @@
             }
         </script>
 
-        <script type="text/javascript">
-            $(document).ready(function() { // Script del Navegador
-                $("ul.subnavegador").not('.selected').hide();
-                $("a.desplegable").click(function(e) {
-                    var desplegable = $(this).parent().find("ul.subnavegador");
-                    $('.desplegable').parent().find("ul.subnavegador").not(desplegable).slideUp('slow');
-                    desplegable.slideToggle('slow');
-                    e.preventDefault();
-                })
-            });
-        </script>
+        // <script type="text/javascript">
+        //     $(document).ready(function() { // Script del Navegador
+        //         $("ul.subnavegador").not('.selected').hide();
+        //         $("a.desplegable").click(function(e) {
+        //             var desplegable = $(this).parent().find("ul.subnavegador");
+        //             $('.desplegable').parent().find("ul.subnavegador").not(desplegable).slideUp('slow');
+        //             desplegable.slideToggle('slow');
+        //             e.preventDefault();
+        //         })
+        //     });
+        // </script>
         
 
     <html>
@@ -38,7 +38,7 @@
             <header>
                 <section class="contenedor">
 
-                     <a href="<?php echo base_url()?>backend/adhome/index2"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
+                     <a href="<?php echo base_url()?>backend/adhome/index2"> <img id='logoruda'src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
             </header>
             <nav>
                 <section class="contenedor">
@@ -50,11 +50,8 @@
                         <li><a href="#">Profesores</a></li>
                         <li><a href="#">Tareas</a></li>
 
-                        <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesión</a></li>
+                        <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesi&oacute;n</a></li>
                     </ul>
-
-
-
 
                 </section>
             </nav>

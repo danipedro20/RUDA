@@ -16,7 +16,7 @@ class Adhome extends CI_Controller {
     }
 
     function index2() {
-        $datos['titulo'] = 'Ruda - Administraci�n';
+        $datos['titulo'] = 'Ruda - Administraci&oacute;n';
         $datos['contenido'] = 'inicio_admin_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }

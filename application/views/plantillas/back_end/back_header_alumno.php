@@ -34,7 +34,7 @@
     <body>
         <header>
             <section class="contenedor">
-                <a href="<?php echo base_url()?>backend/home/index"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
+                <a href="<?php echo base_url()?>backend/home/index"> <img id='logoruda'src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
 
             </section>
         </header>
@@ -46,7 +46,7 @@
                     <li><a href="#">Materias</a></li>
                     <li><a href="#">Profesores</a></li>
                     <li><a href="#">Tareas</a></li>
-                    <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesión</a></li>
+                    <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesi&oacute;n</a></li>
                 </ul>
             </section>
         </nav>
