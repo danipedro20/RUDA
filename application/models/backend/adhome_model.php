@@ -53,6 +53,12 @@ carreras as car on au.id_carrera=car.id_carrera where usu.idperfil='3';");
         return $query->result();
     }
 
+    public function lista_profesores() {
+
+        $query = $this->db->query("select * from usuarios where idperfil=2");
+        return $query->result();
+    }
+
     public function datos_alumnos($entry_id) {
 
         $query = $this->db->query("select usu.idusuario,usu.usu_nombre,car.id_carrera,car.car_denominacion,au.idaula,au.aul_denominacion from 

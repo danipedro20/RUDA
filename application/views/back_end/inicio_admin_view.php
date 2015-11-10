@@ -28,20 +28,31 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         <fieldset>
             <?php
-            
+            $hoy = date('d-m-Y');
+            $fechahoy = date("Y-m-d", strtotime($hoy));
             $sql = $this->db->query("select ins_visto from inscripcion where ins_visto='0';");
             $cont = 0;
+  $evento = 0;
+            if ($sql->num_rows() > 0) {
+                foreach ($sql->result() as $que) {
 
-                if ($sql->num_rows() > 0) {
-                    foreach ($sql->result() as $que) {
+                    $cont = $cont + 1;
+                    ?>
 
-                            $cont = $cont + 1;
-                            ?>
+                    <?php
+                }
+            }
 
-                            <?php
-                        }
-                    }
-            
+            $query = $this->db->query("select evento from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" . $this->session->userdata('id') . "' and prioridad=1)  or ( fecha='" . $fechahoy . "' and prioridad= 3)");
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $que) {
+
+                    $evento = $evento + 1;
+                    ?>
+
+                    <?php
+                }
+            }
             ?>
             <h1> Sección en Construcción </h1>
             <h3 ALIGN = CENTER > Bienvenido:  <?php echo $this->session->userdata('nombre'); ?> </h3>
@@ -49,12 +60,30 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h3 ALIGN = CENTER > id:  <?php echo $this->session->userdata('id'); ?> </h3>
 
             <?php
-            if ($cont > 0) {
+            if ($cont > 0 and $evento > 0) {
                 ?>
                 <div id="mini-notification">
 
 
-                    <p><?php echo 'Tienes' . " " . $cont . " " . 'Solicitud/es de Suscripcion a aula/s ' ?></p>
+                    <p><?php echo 'Tienes' . " " . $cont . " " . 'Solicitud/es de Suscripcion a aula/s  y ' . " " . $evento . " " . ' evento/s hoy ' ?></p>
+
+                </div>
+                <?php
+            }    elseif ($cont == 0 and $evento > 0) {
+                ?>
+                <div id="mini-notification">
+
+
+                    <p><?php echo 'Tienes'. " " . $evento . " " . ' evento/s hoy ' ?></p>
+
+                </div>
+                <?php
+            }elseif ($cont > 0 and $evento == 0) {
+                ?>
+                <div id="mini-notification">
+
+
+                    <p><?php echo 'Tienes' . " " . $cont . " " . 'Solicitud/es de Suscripcion a aula/s' ?></p>
 
                 </div>
                 <?php

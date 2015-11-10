@@ -49,7 +49,7 @@ usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios on usu_cate.idus
    $cont = 0;
 
         foreach ($query3->result() as $fila) {
-            $query = $this->db->query("select evento from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" . $this->session->userdata('id') . "' and idaula='" . $fila->idaula . "')  or ( fecha='" . $fechahoy . "' and prioridad= 2  and idaula='". $fila->idaula ."')");
+            $query = $this->db->query("select evento from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" . $this->session->userdata('id') . "' and idaula='" . $fila->idaula . "' and prioridad=1)  or ( fecha='" . $fechahoy . "' and prioridad= 2  and idaula='". $fila->idaula ."')");
             if ($query->num_rows() > 0) {
                 foreach ($query->result() as $que) {
                   $cont = $cont + 1;

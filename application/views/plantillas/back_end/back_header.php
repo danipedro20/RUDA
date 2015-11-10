@@ -50,7 +50,7 @@
                         <li><a href="#">Profesores</a></li>
                         <li><a href="#">Tareas</a></li>
 
-                        <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesión</a></li>
+                        <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar SesiÃ³n</a></li>
                     </ul>
 
 
