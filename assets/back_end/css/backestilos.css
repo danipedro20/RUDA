@@ -101,10 +101,14 @@ aside ul li:first-of-type {
     padding-left: 30px;
 }
 aside ul li a {
-    color: hsl(260,7%,45%);
+    color: hsl(260, 5%, 38%);
     text-decoration: none;
     display: block;
     padding-left: 50px;
+    text-align: left;
+    margin-left: -47px;
+    margin-top: 60px;
+    border-bottom-style: inset;
 }
 aside ul li a:hover {
     text-decoration: none;
@@ -486,14 +490,14 @@ select:focus {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#204c5c), color-stop(20%,#406c7c)); /* webkit */
 }
 
-table {     
+/*table {     
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;
     margin: 45px;     
     width: 480px; 
     text-align: left;    
     border-collapse: collapse; 
-}
+}*/
 
 img {
     width: 100px;
@@ -503,7 +507,7 @@ img {
     margin-left: 80px;
 }
 
-<<<<<<< HEAD
+
 #logoruda {
     width: 250px;
     height: 165px;
@@ -513,17 +517,17 @@ img {
 }
 
  #mensaje_header {
-=======
+
 #mensaje_header {
->>>>>>> origin/master
+
     font-size: 25px;
     margin-top: 5px;
     margin-left: 20px;
 }
 
-<<<<<<< HEAD
 
-=======
+
+
 #boton1{ 
     background:-moz-linear-gradient(#f9f9f9 0%,#DADADA 100%);
     background:-ms-linear-gradient(#f9f9f9 0%,#DADADA 100%); 
@@ -541,4 +545,4 @@ img {
     background:-moz-linear-gradient(#fff 0%,#DEDEDE 100%);
     color:#999; 
 }
->>>>>>> origin/master
+

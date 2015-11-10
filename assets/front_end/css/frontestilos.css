@@ -484,14 +484,14 @@ select:-moz-placeholder {
    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#204c5c), color-stop(20%,#406c7c)); /* webkit */
    }
 
-table {     
+/*table {     
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
   font-size: 12px;    
   margin: 45px;     
   width: 480px; 
   text-align: left;    
   border-collapse: collapse; 
-}
+}*/
 
 img {
     width: 250px;

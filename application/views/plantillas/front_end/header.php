@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--[if lt IE 9]><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
         <title>Gestión de Aula</title>
         <link href="<?php echo base_url()?>/assets/front_end/css/frontestilos.css" rel="stylesheet" type="text/css">
     </head>
@@ -17,7 +19,7 @@
             <section class="contenedor">
                 <ul>
                     <li><a href="<?php echo base_url()?>frontend/home/index">Inicio</a></li>
-                    <li><a href="<?php echo base_url()?>frontend/suscripcion_control/suscripcioncarreras">Carreras Disponibles</a></li>
+                    <li><a href="<?php echo base_url()?>frontend/suscripcion_control/suscripcioncarreras">Registrarse</a></li>
                     <li><a href="#">Contacto</a></li>
                     <li><a href="#">Nosotros</a></li>
                     <li><a href="<?php echo base_url()?>frontend/usuarios_control/logueo">Iniciar Sesión</a></li>

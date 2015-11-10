@@ -16,11 +16,11 @@ class Adhome extends CI_Controller {
     }
 
     function index2() {
-<<<<<<< HEAD
+
         $datos['titulo'] = 'Ruda - Administraci&oacute;n';
-=======
+
         $datos['titulo'] = 'Ruda - Administración';
->>>>>>> origin/master
+
         $datos['contenido'] = 'inicio_admin_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }

@@ -19,12 +19,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         </script>
         <STYLE type="text/css">
             div.dataTables_wrapper {
-                width: 800px;
+                width: 70%;
                 margin: 0 auto;
             }
         </style>
         <?php if (!empty($arrDatoscarreras)) : ?>
-        <h2 style="float: center;">Lista de Carreras (Click Sobre la Carrera)</h2>
+        <h2 style="float: center;">Lista de Carreras (Para suscribirse, debe hacer click sobre la Carrera)</h2>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 
