@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2015 a las 04:13:59
+-- Tiempo de generación: 10-11-2015 a las 00:24:59
 -- Versión del servidor: 5.5.36
 -- Versión de PHP: 5.4.27
 
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `asistencias` (
 --
 
 INSERT INTO `asistencias` (`idasistencia`, `asi_estado`, `asi_fecha`, `asi_justificacion`, `idcatedra`, `idusuario`, `idaula`) VALUES
-(14, 'A', '2015-11-01', 'NO justifico', 1, 7, 2),
+(14, 'A', '2015-11-01', 'NO justifico', 1, 8, 2),
 (15, 'P', '2015-10-02', 'cambio', 1, 7, 2),
 (16, 'A', '2015-11-07', '', 1, 8, 2),
 (17, 'P', '2015-11-07', '', 1, 7, 2);
@@ -565,6 +565,54 @@ INSERT INTO `usu_cate` (`idusuario`, `idcatedra`) VALUES
 (6, 6),
 (6, 7);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_asistencias`
+--
+CREATE TABLE IF NOT EXISTS `vista_asistencias` (
+`usu_nombre` varchar(30)
+,`idusuario` int(10)
+,`cat_denominacion` varchar(50)
+,`aul_denominacion` varchar(30)
+,`asi_estado` varchar(8)
+,`asi_fecha` date
+,`idcatedra` int(3)
+,`asi_justificacion` varchar(30)
+,`idaula` int(3)
+);
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_tareas`
+--
+CREATE TABLE IF NOT EXISTS `vista_tareas` (
+`idcatedra` int(3)
+,`idaula` int(3)
+,`idtarea` int(3)
+,`tar_descripcion` varchar(30)
+,`tar_fechaasignacion` date
+,`tar_fechaentrega` date
+,`estado` varchar(12)
+);
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_asistencias`
+--
+DROP TABLE IF EXISTS `vista_asistencias`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_asistencias` AS select `usu`.`usu_nombre` AS `usu_nombre`,`usu`.`idusuario` AS `idusuario`,`ca`.`cat_denominacion` AS `cat_denominacion`,`au`.`aul_denominacion` AS `aul_denominacion`,if((`asi`.`asi_estado` = 'P'),'Presente','Ausente') AS `asi_estado`,`asi`.`asi_fecha` AS `asi_fecha`,`asi`.`idcatedra` AS `idcatedra`,`asi`.`asi_justificacion` AS `asi_justificacion`,`asi`.`idaula` AS `idaula` from (((`asistencias` `asi` join `usuarios` `usu` on((`usu`.`idusuario` = `asi`.`idusuario`))) join `catedras` `ca` on((`ca`.`idcatedra` = `asi`.`idcatedra`))) join `aulas` `au` on((`au`.`idaula` = `asi`.`idaula`)));
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_tareas`
+--
+DROP TABLE IF EXISTS `vista_tareas`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_tareas` AS select `ta`.`idcatedra` AS `idcatedra`,`ta`.`idaula` AS `idaula`,`ta`.`idtarea` AS `idtarea`,`ta`.`tar_descripcion` AS `tar_descripcion`,`ta`.`tar_fechaasignacion` AS `tar_fechaasignacion`,`ta`.`tar_fechaentrega` AS `tar_fechaentrega`,if((`n`.`idtarea` <> 'null'),'Corregido','Sin Corregir') AS `estado` from (`tareas` `ta` left join `notas_tarea` `n` on((`ta`.`idtarea` = `n`.`idtarea`)));
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -608,8 +656,8 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `inscripcion`
   ADD CONSTRAINT `fk_inscripcion_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_inscripcion_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_inscripcion_carreras1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_inscripcion_carreras1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_inscripcion_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `notas_examenes`
@@ -643,8 +691,8 @@ ALTER TABLE `reset`
 -- Filtros para la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  ADD CONSTRAINT `fk_TAREAS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tareas_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tareas_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_TAREAS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tcalendario`

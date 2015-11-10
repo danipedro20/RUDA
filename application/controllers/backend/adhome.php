@@ -16,7 +16,11 @@ class Adhome extends CI_Controller {
     }
 
     function index2() {
+<<<<<<< HEAD
         $datos['titulo'] = 'Ruda - Administraci&oacute;n';
+=======
+        $datos['titulo'] = 'Ruda - Administración';
+>>>>>>> origin/master
         $datos['contenido'] = 'inicio_admin_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
@@ -73,6 +77,13 @@ class Adhome extends CI_Controller {
         $datos['titulo'] = 'Editar';
         $datos['alumnos'] = $this->adhome_model->lista_alumnos();
         $datos['contenido'] = 'editar_alumnos_view';
+        $this->load->view('plantillas/adplantilla', $datos);
+    }
+
+    public function listar_profesores() {
+        $datos['titulo'] = 'Lista';
+        $datos['lista'] = $this->adhome_model->lista_profesores();
+        $datos['contenido'] = 'listar_profesores_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
 
@@ -148,7 +159,7 @@ class Adhome extends CI_Controller {
             $this->form_validation->set_rules('usu_telefono', 'Teléfono', 'trim|required');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|callback_email_check|valid_email');
             $this->form_validation->set_rules('usu_pass', 'Contraseña', 'trim|required');
-           
+
             //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
             $this->form_validation->set_message('required', 'El %s es requerido');
 
@@ -170,7 +181,7 @@ class Adhome extends CI_Controller {
 //                $query1 = $this->db->get('inscripciones');
 //                if ($query1->num_rows() > 0) {
                 $insert = $this->adhome_model->insert_profesor($a, $b, $c, $d, $e, $f);
-              //  $recuperacion = $this->adhome_model->insert_recuperacion($a, $g, $h);
+                //  $recuperacion = $this->adhome_model->insert_recuperacion($a, $g, $h);
                 $enviar = $this->adhome_model->enviar_correo($a, $z, $e, $g);
 
 
@@ -225,7 +236,7 @@ class Adhome extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-        $this->pdf->SetTitle("Lista de Planes/Catedras");
+        $this->pdf->SetTitle("Lista de Alumnos");
         $this->pdf->SetLeftMargin(15);
         $this->pdf->SetLineWidth(.3);
         $this->pdf->SetDrawColor(15, 0, 0);
@@ -270,7 +281,78 @@ class Adhome extends CI_Controller {
          * D = Envia el pdf para descarga
          *
          */
-        $this->pdf->Output("Lista de Planes.pdf", 'I');
+        $this->pdf->Output("Lista de Alumnos.pdf", 'I');
+    }
+
+    public function reporte_profesores() {
+      
+        $lista = $this->adhome_model->lista_profesores();
+
+        // Creacion del PDF
+
+        /*
+         * Se crea un objeto de la clase Pdf, recuerda que la clase Pdf
+         * heredó todos las variables y métodos de fpdf
+         */
+        ob_end_clean();
+
+        $this->pdf = new Pdf();
+
+        // Agregamos una página
+        $this->pdf->AddPage();
+
+        // Define el alias para el número de página que se imprimirá en el pie
+        $this->pdf->AliasNbPages();
+
+        /* Se define el titulo, márgenes izquierdo, derecho y
+         * el color de relleno predeterminado
+         */
+        $this->pdf->SetTitle("Lista de Profesores");
+        $this->pdf->SetLeftMargin(15);
+        $this->pdf->SetLineWidth(.3);
+        $this->pdf->SetDrawColor(15, 0, 0);
+        $this->pdf->SetRightMargin(15);
+        $this->pdf->SetTextColor(0);
+        $this->pdf->SetFillColor(200, 200, 200);
+
+        // Se define el formato de fuente: Arial, negritas, tamaño 9
+        $this->pdf->SetFont('Arial', 'B', 7);
+        /*
+         * TITULOS DE COLUMNAS
+         *
+         * $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
+         */
+
+        $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(60, 7, 'Nombre', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(60, 7, 'Numero C.I', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(60, 7, 'Telefono', 'TBLR', 0, 'C', '1');
+        $this->pdf->Ln(7);
+        // La variable $x se utiliza para mostrar un número consecutivo
+        $x = 1;
+
+        foreach ($lista as $i) {
+            // se imprime el numero actual y despues se incrementa el valor de $x en uno
+            $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
+            // Se imprimen los datos de cada Catedra
+
+
+            $this->pdf->Cell(60, 5, utf8_decode($i->usu_nombre), 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(60, 5, utf8_decode($i->usu_nrocedula), 'TBL', 0, 'C', 0);
+            $this->pdf->Cell(60, 5, utf8_decode($i->usu_telefono), 'TBLR', 0, 'C', 0);
+            //Se agrega un salto de linea
+            $this->pdf->Ln(5);
+        }
+        /*
+         * Se manda el pdf al navegador
+         *
+         * $this->pdf->Output(nombredelarchivo, destino);
+         *
+         * I = Muestra el pdf en el navegador
+         * D = Envia el pdf para descarga
+         *
+         */
+        $this->pdf->Output("Lista de Profesores.pdf", 'I');
     }
 
 }

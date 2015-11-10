@@ -6,20 +6,21 @@
             <li><a href="<?php echo base_url() ?>backend/adhome/verperfil">Perfil de Usuario</a></li>
             <li><a href="<?php echo base_url() ?>backend/verificacion_control/verificacionadmin">Cambiar contraseña</a></li>
             <li><a href="<?php echo base_url() ?>backend/baneo_control/baneo">Suspender Cuenta</a></li>
-               <li><a href="<?php echo base_url()?>backend/adhome/agenda">Agenda</a></li>
+            <li><a href="<?php echo base_url() ?>backend/adhome/agenda">Agenda</a></li>
         </ul> 
 </ul>
 <ul class="parent">
     <li><a class="desplegable" title="Editar Cuentas">Cuentas</a>
         <ul class="subnavegador">
-           <li><a class="desplegable" title="Alumnos">Alumnos</a>
+            <li><a class="desplegable" title="Alumnos">Alumnos</a>
             <li><a href="<?php echo base_url() ?>backend/adhome/mostrar_alumnos">Alumnos</a></li>
 
         </ul> 
-         <ul class="subnavegador">
-              <li><a class="desplegable" title="Profesores">Profesor</a>
+        <ul class="subnavegador">
+            <li><a class="desplegable" title="Profesores">Profesor</a>
+            <li><a href="<?php echo base_url() ?>backend/adhome/listar_profesores">Listar Profesores</a></li>
             <li><a href="<?php echo base_url() ?>backend/adhome/registrar_profesores">Registar Profesores</a></li>
-           
+
 
         </ul> 
 </ul>
@@ -35,8 +36,8 @@
 <ul class="parent">
     <li><a class="desplegable" title="Catedras">Catedras</a>
         <ul class="subnavegador">
-             <li><a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Crear Catedras</a></li>
-               <li><a href="<?php echo base_url() ?>backend/inscatedras_control/listar_catedras">Lista de  Catedras</a></li>
+            <li><a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Crear Catedras</a></li>
+            <li><a href="<?php echo base_url() ?>backend/inscatedras_control/listar_catedras">Lista de  Catedras</a></li>
             <li><a href="<?php echo base_url() ?>backend/inscatedras_control/listar_catedras_profesores">Catedras/Profesores</a></li>
             <li><a href="<?php echo base_url() ?>backend/asigcatedras_control/asigcatedras">Asignar catedras a Profesores</a></li>
         </ul> 
@@ -55,7 +56,7 @@
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/carreras_control/vercarreras">Ver Carreras</a></li>
             <li><a href="<?php echo base_url() ?>backend/carreras_control/carreras">Crear Carreras</a></li>
-     
+
 
         </ul> 
 </ul>

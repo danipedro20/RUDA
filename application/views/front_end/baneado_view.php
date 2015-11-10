@@ -11,7 +11,15 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 </script>
 <section class="contenido">
     <h1>Cuenta Desabilitada temporalmente</h1>
+    <?php
+    $fecha_inicio = $this->session->userdata('fechai');
+    $fecha_fin = $this->session->userdata('fechaf');
+    $segundos = strtotime($fecha_fin) - strtotime($fecha_inicio);
+    $diferencia_dias=intval($segundos/60/60/24);
+    ?> 
+
     <h2> <?php echo 'Motivo de la suspencion: ' . " " . $this->session->userdata('motivo') . " " ?> </h2>
-    <h2> <?php echo 'Fecha de inicio: ' . " " . $this->session->userdata('fechai') . " " ?> </h2>
-    <h2> <?php echo 'fecha  fin: ' . " " . $this->session->userdata('fechaf') . " " ?> </h2>
+    <h2> <?php echo 'Fecha de inicio: ' . " " . (date("d-m-Y", strtotime($fecha_inicio))) . " " ?> </h2>
+    <h2> <?php echo 'fecha  fin: ' . " " . (date("d-m-Y", strtotime($fecha_fin))) . " " ?> </h2>
+    <h2> <?php echo 'Dias de Suspencion: ' . " " . $diferencia_dias . " " ?> </h2>
 </section>

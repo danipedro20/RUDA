@@ -26,14 +26,14 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             }
         </style>
         <?php if (!empty($lista)) : ?>
+            <h1>Lista de profesores</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 
                     <tr>
-                        <th>Catedra</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-
+                        <th>Nombre</th>
+                        <th>Carrera</th>
+                        <th>Aula</th>
 
                     </tr>
 
@@ -42,20 +42,24 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <tbody>
                     <?php foreach ($lista as $i) : ?>
                         <tr>
-                            <td><?php echo $i->cat_denominacion; ?></td>
-                            <td><?= anchor(base_url() . 'backend/inscatedras_control/editar_catedra/' . $i->idcatedra, 'Editar') ?></td>
-                            <td><a href="<?php echo base_url() . 'backend/inscatedras_control/eliminarcatedra/' . $i->idcatedra ?>" onclick="return confirm('¿Estás seguro que desea eliminar esta Cátedra?')">Eliminar</a></td> 
+
+                            <td><?php echo $i->usu_nombre ?></td>
+                            <td><?php echo $i->usu_nrocedula; ?></td>
+                            <td><?php echo $i->usu_telefono; ?></td>
                         <?php endforeach; ?></tr>
                 </tbody>
 
             </table>
-             <div id="boton1">
-<a href="<?php echo base_url() ?>backend/inscatedras_control/reporte_catedras"  target="_blank">Generar Reporte</a>
+
+            <div id="boton1">
+                <a href="<?php echo base_url() ?>backend/adhome/reporte_profesores"  target="_blank">Generar Reporte</a>
                 
             </div>
-       
+
+
+
         <?php else : ?>
-            <h1>No hay Cátedras</h1>
+            <h1>No hay Profesores</h1>
         <?php endif; ?>
     </section>
 
@@ -63,4 +67,3 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 } else
     redirect(base_url('/frontend/usuarios_control/logueo/'));
 ?>
-

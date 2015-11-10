@@ -798,7 +798,7 @@ class Profesor_control extends CI_Controller {
         $this->pdf->Cell(15, 7, 'Ptos Compl.', 'TBL', 0, 'C', '1');
         $this->pdf->Cell(15, 7, 'Nota Compl.', 'TBL', 0, 'C', '1');
         $this->pdf->Cell(15, 7, 'Ptos Mesa', 'TBL', 0, 'C', '1');
-         $this->pdf->Cell(15, 7, 'Nota Mesa', 'TBL', 0, 'C', '1');
+         $this->pdf->Cell(15, 7, 'Nota Mesa', 'TBLR', 0, 'C', '1');
 
 
 
@@ -865,7 +865,7 @@ class Profesor_control extends CI_Controller {
                 }
             }
             if (!empty($i->complementario)) {
-                $this->pdf->Cell(15, 5, utf8_decode($i->complentario), 'TBLR', 0, 'C', 0);
+                $this->pdf->Cell(15, 5, utf8_decode($i->complementario), 'TBLR', 0, 'C', 0);
 
                 switch ($i->complementario) {
                     case $i->complementario >= 0 and $i->complementario <= 59:

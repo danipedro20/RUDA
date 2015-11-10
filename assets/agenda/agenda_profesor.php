@@ -37,7 +37,7 @@ plan_estudios.idplan=cate_plan.idplan join catedras on cate_plan.idcatedra=cated
 usu_cate on usu_cate.idcatedra=catedras.idcatedra join usuarios on usu_cate.idusuario=usuarios.idusuario where usuarios.idusuario='" . $_GET["usuario"] . "'");
             if ($fila1 = $query2->fetch_array()) {
                 do {
-                    $query = $db->query("select * from tcalendario where (fecha='" . $_GET["fecha"] . "' and idusuario='" . $_GET["usuario"] . "')  or ( fecha='" . $_GET["fecha"] . "' and prioridad=2) ");
+                    $query = $db->query("select * from tcalendario where (fecha='" . $_GET["fecha"] . "' and idusuario='" . $_GET["usuario"] . "' and prioridad=1)  or ( fecha='" . $_GET["fecha"] . "' and prioridad=2) ");
                     if ($fila = $query->fetch_array()) {
                         do {
                             if ($fila1["idaula"] == $fila["idaula"]) {

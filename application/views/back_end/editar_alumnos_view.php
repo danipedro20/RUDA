@@ -26,6 +26,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             }
         </style>
         <?php if (!empty($alumnos)) : ?>
+         <h1>Lista de Alumnos</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 
@@ -48,7 +49,11 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 </tbody>
 
             </table>
-          <button><a href="<?php echo base_url() ?>backend/adhome/reporte_alumnos"  target="_blank">Generar Reporte</a></button>
+            <div id="boton1">
+              <a href="<?php echo base_url() ?>backend/adhome/reporte_alumnos"  target="_blank">Generar Reporte</a>
+                
+            </div>
+          
         <?php else : ?>
             <h1>No hay Alumnos</h1>
         <?php endif; ?>

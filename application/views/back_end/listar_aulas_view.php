@@ -55,7 +55,11 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 </tbody>
 
             </table>
-        <button><a href="<?php echo base_url() ?>backend/reg_aula/reporte_aulas"  target="_blank">Generar Reporte</a></button>
+          <div id="boton1">
+               <a href="<?php echo base_url() ?>backend/reg_aula/reporte_aulas"  target="_blank">Generar Reporte</a>
+                
+            </div>
+      
          <?php else : ?>
                 <h1>No hay Aulas</h1>
             <?php endif; ?>

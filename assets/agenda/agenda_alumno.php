@@ -32,7 +32,7 @@ function buscar_en_array($fecha, $array) {
 switch ($_GET["accion"]) {
     case "listar_evento": {
 
-            $query = $db->query("select * from tcalendario where (fecha='" . $_GET["fecha"] . "' and idusuario='" . $_GET["usuario"] . "' and idaula='" . $_GET["aula"] . "')  or ( fecha='" . $_GET["fecha"] . "' and prioridad= 2 and idaula='" . $_GET["aula"] . "')or ( fecha='" . $_GET["fecha"] . "' and idaula= 1 ) ");
+            $query = $db->query("select * from tcalendario where (fecha='" . $_GET["fecha"] . "' and idusuario='" . $_GET["usuario"] . "' and idaula='" . $_GET["aula"] . "' and prioridad=1)  or ( fecha='" . $_GET["fecha"] . "' and prioridad= 2 and idaula='" . $_GET["aula"] . "')");
             if ($fila = $query->fetch_array()){
                 do {
 

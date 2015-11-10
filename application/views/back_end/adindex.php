@@ -36,7 +36,7 @@ date_default_timezone_set('America/Asuncion');
 aulas.idaula=usu_au.idaula join usuarios on 
 usu_au.idusuario=usuarios.idusuario and usuarios.idusuario='$z'");
             $query = $sql->row();
-            $query2 = $this->db->query("select evento,idaula from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" . $z . "' and idaula='" . $query->idaula . "')  or ( fecha='" . $fechahoy . "' and prioridad=2 and idaula='" . $query->idaula . "' or ( fecha='" . $fechahoy . "' and idaula= 1 ) )");
+            $query2 = $this->db->query("select evento,idaula from tcalendario where (fecha='" . $fechahoy . "' and idusuario='" . $z . "' and idaula='" . $query->idaula . "' and prioridad=1)  or ( fecha='" . $fechahoy . "' and prioridad=2 and idaula='" . $query->idaula . "' or ( fecha='" . $fechahoy . "' and idaula= 1 ) )");
             $row = $query2->row();
             if ($query->idaula === 1) {
                 $query3 = $db->query("select  distinct ca.evento from 
