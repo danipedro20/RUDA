@@ -1,8 +1,9 @@
-body {
+html, body {
     margin: 0;
     font-family: "Arial";
     background: url('../img/fondo_claro.jpg');
-    
+    background-size: 100%;
+    height:100%;
     font-size: 14px;
 }
 a {
@@ -77,6 +78,7 @@ nav ul li a:hover {
 aside {
     width: 0 auto;
     float: left;
+    height:100%;
     background: hsl(264,33%,97%);
     border-radius: 5px;
     margin-right: 20px;
@@ -119,7 +121,7 @@ aside ul li a:hover {
     position: absolute;
     margin-right: 15%;
 }
-}
+
 
 .contenido article {
     padding: 15px 30px;
@@ -192,8 +194,8 @@ footer {
     /*background: hsl(200, 31%, 53%);*/
     background-color: #1F0A0A;
     width: 100%;
-    position: absolute;
-    margin-top: 70%;  
+    position: relative;
+    margin-top: 70%;
     clear: both;
     color: hsl(0,0%,100%);
     padding: 20px 0;
@@ -207,8 +209,9 @@ footer a:hover {
 }
 
 section, h2, form, fieldset, input, textarea{
-   margin:0; 
-   padding:0; 
+   margin:0 auto;
+   height: 0 auto; 
+   padding:0 auto; 
    border:0; 
    outline:none;
    }

@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!--[if lt IE 9]><script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]-->
         <title>Gestión de Aula</title>
+        <link rel="shortcut icon" href="<?php echo base_url()?>/assets/front_end/img/favicon.ico">
+        <link rel="icon" type="image/gif" href="<?php echo base_url()?>/assets/front_end/img/animated_favicon1.gif">
         <link href="<?php echo base_url()?>/assets/front_end/css/frontestilos.css" rel="stylesheet" type="text/css">
     </head>
     <body>

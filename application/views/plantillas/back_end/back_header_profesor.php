@@ -5,6 +5,8 @@
         <meta http-equiv="Expires" content="0" /> 
         <meta http-equiv="Pragma" content="no-cache" />
         <title><?php echo $titulo ?></title>
+        <link rel="shortcut icon" href="<?php echo base_url()?>/assets/back_end/img/favicon.ico">
+        <link rel="icon" type="image/gif" href="<?php echo base_url()?>/assets/back_end/img/animated_favicon1.gif">
         <link href="<?php echo base_url() ?>/assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
         <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
         <script Language="JavaScript">
@@ -31,7 +33,7 @@
 
         <header>
             <section class="contenedor">
-                 <a href="<?php echo base_url()?>backend/home/index"> <img src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
+                 <a href="<?php echo base_url()?>backend/home/index"> <img id='logoruda' src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
 
             </section>
         </header>
