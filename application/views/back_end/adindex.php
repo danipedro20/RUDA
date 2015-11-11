@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 date_default_timezone_set('America/Asuncion');
@@ -188,7 +188,7 @@ usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuari
                 ?>
                 <div id="mini-notification">
 
-
+////
                     <p><?php echo 'Tienes ' . "" . $cont1 . " " . ' tarea/s pediente/s' ?></p>
 
                 </div>
