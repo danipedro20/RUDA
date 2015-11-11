@@ -31,7 +31,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <form action="<?php echo base_url(); ?>backend/profesor_control/insertarea" method="post" enctype="multipart/form-data" >
 
                 <label name="lbl_tar_descripcion">Descripción de la Tarea:</label>
-                <textarea name="tar_descripcion" id="tar_descripcion" cols="35" rows="10" required="" value='<?php echo set_value('tar_descripcion') ?>'></textarea>
+                <textarea name="tar_descripcion" id="tar_descripcion" cols="35" rows="10" required="" maxlength="30" value='<?php echo set_value('tar_descripcion') ?>'></textarea>
                 <label name="lbl_idcatedra">Seleccione el aula:</label>
                 <select name='aula' id='aula'>
                     <option value="">Seleccione un Aula
@@ -39,7 +39,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                         <option value="<?php echo $i->idaula ?>"><?php echo $i->aul_denominacion ?>
                         </option><?php endforeach; ?>
                 </select>
-                <label name="lbl_idcatedra">Catedra:</label>
+                <label name="lbl_idcatedra">Cátedra:</label>
                 <select name='catedra' id='catedra' required="">
 
                 </select><p></p>
@@ -48,7 +48,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <input type="text" id="fecha" required="" name="fecha"  placeholder="Fecha de entrega" value='<?php echo set_value('tar_fecha entrega') ?>' />
 
                 <label name="lbl_puntostarea">Puntos de la Tarea: </label>
-                <input type="text" name="tar_puntostarea" placeholder="Puntos de la tarea" required="" value='<?php echo set_value('tar_puntostarea') ?>' />
+                <input type="text" name="tar_puntostarea" placeholder="Puntos de la tarea" required="" maxlength="2" value='<?php echo set_value('tar_puntostarea') ?>' />
                 <label for="userfile">Archivo Adjunto:</label>
                 <input type="file" name="userfile"  id="userfile"/>
 

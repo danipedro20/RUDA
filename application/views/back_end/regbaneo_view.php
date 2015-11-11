@@ -1,4 +1,4 @@
- <?php
+  <?php
 header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 ?>
@@ -18,7 +18,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 
                 <label name="lbl_bamotivo">Motivo de Suspención:</label>
-                <input  type="text" name="bamotivo" id="bamotivo" cols="35" rows="10"  placeholder="Motivo de suspención" required="" value='<?php echo set_value('bamotivo') ?>'>
+                <input  type="text" name="bamotivo" id="bamotivo" cols="35" rows="10"  placeholder="Motivo de suspención"  maxlength="45" required="" value='<?php echo set_value('bamotivo') ?>'>
                 <label name="lbl_usu_correo">Correo del Usuario:</label>
                 <select name='idusuario' id='idusuario'>
              

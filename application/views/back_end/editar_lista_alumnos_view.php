@@ -34,7 +34,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                         <th>Nombre</th>
                         <th>Numero de cedula</th>
                         <th>Estado</th>
-                        <th>Justificacion</th>
+                        <th>Justificación</th>
 
                     </tr>
 
@@ -57,7 +57,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         <?php } ?>
                                 </select></td>
-                            <td><input type="text" name="justificacion[]" id="justificacion" value="<?php echo $alumno->asi_justificacion; ?>" style="width: 200px;"/></td>
+                            <td><input type="text" name="justificacion[]" id="justificacion" maxlength="30" value="<?php echo $alumno->asi_justificacion; ?>" style="width: 200px;"/></td>
                     <input type="hidden" name="catedra[]" id="catedra" value='<?php echo $alumno->idcatedra; ?>'/>
                     <input type="hidden" name="aula[]" id="aula" value='<?php echo $alumno->idaula; ?>'/>
                     <input type="hidden" name="fecha[]" id="fecha" value='<?php echo $alumno->asi_fecha; ?>'/>

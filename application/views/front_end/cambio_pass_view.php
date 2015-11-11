@@ -26,9 +26,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 
                 <label name="lbl_respuesta">Respuesta Secreta: </label>
-                <input type="text" name="respuesta" placeholder="Respuesta Secreta" required="" id="respuesta" value='<?php echo set_value('respuesta') ?>' />
+                <input type="text" name="respuesta" placeholder="Respuesta Secreta"  maxlength="15" required="" id="respuesta" value='<?php echo set_value('respuesta') ?>' />
                 <label name="lbl_usu_pass">Contraseña Nueva: </label>
-                <input type="password" name="usu_passnuevo" placeholder="Contraseña Nueva" required="" id="usu_passnuevo" value='<?php echo set_value('usu_passnuevo') ?>' />
+                <input type="password" name="usu_passnuevo" placeholder="Contraseña Nueva"  maxlength="15" required="" id="usu_passnuevo" value='<?php echo set_value('usu_passnuevo') ?>' />
                 <!-- este input lo usaremos como referencia para la validacion -->
                 <input type="hidden" name="ingresar" value="si" />
                 <!--            En esta linea estamos configurando como se va a mostrar el error si algo no esta bien-->

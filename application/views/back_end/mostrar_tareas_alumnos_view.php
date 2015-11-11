@@ -26,9 +26,10 @@
                 <thead>
 
                     <tr>
-                        <th>Descripcion de la Tarea</th>
-                        <th>Fecha de asignacion</th>
-                        <th>Fecha de Entrega</th><th>Puntos</th>
+                        <th>Descripción de la Tarea</th>
+                        <th>Fecha de asignación</th>
+                        <th>Fecha de Entrega</th>
+                        <th>Puntos</th>
                         <th>Descarga</th>
                         <th>Comentarios</th>
                         <th>Puntos Logrados</th>

@@ -30,7 +30,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 $rest = substr($a, 0, -1);
                 ?>
                 <label name="lbl_pla_denominacion">Plan de Estudio: </label>
-                <input type="text" name="pla_denominacion" id="pla_denominacion" placeholder="Nombre Actual del Plan de Estudio" required="" value='<?php
+                <input type="text" name="pla_denominacion" id="pla_denominacion"  maxlength="30" placeholder="Nombre Actual del Plan de Estudio" required="" value='<?php
                 if ($rest == 'http://' . $_SERVER['HTTP_HOST'] . '/backend/insplan_control/editar_plan_estudio/') {
                     echo set_value('pla_denominacion');
                 } else {

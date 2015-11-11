@@ -32,8 +32,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                     <tr>
                         <th>Aula</th>
                         <th>Carrera</th>
-                        <th>Catedra</th>
-                        <th>Dias de Catedra</th>
+                        <th>Cátedra</th>
+                        <th>Días de Catedra</th>
                         <th>Profesor</th>
                          <th>Ver Nota</th>
 

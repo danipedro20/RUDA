@@ -19,9 +19,9 @@ if ($this->session->userdata('nombre')) {
 
             <form method="post" action=" <?php echo base_url(); ?>backend/verificacion_control/verificacioncontra">
                 <label name="lbl_usu_pass">Contraseña: </label>
-                <input type="password" name="usu_pass" placeholder="Contraseña"  required="" id="usu_pass" value='<?php echo set_value('usu_pass') ?>' />
+                <input type="password" name="usu_pass" placeholder="Contraseña"  maxlength="15" required="" id="usu_pass" value='<?php echo set_value('usu_pass') ?>' />
                 <label name="lbl_usu_pass">Contraseña Nueva: </label>
-                <input type="password" name="usu_passnuevo" placeholder="Contraseña Nueva" required="" id="usu_passnuevo" value='<?php echo set_value('usu_passnuevo') ?>' />
+                <input type="password" name="usu_passnuevo" placeholder="Contraseña Nueva"  maxlength="15" required="" id="usu_passnuevo" value='<?php echo set_value('usu_passnuevo') ?>' />
                 <!-- este input lo usaremos como referencia para la validacion -->
                 <input type="hidden" name="ingresar" value="si" />
                 <!--            En esta linea estamos configurando como se va a mostrar el error si algo no esta bien-->

@@ -38,7 +38,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <fieldset>
                 <h2> Editar Datos</h2>
                 <label for="lbl_Nommbre">Nombre: </label>
-                <input type="text" name="usu_nombre" id="usu_nombre"  required=""  value='<?php echo $alum->usu_nombre; ?>'/>
+                <input type="text" name="usu_nombre" id="usu_nombre"  maxlength="30" required=""  value='<?php echo $alum->usu_nombre; ?>'/>
                 <input type="hidden" name="idusuario" id="usu_nombre"  required=""  value='<?php echo $alum->idusuario; ?>'/>
 
                 <label for="lbl_aula">Aula: </label>

@@ -31,7 +31,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                     <option value="<?php echo $catedra->idaula ?>"><?php echo $catedra->aul_denominacion ?>
                     </option><?php endforeach; ?>
             </select> <p></p><p></p>
-            <label name="lbl_idcatedra">Catedra:</label>
+            <label name="lbl_idcatedra">Cátedra:</label>
             <select name='catedra' id='catedra'>
 
             </select>

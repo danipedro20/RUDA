@@ -11,6 +11,16 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 </script>
 <section class="contenido">
     <fieldset>
+        <script>
+            function justNumbers(e)
+            {
+                var keynum = window.event ? window.event.keyCode : e.which;
+                if ((keynum == 8) || (keynum == 46))
+                    return true;
+
+                return /\d/.test(String.fromCharCode(keynum));
+            }
+        </script>
 
         <h1>Editar Perfil</h1>
         <?php
@@ -23,13 +33,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         }
         ?>
         <label name="lbl_usu_nombre">Nombre/s y Apellido/s: </label>
-        <input type="text" name="usu_nombre" placeholder="Nombre" required="" value='<?php echo $this->session->userdata('nombre'); ?>' />
+        <input type="text" name="usu_nombre" placeholder="Nombre" required=""  maxlength="30" value='<?php echo $this->session->userdata('nombre'); ?>' /><p></p>
         <label name="lbl_usu_direccion">Dirección: </label>
-        <input type="text" name="usu_direccion" placeholder="Dirección" required="" value='<?php echo $this->session->userdata('direccion'); ?>' />
+        <input type="text" name="usu_direccion" placeholder="Dirección"  maxlength="100"required="" value='<?php echo $this->session->userdata('direccion'); ?>' /><p></p>
         <label name="lbl_usu_telefono">Teléfono: </label>
-        <input type="text" name="usu_telefono" placeholder="Teléfono" required="" value='<?php echo $this->session->userdata('telefono'); ?>' />
+        <input type="text" name="usu_telefono" placeholder="Teléfono"  maxlength="10" required="" onkeypress="return justNumbers(event);"value='<?php echo $this->session->userdata('telefono'); ?>' /><p></p>
         <label name="lbl_usu_email">Email: </label>
-        <input type="email" name="usu_email" placeholder="Email" required="" value='<?php echo $this->session->userdata('email'); ?>' />
+        <input type="email" name="usu_email" placeholder="Email" required=""  maxlength="30" value='<?php echo $this->session->userdata('email'); ?>' />
         <!-- este input lo usaremos como referencia para la validacion -->
         <input type="hidden" name="grabar" value="si" />
 

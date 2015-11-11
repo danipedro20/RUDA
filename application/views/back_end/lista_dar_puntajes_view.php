@@ -32,7 +32,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                     <tr>
                          <th>Nombre</th>
-                        <th>Numero de cedula</th>
+                        <th>Número de C.I</th>
                         <th>Tarea Denominacion</th>
                         <th>Puntos Asignados</th>
                         <th>Puntos Logrados</th>
@@ -49,7 +49,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                             <td><?php echo $i->usu_nrocedula; ?></td>
                             <td><input type="text" name="tar_denominacion[]" id="tar_denominacion" value='<?php echo $i->tar_descripcion; ?>' style="width: 180px;" readonly=""/> </td>
                             <td><input type="text" name="tar_puntostarea[]" id="tar_puntostarea" value='<?php echo $i->tar_puntostarea; ?>' style="width: 90px;" readonly="" /></td>
-                            <td><input type="text" name="tar_puntoslogrados[]" id="tar_puntoslogrados" value="" style="width: 90px;" /></td>
+                            <td><input type="text" name="tar_puntoslogrados[]" id="tar_puntoslogrados"  maxlength="2" value="" style="width: 90px;" /></td>
                     <input type="hidden" name="tarea[]" id="tarea" value='<?php echo $idtarea; ?>'/>
                     <input type="hidden" name="catedra[]" id="catedra" value='<?php echo $i->idcatedra; ?>'/>
 

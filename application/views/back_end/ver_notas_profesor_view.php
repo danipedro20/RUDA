@@ -32,7 +32,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                     <tr>
                          <th>Nombre</th>
-                         <th>Numero de Cédula</th>
+                         <th>Número de C.I</th>
                         <th>Parcial</th>
                         <th>Recuperatorio</th>
                         <th>Primer Ordinario</th>

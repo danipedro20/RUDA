@@ -22,11 +22,11 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h1>Editar Catedra/Plan</h1>
             <form method="post">
 
-                <label name="lbl_cat_denominacion">Nombre de Catedra: </label>
+                <label name="lbl_cat_denominacion">Nombre de Cátedra: </label>
                 <input type="text" name="cate_denominacion" placeholder="Nombre Actual de catedra" required="" readonly="readonly" value='<?php echo $catedra_plan->cat_denominacion; ?>' />
                 <input type="hidden" name="idcatedra"  value='<?php echo $catedra_plan->idcatedra; ?>' />
-                <label name="lbl_cat_denominacion">Dia de Catedra: </label>
-                <input type="text" name="diascatedra" id="diascatedra" required="" value='<?php echo $catedra_plan->diascatedra; ?>' />
+                <label name="lbl_cat_denominacion">Dia de Cátedra: </label>
+                <input type="text" name="diascatedra" id="diascatedra" required="" maxlength="10" value='<?php echo $catedra_plan->diascatedra; ?>' />
 
                 <label for="lbl_profesor">Plan De Estudio: </label>
                 <select name='selplan' id='selplan'>

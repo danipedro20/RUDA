@@ -32,7 +32,8 @@ if ($this->session->userdata('nombre')) {
             Tu comentario: 
             <form action="<?php echo base_url(); ?>backend/alumnos_control/comentario/" method="post" enctype="multipart/form-data" >
                 <?= form_hidden('idtarea', $this->uri->segment(4)) ?>
-                <?= form_textarea('comentario') ?>
+                   <textarea name="comentario" id="comentario" cols="35" rows="10" required="" value="" maxlength="150"></textarea>
+                  
                 <p><label for="userfile">Adjuntar Archivo:</label>
                     <input type="file" name="userfile"  id="userfile"/>
                     <font color='red' style='font-weight: bold; font-size: 14px; text-decoration: underline'><?php

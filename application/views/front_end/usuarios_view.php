@@ -12,9 +12,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 
             <label name="lbl_usu_email">Email: </label>
-            <input type="text" name="usu_email" placeholder="Correo" required="" id="usu_email" value="<?php echo set_value('usu_email') ?>" />
+            <input type="text" name="usu_email" placeholder="Correo"  maxlength="30" required="" id="usu_email" value="<?php echo set_value('usu_email') ?>" />
             <label name="lbl_usu_pass">Contraseña: </label>
-            <input type="password" name="usu_pass" placeholder="Contraseña" required="" id="usu_pass" value='<?php echo set_value('usu_pass') ?>' />
+            <input type="password" name="usu_pass" placeholder="Contraseña"  maxlength="15" required="" id="usu_pass" value='<?php echo set_value('usu_pass') ?>' />
             <!-- este input lo usaremos como referencia para la validacion -->
             <input type="hidden" name="ingresar" value="si" />
             <P ALIGN=RIGHT><a href="<?php echo base_url() ?>frontend/recuperacion_control/formarecuperacion">¿Has olvidado tu contraseña?</a></p>

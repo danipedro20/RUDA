@@ -26,7 +26,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 
                 <label name="lbl_car_denominacion">Nombre: </label>
-                <input type="text" name="car_denominacion" placeholder="Nombre Actual de la carrera" required="" value='<?php echo $carrera->car_denominacion; ?>' />
+                <input type="text" name="car_denominacion" placeholder="Nombre Actual de la carrera" required=""  maxlength="30" value='<?php echo $carrera->car_denominacion; ?>' />
                 <input type="hidden" name="id_carrera" id="id_carrera" required="" value='<?php echo $carrera->id_carrera; ?>' />
 
                 <!-- este input lo usaremos como referencia para la validacion -->

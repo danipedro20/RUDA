@@ -13,7 +13,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <?php echo form_open("backend/insplan_control/inserplan") ?>
 
             <label name="lbl_pla_denominacion">Nombre del Plan de Estudio: </label>
-            <input type="text" name="pla_denominacion" placeholder="Nombre del Plan de Estudio" required="" value='<?php echo set_value('pla_denominacion') ?>' />
+            <input type="text" name="pla_denominacion" placeholder="Nombre del Plan de Estudio" required=""  maxlength="30" value='<?php echo set_value('pla_denominacion') ?>' />
             <input type="hidden"  id="direccion" name="direccion"  value= <?php echo $_SERVER['HTTP_REFERER']; ?>  />
 
             <!-- este input lo usaremos como referencia para la validacion -->

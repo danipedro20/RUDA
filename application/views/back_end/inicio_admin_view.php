@@ -65,7 +65,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <div id="mini-notification">
 
 
-                    <p><?php echo 'Tienes' . " " . $cont . " " . 'Solicitud/es de Suscripcion a aula/s  y ' . " " . $evento . " " . ' evento/s hoy ' ?></p>
+                    <p><?php echo 'Tienes' . " " . $cont . " " . 'Solicitud/es de suscripcion a aula/s  y ' . " " . $evento . " " . ' evento/s hoy ' ?></p>
 
                 </div>
                 <?php
@@ -83,7 +83,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <div id="mini-notification">
 
 
-                    <p><?php echo 'Tienes' . " " . $cont . " " . 'Solicitud/es de Suscripcion a aula/s' ?></p>
+                    <p><?php echo 'Tienes' . " " . $cont . " " . 'Solicitud/es de suscripcion a aula/s' ?></p>
 
                 </div>
                 <?php

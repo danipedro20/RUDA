@@ -171,7 +171,7 @@ usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuari
                 <div id="mini-notification">
 
 
-                    <p><?php echo 'Tienes' . "" . $cont1 . " " . 'tarea/as y ' . "" . $cont2 . " " . 'Actividades en tu agenda ' ?></p>
+                    <p><?php echo 'Tienes' . "" . $cont1 . " " . 'tarea/as y ' . "" . $cont2 . " " . 'actividad/es en tu agenda ' ?></p>
 
                 </div>
                 <?php
@@ -180,7 +180,7 @@ usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuari
                 <div id="mini-notification">
 
 
-                    <p><?php echo 'Tienes ' . "" . $cont2 . " " . 'Actividad/es en tu agenda ' ?></p>
+                    <p><?php echo 'Tienes ' . "" . $cont2 . " " . 'actividad/es en tu agenda ' ?></p>
 
                 </div>
                 <?php

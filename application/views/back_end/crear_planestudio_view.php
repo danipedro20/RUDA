@@ -17,7 +17,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <?php echo form_open("backend/insplan_control/inserplan") ?>
 
             <label name="lbl_pla_denominacion">Nombre del Plan de Estudio: </label>
-            <input type="text" name="pla_denominacion" placeholder="Nombre del Plan de Estudio" required="" value='<?php echo set_value('pla_denominacion') ?>' />
+            <input type="text" name="pla_denominacion" placeholder="Nombre del Plan de Estudio" required="" maxlength="30" value='<?php echo set_value('pla_denominacion') ?>' />
             <label name="fecha">Fecha de Inicio:</label>
             <input type="text" id="fecha" required="" name="fecha"  placeholder="Fecha de Inicio" value='<?php echo set_value('tar_fecha entrega') ?>' />
             <label name="fecha">Fecha de Fin:</label>
