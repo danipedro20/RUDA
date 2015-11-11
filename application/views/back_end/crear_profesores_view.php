@@ -93,6 +93,16 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         });
     });
 </script>
+   <script>
+            function justNumbers(e)
+            {
+                var keynum = window.event ? window.event.keyCode : e.which;
+                if ((keynum == 8) || (keynum == 46))
+                    return true;
+
+                return /\d/.test(String.fromCharCode(keynum));
+            }
+        </script>
 
 <section class="contenido">
     <fieldset>
@@ -104,19 +114,19 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         ?>
         <span id="msgUsuario"></span>
         <label name="lbl_usu_nombre">Nombre/s y Apellido/s: </label>
-        <input type="text" name="username" id="username" placeholder="Nombre" required="" value='<?php echo set_value('username') ?>' /><br>
+        <input type="text" name="username" id="username" placeholder="Nombre" required="" maxlength="30" value='<?php echo set_value('username') ?>' /><br>
         <span id="msgCedula"></span>
         <label name="lbl_usu_nrocedula">Número de C.I: </label>
-        <input type="text" name="usu_nrocedula" id="usu_nrocedula" placeholder="Número de C.I" required="" value='<?php echo set_value('usu_nrocedula') ?>' /><br>
+        <input type="text" name="usu_nrocedula" id="usu_nrocedula" placeholder="Número de C.I" onkeypress="return justNumbers(event);" required="" maxlength="10" value='<?php echo set_value('usu_nrocedula') ?>' /><br>
         <label name="lbl_usu_direccion">Dirección: </label>
-        <input type="text" name="usu_direccion" placeholder="Dirección" required="" value='<?php echo set_value('usu_direccion') ?>' /><br>
+        <input type="text" name="usu_direccion" placeholder="Dirección" required="" maxlength="100" value='<?php echo set_value('usu_direccion') ?>' /><br>
         <label name="lbl_usu_telefono">Teléfono: </label>
-        <input type="text" name="usu_telefono" placeholder="Teléfono" required="" value='<?php echo set_value('usu_telefono') ?>' /><br>
+        <input type="text" name="usu_telefono" placeholder="Teléfono" required="" maxlength="10" onkeypress="return justNumbers(event);"value='<?php echo set_value('usu_telefono') ?>' /><br>
         <span id="msgEmail"></span>
         <label name="lbl_usu_email">Email: </label>
-        <input type="email" name="email" id="email" placeholder="Email" required="" value='<?php echo set_value('email') ?>' /><br> 
+        <input type="email" name="email" id="email" placeholder="Email" maxlength="30" required="" value='<?php echo set_value('email') ?>' /><br> 
         <label name="lbl_usu_pass">Contraseña: </label>
-        <input type="password" name="usu_pass" placeholder="Contraseña" required="" value='<?php echo set_value('usu_pass') ?>' /><br>
+        <input type="password" name="usu_pass" placeholder="Contraseña" required="" maxlength="15" value='<?php echo set_value('usu_pass') ?>' /><br>
 
 <!--        <label name="lbl_pregunta">Pregunta Secreta: </label>
         <input type="text" name="pregunta" placeholder="Pregunta Secreta" required="" value='<?php echo set_value('pregunta') ?>' /><br>

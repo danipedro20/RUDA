@@ -14,7 +14,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <?php echo form_open("backend/carreras_control/insercarreras") ?>
 
             <label name="lbl_car_denominacion">Nombre de la Carrera: </label>
-            <input type="text" name="car_denominacion" id="car_denominacion" placeholder="Nombre de la carrera" required="" value='<?php echo set_value('car_denominacion') ?>' />
+            <input type="text" name="car_denominacion" id="car_denominacion" placeholder="Nombre de la carrera" required="" maxlength="30" value='<?php echo set_value('car_denominacion') ?>' />
             <input type="hidden"  id="dircarr" name="dircarr"  value= <?php echo $_SERVER['HTTP_REFERER']; ?>  />
 
             <!-- este input lo usaremos como referencia para la validacion -->

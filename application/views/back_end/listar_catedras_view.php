@@ -30,7 +30,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <thead>
 
                     <tr>
-                        <th>Catedra</th>
+                        <th>Cátedra</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
 

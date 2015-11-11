@@ -30,8 +30,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <thead>
 
                     <tr>
-                        <th>Descripcion de la Tarea</th>
-                        <th>Fecha de asignacion</th>
+                        <th>Descripción de la Tarea</th>
+                        <th>Fecha de asignación</th>
                         <th>Fecha de Entrega</th>
                         <th>Fecha de Puntos de la Tarea</th>
                         <th>Descarga</th>

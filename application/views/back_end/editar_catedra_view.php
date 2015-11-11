@@ -22,8 +22,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h1>Editar Catedra</h1>
             <form method="post">
 
-                <label name="lbl_cat_denominacion">Catedra: </label>
-                <input type="text" name="cate_denominacion" placeholder="Nombre Actual de catedra" required="" value='<?php echo $catedra->cat_denominacion; ?>' />
+                <label name="lbl_cat_denominacion">Cátedra: </label>
+                <input type="text" name="cate_denominacion" placeholder="Nombre Actual de catedra" maxlength="50"required="" value='<?php echo $catedra->cat_denominacion; ?>' />
                 <input type="hidden" name="idcatedra"  value='<?php echo $catedra->idcatedra; ?>' />
 <!--                <label name="lbl_cat_denominacion">Dia de Catedra: </label>
                 <input type="text" name="cat_diascatedra" placeholder="Dias de catedra" required="" value='<?php echo $catedra->cat_diascatedra; ?>' />-->

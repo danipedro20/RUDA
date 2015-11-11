@@ -18,8 +18,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     $diferencia_dias=intval($segundos/60/60/24);
     ?> 
 
-    <h2> <?php echo 'Motivo de la suspencion: ' . " " . $this->session->userdata('motivo') . " " ?> </h2>
+    <h2> <?php echo 'Motivo de la suspención: ' . " " . $this->session->userdata('motivo') . " " ?> </h2>
     <h2> <?php echo 'Fecha de inicio: ' . " " . (date("d-m-Y", strtotime($fecha_inicio))) . " " ?> </h2>
     <h2> <?php echo 'fecha  fin: ' . " " . (date("d-m-Y", strtotime($fecha_fin))) . " " ?> </h2>
-    <h2> <?php echo 'Dias de Suspencion: ' . " " . $diferencia_dias . " " ?> </h2>
+    <h2> <?php echo 'Dias de suspención: ' . " " . $diferencia_dias . " " ?> </h2>
 </section>

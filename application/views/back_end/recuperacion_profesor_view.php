@@ -25,7 +25,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         if ($query->num_rows() == 0) {
             ?>
-            <h1>Formulario de Recuperacion</h1>
+            <h1>Formulario de Recuperación</h1>
             <input type="hidden" name="idusuario" id="idusuario" placeholder="Email" required="" value='<?php echo $idusuario ?>' /><br> 
             <label name="pregunta">Pregunta Secreta: </label>
             <select name='pregunta' id='pregunta'>
@@ -35,12 +35,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             </select>
 
             <label name="respuesta">Respuesta Secreta: </label>
-            <input type="password" name="respuesta" placeholder="Respuesta Secreta" required="" value='<?php echo set_value('respuesta') ?>' /> <br> 
+            <input type="password" name="respuesta" placeholder="Respuesta Secreta"  maxlength="15"required="" value='<?php echo set_value('respuesta') ?>' /> <br> 
 
-            <input type="hidden" id="idcarrera" name="idcarrera"  value='<?php echo $idcarrera; ?>' /><br>
-            <input type="hidden" id="idaula" name="idaula"  value='<?php echo $idaula; ?>' /><br>
-            <input type="hidden" id="idplan" name="idplan"  value='<?php echo $idplan; ?>' /><br>
-
+            
             <!-- este input lo usaremos como referencia para la validacion -->
             <input type="hidden" name="grabar" value="si" />
 

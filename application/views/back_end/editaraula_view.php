@@ -21,12 +21,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h2> Editar Aula</h2>
             <form method="post">
                 <label for="lbl_aulanombre">Nombre : </label>
-                <input type="text" name="aul_denominacion" id="inp_nombreaula"  required=""  value='<?php echo $aulas->aul_denominacion; ?>'/>
+                <input type="text" name="aul_denominacion" id="inp_nombreaula"  maxlength="30" required=""  value='<?php echo $aulas->aul_denominacion; ?>'/>
                 <input type="hidden" name="idaula" id="idaula" value='<?php echo $aulas->idaula; ?>'/>
                 <label for="lbl_plazahabilitada">Plaza Habilitadas: </label>
-                <input type="text" name="aul_plazashabilitadas" id="aul_plazashabilitadas"  required="required" value='<?php echo $aulas->aul_plazashabilitadas; ?>'/>
+                <input type="text" name="aul_plazashabilitadas" id="aul_plazashabilitadas"  maxlength="2" required="required" value='<?php echo $aulas->aul_plazashabilitadas; ?>'/>
                 <label for="lbl_plazadisponibles">Plaza Disponibles: </label>
-                <input type="text" name="aul_plazasdisponibles" id="aul_plazasdisponibles"  required="required" value='<?php echo $aulas->aul_plazasdisponibles; ?>'/>
+                <input type="text" name="aul_plazasdisponibles" id="aul_plazasdisponibles"  maxlength="2" required="required" value='<?php echo $aulas->aul_plazasdisponibles; ?>'/>
                 <label for="lbl_carrera">Carrera: </label>
                 <select name='selcarrera' id='selcarrera'>
                     <option value="<?php echo $aulas->id_carrera ?>"><?php echo $aulas->car_denominacion ?></option>

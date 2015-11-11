@@ -26,9 +26,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <h2>AULA</h2>
             <?php echo form_open("backend/reg_aula/inseraula") ?>
             <label for="lbl_aulanombre">Nombre: </label>
-            <input type="text" name="aul_denominacion" id="inp_nombreaula" placeholder="Nombre del Aula" required=""  value='<?php echo set_value('aul_denominacion') ?>'/>
+            <input type="text" name="aul_denominacion" id="inp_nombreaula" placeholder="Nombre del Aula" required=""  maxlength="30" value='<?php echo set_value('aul_denominacion') ?>'/>
 
-            <label for="lbl_plazahabilitada">Plaza Habilitadas: </label>
+            <label for="lbl_plazahabilitada">Plazas Habilitadas: </label>
             <input type="text" name="aul_plazahabilitada" id="inp_plazahabilitada" placeholder="Ingrese los lugares habilitados" required="required" value='<?php echo set_value('aul_plazahabilitada') ?>'/>
 
             <label for="lbl_carrera">Carrera: </label>

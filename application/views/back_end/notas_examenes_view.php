@@ -19,6 +19,17 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 });
             });
         </script>
+           <script>
+            function justNumbers(e)
+            {
+                var keynum = window.event ? window.event.keyCode : e.which;
+                if ((keynum == 8) || (keynum == 46))
+                    return true;
+
+                return /\d/.test(String.fromCharCode(keynum));
+            }
+        </script>
+
         <STYLE type="text/css">
             div.dataTables_wrapper {
                 width: 800px;
@@ -74,8 +85,15 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                                 <?php } elseif ($idtipo == 6 or $idtipo == 7 or $idtipo == 8) { ?>
                                     <td><input type="text" name="puntos[]" id="total" value="100" readonly="" style="width: 90px;" /></td>
                                 <?php } ?>
+                                        <?php if ($idtipo == 1 or $idtipo == 2 or $idtipo == 3) { ?> 
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="2"value="" onkeypress="return justNumbers(event);" style="width: 90px;" /></td>
+                                <?php } elseif ($idtipo == 4 or $idtipo == 5) { ?> 
+                                    <td><input type="text" name="logrados[]" id="logrados" value="" maxlength="2" onkeypress="return justNumbers(event);"style="width: 90px;" /></td>
+                                <?php } elseif ($idtipo == 6 or $idtipo == 7 or $idtipo == 8) { ?>
+                                    <td><input type="text" name="logrados[]" id="logrados" value="" maxlength="3"onkeypress="return justNumbers(event);" style="width: 90px;" /></td>
+                                <?php } ?>
 
-                                <td><input type="text" name="logrados[]" id="logrados" value="" style="width: 90px;" /></td>
+                               
 
 
 

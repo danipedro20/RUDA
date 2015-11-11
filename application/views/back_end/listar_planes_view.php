@@ -26,8 +26,8 @@
 
                     <tr>
                         <th>Plan de Estudio</th>
-                        <th>Catedra</th>
-                        <th>Dias Catedra</th>
+                        <th>Cátedra</th>
+                        <th>Días Catedra</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
 

@@ -12,8 +12,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <h1>Crear Catedra</h1>
         <?php echo form_open("backend/inscatedras_control/insercatedra") ?>
 
-        <label name="lbl_cat_denominacion">Nombre de Catedra: </label>
-        <input type="text" name="cat_denominacion" placeholder="Nombre de catedra" required="" value='<?php echo set_value('cat_denominacion') ?>' />
+        <label name="lbl_cat_denominacion">Nombre de Cátedra: </label>
+        <input type="text" name="cat_denominacion" placeholder="Nombre de cátedra" required="" maxlength="50" value='<?php echo set_value('cat_denominacion') ?>' />
 <!--        <label name="lbl_cat_diascatedra">Dias de catedra </label>
        // <input type="text" name="cat_diascatedra" placeholder="Dia de Catedra" required="" value='<?php echo set_value('cat_diascatedra') ?>' />-->
         <input type="hidden"  id="dire" name="dire"  value= <?php echo $_SERVER['HTTP_REFERER'];?>  />

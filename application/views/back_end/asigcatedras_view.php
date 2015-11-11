@@ -40,10 +40,10 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                         </option><?php endforeach; ?>
                 </select>
                 <p></p> 
-                <label name="lbl_idcatedra">Catedras:</label>
+                <label name="lbl_idcatedra">Cátedras:</label>
                 <select   name="catedra" id="catedra" data-placeholder="Seleccione Catedras..." required="" style="width: 350px;" >                        
                 </select>
-                <a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Insertar una Nueva Catedra</a>
+                <a href="<?php echo base_url() ?>backend/inscatedras_control/catedra">Insertar una Nueva Cátedra</a>
                 <font color='red' style='font-weight: bold; font-size: 14px; text-decoration: underline'><?php echo validation_errors(); ?></font>
                 <input type="hidden" name="grabar" value="si" />
                 <input type="submit" name="btnguardarplan" value="Guardar" />

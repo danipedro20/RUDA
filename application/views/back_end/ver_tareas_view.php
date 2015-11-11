@@ -20,7 +20,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             </select>
 
 
-            <label name="lbl_idcatedra">Catedra:</label>
+            <label name="lbl_idcatedra">Cátedra:</label>
             <select name='catedra' id='catedra' style="width: 300px;">
             </select>
             <input type="hidden" id="selaula2" name="selaula2"  value='<?php echo $b = $this->input->post('selaula'); ?>' /><br>  

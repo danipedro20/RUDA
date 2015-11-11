@@ -19,6 +19,16 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 });
             });
         </script>
+        <script>
+            function justNumbers(e)
+            {
+                var keynum = window.event ? window.event.keyCode : e.which;
+                if ((keynum == 8) || (keynum == 46))
+                    return true;
+
+                return /\d/.test(String.fromCharCode(keynum));
+            }
+        </script>
         <STYLE type="text/css">
             div.dataTables_wrapper {
                 width: 800px;
@@ -72,28 +82,28 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                                 <td><input type="hidden" name="id[]" id="id" value='<?php echo $i->id; ?>'/><?php echo $i->usu_nombre; ?> </td>
                                 <td> <?php echo $i->usu_nrocedula; ?></td>
                                 <?php if ($idtipo == 1 or $idtipo == 2 or $idtipo == 3) { ?> 
-                                    <td><input type="text" name="puntos[]" id="total" value="40" readonly="" style="width: 90px;" /></td>
+                                    <td><input type="text" name="puntos[]" id="puntos" value="40" readonly="" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 4 or $idtipo == 5) { ?> 
-                                    <td><input type="text" name="puntos[]" id="total" value="60"  readonly="" style="width: 90px;" /></td>
+                                    <td><input type="text" name="puntos[]" id="puntos" value="60"  readonly="" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 6 or $idtipo == 7 or $idtipo == 8) { ?>
-                                    <td><input type="text" name="puntos[]" id="total" value="100" readonly="" style="width: 90px;" /></td>
+                                    <td><input type="text" name="puntos[]" id="puntos" value="100" readonly="" style="width: 90px;" /></td>
                                 <?php } ?>
                                 <?php if ($idtipo == 1) { ?> 
-                                    <td><input type="text" name="logrados[]" id="total" value=" <?php echo $i->proceso ?> "style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="2"onkeypress="return justNumbers(event);"  value=" <?php echo $i->proceso ?> "style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 2) { ?> 
-                                    <td><input type="text" name="logrados[]" id="total" value=" <?php echo $i->parcial ?>" style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="2"onkeypress="return justNumbers(event);"  value=" <?php echo $i->parcial ?>" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 3) { ?>
-                                    <td><input type="text" name="logrados[]" id="total" value="<?php echo $i->recuperatorio ?>" style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="2" onkeypress="return justNumbers(event);" value="<?php echo $i->recuperatorio ?>" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 4) { ?>
-                                    <td><input type="text" name="logrados[]" id="total" value="<?php echo $i->primer_ordinario ?>" style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="2"onkeypress="return justNumbers(event);" value="<?php echo $i->primer_ordinario ?>" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 5) { ?>
-                                    <td><input type="text" name="logrados[]" id="total" value="<?php echo $i->segundo_ordinario ?>" style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="2"onkeypress="return justNumbers(event);" value="<?php echo $i->segundo_ordinario ?>" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 6) { ?>
-                                    <td><input type="text" name="logrados[]" id="total" value="<?php echo $i->complementario ?>" style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="3"onkeypress="return justNumbers(event);" value="<?php echo $i->complementario ?>" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 7) { ?>
-                                    <td><input type="text" name="logrados[]" id="total" value="<?php echo $i->extraordinario ?>" style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="3"onkeypress="return justNumbers(event);" value="<?php echo $i->extraordinario ?>" style="width: 90px;" /></td>
                                 <?php } elseif ($idtipo == 8) { ?>
-                                    <td><input type="text" name="logrados[]" id="total" value="<?php echo $i->mesa_especial ?>" style="width: 90px;" /></td>
+                                    <td><input type="text" name="logrados[]" id="logrados" maxlength="3"onkeypress="return justNumbers(event);" value="<?php echo $i->mesa_especial ?>" style="width: 90px;" /></td>
                                 <?php } ?>
                         <input type="hidden" name="idusuario[]" id="idusuario" value='<?php echo $i->idusuario; ?>'/>
                         <input type="hidden" name="idcatedra[]" id="idcatedra" value='<?php echo $i->idcatedra; ?>'/>

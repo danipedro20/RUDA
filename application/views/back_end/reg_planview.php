@@ -14,7 +14,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         <?php echo form_open("backend/reg_plan/insertarplan") ?>
             
             <label name="lbl_plannombre">Nombre del Plan: </label>
-            <input type="text" name="inp_nombreplan" placeholder="Nombre del Plan de Estudio" required="" value='<?php echo set_value('inp_nombreplan') ?>' />
+            <input type="text" name="inp_nombreplan" placeholder="Nombre del Plan de Estudio"  maxlength="30" required="" value='<?php echo set_value('inp_nombreplan') ?>' />
             
             <!-- este input lo usaremos como referencia para la validacion -->
             <input type="hidden" name="grabar" value="si" />
