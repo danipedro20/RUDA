@@ -39,29 +39,42 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                         <th>Catedra</th>
                         <th>Aula</th>
                         <th>Archivo</th>
+                        <th>Creado por</th>
+                        <th>Estado</th>
 
                     </tr>
 
                 </thead>
 
                 <tbody>
-                    <?php foreach ($lista as $i) : ?>
+                    <?php
+                    foreach ($lista as $i) :
+                        $fecha_asig = $i->tar_fechaasignacion;
+                        $fecha_entre = $i->tar_fechaentrega;
+                        ?>
                         <tr>
+
 
                             <td><?php echo $i->idtarea; ?></td>
                             <td><?php echo $i->tar_descripcion; ?></td>
-                            <td><?php echo $i->tar_fechaasignacion; ?></td>
-                            <td><?php echo $i->tar_fechaentrega; ?></td>
+                            <td><?php echo date("d-m-Y", strtotime($fecha_asig)); ?></td>
+                            <td><?php echo date("d-m-Y", strtotime($fecha_entre)); ?></td>
                             <td><?php echo $i->tar_puntostarea; ?></td>
-                            <td><?php echo $i->idcatedra; ?></td>
-                            <td><?php echo $i->idaula; ?></td>
-                            <td><?php echo $i->tar_nombrearchivo; ?></td>
+                            <td><?php echo $i->cat_denominacion; ?></td>
+                            <td><?php echo $i->aul_denominacion; ?></td>
+                            <?php if ($i->tar_nombrearchivo == 'NULL') { ?>
+                                <td><?php echo 'Sin Archivo'; ?></td>
+                            <?php } else { ?>
+                                <td><?php echo $i->tar_nombrearchivo; ?></td>
+                            <?php } ?>
+                            <td><?php echo $i->usu_nombre; ?></td>
+                            <td><?php echo $i->estado; ?></td>
                         <?php endforeach; ?></tr>
                 </tbody>
 
             </table>
 
-            
+
 
 
 

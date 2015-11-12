@@ -16,11 +16,7 @@ class Adhome extends CI_Controller {
     }
 
     function index2() {
-
-        $datos['titulo'] = 'Ruda - Administraci&oacute;n';
-
         $datos['titulo'] = 'Ruda - Administración';
-
         $datos['contenido'] = 'inicio_admin_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
@@ -76,6 +72,12 @@ class Adhome extends CI_Controller {
     public function mostrar_alumnos() {
         $datos['titulo'] = 'Editar';
         $datos['alumnos'] = $this->adhome_model->lista_alumnos();
+        $datos['contenido'] = 'editar_alumnos_view';
+        $this->load->view('plantillas/adplantilla', $datos);
+    }
+      public function tareas_a_profesores() {
+        $datos['titulo'] = 'Editar';
+        $datos['lista'] = $this->adhome_model->lista_profesores();
         $datos['contenido'] = 'editar_alumnos_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
@@ -182,7 +184,7 @@ class Adhome extends CI_Controller {
 //                if ($query1->num_rows() > 0) {
                 $insert = $this->adhome_model->insert_profesor($a, $b, $c, $d, $e, $f);
                 //  $recuperacion = $this->adhome_model->insert_recuperacion($a, $g, $h);
-                $enviar = $this->adhome_model->enviar_correo($a, $z, $e, $g);
+             //  $enviar = $this->adhome_model->enviar_correo($a, $z, $e, $g);
 
 
 

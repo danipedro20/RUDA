@@ -89,7 +89,7 @@ aside ul {
 aside ul li {
     font-size: 13px;
     line-height: 25px;
-    
+
 }
 aside li:not(:first-of-type):hover {
     background: hsl(264,33%,90%);
@@ -517,33 +517,33 @@ img {
     margin-left: 80px;
 }
 
- #mensaje_header {
-
 #mensaje_header {
 
-    font-size: 25px;
-    margin-top: 5px;
-    margin-left: 20px;
-}
+    #mensaje_header {
+
+        font-size: 25px;
+        margin-top: 5px;
+        margin-left: 20px;
+    }
 
 
 
 
-#boton1{ 
-    background:-moz-linear-gradient(#f9f9f9 0%,#DADADA 100%);
-    background:-ms-linear-gradient(#f9f9f9 0%,#DADADA 100%); 
-    background:-o-linear-gradient(#f9f9f9 0%,#DADADA 100%); 
-    background:-webkit-linear-gradient(#f9f9f9 0%,#DADADA 100%); 
-    background:linear-gradient(#f9f9f9 0%,#DADADA 100%);
-    border:solid 1px #DEDEDE; 
-    border-radius:10px;
-    text-align:center;
-    padding:5px; 
-    color:#333; 
-    width:75px; 
-} 
-#boton1:hover{
-    background:-moz-linear-gradient(#fff 0%,#DEDEDE 100%);
-    color:#999; 
-}
+    #boton1{ 
+        background:-moz-linear-gradient(#f9f9f9 0%,#DADADA 100%);
+        background:-ms-linear-gradient(#f9f9f9 0%,#DADADA 100%); 
+        background:-o-linear-gradient(#f9f9f9 0%,#DADADA 100%); 
+        background:-webkit-linear-gradient(#f9f9f9 0%,#DADADA 100%); 
+        background:linear-gradient(#f9f9f9 0%,#DADADA 100%);
+        border:solid 1px #DEDEDE; 
+        border-radius:10px;
+        text-align:center;
+        padding:5px; 
+        color:#333; 
+        width:75px; 
+    } 
+    #boton1:hover{
+        background:-moz-linear-gradient(#fff 0%,#DEDEDE 100%);
+        color:#999; 
+    }}
 

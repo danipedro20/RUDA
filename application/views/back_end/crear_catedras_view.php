@@ -8,6 +8,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 <section class="contenido">
 
 
+
     <fieldset>
         <h1>Crear Catedra</h1>
         <?php echo form_open("backend/inscatedras_control/insercatedra") ?>

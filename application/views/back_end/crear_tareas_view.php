@@ -25,6 +25,17 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 })
             });
         </script>
+                    <script>
+            function justNumbers(e)
+            {
+                var keynum = window.event ? window.event.keyCode : e.which;
+                if ((keynum == 8) || (keynum == 46))
+                    return true;
+
+                return /\d/.test(String.fromCharCode(keynum));
+            }
+        </script>
+       
 
         <fieldset>
             <h1>Crear tarea</h1>
@@ -32,6 +43,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                 <label name="lbl_tar_descripcion">Descripción de la Tarea:</label>
                 <textarea name="tar_descripcion" id="tar_descripcion" cols="35" rows="10" required="" maxlength="30" value='<?php echo set_value('tar_descripcion') ?>'></textarea>
+                <p></p>
                 <label name="lbl_idcatedra">Seleccione el aula:</label>
                 <select name='aula' id='aula'>
                     <option value="">Seleccione un Aula
@@ -48,7 +60,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 <input type="text" id="fecha" required="" name="fecha"  placeholder="Fecha de entrega" value='<?php echo set_value('tar_fecha entrega') ?>' />
 
                 <label name="lbl_puntostarea">Puntos de la Tarea: </label>
-                <input type="text" name="tar_puntostarea" placeholder="Puntos de la tarea" required="" maxlength="2" value='<?php echo set_value('tar_puntostarea') ?>' />
+                <input type="text" name="tar_puntostarea" placeholder="Puntos de la tarea"  onkeypress="return justNumbers(event);" required="" maxlength="2" value='<?php echo set_value('tar_puntostarea') ?>' />
                 <label for="userfile">Archivo Adjunto:</label>
                 <input type="file" name="userfile"  id="userfile"/>
 

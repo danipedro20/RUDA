@@ -48,7 +48,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                             <td><?php echo $lis->aul_denominacion; ?></td>
                             <td><?php echo $lis->car_denominacion; ?></td>
                             <td><?php echo $lis->pla_denominacion; ?></td>
-                            <td><?php echo $lis->idturno; ?></td>
+                             <?php if ($lis->idturno == 'M') { ?>
+                            <td><?php echo'Manaña' ?></td>
+                        <?php } elseif ($lis->idturno == 'T') { ?>
+                            <td><?php echo'Tarde' ?></td>
+                        <?php } elseif ($lis->idturno == 'N') { ?>
+                              <td><?php echo'Noche' ?></td>
+                               <?php } ?>
                             <td><?= anchor(base_url() . 'backend/reg_aula/editaraula/' . $lis->idaula, 'Editar') ?></td>
                             <td><a href="<?php echo base_url() . 'backend/reg_aula/eliminar_aula/' . $lis->idaula ?>" onclick="return confirm('¿Estás seguro que desea eliminar esta Aula?')">Eliminar</a></td>
                         <?php endforeach; ?></tr>

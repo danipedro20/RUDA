@@ -7,16 +7,12 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     ?>
 
     <section class="contenido">
-        <?php if ($_SERVER['HTTP_REFERER'] == base_url('/backend/insplan_control/eliminarplanestudio')) { ?>
-            <h2>Se ha Eliminado  con Exito!!!</h2>
-        <?php } elseif ($_SERVER['HTTP_REFERER'] == base_url('/backend/insplan_control/planestudio')) { ?> 
+        
             <h2>Se ha insertado con Exito!!!</h2>
             <P ALIGN=CENTER><a href="<?php echo base_url(); ?>backend/planestudio_control/plan">Agregar Catedras a un Plan de Estudio</a></p>
             <P ALIGN=CENTER><a href="<?php echo base_url(); ?>backend/insplan_control/planestudio">Insertar otro Plan de Estudio</a></p>
 
-        <?php } elseif ($_SERVER['HTTP_REFERER'] == base_url('/backend/insplan_control/editarplanestudio')) { ?> 
-            <h2>Se ha Editado  con Exito!!!</h2> 
-        <?php } ?>
+      
 
 
     </section>

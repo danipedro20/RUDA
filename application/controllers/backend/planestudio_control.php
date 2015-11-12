@@ -17,6 +17,11 @@ class Planestudio_control extends CI_Controller {
         $datos['contenido'] = 'plan_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
+       public function success_plan() {
+        $datos['titulo'] = 'Ruda - Exitoso';
+        $datos['contenido'] = 'sucess_plan_view';
+        $this->load->view('plantillas/adplantilla', $datos);
+    }
 
     public function listar_catedras_planes() {
         $datos['titulo'] = 'Plan de estudios';
@@ -30,7 +35,7 @@ class Planestudio_control extends CI_Controller {
         $a = $this->input->post('plan');
         $b = $this->input->post('catedra');
         $this->planestudio_model->inserplan($a, $b);
-        redirect(base_url('/backend/planestudio_control/listar_catedras_planes/'));
+        redirect(base_url('/backend/planestudio_control/success_plan/'));
     }
 
     public function editar_catedras_planes() {
