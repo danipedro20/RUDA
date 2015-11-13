@@ -27,7 +27,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             }
         </style>
         <form  action="<?php echo base_url(); ?>backend/profesor_control/editar_puntaje" method="post">
-
+            <h1>Editar de Puntos de Tarea</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 
@@ -55,7 +55,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
 
                 <?php endforeach; ?>
-            </tr>
+                </tr>
                 </tbody>
 
             </table>

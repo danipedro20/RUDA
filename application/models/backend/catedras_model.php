@@ -33,7 +33,7 @@ class Catedras_model extends CI_Model {
     }
 
     public function elimicatedra($a) {
-        $tablas = array('usu_cate', 'tareas', 'cate_plan', 'catedra');
+        $tablas = array('usu_cate', 'tareas', 'cate_plan', 'catedras');
         $this->db->where('idcatedra', $a);
         $this->db->delete($tablas);
     }

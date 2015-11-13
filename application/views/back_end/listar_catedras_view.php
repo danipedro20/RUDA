@@ -26,6 +26,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             }
         </style>
         <?php if (!empty($lista)) : ?>
+        <h1>Lista de Cátedras</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 

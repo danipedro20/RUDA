@@ -21,6 +21,7 @@
             }
         </style>
         <?php if (!empty($plan)) : ?>
+        <h1>Lista de Planes</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 

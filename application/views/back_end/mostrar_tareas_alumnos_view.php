@@ -22,6 +22,7 @@
             }
         </style>
         <?php if (!empty($arrDatostar)) : ?>
+        <h1>Lista de Tareas</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 

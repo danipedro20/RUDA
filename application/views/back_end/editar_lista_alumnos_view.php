@@ -26,7 +26,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             }
         </style>
        <form  action="<?php echo base_url(); ?>backend/profesor_control/editar_lista" method="post">
-           <h1><?php echo $nombre->cat_denominacion; ?></h1>
+           <h1>Editar Lista de:<?php echo $nombre->cat_denominacion; ?></h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>
 
