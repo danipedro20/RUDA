@@ -26,6 +26,16 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 margin: 0 auto;
             }
         </style>
+        <script>
+            function justNumbers(e)
+            {
+                var keynum = window.event ? window.event.keyCode : e.which;
+                if ((keynum == 8) || (keynum == 46))
+                    return true;
+
+                return /\d/.test(String.fromCharCode(keynum));
+            }
+        </script>
         <form  action="<?php echo base_url(); ?>backend/profesor_control/editar_puntaje" method="post">
             <h1>Editar de Puntos de Tarea</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
@@ -50,7 +60,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                             <td><?php echo $i->usu_nrocedula; ?></td>
                             <td><input type="text" name="tar_denominacion[]" id="tar_denominacion" value='<?php echo $i->tar_descripcion; ?>' style="width: 180px;" readonly=""/> </td>
                             <td><input type="text" name="tar_puntostarea[]" id="tar_puntostarea" value='<?php echo $i->puntos_asignados; ?>' style="width: 90px;" readonly="" /></td>
-                            <td><input type="text" name="tar_puntoslogrados[]" id="tar_puntoslogrados" maxlength="2" value='<?php echo $i->puntos_logrados; ?>' style="width: 90px;" /></td>
+                            <td><input type="text" name="tar_puntoslogrados[]" id="tar_puntoslogrados" maxlength="2" onkeypress="return justNumbers(event);" value='<?php echo $i->puntos_logrados; ?>' style="width: 90px;" /></td>
                     <input type="hidden" name="id[]" id="id" value='<?php echo $i->id; ?>'/>
 
 

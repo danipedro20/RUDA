@@ -105,7 +105,7 @@ class Reg_aula extends CI_Controller {
     }
 
     public function reporte_aulas() {
-    
+
 
         $aulas = $this->reg_aula_model->lista();
 
@@ -121,9 +121,9 @@ class Reg_aula extends CI_Controller {
 
         // Agregamos una página
         $this->pdf->AddPage();
-       
-                // Define el alias para el número de página que se imprimirá en el pie
-                $this->pdf->AliasNbPages();
+
+        // Define el alias para el número de página que se imprimirá en el pie
+        $this->pdf->AliasNbPages();
 
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
@@ -145,10 +145,10 @@ class Reg_aula extends CI_Controller {
          */
 
         $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
-        $this->pdf->Cell(50, 7, 'Descripcion', 'TBL', 0, 'C', '1');
-        $this->pdf->Cell(50, 7, 'Carrera', 'TBLR', 0, 'C', '1');
-        $this->pdf->Cell(90, 7, 'Plan de Estudio', 'TBLR', 0, 'C', '1');
-        $this->pdf->Cell(90, 7, 'Turno', 'TBLR', 0, 'C', '1');
+        $this->pdf->Cell(30, 7, 'Descripcion', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(40, 7, 'Carrera', 'TBLR', 0, 'C', '1');
+        $this->pdf->Cell(60, 7, 'Plan de Estudio', 'TBLR', 0, 'C', '1');
+        $this->pdf->Cell(30, 7, 'Turno', 'TBLR', 0, 'C', '1');
         $this->pdf->Ln(7);
         // La variable $x se utiliza para mostrar un número consecutivo
         $x = 1;
@@ -157,10 +157,17 @@ class Reg_aula extends CI_Controller {
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
             $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
-            $this->pdf->Cell(50, 5, utf8_decode($i->aul_denominacion), 'TBL', 0, 'C', 0);
-            $this->pdf->Cell(50, 5, utf8_decode($i->car_denominacion), 'TBLR', 0, 'C', 0);
-            $this->pdf->Cell(90, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
-            $this->pdf->Cell(90, 5, $i->idturno, 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode($i->aul_denominacion), 'TBL', 0, 'C', 0);
+            $this->pdf->Cell(40, 5, utf8_decode($i->car_denominacion), 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(60, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
+            if ($i->idturno == 'M') {
+                $this->pdf->Cell(30, 5,'Mañana', 'TBLR', 0, 'C', 0);
+            } elseif ($i->idturno == 'T') {
+                $this->pdf->Cell(30, 5, 'Tarde', 'TBLR', 0, 'C', 0);
+            } elseif ($i->idturno == 'N') {
+                $this->pdf->Cell(30, 5, 'Noche', 'TBLR', 0, 'C', 0);
+            }
+
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
         }
@@ -174,7 +181,6 @@ class Reg_aula extends CI_Controller {
          *
          */
         $this->pdf->Output("Lista de Aulas.pdf", 'I');
-        
     }
 
 }

@@ -26,7 +26,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         </script>
 
         <fieldset>
-            <h1>Generar Reportes de Asistencias</h1>
+            <h1>Generar Reportes de Tareas</h1>
             <form action="<?php echo base_url(); ?>backend/profesor_control/generar_reporte_tareas" method="post" target="_blank">
                 <label name="lbl_idcatedra">Seleccione el aula:</label>
                 <select name='aula' id='aula'>
