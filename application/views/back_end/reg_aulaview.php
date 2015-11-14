@@ -23,14 +23,14 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         </script>-->
         <fieldset>
-            <h2>AULA</h2>
+            <h2>Crear Aula</h2>
             <?php echo form_open("backend/reg_aula/inseraula") ?>
             <label for="lbl_aulanombre">Nombre: </label>
             <input type="text" name="aul_denominacion" id="inp_nombreaula" placeholder="Nombre del Aula" required=""  maxlength="30" value='<?php echo set_value('aul_denominacion') ?>'/>
 
             <label for="lbl_plazahabilitada">Plazas Habilitadas: </label>
             <input type="text" name="aul_plazahabilitada" id="inp_plazahabilitada" placeholder="Ingrese los lugares habilitados" required="required" value='<?php echo set_value('aul_plazahabilitada') ?>'/>
-
+            <p></p>
             <label for="lbl_carrera">Carrera: </label>
              <select name='selcarrera' id='selcarrera'>
              

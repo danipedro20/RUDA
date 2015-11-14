@@ -32,8 +32,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                     <tr>
                         <th>Nombre</th>
-                        <th>Carrera</th>
-                        <th>Aula</th>
+                        <th>Número de C.I</th>
+                        <th>Telefono</th>
 
                     </tr>
 

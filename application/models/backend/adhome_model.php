@@ -53,6 +53,8 @@ carreras as car on au.id_carrera=car.id_carrera where usu.idperfil='3';");
         return $query->result();
     }
 
+    
+    
     public function lista_profesores() {
 
         $query = $this->db->query("select * from usuarios where idperfil=2");
@@ -108,22 +110,7 @@ carreras as car on au.id_carrera=car.id_carrera where  usu.idusuario='$entry_id'
         return $query->result();
     }
 
-//
-//    public function insert_recuperacion($a, $g, $h) {
-//
-//        $this->db->select('idusuario')
-//                ->where('usu_nombre', $a);
-//        $query = $this->db->get('usuarios');
-//        $row = $query->row_array();
-//        $ingresado = $row['idusuario'];
-//
-//        $data = array(
-//            'recupregunta' => $g,
-//            'recurespuesta' => $h,
-//            'idusuario' => $ingresado,
-//        );
-//        return $this->db->insert('recuperacion', $data);
-//    }
+
 
     public function enviar_correo($a, $z, $e, $g) {
 
