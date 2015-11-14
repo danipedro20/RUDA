@@ -329,7 +329,7 @@ table.dataTable,table.dataTable th,table.dataTable td {
 
 .dataTables_wrapper .dataTables_filter input {
 	/*margin-left: 0.5em*/
-	width: 260px;
+	width: 220px;
     height: 35px;
     padding: 5px 20px 0px 20px;
     /* margin: 0 0 20px 0; */

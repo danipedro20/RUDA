@@ -19,13 +19,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 });
             });
         </script>
-        <STYLE type="text/css">
-            div.dataTables_wrapper {
-                width: 800px;
-                margin: 0 auto;
-            }
-        </style>
-        <form method="post" action="<?php echo base_url(); ?>backend/profesor_control/guardar_puntajes">
+        
+        <form id='tabla' method="post" action="<?php echo base_url(); ?>backend/profesor_control/guardar_puntajes">
 
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>

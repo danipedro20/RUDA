@@ -13,7 +13,7 @@
         <header>
             <section class="contenedor">
 				
-               <a href="<?php echo base_url()?>frontend/home/index"> <img src='<?php echo base_url()?>/assets/front_end/img/logoRuda.png'/> </a>
+               <a href="<?php echo base_url()?>frontend/home/index"> <img id='logoruda'src='<?php echo base_url()?>/assets/front_end/img/logoRuda.png'/> </a>
                 <!-- <h4 id="mensaje_header">Sistema de Gestión de Aula</h4> -->
             </section>
         </header>

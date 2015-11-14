@@ -157,7 +157,7 @@ carreras as car on au.id_carrera=car.id_carrera where  usu.idusuario='$entry_id'
 
     public function aulas() {
 
-        $query = $this->db->query("select * from aulas ");
+        $query = $this->db->query("select * from aulas");
         return $query->result();
     }
 

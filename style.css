@@ -1,0 +1,97 @@
+* {
+	margin:0;
+	padding: 0;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 230px;
+	width: calc(100% - 230px);
+	height: 100px;
+	background: #27ae60;
+}
+aside {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 230px;
+	height: 100%;
+	background: #34495e;
+	font-family: 'Lato', sans-serif;
+	overflow: hidden;
+}
+#box-profile {
+	width: 230px;
+	height: 100px;
+	overflow: hidden;
+	background: #2ecc71;
+}
+.img-profile {
+	position: relative;
+	display: block;
+	float: left;
+	margin:25px 0 25px 20px;
+	width: 70px;
+	height: 50px;
+	border-radius: 60px;
+
+}
+.name-user {
+	position: relative;
+	display: block;
+	float: left;
+	width: auto;
+	line-height: 20px;
+	font-size: 20px;
+	color: #fff;
+	font-family: 'Lato', sans-serif;
+	margin:40px 0 40px 15px;
+}
+input[id="show-menu"] {
+	display: none;
+}
+
+aside nav ul {
+	list-style: none;
+	width: 100%;
+	margin-top:30px;
+}
+nav ul li {
+	display: block;
+	width: 230px;
+	height: auto;
+	
+}
+nav ul li:hover {
+	border-left: 3px solid #27ae60;
+}
+ul li a, label {
+	display: block;
+	text-indent: 20px;
+	width: 100%;
+	line-height: 14px;
+	font-size: 14px;
+	padding: 18px 0;
+	text-decoration: none;
+	cursor: pointer;
+	color: #ccc;
+	
+}
+
+
+/*sub menu*/
+
+aside input[id="show-menu"]:checked + nav ul li ul  {
+	height: 150px;
+}
+
+
+
+.sub-menu {
+	overflow: hidden;
+	margin-top: 0;
+	background: #2c3e50;
+	height: 0;
+	transition: 1s;
+}

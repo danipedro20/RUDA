@@ -29,11 +29,10 @@ date_default_timezone_set('America/Asuncion');
             }
         </style>
 
-        <h1> Sección en Construcción </h1>
+        <h1> Bienvenido!!! </h1>
         <h3 ALIGN = CENTER > Bienvenido:  <?php echo $this->session->userdata('nombre'); ?> </h3>
-        <h3 ALIGN = CENTER > Perfil:  <?php echo $this->session->userdata('perfil'); ?> </h3>
-        <h3 ALIGN = CENTER > id:  <?php echo$this->session->userdata('id');
-    ?> </h3>
+        
+     
 
 
         <?php

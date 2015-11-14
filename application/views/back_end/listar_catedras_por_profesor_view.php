@@ -67,71 +67,71 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                             <?php if ((!empty($row->parcial) or (!empty($row->recuperatorio)))) { ?>
                                 <?php if (!empty($row->parcial)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/2"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/2"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/2"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/2"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
                                 <?php if (!empty($row->recuperatorio)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/3"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/3"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/3"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/3"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
                                 <?php if (!empty($row->primer_ordinario)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/4"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/4"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/4"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/4"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
                                 <?php if (!empty($row->segundo_ordinario)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/5"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/5"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/5"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/5"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
                                 <?php if (!empty($row->complementario)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/6"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/6"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/6"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/6"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
                                 <?php if (!empty($row->extraordinario)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/7"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/7"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/7"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/7"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
                                 <?php if (!empty($row->mesa_especial)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/8"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/8"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/8"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/8"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
@@ -152,42 +152,42 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                             <?php } else { ?>
                                 <td> 
-                                    <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/2"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                    <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/2"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                 </td>
 
                                 <td> 
-                                    <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/3"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                    <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/3"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                 </td>
                                 <td>Favor cargue el Parcial o Recu.</td>
                                 <td>Favor cargue el Parcial o Recu.</td>
                                 <?php if (!empty($row->complementario)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/6"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/6"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/6"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/6"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
                                 <?php if (!empty($row->extraordinario)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/7"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/7"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/7"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/7"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?> <?php if (!empty($row->mesa_especial)) { ?>
                                     <td>                              
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/8"><img src="<?php echo base_url() ?>/assets/editar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/editar_notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/8"><img id='editarprof' src="<?php echo base_url() ?>/assets/editar.jpg"></a>
                                     </td>
                                 <?php } else { ?>
                                     <td> 
-                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/8"><img src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
+                                        <a href="<?php echo base_url() ?>backend/profesor_control/notas_examenes/<?php echo $i->idplan ?>/<?php echo $i->idcatedra ?>/<?php echo $i->idaula ?>/8"><img id='editarprof' src="<?php echo base_url() ?>/assets/agregar.jpg"></a>
 
                                     </td>
                                 <?php } ?>
