@@ -30,12 +30,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             }
         </script>
 
-        <STYLE type="text/css">
-            div.dataTables_wrapper {
-                width: 800px;
-                margin: 0 auto;
-            }
-        </style>
+       
         <?php if (!empty($lista)) : ?>
             <h1><?php echo $nombre->cat_denominacion; ?></h1>
             <h2><?php
@@ -56,7 +51,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 }
                 ?></h2>
             <a href="<?php echo base_url() ?>backend/profesor_control/listar_catedras_profesor">Volver</a>
-            <form method="post" action="<?php echo base_url(); ?>backend/profesor_control/guardar_notas_examenes">
+            <form id='tabla' method="post" action="<?php echo base_url(); ?>backend/profesor_control/guardar_notas_examenes">
                 <table id="example" class="display nowrap" cellspacing="0" width="100%">
                     <thead>
 

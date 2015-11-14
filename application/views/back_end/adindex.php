@@ -160,11 +160,9 @@ usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuari
                 }
             }
             ?>
-            <h1> Sección en Construcción </h1>
-            <h3 ALIGN = CENTER > Bienvenido:  <?php echo $this->session->userdata('nombre'); ?> </h3>
-            <h3 ALIGN = CENTER > Perfil:  <?php echo $this->session->userdata('perfil'); ?> </h3>
-            <h3 ALIGN = CENTER > id:  <?php echo $z; ?> </h3>
-
+            <h1> Bienvenido!! </h1>
+            <h3 ALIGN = CENTER > Usuario:  <?php echo $this->session->userdata('nombre'); ?> </h3>
+            
             <?php
             if ($cont1 > 0 and $cont2 > 0) {
                 ?>
@@ -188,7 +186,7 @@ usu_au.idaula=au.idaula join aulas on usu_au.idaula=aulas.idaula  where idusuari
                 ?>
                 <div id="mini-notification">
 
-////
+
                     <p><?php echo 'Tienes ' . "" . $cont1 . " " . ' tarea/s pediente/s' ?></p>
 
                 </div>

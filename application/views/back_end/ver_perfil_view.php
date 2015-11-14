@@ -7,11 +7,11 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     ?>
     <section class="contenido">
         <h2 ALIGN = CENTER> Perfil del Usuario </h2>
-        <h4 ALIGN = Left >Nombre de Usuario:  <?php echo $this->session->userdata('nombre'); ?> </h4>
-        <h4 ALIGN = Left >Número de C.I:  <?php echo $this->session->userdata('cedula'); ?> </h4>
-        <h4 ALIGN = Left >Direccion:  <?php echo $this->session->userdata('direccion'); ?> </h4>
-        <h4 ALIGN = Left >Correo:  <?php echo $this->session->userdata('email'); ?> </h4>
-        <h4 ALIGN = Left >Número de Teléfono:  <?php echo $this->session->userdata('telefono'); ?> </h4>
+        <h4 ALIGN = center >Nombre de Usuario:  <?php echo $this->session->userdata('nombre'); ?> </h4>
+        <h4 ALIGN = center >Número de C.I:  <?php echo $this->session->userdata('cedula'); ?> </h4>
+        <h4 ALIGN = center >Direccion:  <?php echo $this->session->userdata('direccion'); ?> </h4>
+        <h4 ALIGN = center >Correo:  <?php echo $this->session->userdata('email'); ?> </h4>
+        <h4 ALIGN = center >Número de Teléfono:  <?php echo $this->session->userdata('telefono'); ?> </h4>
            <?php if ($this->session->userdata('perfil') == 1) { ?>
          <h4 ALIGN = left ><a href="<?php echo base_url() ?>backend/adhome/editarperfil/" >Editar Perfil</a></h4>
 

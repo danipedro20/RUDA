@@ -15,13 +15,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         ?>
 
         <h2 ALIGN = CENTER> Perfil <?php echo $this->session->userdata('nombre'); ?> </h2>
-        <h4 ALIGN = Left >Nombre de Usuario:  <?php echo $this->session->userdata('nombre'); ?> </h4>
-        <h4 ALIGN = Left >Número de C.I:  <?php echo $this->session->userdata('cedula'); ?> </h4>
-        <h4 ALIGN = Left >Direccion:  <?php echo $this->session->userdata('direccion'); ?> </h4>
-        <h4 ALIGN = Left >Correo:  <?php echo $this->session->userdata('email'); ?> </h4>
-        <h4 ALIGN = Left >Número de Teléfono:  <?php echo $this->session->userdata('telefono'); ?> </h4>
-        <h4 ALIGN = Left >Turno:  <?php echo $fila->idturno; ?> </h4>
-            <h4 ALIGN = Left >Carrera:  <?php echo $fila->car_denominacion; ?> </h4>
+        <h4 ALIGN = center >Nombre de Usuario:  <?php echo $this->session->userdata('nombre'); ?> </h4>
+        <h4 ALIGN = center >Número de C.I:  <?php echo $this->session->userdata('cedula'); ?> </h4>
+        <h4 ALIGN = center >Direccion:  <?php echo $this->session->userdata('direccion'); ?> </h4>
+        <h4 ALIGN = center >Correo:  <?php echo $this->session->userdata('email'); ?> </h4>
+        <h4 ALIGN = center >Número de Teléfono:  <?php echo $this->session->userdata('telefono'); ?> </h4>
+        <h4 ALIGN = center >Turno:  <?php echo $fila->idturno; ?> </h4>
+            <h4 ALIGN = center >Carrera:  <?php echo $fila->car_denominacion; ?> </h4>
             <h4 ALIGN = left ><a href="<?php echo base_url() ?>backend/alumnos_control/editarperfil/" >Editar Perfil</a></h4>
 
 

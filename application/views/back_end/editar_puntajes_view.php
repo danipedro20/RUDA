@@ -20,12 +20,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 });
             });
         </script>
-        <STYLE type="text/css">
-            div.dataTables_wrapper {
-                width: 800px;
-                margin: 0 auto;
-            }
-        </style>
+      
         <script>
             function justNumbers(e)
             {
@@ -36,7 +31,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 return /\d/.test(String.fromCharCode(keynum));
             }
         </script>
-        <form  action="<?php echo base_url(); ?>backend/profesor_control/editar_puntaje" method="post">
+        <form id='tabla'  action="<?php echo base_url(); ?>backend/profesor_control/editar_puntaje" method="post">
             <h1>Editar de Puntos de Tarea</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>

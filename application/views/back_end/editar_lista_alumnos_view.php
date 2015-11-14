@@ -19,13 +19,8 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                 });
             });
         </script>
-        <STYLE type="text/css">
-            div.dataTables_wrapper {
-                width: 800px;
-                margin: 0 auto;
-            }
-        </style>
-       <form  action="<?php echo base_url(); ?>backend/profesor_control/editar_lista" method="post">
+        
+       <form id='tabla' action="<?php echo base_url(); ?>backend/profesor_control/editar_lista" method="post">
            <h1>Editar Lista de:<?php echo $nombre->cat_denominacion; ?></h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>

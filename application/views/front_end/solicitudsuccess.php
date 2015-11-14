@@ -11,6 +11,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 </script>
 <section class="contenido">
     
-    <h2>La solicitud se ha enviado  con Exito!!!</h2>
+    <h2>La solicitud se ha enviado con &eacute;xito a su correo!!!</h2>
+    
     
 </section>

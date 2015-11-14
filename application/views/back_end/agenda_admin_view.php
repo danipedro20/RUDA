@@ -1,3 +1,5 @@
+</section>
+<section>
 <?php
 header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -11,8 +13,8 @@ $tabla = "tcalendario";
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($db->connect_errno) {
     die("<h1>Fallo al conectar a MySQL: (" . $db->connect_errno . ") " . $db->connect_error . "</h1>");
-}
-;
+};
+
 ?>
 
 <?php if ($this->session->userdata('nombre')) {
@@ -40,7 +42,7 @@ if ($db->connect_errno) {
             function generar_calendario(mes, anio)
             {
                 var agenda = $(".cal");
-                agenda.html("<img src='<?php echo base_url(); ?>assets/agenda/images/loading.gif'>");
+                agenda.html("<img id='calendar' src='<?php echo base_url(); ?>assets/agenda/images/loading.gif'>");
                 $.ajax({
                     type: "GET",
                     url: "<?php echo base_url(); ?>assets/agenda/agenda_admin.php",
@@ -117,7 +119,7 @@ if ($db->connect_errno) {
                     e.preventDefault();
                     if ($("#evento_titulo").valid() == true)
                     {
-                        $("#respuesta_form").html("<img src='<?php echo base_url(); ?>assets/agenda/images/loading.gif'>");
+                        $("#respuesta_form").html("<img id='calendar' src='<?php echo base_url(); ?>assets/agenda/images/loading.gif'>");
                         var evento = $("#evento_titulo").val();
                         var prioridad = $("#prioridad").val();
                         var aula = $("#aula").val();
@@ -149,7 +151,7 @@ if ($db->connect_errno) {
                 {
                     e.preventDefault();
                     var current_p = $(this);
-                    $("#respuesta").html("<img src='<?php echo base_url(); ?>assets/agenda/images/loading.gif'>");
+                    $("#respuesta").html("<img id='calendar' src='<?php echo base_url(); ?>assets/agenda/images/loading.gif'>");
                     var id = $(this).attr("rel");
                     $.ajax({
                         type: "GET",
@@ -179,3 +181,4 @@ if ($db->connect_errno) {
 } else
     redirect(base_url('/frontend/usuarios_control/logueo/'));
 ?>
+</section>

@@ -21,7 +21,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
         </script>
         <STYLE type="text/css">
             div.dataTables_wrapper {
-                width: 800px;
+                width: 600px;
                 margin: 0 auto;
             }
         </style>
