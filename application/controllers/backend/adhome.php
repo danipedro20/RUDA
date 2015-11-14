@@ -12,7 +12,7 @@ class Adhome extends CI_Controller {
         $this->load->model('backend/adhome_model');
         $this->load->library('pdf');
         //llamado al modelo
-        //   $this->load->model('/backend/Perfil_model');
+      
     }
 
     function index2() {

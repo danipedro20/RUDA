@@ -7,8 +7,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 $dbhost = "localhost";
 $dbname = "ruda";
-$dbuser = "root";
-$dbpass = "";
+$dbuser = "ruben";
+$dbpass = "ruben";
 $tabla = "tcalendario";
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($db->connect_errno) {

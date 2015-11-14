@@ -50,7 +50,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                             <td><?php echo $soli->ins_nombre; ?></td>
                             <td><?php echo $soli->car_denominacion; ?></td>
                             <td><?php echo $soli->aul_denominacion; ?></td>
-                            <td><?php echo $soli->ins_turno; ?></td>
+                             <?php if ($soli->ins_turno == 'M') { ?>
+                            <td><?php echo'Manaña' ?></td>
+                        <?php } elseif ($soli->ins_turno == 'T') { ?>
+                            <td><?php echo'Tarde' ?></td>
+                        <?php } elseif ($soli->ins_turno == 'N') { ?>
+                              <td><?php echo'Noche' ?></td>
+                               <?php } ?>
                             <td><?= anchor(base_url() . 'frontend/solicitud_control/verificarsolicitud/' . $soli->idinscripcion, 'Verificar') ?></td>
                         <?php endforeach; ?></tr>
                 </tbody>

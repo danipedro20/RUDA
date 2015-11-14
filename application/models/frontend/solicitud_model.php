@@ -14,23 +14,8 @@ class Solicitud_model extends CI_Model {
         $consulta = $this->db->get('aulas');
         $row = $consulta->row();
         $idturno = $row->idturno;
-
-        $data = array(
-            'ins_nombre' => $a,
-            'ins_nrocedula' => $b,
-            'ins_direccion' => $c,
-            'ins_telefono' => $d,
-            'ins_email' => $e,
-            'ins_password' => $f,
-            'ins_pregunta' => $g,
-            'ins_respuesta' => $h,
-            'id_carrera' => $i,
-            'idaula' => $j,
-            'idplan' => $k,
-            'ins_turno' => $idturno,
-            'ins_visto' => '0',
-        );
-        return $this->db->insert('inscripcion', $data);
+      $query = $this->db->query("CALL insertar_solicitudes('$a','$b','$c','$d','$e','$f','$g','$h',0,'$idturno','$j','$k','$i');");
+        return $query->result();
     }
 
     public function verifica_username($username) {
@@ -66,10 +51,10 @@ class Solicitud_model extends CI_Model {
                 ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
-         echo $query->idaula;
-          echo $query->idplan;
-        
-        
+        echo $query->idaula;
+        echo $query->idplan;
+
+
         $this->db->where('idaula', $query->idaula)
                 ->where('idplan', $query->idplan)
                 ->where('id_carrera', $query->id_carrera)
@@ -90,16 +75,8 @@ class Solicitud_model extends CI_Model {
                 ->from('inscripcion');
         $query = $this->db->get();
         $query = $query->row();
-        $data = array(
-            'usu_nombre' => $query->ins_nombre,
-            'usu_nrocedula' => $query->ins_nrocedula,
-            'usu_direccion' => $query->ins_direccion,
-            'usu_telefono' => $query->ins_telefono,
-            'usu_email' => $query->ins_email,
-            'usu_password' => $query->ins_password,
-            'idperfil' => '3',
-        );
-        return $this->db->insert('usuarios', $data);
+        $insert = $this->db->query("CALL insertar_usuarios('$query->ins_nombre','$query->ins_nrocedula','$query->ins_direccion','$query->ins_telefono','$query->ins_email','$query->ins_password',3);");
+        return $insert->result();
     }
 
     public function insertarrecuperacion($id) {
