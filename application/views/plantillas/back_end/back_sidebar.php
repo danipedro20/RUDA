@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 </section>
 
 <div id="menu">
@@ -27,7 +27,7 @@
                 </li>
             </ul>
         </li>
-=======
+
 <aside>
 </ul>
 <ul class="parent">
@@ -50,7 +50,7 @@
             <li><a class="desplegable" title="Profesores">Profesor</a>
             <li><a href="<?php echo base_url()?>backend/adhome/listar_profesores">Listar Profesores</a></li>
             <li><a href="<?php echo base_url()?>backend/adhome/registrar_profesores">Registar Profesores</a></li>
->>>>>>> 58ab32dfbceda6b60a87103a175a9d38232d63fc
+
 
         <li class="has-sub"><a href="#">Aulas</a>
             <ul>
@@ -77,14 +77,14 @@
             </ul>
         </li>
 
-<<<<<<< HEAD
+
         <li class="has-sub"><a href="#">Carreras</a>
             <ul>
                 <li><a href="<?php echo base_url() ?>backend/carreras_control/vercarreras">Ver Carreras</a></li>
                 <li><a href="<?php echo base_url() ?>backend/carreras_control/carreras">Crear Carreras</a></li>
             </ul>
         </li>
-=======
+
 <ul class="parent">
     <li><a class="desplegable" title="Aulas">Aulas</a>
         <ul class="subnavegador">
@@ -116,7 +116,7 @@
         <ul class="subnavegador">
             <li><a href="<?php echo base_url() ?>backend/carreras_control/vercarreras">Ver Carreras</a></li>
             <li><a href="<?php echo base_url() ?>backend/carreras_control/carreras">Crear Carreras</a></li>
->>>>>>> 58ab32dfbceda6b60a87103a175a9d38232d63fc
+
 
     </ul>
 </div>
