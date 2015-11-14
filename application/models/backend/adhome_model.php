@@ -104,17 +104,8 @@ carreras as car on au.id_carrera=car.id_carrera where  usu.idusuario='$entry_id'
     }
 
     public function insert_profesor($a, $b, $c, $d, $e, $f) {
-
-        $data = array(
-            'usu_nombre' => $a,
-            'usu_nrocedula' => $b,
-            'usu_direccion' => $c,
-            'usu_telefono' => $d,
-            'usu_email' => $e,
-            'usu_password' => $f,
-            'idperfil' => '2',
-        );
-        return $this->db->insert('usuarios', $data);
+        $query = $this->db->query("CALL insertar_usuarios('$a','$b','$c','$d','$e','$f',2);");
+        return $query->result();
     }
 
 //

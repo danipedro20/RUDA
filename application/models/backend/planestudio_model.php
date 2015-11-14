@@ -19,11 +19,12 @@ class Planestudio_model extends CI_Model {
         return $query->result();
     }
 
-    public function inserplan($a, $b) {
+    public function inserplan($a, $b,$c) {
 
         $data = array(
             'idplan' => $a,
             'idcatedra' => $b,
+             'diascatedra' => $c,
         );
         return $this->db->insert('cate_plan', $data);
     }

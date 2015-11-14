@@ -7,7 +7,7 @@ class Planestudio_control extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('backend/planestudio_model');
-         $this->load->library('pdf');
+        $this->load->library('pdf');
     }
 
     public function plan() {
@@ -17,7 +17,8 @@ class Planestudio_control extends CI_Controller {
         $datos['contenido'] = 'plan_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
-       public function success_plan() {
+
+    public function success_plan() {
         $datos['titulo'] = 'Ruda - Exitoso';
         $datos['contenido'] = 'sucess_plan_view';
         $this->load->view('plantillas/adplantilla', $datos);
@@ -34,7 +35,8 @@ class Planestudio_control extends CI_Controller {
 
         $a = $this->input->post('plan');
         $b = $this->input->post('catedra');
-        $this->planestudio_model->inserplan($a, $b);
+        $c = $this->input->post('diascatedra');
+        $this->planestudio_model->inserplan($a, $b ,$c);
         redirect(base_url('/backend/planestudio_control/success_plan/'));
     }
 
@@ -140,7 +142,7 @@ class Planestudio_control extends CI_Controller {
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
             $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
-           
+
 
             $this->pdf->Cell(60, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
             $this->pdf->Cell(90, 5, utf8_decode($i->cat_denominacion), 'TBL', 0, 'C', 0);
