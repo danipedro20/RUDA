@@ -44,10 +44,10 @@
             <section class="contenedor">
                 <ul>
                     <li><a href="<?php echo base_url() ?>frontend/usuarios_control/sitioalumno">Inicio</a></li>
-                    <li><a href="#">Asistencias</a></li>
-                    <li><a href="#">Materias</a></li>
-                    <li><a href="#">Profesores</a></li>
-                    <li><a href="#">Tareas</a></li>
+                    <li><a href="<?php echo base_url() ?>backend/alumnos_control/reporte_asistencias_alumno" target="_blank" >Asistencias</a></li>
+                    <!-- <li><a href="#">Materias</a></li> -->
+                    <li><a href="<?php echo base_url() ?>backend/alumnos_control/agenda">Agenda</a></li>
+                    <li><a href="<?php echo base_url() ?>backend/alumnos_control/successalumnostareas">Tareas</a></li>
                     <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesi&oacute;n</a></li>
                 </ul>
             </section>

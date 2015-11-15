@@ -206,7 +206,7 @@ left join carreras as car on car.id_carrera=au.id_carrera
 left join usu_au as usca on usca.idaula=au.idaula
 left join usuarios as alumno on usca.idusuario=alumno.idusuario
 left join notas_examenes as n on n.idcatedra=ca.idcatedra
-where alumno.idusuario='$c';");
+where n.idusuario='$c';");
         return $query->result();
     }
    public function reportes_asistencias() {

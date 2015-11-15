@@ -43,10 +43,10 @@
 
                 <ul>
                     <li><a href="<?php echo base_url() ?>frontend/usuarios_control/sitioprofesor">Inicio</a></li>
-                    <li><a href="#">Asistencias</a></li>
-                    <li><a href="#">Materias</a></li>
-                    <li><a href="#">Alumnos</a></li>
-                    <li><a href="#">Tareas</a></li>
+                    <li><a href="<?php echo base_url()?>backend/profesor_control/listaralumnos">Asistencias</a></li>
+                    <li><a href="<?php echo base_url()?>backend/profesor_control/listar_catedras_profesor">C&aacute;tedras</a></li>
+                    <li><a href="<?php echo base_url()?>backend/profesor_control/listaralumnos">Alumnos</a></li>
+                    <li><a href="<?php echo base_url()?>backend/profesor_control/tareas">Tareas</a></li>
                     <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesión</a></li>
                 </ul>
 

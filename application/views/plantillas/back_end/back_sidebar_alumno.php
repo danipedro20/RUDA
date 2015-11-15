@@ -19,7 +19,7 @@
 
         <li class="has-sub"><a href="#">Reportes</a>
             <ul>
-                <li><a href="<?php echo base_url() ?>backend/alumnos_control/reporte_notas_alumno" target="_blank" >Notas</a></li>
+                <li><a href="<?php echo base_url() ?>backend/alumnos_control/reporte_notas_alumno" target="_blank" >Notas Disponibles</a></li>
                 <li><a href="<?php echo base_url() ?>backend/alumnos_control/reporte_asistencias_alumno" target="_blank" >Asistencias</a></li>
             </ul>
         </li>
