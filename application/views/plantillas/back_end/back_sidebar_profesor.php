@@ -3,8 +3,8 @@
     <ul>
         <li class="has-sub"><a href="#">Informaci&oacute;n General</a>
             <ul>
-                <li><a href="<?php echo base_url() ?>backend/alumnos_control/verperfil">Perfil de Usuario</a></li>
-                <li><a href="<?php echo base_url() ?>backend/verificacion_control/verificacion">Cambiar contraseña</a></li>
+                <li><a href="<?php echo base_url() ?>backend/profesor_control/verperfil">Perfil de Usuario</a></li>
+                <li><a href="<?php echo base_url() ?>backend/verificacion_control/verificacionprofesor">Cambiar contraseña</a></li>
             </ul> 
         </li>
         

@@ -10,7 +10,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
         <form method="post" action=" <?php echo base_url(); ?>frontend/usuarios_control/ingreso">
 
-            <h1>Ingreso al Sistema</h1>
+            <h1 id='logueo'>Ingreso al Sistema</h1>
 
             <label name="lbl_usu_email">Email: </label>
             <input type="text" name="usu_email" placeholder="Correo"  maxlength="30" required="" id="usu_email" value="<?php echo set_value('usu_email') ?>" />
