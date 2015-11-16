@@ -129,13 +129,12 @@ class Carreras_control extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-        $this->pdf->SetTitle("Lista de Carreras");
-        $this->pdf->SetLeftMargin(15);
-        $this->pdf->SetLineWidth(.3);
-        $this->pdf->SetDrawColor(15, 0, 0);
-        $this->pdf->SetRightMargin(15);
-        $this->pdf->SetTextColor(0);
+         $this->pdf->SetFont('Arial', 'B', 12);
+
+        $this->pdf->Cell(40, 6, '', 0, 0, 'C');
+        $this->pdf->Cell(100, 6, 'Lista de Carreras', 1, 0, 'C');
         $this->pdf->SetFillColor(200, 200, 200);
+        $this->pdf->Ln(10);
 
         // Se define el formato de fuente: Arial, negritas, tamaño 9
         $this->pdf->SetFont('Arial', 'B', 7);

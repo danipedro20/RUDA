@@ -599,6 +599,7 @@ function AcceptPageBreak()
 function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link='')
 {
 	// Output a cell
+   
 	$k = $this->k;
 	if($this->y+$h>$this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AcceptPageBreak())
 	{
@@ -615,6 +616,8 @@ function Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=false, $link
 		if($ws>0)
 		{
 			$this->ws = $ws;
+                       
+                        
 			$this->_out(sprintf('%.3F Tw',$ws*$k));
 		}
 	}

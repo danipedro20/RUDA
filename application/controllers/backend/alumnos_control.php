@@ -200,14 +200,20 @@ class Alumnos_control extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-        $this->pdf->SetTitle("Lista de Notas");
-        $this->pdf->SetLeftMargin(15);
-        $this->pdf->SetLineWidth(.3);
-        $this->pdf->SetDrawColor(15, 0, 0);
-        $this->pdf->SetRightMargin(15);
-        $this->pdf->SetTextColor(0);
-        $this->pdf->SetFillColor(200, 200, 200);
+        $this->pdf->SetFont('Arial', 'B', 12);
 
+        $this->pdf->Cell(40, 6, '', 0, 0, 'C');
+        $this->pdf->Cell(100, 6, 'Lista de Notas', 1, 0, 'C');
+        $this->pdf->SetFillColor(200, 200, 200);
+        $this->pdf->Ln(10);
+
+//        $this->pdf->SetTitle("Lista de Notas");
+//        $this->pdf->SetLeftMargin(15);
+//        $this->pdf->SetLineWidth(.3);
+//        $this->pdf->SetDrawColor(15, 0, 0);
+//        $this->pdf->SetRightMargin(15);
+//        $this->pdf->SetTextColor(0);
+//        $this->pdf->SetFillColor(200, 200, 200);
         // Se define el formato de fuente: Arial, negritas, tamaño 9
         $this->pdf->SetFont('Arial', 'B', 7);
         /*
@@ -387,14 +393,12 @@ class Alumnos_control extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-        $this->pdf->SetTitle("Lista de Asistencias");
-        $this->pdf->SetLeftMargin(15);
-        $this->pdf->SetLineWidth(.3);
-        $this->pdf->SetDrawColor(15, 0, 0);
-        $this->pdf->SetRightMargin(15);
-        $this->pdf->SetTextColor(0);
-        $this->pdf->SetFillColor(200, 200, 200);
+         $this->pdf->SetFont('Arial', 'B', 12);
 
+        $this->pdf->Cell(40, 6, '', 0, 0, 'C');
+        $this->pdf->Cell(100, 6, 'Lista de Asistencias', 1, 0, 'C');
+        $this->pdf->SetFillColor(200, 200, 200);
+        $this->pdf->Ln(10);
         // Se define el formato de fuente: Arial, negritas, tamaño 9
         $this->pdf->SetFont('Arial', 'B', 7);
         /*
@@ -421,7 +425,7 @@ class Alumnos_control extends CI_Controller {
             $this->pdf->Cell(60, 5, utf8_decode($i->cat_denominacion), 'TBL', 0, 'C', 0);
             $this->pdf->Cell(30, 5, utf8_decode(date("d-m-Y", strtotime($fecha))), 'TBLR', 0, 'C', 0);
             $this->pdf->Cell(20, 5, utf8_decode($i->asi_estado), 'TBLR', 0, 'C', 0);
-             $this->pdf->Cell(30, 5, utf8_decode($i->asi_justificacion), 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode($i->asi_justificacion), 'TBLR', 0, 'C', 0);
 
 
             //Se agrega un salto de linea

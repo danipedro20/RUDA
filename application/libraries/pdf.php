@@ -9,6 +9,7 @@
         }
       
         public function Header(){
+            $titulo='Sistema de Gestión de Aula';
             $this->Image('assets/uploads/logoruda.png',10,8,22);
             $this->SetFont('Arial','B',20);
             $this->Cell(30);
@@ -16,7 +17,7 @@
             $this->Ln('7');
             $this->SetFont('Arial','B',10);
             $this->Cell(30);
-            $this->Cell(120,10,'Sistema de Gestion de Aula',0,0,'C');
+            $this->Cell(120,10,utf8_decode($titulo),0,0,'C');
             $this->Ln(20);
          
        }

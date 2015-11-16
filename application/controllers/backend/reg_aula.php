@@ -128,13 +128,21 @@ class Reg_aula extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-        $this->pdf->SetTitle("Lista de Aulas");
-        $this->pdf->SetLeftMargin(15);
-        $this->pdf->SetLineWidth(.3);
-        $this->pdf->SetDrawColor(15, 0, 0);
-        $this->pdf->SetRightMargin(15);
-        $this->pdf->SetTextColor(0);
+
+          $this->pdf->SetFont('Arial', 'B', 12);
+
+        $this->pdf->Cell(40, 6, '', 0, 0, 'C');
+        $this->pdf->Cell(100, 6, 'Lista de Aulas', 1, 0, 'C');
         $this->pdf->SetFillColor(200, 200, 200);
+        $this->pdf->Ln(10);
+
+//        $this->pdf->SetTitle("Lista de Aulas");
+//        $this->pdf->SetLeftMargin(15);
+//        $this->pdf->SetLineWidth(.3);
+//        $this->pdf->SetDrawColor(15, 0, 0);
+//        $this->pdf->SetRightMargin(15);
+//        $this->pdf->SetTextColor(0);
+//        $this->pdf->SetFillColor(200, 200, 200);
 
         // Se define el formato de fuente: Arial, negritas, tamaño 9
         $this->pdf->SetFont('Arial', 'B', 7);
@@ -143,9 +151,9 @@ class Reg_aula extends CI_Controller {
          *
          * $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
          */
-
+$des='Descripción';
         $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
-        $this->pdf->Cell(30, 7, 'Descripcion', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(30, 7,utf8_decode($des), 'TBL', 0, 'C', '1');
         $this->pdf->Cell(40, 7, 'Carrera', 'TBLR', 0, 'C', '1');
         $this->pdf->Cell(60, 7, 'Plan de Estudio', 'TBLR', 0, 'C', '1');
         $this->pdf->Cell(30, 7, 'Turno', 'TBLR', 0, 'C', '1');
@@ -161,7 +169,8 @@ class Reg_aula extends CI_Controller {
             $this->pdf->Cell(40, 5, utf8_decode($i->car_denominacion), 'TBLR', 0, 'C', 0);
             $this->pdf->Cell(60, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
             if ($i->idturno == 'M') {
-                $this->pdf->Cell(30, 5,'Mañana', 'TBLR', 0, 'C', 0);
+                $ma='Mañana';
+                $this->pdf->Cell(30, 5,utf8_decode($ma), 'TBLR', 0, 'C', 0);
             } elseif ($i->idturno == 'T') {
                 $this->pdf->Cell(30, 5, 'Tarde', 'TBLR', 0, 'C', 0);
             } elseif ($i->idturno == 'N') {
