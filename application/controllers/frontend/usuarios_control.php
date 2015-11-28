@@ -53,7 +53,7 @@ class Usuarios_control extends CI_Controller {
 
         //si existe el campo oculto llamado grabar creamos las validadciones
         $this->form_validation->set_rules('usu_email', 'Email', 'trim|required');
-        $this->form_validation->set_rules('usu_pass', 'Contrase�a', 'trim|required');
+        $this->form_validation->set_rules('usu_pass', 'Contraseña', 'trim|required');
 
         //SI HAY ALGÚNA REGLA DE LAS ANTERIORES QUE NO SE CUMPLE MOSTRAMOS EL MENSAJE
         $this->form_validation->set_message('required', 'El %s es requerido');
