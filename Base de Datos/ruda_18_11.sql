@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2015 a las 10:12:43
+-- Tiempo de generación: 18-11-2015 a las 13:07:51
 -- Versión del servidor: 5.5.36
 -- Versión de PHP: 5.4.27
 
@@ -61,56 +61,6 @@ CREATE TABLE IF NOT EXISTS `asistencias` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `aud_notas_examenes`
---
-
-CREATE TABLE IF NOT EXISTS `aud_notas_examenes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parcial_old` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `parcial_new` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `recuperatorio_old` int(2) DEFAULT NULL,
-  `recuperatorio_new` int(2) DEFAULT NULL,
-  `primer_ordinario_old` int(2) DEFAULT NULL,
-  `primer_ordinario_new` int(2) DEFAULT NULL,
-  `segundo_ordinario_old` int(2) DEFAULT NULL,
-  `segundo_ordinario_new` int(2) DEFAULT NULL,
-  `complementario_old` int(3) DEFAULT NULL,
-  `complementario_new` int(3) DEFAULT NULL,
-  `extraordinario_old` int(3) DEFAULT NULL,
-  `extraordinario_new` int(3) DEFAULT NULL,
-  `mesa_especial_old` int(3) DEFAULT NULL,
-  `mesa_especial_new` int(3) DEFAULT NULL,
-  `idaula` int(3) NOT NULL,
-  `idplan` int(3) NOT NULL,
-  `idusuario` int(10) NOT NULL,
-  `idcatedra` int(3) NOT NULL,
-  `modificado` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `accion` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_aud_notas_examenes_aulas1_idx` (`idaula`),
-  KEY `fk_aud_notas_examenes_plan_estudios1_idx` (`idplan`),
-  KEY `fk_aud_notas_examenes_usuarios1_idx` (`idusuario`),
-  KEY `fk_aud_notas_examenes_catedras1_idx` (`idcatedra`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=22 ;
-
---
--- Volcado de datos para la tabla `aud_notas_examenes`
---
-
-INSERT INTO `aud_notas_examenes` (`id`, `parcial_old`, `parcial_new`, `recuperatorio_old`, `recuperatorio_new`, `primer_ordinario_old`, `primer_ordinario_new`, `segundo_ordinario_old`, `segundo_ordinario_new`, `complementario_old`, `complementario_new`, `extraordinario_old`, `extraordinario_new`, `mesa_especial_old`, `mesa_especial_new`, `idaula`, `idplan`, `idusuario`, `idcatedra`, `modificado`, `accion`, `fecha`) VALUES
-(14, NULL, '20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 24, 1, 'Ing.Diego Casco', 'nuevo', NULL),
-(15, NULL, '20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 27, 1, 'Ing.Diego Casco', 'nuevo', NULL),
-(16, '20', '40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 24, 1, 'Ing.Diego Casco', 'editado', NULL),
-(17, '20', '40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 27, 1, 'Ing.Diego Casco', 'editado', NULL),
-(18, '40', '25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 24, 1, 'Ing.Diego Casco', 'editado', '2015-11-28 00:00:00'),
-(19, '40', '25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 27, 1, 'Ing.Diego Casco', 'editado', '2015-11-28 00:00:00'),
-(20, '25', '30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 24, 1, 'Ing.Diego Casco', 'editado', '2015-11-28 08:51:20'),
-(21, '25', '30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, 9, 27, 1, 'Ing.Diego Casco', 'editado', '2015-11-28 08:51:20');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `aulas`
 --
 
@@ -132,13 +82,14 @@ CREATE TABLE IF NOT EXISTS `aulas` (
 --
 
 INSERT INTO `aulas` (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES
-(4, 'Aula 1 Informatica Mañana', 96, 100, 3, 9, 'M'),
-(5, 'Aula 1 Informática Tarde', 100, 100, 3, 9, 'N'),
-(6, 'Aula 1 Informática Noche', 100, 100, 3, 9, 'T'),
+(4, 'Aula 1 Informatica Mañana', 97, 100, 3, 9, 'M'),
+(5, 'Aula 1 Informática Noche', 100, 100, 3, 9, 'N'),
+(6, 'Aula 1 Informática Tarde', 100, 100, 3, 9, 'T'),
 (7, 'Aula 2 Informática Mañana', 100, 100, 3, 10, 'M'),
 (8, 'Aula 2 Informática Tarde', 100, 100, 3, 10, 'T'),
 (9, 'Aula 2 Informática Noche', 100, 100, 3, 10, 'N'),
 (10, 'Aula 3 Informática Mañana', 100, 100, 3, 11, 'M'),
+(11, 'Aula 3 Informática Tarde', 100, 100, 3, 11, 'T'),
 (12, 'Aula 3 Informática Noche', 100, 100, 3, 11, 'N');
 
 -- --------------------------------------------------------
@@ -198,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `catedras` (
   `cat_denominacion` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT 'Nombre o denominacion de la cátedra',
   `cat_diascatedra` varchar(20) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Días que se desarrollara la cátedra',
   PRIMARY KEY (`idcatedra`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de cátedras' AUTO_INCREMENT=90 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de cátedras' AUTO_INCREMENT=91 ;
 
 --
 -- Volcado de datos para la tabla `catedras`
@@ -207,6 +158,8 @@ CREATE TABLE IF NOT EXISTS `catedras` (
 INSERT INTO `catedras` (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES
 (1, 'Introducción ala Informática', ''),
 (2, 'Análisis Matemático I', ''),
+(3, 'Introducción ala Base de Datos', ''),
+(4, 'Ingles Técnico I', ''),
 (5, 'Análisis Matemático II', ''),
 (6, 'Estructura de Datos I', ''),
 (7, 'Introducción ala Programación', ''),
@@ -314,6 +267,8 @@ CREATE TABLE IF NOT EXISTS `cate_plan` (
 INSERT INTO `cate_plan` (`idplan`, `idcatedra`, `diascatedra`) VALUES
 (9, 1, 'Lunes'),
 (9, 2, 'Martes'),
+(9, 3, 'Miercoles'),
+(9, 4, 'Jueves'),
 (10, 5, 'Viernes'),
 (10, 6, 'Lunes'),
 (10, 7, 'Martes'),
@@ -374,6 +329,8 @@ INSERT INTO `cate_plan` (`idplan`, `idcatedra`, `diascatedra`) VALUES
 (26, 63, 'Martes'),
 (26, 64, 'Miercoles'),
 (26, 65, 'Jueves'),
+(27, 67, 'Martes'),
+(27, 68, 'Miercoles'),
 (28, 69, 'Jueves'),
 (28, 70, 'Viernes'),
 (28, 71, 'Lunes'),
@@ -474,61 +431,19 @@ CREATE TABLE IF NOT EXISTS `notas_examenes` (
   `complementario` int(3) DEFAULT NULL,
   `extraordinario` int(3) DEFAULT NULL,
   `mesa_especial` int(3) DEFAULT NULL,
-  `idaula` int(3) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_notas_examenes_catedras1_idx` (`idcatedra`),
   KEY `fk_notas_examenes_plan_estudios1_idx` (`idplan`),
-  KEY `fk_notas_examenes_usuarios1_idx` (`idusuario`),
-  KEY `fk_notas_examenes_aulas1_idx` (`idaula`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+  KEY `fk_notas_examenes_usuarios1_idx` (`idusuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `notas_examenes`
 --
 
-INSERT INTO `notas_examenes` (`id`, `idcatedra`, `idplan`, `idusuario`, `parcial`, `recuperatorio`, `primer_ordinario`, `segundo_ordinario`, `complementario`, `extraordinario`, `mesa_especial`, `idaula`) VALUES
-(7, 1, 9, 24, 30, NULL, NULL, NULL, NULL, NULL, NULL, 5),
-(8, 1, 9, 27, 30, NULL, NULL, NULL, NULL, NULL, NULL, 5);
-
---
--- Disparadores `notas_examenes`
---
-DROP TRIGGER IF EXISTS `notas_examenes_insert`;
-DELIMITER //
-CREATE TRIGGER `notas_examenes_insert` AFTER INSERT ON `notas_examenes`
- FOR EACH ROW BEGIN
-DECLARE usuario varchar(100);
-SET @usuario := (select usu.usu_nombre from usuarios as usu join usu_cate as usca on usu.idusuario=usca.idusuario
-join catedras as ca on ca.idcatedra=usca.idcatedra where ca.idcatedra=NEW.idcatedra);
-insert into aud_notas_examenes(parcial_new,
-recuperatorio_new,primer_ordinario_new,
-segundo_ordinario_new,complementario_new,
-extraordinario_new,mesa_especial_new,idaula,idplan,idusuario,idcatedra,modificado,accion,fecha)values
-(NEW.parcial,NEW.recuperatorio,NEW.primer_ordinario,
-NEW.segundo_ordinario,NEW.complementario,NEW.extraordinario,NEW.mesa_especial,NEW.idaula,NEW.idplan,
-NEW.idusuario,NEW.idcatedra,@usuario,"nuevo",now());
-end
-//
-DELIMITER ;
-DROP TRIGGER IF EXISTS `notas_examenes_trigger`;
-DELIMITER //
-CREATE TRIGGER `notas_examenes_trigger` AFTER UPDATE ON `notas_examenes`
- FOR EACH ROW BEGIN
-DECLARE usuario varchar(100);
-SET @usuario := (select usu.usu_nombre from usuarios as usu join usu_cate as usca on usu.idusuario=usca.idusuario
-join catedras as ca on ca.idcatedra=usca.idcatedra where ca.idcatedra=OLD.idcatedra);
-insert into aud_notas_examenes(parcial_old,parcial_new,recuperatorio_old,
-recuperatorio_new,primer_ordinario_old,primer_ordinario_new,segundo_ordinario_old,
-segundo_ordinario_new,complementario_old,complementario_new,extraordinario_old,
-extraordinario_new,mesa_especial_old,mesa_especial_new,idaula,idplan,idusuario,idcatedra,modificado,accion,fecha)values
-(OLD.parcial,NEW.parcial,OLD.recuperatorio,NEW.recuperatorio,
-OLD.primer_ordinario,NEW.primer_ordinario,OLD.segundo_ordinario,
-NEW.segundo_ordinario,OLD.complementario,NEW.complementario,
-OLD.extraordinario,NEW.extraordinario,OLD.mesa_especial,NEW.mesa_especial,OLD.idaula,OLD.idplan,
-OLD.idusuario,OLD.idcatedra,@usuario,"editado",now());
-end
-//
-DELIMITER ;
+INSERT INTO `notas_examenes` (`id`, `idcatedra`, `idplan`, `idusuario`, `parcial`, `recuperatorio`, `primer_ordinario`, `segundo_ordinario`, `complementario`, `extraordinario`, `mesa_especial`) VALUES
+(1, 1, 9, 24, 50, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 1, 9, 23, 30, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -586,6 +501,7 @@ INSERT INTO `plan_estudios` (`idplan`, `pla_denominacion`, `pla_fechainicio`, `p
 (24, 'Diseño Gráfico Primer Módulo', '2015-11-01', '2015-11-30'),
 (25, 'Diseño Gráfico Segundo Módulo', '2015-11-01', '2015-11-30'),
 (26, 'Diseño Gráfico Tercer Módulo', '2015-11-01', '2015-11-30'),
+(27, 'Diseño Gráfico Cuarto Módulo', '2015-11-01', '2015-11-30'),
 (28, 'Diseño Gráfico Quinto Módulo', '2015-11-01', '2015-11-23'),
 (29, 'Diseño Gráfico Sexto Módulo', '2015-11-01', '2015-11-30'),
 (30, 'Diseño Gráfico Séptimo Módulo', '2015-11-01', '2015-11-30'),
@@ -607,7 +523,7 @@ CREATE TABLE IF NOT EXISTS `recuperacion` (
   `idusuario` int(10) NOT NULL,
   PRIMARY KEY (`idrecuperacion`),
   KEY `fk_RECUPERACION_USUARIOS1_idx` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `recuperacion`
@@ -615,8 +531,7 @@ CREATE TABLE IF NOT EXISTS `recuperacion` (
 
 INSERT INTO `recuperacion` (`idrecuperacion`, `recupregunta`, `recurespuesta`, `idusuario`) VALUES
 (1, 'Cual es tu heroe Favorito', 'ec0e2603172c73a8b644bb9456c1ff6e', 23),
-(2, 'Cual es tu heroe Favorito', 'af4f53decf756dd454d80e13351b1a55', 24),
-(3, 'Cual es tu heroe Favorito', 'ec0e2603172c73a8b644bb9456c1ff6e', 27);
+(2, 'Cual es tu heroe Favorito', 'af4f53decf756dd454d80e13351b1a55', 24);
 
 -- --------------------------------------------------------
 
@@ -652,14 +567,7 @@ CREATE TABLE IF NOT EXISTS `tareas` (
   PRIMARY KEY (`idtarea`),
   KEY `fk_TAREAS_CATEDRAS1_idx` (`idcatedra`),
   KEY `fk_tareas_aulas1_idx` (`idaula`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y Detalles de tareas' AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `tareas`
---
-
-INSERT INTO `tareas` (`idtarea`, `tar_descripcion`, `tar_fechaasignacion`, `tar_fechaentrega`, `tar_puntostarea`, `idcatedra`, `idaula`, `tar_nombrearchivo`, `tar_rutaarchivo`) VALUES
-(1, 'fabricacion de mueble', '2015-11-18', '2015-11-20', 0, 1, 4, 'NULL', 'NULL');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y Detalles de tareas' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -696,7 +604,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `idperfil` varchar(1) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`idusuario`),
   UNIQUE KEY `nro_cedula_UNIQUE` (`usu_nrocedula`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de los usuarios' AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de los usuarios' AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -715,8 +623,7 @@ INSERT INTO `usuarios` (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direcci
 (21, 'V.M José Flores', 1234567891, 'Pai Perez', 12345678, 'joseflores@profesor.com', '202cb962ac59075b964b07152d234b70', '2'),
 (22, 'Ing. Andrea Riego', 1234567892, 'Pai Perez', 12345678, 'andreariego@profesor.com', '202cb962ac59075b964b07152d234b70', '2'),
 (23, 'Ruben Toledo', 4345503, 'Magallanes 1947 casi Pozo Favorito', 971339788, 'toledorubendario91@gmail.com', '202cb962ac59075b964b07152d234b70', '3'),
-(24, 'Daniel Ferreira', 14785236, 'Luque', 123, 'dani@alumno.com', '202cb962ac59075b964b07152d234b70', '3'),
-(27, 'Ruben Gonzalez', 870127, 'cerrocora', 1233, 'sonia.car90@gmail.com', '202cb962ac59075b964b07152d234b70', '3');
+(24, 'Daniel Ferreira', 14785236, 'Luque', 123, 'dani@alumno.com', '202cb962ac59075b964b07152d234b70', '3');
 
 -- --------------------------------------------------------
 
@@ -737,8 +644,8 @@ CREATE TABLE IF NOT EXISTS `usu_au` (
 --
 
 INSERT INTO `usu_au` (`idusuario`, `idaula`) VALUES
-(24, 5),
-(27, 5);
+(23, 4),
+(24, 4);
 
 -- --------------------------------------------------------
 
@@ -822,15 +729,6 @@ ALTER TABLE `asistencias`
   ADD CONSTRAINT `fk_ASISTENCIAS_USUARIOS1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `aud_notas_examenes`
---
-ALTER TABLE `aud_notas_examenes`
-  ADD CONSTRAINT `fk_aud_notas_examenes_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_aud_notas_examenes_catedras1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_aud_notas_examenes_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_aud_notas_examenes_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Filtros para la tabla `aulas`
 --
 ALTER TABLE `aulas`
@@ -868,7 +766,6 @@ ALTER TABLE `inscripcion`
 -- Filtros para la tabla `notas_examenes`
 --
 ALTER TABLE `notas_examenes`
-  ADD CONSTRAINT `fk_notas_examenes_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_notas_examenes_catedras1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_notas_examenes_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_notas_examenes_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;

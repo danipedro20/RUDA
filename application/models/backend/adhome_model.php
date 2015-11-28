@@ -49,7 +49,7 @@ class Adhome_model extends CI_Model {
         $query = $this->db->query("select usu.idusuario,usu.usu_nombre,car.car_denominacion,au.aul_denominacion from 
 usuarios as usu join usu_au as usa on usu.idusuario=usa.idusuario join
 aulas as au on usa.idaula=au.idaula join 
-carreras as car on au.id_carrera=car.id_carrera where usu.idperfil='3';");
+carreras as car on au.id_carrera=car.id_carrera where usu.idperfil='3'");
         return $query->result();
     }
 
@@ -66,13 +66,13 @@ carreras as car on au.id_carrera=car.id_carrera where usu.idperfil='3';");
         $query = $this->db->query("select usu.idusuario,usu.usu_nombre,car.id_carrera,car.car_denominacion,au.idaula,au.aul_denominacion from 
 usuarios as usu join usu_au as usa on usu.idusuario=usa.idusuario join
 aulas as au on usa.idaula=au.idaula join 
-carreras as car on au.id_carrera=car.id_carrera where usu.idperfil='3' and usu.idusuario='$entry_id';");
+carreras as car on au.id_carrera=car.id_carrera where usu.idperfil='3' and usu.idusuario='$entry_id'");
         return $query->row();
     }
 
     public function verlascarreras($idaula) {
         $query2 = $this->db->query("select ca.id_carrera,ca.car_denominacion from carreras as ca join
-aulas as au on ca.id_carrera=au.id_carrera where au.idaula='$idaula';");
+aulas as au on ca.id_carrera=au.id_carrera where au.idaula='$idaula'");
         return $query2->result();
     }
 
@@ -80,7 +80,7 @@ aulas as au on ca.id_carrera=au.id_carrera where au.idaula='$idaula';");
         $query2 = $this->db->query("select au.aul_denominacion,au.idaula,au.aul_denominacion from 
 usuarios as usu join usu_au as usa on usu.idusuario=usa.idusuario join
 aulas as au on usa.idaula=au.idaula join 
-carreras as car on au.id_carrera=car.id_carrera where  usu.idusuario='$entry_id';");
+carreras as car on au.id_carrera=car.id_carrera where  usu.idusuario='$entry_id'");
         $row = $query2->row();
 
         $query = $this->db->query("select idaula,aul_denominacion from aulas where aul_denominacion <> '$row->aul_denominacion'");

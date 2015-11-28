@@ -112,8 +112,11 @@ class Insplan_control extends CI_Controller {
 
     public function eliminar_planestudio() {
         $a = $this->uri->segment(4);
-        $eliminar = $this->plan_model->eliminarplan($a);
-        redirect(base_url('/backend/insplan_control/listar_plan_estudios/'));
+        $datos['titulo'] = 'Ruda - Crear  Plan de Estudios';
+        $datos['error'] = $this->plan_model->eliminarplan($a);
+        $datos['plan'] = $this->plan_model->listar_planes();
+        $datos['contenido'] = 'listar_plan_estudios_view';
+        $this->load->view('plantillas/adplantilla', $datos);
     }
 
     function plan_check($plan) {
@@ -162,7 +165,7 @@ class Insplan_control extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-          $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 12);
 
         $this->pdf->Cell(40, 6, '', 0, 0, 'C');
         $this->pdf->Cell(100, 6, 'Lista de Planes de Estudios', 1, 0, 'C');
@@ -190,11 +193,11 @@ class Insplan_control extends CI_Controller {
             $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
             $fechainicio = $i->pla_fechainicio;
-            $fechafin= $i->pla_fechafin; 
-            
+            $fechafin = $i->pla_fechafin;
+
             $this->pdf->Cell(100, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
-            $this->pdf->Cell(30, 5, utf8_decode( date("d-m-Y", strtotime($fechainicio))), 'TBL', 0, 'C', 0);
-            $this->pdf->Cell(30, 5, utf8_decode(date("d-m-Y", strtotime($fechafin) )), 'TBLR', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode(date("d-m-Y", strtotime($fechainicio))), 'TBL', 0, 'C', 0);
+            $this->pdf->Cell(30, 5, utf8_decode(date("d-m-Y", strtotime($fechafin))), 'TBLR', 0, 'C', 0);
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
         }

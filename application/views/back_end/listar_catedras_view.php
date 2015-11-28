@@ -26,6 +26,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             }
         </style>
         <?php if (!empty($lista)) : ?>
+         <h4> <?php if(isset($error)) echo '<font color="red" style=" font-size: 30px; ">'.$error.'</font>';?></h4>
         <h1>Lista de Cátedras</h1>
             <table id="example" class="display nowrap" cellspacing="0" width="100%">
                 <thead>

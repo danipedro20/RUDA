@@ -348,17 +348,18 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         return $query->result();
     }
 
-    public function guardar_nota_parcial($idusuario, $idplan, $idcatedra, $logrados) {
+    public function guardar_nota_parcial($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'idusuario' => $idusuario,
             'idcatedra' => $idcatedra,
+            'idaula' => $idaula,
             'idplan' => $idplan,
             'parcial' => $logrados,
         );
         return $this->db->insert('notas_examenes', $data);
     }
 
-    public function editar_nota_parcial($idusuario, $idplan, $idcatedra, $logrados) {
+    public function editar_nota_parcial($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'parcial' => $logrados,
         );
@@ -366,20 +367,22 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         $this->db->where('idusuario', $idusuario);
         $this->db->where('idcatedra', $idcatedra);
         $this->db->where('idplan', $idplan);
+         $this->db->where('idaula', $idaula);
         $this->db->update('notas_examenes', $data);
     }
 
-    public function guardar_nota_recuperatorio($idusuario, $idplan, $idcatedra, $logrados) {
+    public function guardar_nota_recuperatorio($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'idusuario' => $idusuario,
             'idcatedra' => $idcatedra,
             'idplan' => $idplan,
+            'idaula' => $idaula,
             'recuperatorio' => $logrados,
         );
         return $this->db->insert('notas_examenes', $data);
     }
 
-    public function editar_nota_recuperatorio($idusuario, $idplan, $idcatedra, $logrados) {
+    public function editar_nota_recuperatorio($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'recuperatorio' => $logrados,
         );
@@ -387,10 +390,11 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         $this->db->where('idusuario', $idusuario);
         $this->db->where('idcatedra', $idcatedra);
         $this->db->where('idplan', $idplan);
+        $this->db->where('idaula', $idaula);
         $this->db->update('notas_examenes', $data);
     }
 
-    public function guardar_nota_primer_ordinario($idusuario, $idplan, $idcatedra, $logrados) {
+    public function guardar_nota_primer_ordinario($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'primer_ordinario' => $logrados,
         );
@@ -398,10 +402,11 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         $this->db->where('idusuario', $idusuario);
         $this->db->where('idcatedra', $idcatedra);
         $this->db->where('idplan', $idplan);
+         $this->db->where('idaula', $idaula);
         $this->db->update('notas_examenes', $data);
     }
 
-    public function guardar_nota_segundo_ordinario($idusuario, $idplan, $idcatedra, $logrados) {
+    public function guardar_nota_segundo_ordinario($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'segundo_ordinario' => $logrados,
         );
@@ -409,20 +414,22 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         $this->db->where('idusuario', $idusuario);
         $this->db->where('idcatedra', $idcatedra);
         $this->db->where('idplan', $idplan);
+        $this->db->where('idaula', $idaula);
         $this->db->update('notas_examenes', $data);
     }
 
-    public function guardar_nota_complementario($idusuario, $idplan, $idcatedra, $logrados) {
+    public function guardar_nota_complementario($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'idusuario' => $idusuario,
             'idcatedra' => $idcatedra,
             'idplan' => $idplan,
+            'idaula' => $idaula,
             'complementario' => $logrados,
         );
         return $this->db->insert('notas_examenes', $data);
     }
 
-    public function editar_nota_complementario($idusuario, $idplan, $idcatedra, $logrados) {
+    public function editar_nota_complementario($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'complementario' => $logrados,
         );
@@ -430,20 +437,22 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         $this->db->where('idusuario', $idusuario);
         $this->db->where('idcatedra', $idcatedra);
         $this->db->where('idplan', $idplan);
+        $this->db->where('idaula', $idaula);
         $this->db->update('notas_examenes', $data);
     }
 
-    public function guardar_nota_extraordinario($idusuario, $idplan, $idcatedra, $logrados) {
+    public function guardar_nota_extraordinario($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'idusuario' => $idusuario,
             'idcatedra' => $idcatedra,
             'idplan' => $idplan,
+            'idaula' => $idaula,
             'extraordinario' => $logrados,
         );
         return $this->db->insert('notas_examenes', $data);
     }
 
-    public function editar_nota_extraordinario($idusuario, $idplan, $idcatedra, $logrados) {
+    public function editar_nota_extraordinario($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'extraordinario' => $logrados,
         );
@@ -451,20 +460,22 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         $this->db->where('idusuario', $idusuario);
         $this->db->where('idcatedra', $idcatedra);
         $this->db->where('idplan', $idplan);
+         $this->db->where('idaula', $idaula);
         $this->db->update('notas_examenes', $data);
     }
 
-    public function guardar_nota_mesa($idusuario, $idplan, $idcatedra, $logrados) {
+    public function guardar_nota_mesa($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'idusuario' => $idusuario,
             'idcatedra' => $idcatedra,
             'idplan' => $idplan,
+            'idaula' => $idaula,
             'mesa_especial' => $logrados,
         );
         return $this->db->insert('notas_examenes', $data);
     }
 
-    public function editar_nota_mesa($idusuario, $idplan, $idcatedra, $logrados) {
+    public function editar_nota_mesa($idusuario, $idplan, $idcatedra, $logrados,$idaula) {
         $data = array(
             'mesa_especial' => $logrados,
         );
@@ -472,12 +483,13 @@ where profesor.idusuario='$j' and pla.idplan='$plan' and ca.idcatedra='$catedra'
         $this->db->where('idusuario', $idusuario);
         $this->db->where('idcatedra', $idcatedra);
         $this->db->where('idplan', $idplan);
+        $this->db->where('idaula', $idaula);
         $this->db->update('notas_examenes', $data);
     }
 
-    public function listar_notas_examen($plan, $catedra) {
+    public function listar_notas_examen($plan, $catedra,$aula) {
         $query = $this->db->query("select n.idusuario,usu.usu_nombre,usu.usu_nrocedula,n.idcatedra,n.idplan,n.parcial,n.recuperatorio,n.primer_ordinario,n.segundo_ordinario,n.complementario,n.extraordinario,n.mesa_especial
-from notas_examenes as n join usuarios as usu on n.idusuario=usu.idusuario where n.idcatedra='$catedra' and n.idplan='$plan';");
+from notas_examenes as n join usuarios as usu on n.idusuario=usu.idusuario where n.idcatedra='$catedra' and n.idplan='$plan' and n.idaula='$aula';");
         return $query->result();
     }
 

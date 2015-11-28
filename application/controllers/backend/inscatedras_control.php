@@ -94,8 +94,11 @@ class Inscatedras_control extends CI_Controller {
 
     public function eliminarcatedra() {
         $a = $this->uri->segment(4);
-        $eliminar = $this->catedras_model->elimicatedra($a);
-        redirect(base_url('/backend/inscatedras_control/listar_catedras_profesores/'));
+        $datos['titulo'] = 'Ruda - Lista';
+        $datos['error'] = $this->catedras_model->elimicatedra($a);
+        $datos['lista'] = $this->catedras_model->lista_catedras();
+        $datos['contenido'] = 'listar_catedras_view';
+        $this->load->view('plantillas/adplantilla', $datos);
     }
 
     public function editarcatedra() {
@@ -152,7 +155,7 @@ class Inscatedras_control extends CI_Controller {
     }
 
     public function reporte_catedras() {
-     
+
 
         $catedras = $this->catedras_model->lista_catedras();
 
@@ -200,9 +203,9 @@ class Inscatedras_control extends CI_Controller {
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
             $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
-           
+
             $this->pdf->Cell(100, 5, utf8_decode($i->cat_denominacion), 'TBLR', 0, 'C', 0);
-            
+
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
         }
@@ -217,8 +220,9 @@ class Inscatedras_control extends CI_Controller {
          */
         $this->pdf->Output("Lista de Catedras.pdf", 'I');
     }
-     public function reporte_catedra_profesor() {
-     
+
+    public function reporte_catedra_profesor() {
+
 
         $catedras = $this->catedras_model->lista();
 
@@ -241,7 +245,7 @@ class Inscatedras_control extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-         $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 12);
 
         $this->pdf->Cell(40, 6, '', 0, 0, 'C');
         $this->pdf->Cell(100, 6, 'Lista de Catedras/Pofesores', 1, 0, 'C');
@@ -257,7 +261,7 @@ class Inscatedras_control extends CI_Controller {
 
         $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
         $this->pdf->Cell(80, 7, 'Profesor', 'TBL', 0, 'C', '1');
-         $this->pdf->Cell(100, 7,'Catedra', 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(100, 7, 'Catedra', 'TBL', 0, 'C', '1');
         $this->pdf->Ln(7);
         // La variable $x se utiliza para mostrar un número consecutivo
         $x = 1;
@@ -266,11 +270,11 @@ class Inscatedras_control extends CI_Controller {
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
             $this->pdf->Cell(15, 5, $x++, 'TBL', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
-           
-             $this->pdf->Cell(80, 5, utf8_decode($i->usu_nombre), 'TBLR', 0, 'C', 0);
+
+            $this->pdf->Cell(80, 5, utf8_decode($i->usu_nombre), 'TBLR', 0, 'C', 0);
             $this->pdf->Cell(100, 5, utf8_decode($i->cat_denominacion), 'TBLR', 0, 'C', 0);
-            
-            
+
+
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
         }

@@ -13,7 +13,7 @@ $tabla = "tcalendario";
 $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($db->connect_errno) {
     die("<h1>Fallo al conectar a MySQL: (" . $db->connect_errno . ") " . $db->connect_error . "</h1>");
-};
+}
 
 ?>
 
@@ -33,10 +33,10 @@ if ($db->connect_errno) {
             <div class="cal"></div><div id="mask"></div>
 
         </div>
-        <script src="<?php echo base_url(); ?>assets/front_end/jquery/jquery.js"></script>
-        <script src="<?php echo base_url(); ?>assets/front_end/jquery/validate.js"></script>
-        <script src="<?php echo base_url(); ?>assets/front_end/jquery/mensajes.js"></script>  
-        <link href="<?php echo base_url(); ?>assets/agenda/estilos.css" rel="stylesheet" type="text/css" >
+        <script src="<?php echo base_url()?>assets/front_end/jquery/jquery.js"></script>
+        <script src="<?php echo base_url()?>assets/front_end/jquery/validate.js"></script>
+        <script src="<?php echo base_url()?>assets/front_end/jquery/mensajes.js"></script>  
+        <link href="<?php echo base_url()?>assets/agenda/estilos.css" rel="stylesheet" type="text/css" >
 
         <script>
             function generar_calendario(mes, anio)

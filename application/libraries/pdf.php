@@ -29,4 +29,4 @@
               $this->Cell(0,10,utf8_decode('Página ').$this->PageNo().' de {nb} --  Impreso el ' .date('d/m/y'),0,0,'C');
       }
     }
-?>;
+?>

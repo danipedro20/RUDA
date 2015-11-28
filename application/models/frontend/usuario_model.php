@@ -81,8 +81,7 @@ class Usuario_model extends CI_Model {
             return FALSE;
         } else {
 
-            return TRUE
-            ;
+            return TRUE;
         }
     }
 

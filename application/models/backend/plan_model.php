@@ -9,7 +9,7 @@ class Plan_model extends CI_Model {
         parent::__construct();
     }
 
-    public function inseplan($a,$fecha,$fecha_fin) {
+    public function inseplan($a, $fecha, $fecha_fin) {
         $data = array(
             'pla_denominacion' => $a,
             'pla_fechainicio' => $fecha,
@@ -18,7 +18,7 @@ class Plan_model extends CI_Model {
         return $this->db->insert('plan_estudios', $data);
     }
 
-    public function editarplanestudio($a, $b,$fecha,$fecha_fin) {
+    public function editarplanestudio($a, $b, $fecha, $fecha_fin) {
         $data = array(
             'pla_denominacion' => $a,
             'pla_fechainicio' => $fecha,
@@ -47,9 +47,11 @@ class Plan_model extends CI_Model {
     }
 
     public function eliminarplan($a) {
-        $tablas = array('aulas', 'cate_plan', 'plan_estudios');
         $this->db->where('idplan', $a);
-        $this->db->delete($tablas);
+        $this->db->delete('plan_estudios');
+        if ($this->db->_error_message()) {
+            return $data = 'Atencion!!! Nose puede borrar este Plan';
+        }
     }
 
     function plan_check($plan) {
@@ -65,7 +67,6 @@ class Plan_model extends CI_Model {
         $consulta = $this->db->query("select *from plan_estudios where idplan='$id';");
         return $consulta->row();
     }
- 
 
     public function lista_catedra() {
         $consulta = $this->db->query("select * from catedras;");

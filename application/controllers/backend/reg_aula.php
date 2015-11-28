@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -100,8 +99,11 @@ class Reg_aula extends CI_Controller {
 
     public function eliminar_aula() {
         $a = $this->uri->segment(4);
-        $eliminar = $this->reg_aula_model->elimiaula($a);
-        redirect(base_url('backend/reg_aula/listar_aulas/'));
+        $datos['titulo'] = 'Aulas';
+        $datos['error'] = $this->reg_aula_model->elimiaula($a);
+        $datos['lista'] = $this->reg_aula_model->lista();
+        $datos['contenido'] = 'listar_aulas_view';
+        $this->load->view('plantillas/adplantilla', $datos);
     }
 
     public function reporte_aulas() {
@@ -129,7 +131,7 @@ class Reg_aula extends CI_Controller {
          * el color de relleno predeterminado
          */
 
-          $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 12);
 
         $this->pdf->Cell(40, 6, '', 0, 0, 'C');
         $this->pdf->Cell(100, 6, 'Lista de Aulas', 1, 0, 'C');
@@ -143,7 +145,6 @@ class Reg_aula extends CI_Controller {
 //        $this->pdf->SetRightMargin(15);
 //        $this->pdf->SetTextColor(0);
 //        $this->pdf->SetFillColor(200, 200, 200);
-
         // Se define el formato de fuente: Arial, negritas, tamaño 9
         $this->pdf->SetFont('Arial', 'B', 7);
         /*
@@ -151,9 +152,9 @@ class Reg_aula extends CI_Controller {
          *
          * $this->pdf->Cell(Ancho, Alto,texto,borde,posición,alineación,relleno);
          */
-$des='Descripción';
+        $des = 'Descripción';
         $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
-        $this->pdf->Cell(30, 7,utf8_decode($des), 'TBL', 0, 'C', '1');
+        $this->pdf->Cell(30, 7, utf8_decode($des), 'TBL', 0, 'C', '1');
         $this->pdf->Cell(40, 7, 'Carrera', 'TBLR', 0, 'C', '1');
         $this->pdf->Cell(60, 7, 'Plan de Estudio', 'TBLR', 0, 'C', '1');
         $this->pdf->Cell(30, 7, 'Turno', 'TBLR', 0, 'C', '1');
@@ -169,8 +170,8 @@ $des='Descripción';
             $this->pdf->Cell(40, 5, utf8_decode($i->car_denominacion), 'TBLR', 0, 'C', 0);
             $this->pdf->Cell(60, 5, utf8_decode($i->pla_denominacion), 'TBLR', 0, 'C', 0);
             if ($i->idturno == 'M') {
-                $ma='Mañana';
-                $this->pdf->Cell(30, 5,utf8_decode($ma), 'TBLR', 0, 'C', 0);
+                $ma = 'Mañana';
+                $this->pdf->Cell(30, 5, utf8_decode($ma), 'TBLR', 0, 'C', 0);
             } elseif ($i->idturno == 'T') {
                 $this->pdf->Cell(30, 5, 'Tarde', 'TBLR', 0, 'C', 0);
             } elseif ($i->idturno == 'N') {
@@ -190,6 +191,38 @@ $des='Descripción';
          *
          */
         $this->pdf->Output("Lista de Aulas.pdf", 'I');
+    }
+
+    public function autocompletar() {
+        //si es una petición ajax y existe una variable post
+        //llamada info dejamos pasar
+        if ($this->input->is_ajax_request() && $this->input->post('info')) {
+
+            $abuscar = $this->security->xss_clean($this->input->post('info'));
+
+            $search = $this->reg_aula_model->buscador($abuscar);
+
+            //si search es distinto de false significa que hay resultados
+            //y los mostramos con un loop foreach
+            if ($search !== FALSE) {
+
+                foreach ($search as $fila) {
+                    ?>
+
+                    <p><a href=""><?php echo $fila->pla_denominacion; ?></a></p>
+
+                    <?php
+                }
+
+                //en otro caso decimos que no hay resultados
+            } else {
+                ?>
+
+                <p><?php echo 'No hay resultados'; ?></p>
+
+                <?php
+            }
+        }
     }
 
 }

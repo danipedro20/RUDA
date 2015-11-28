@@ -20,9 +20,12 @@ class Planestudio_model extends CI_Model {
     }
 
     public function inserplan($a, $b,$c) {
-
+ echo $b;
+        
+        $query = $this->db->query("SELECT * FROM plan_estudios where pla_denominacion='$a'");
+        $row = $query->row();
         $data = array(
-            'idplan' => $a,
+            'idplan' => $row->idplan,
             'idcatedra' => $b,
              'diascatedra' => $c,
         );
@@ -36,7 +39,7 @@ cate_plan.idplan=plan_estudios.idplan");
         return $consulta->result();
     }
 
-    public function verlascatedras($id) {
+    public function verlascatedras() {
         $query = $this->db->query("select ca.idcatedra,ca.cat_denominacion from cate_plan as cate right join catedras as ca on
 ca.idcatedra=cate.idcatedra where cate.idcatedra is null;");
 
@@ -55,9 +58,11 @@ cate_plan as capla on  capla.idcatedra=ca.idcatedra join plan_estudios as pla  o
     }
 
     public function editar_catedraplan($a, $b, $c) {
+        $query = $this->db->query("SELECT * FROM plan_estudios where pla_denominacion='$a'");
+        $row = $query->row();
 
         $data = array(
-            'idplan' => $a,
+            'idplan' => $row->idplan,
             'diascatedra' => $c,
         );
 

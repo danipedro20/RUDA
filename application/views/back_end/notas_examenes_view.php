@@ -70,6 +70,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                     <tbody>
                         <?php foreach ($lista as $i) : ?>
                             <tr>
+                                <?php if(!empty( $i->usu_nombre)){ ?>
 
                                 <td><?php echo $i->usu_nombre; ?> </td>
                                 <td> <?php echo $i->usu_nrocedula; ?></td>
@@ -94,16 +95,18 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 
                         <input type="hidden" name="idusuario[]" id="idusuario" value='<?php echo $i->idusuario; ?>'/>
                         <input type="hidden" name="idcatedra[]" id="idcatedra" value='<?php echo $i->idcatedra; ?>'/>
+                         <input type="hidden" name="idaula[]" id="idcatedra" value='<?php echo $idaula; ?>'/>
                         <input type="hidden" name="idplan[]" id="idplan" value='<?php echo $i->idplan; ?>'/>
                         <input type="hidden" name="idtipo[]" id="idtipo" value='<?php echo $idtipo; ?>'/>
                         <input type="hidden" name="id[]" id="idtipo" value='<?php echo $id; ?>'/>
-                    <?php endforeach; ?></tr>
+                                <?php }else{ echo 'No hay Alumnos';}?>
+ <?php endforeach; ?></tr>
                     </tbody>
 
                 </table>
                 <input type="submit" name="guardar" id="guardar" value="Guardar Notas"/>
             <?php else : ?>
-                <h1>No hay Cátedras</h1>
+                <h1>No hay Alumnos</h1>
             <?php endif; ?>
         </form>
     </section>

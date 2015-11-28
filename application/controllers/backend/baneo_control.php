@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -35,11 +34,43 @@ class Baneo_control extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $this->baneo();
             } else {
-                $a = $this->input->post('idusuario');
+                $a = $this->input->post('usuario');
                 $c = $this->input->post('bamotivo');
 
-                $insert = $this->baneo_model->insbaneo($a,$c);
-                redirect(base_url('backend/baneo_control/successbaneo/'));
+               $insert = $this->baneo_model->insbaneo($a, $c);
+             redirect(base_url('backend/baneo_control/successbaneo/'));
+            }
+        }
+    }
+
+    public function autocompletar() {
+        //si es una petición ajax y existe una variable post
+        //llamada info dejamos pasar
+        if ($this->input->is_ajax_request() && $this->input->post('info')) {
+
+            $abuscar = $this->security->xss_clean($this->input->post('info'));
+
+            $search = $this->baneo_model->buscador($abuscar);
+
+            //si search es distinto de false significa que hay resultados
+            //y los mostramos con un loop foreach
+            if ($search !== FALSE) {
+
+                foreach ($search as $fila) {
+                    ?>
+
+                    <p><a href=""><?php echo $fila->usu_email ?></a></p>
+
+                    <?php
+                }
+
+                //en otro caso decimos que no hay resultados
+            } else {
+                ?>
+
+                <p><?php echo 'No hay resultados' ?></p>
+
+                <?php
             }
         }
     }

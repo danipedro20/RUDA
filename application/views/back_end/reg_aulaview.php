@@ -6,22 +6,78 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     ?>
 
     <section class="contenido">
+        <link rel="stylesheet" href="<?php echo base_url() ?>/assets/front_end/jquery-ui/jquery-ui.css"/>
+        <script src='<?php echo base_url() ?>/assets/autocompletado/jquery.js'></script>
+        <script src="<?php echo base_url() ?>/assets/front_end/jquery-ui/jquery-ui.js"></script>
+        <script src="<?php echo base_url() ?>/assets/calendario/datapicker.js"></script>
+        <script type="text/javascript">
 
-<!--
-        <link rel="stylesheet" href="<?php echo base_url() ?>/assets/front_end/jquery/choosen/chosen.css"/>
-        <script src="<?php echo base_url() ?>/assets/front_end/jquery/jquery.js"></script>
-        <script src="<?php echo base_url() ?>/assets/front_end/jquery/choosen/chosen.jquery.min.js"></script>
-        <script>
+            $(document).ready(function() {
+                //utilizamos el evento keyup para coger la información
+                //cada vez que se pulsa alguna tecla con el foco en el buscador
+                $(".autocompletar").keyup(function() {
 
+                    //en info tenemos lo que vamos escribiendo en el buscador
+                    var info = $(this).val();
+                    //hacemos la petición al método autocompletar del controlador autocompletado
+                    //pasando la variable info
+                    $.post('<?php echo base_url(); ?>backend/reg_aula/autocompletar', {info: info}, function(data) {
 
+                        //si autocompletado nos devuelve algo
+                        if (data != '')
+                        {
 
-            jQuery(document).ready(function() {
-                jQuery(".chosen").chosen();
-            });
+                            //en el div con clase contenedor mostramos la info
+                            $(".contenedo").html(data);
 
+                        } else {
 
+                            $(".contenedo").html('');
 
-        </script>-->
+                        }
+                    })
+
+                })
+                //buscamos el elemento pulsado con live y mostramos un alert
+                $(".contenedo").find("a").live('click', function(e)
+                {
+                    e.preventDefault();
+                    $("input[name=selplan]").val($(this).text());
+                    $('.contenedo p').hide();
+                });
+
+            })
+        </script>
+          <style type="text/css">
+
+            .wrapper{
+                margin: auto;
+                width: 500px;	 		
+            }
+            .autocompletar{
+                border-radius: 5px;
+                padding: 7px 2px;
+                width: 300px;
+                margin-bottom: 20px;
+            }
+            .contenedo p{
+                font-size: 14px;
+                background-color: #ca5d36;
+                background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.5) 50%);
+                background-size: 203px 203px;
+                color: #fff;
+                padding: 3px 2px;
+                border: 1px solid #000;
+                max-width: 300px;
+                margin-top: -14px;
+            }
+            .contenedo p a{
+                color: #fff;
+                text-decoration: none;				
+            }
+        </style>
+    
+
         <fieldset>
             <h2>Crear Aula</h2>
             <?php echo form_open("backend/reg_aula/inseraula") ?>
@@ -32,22 +88,23 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
             <input type="text" name="aul_plazahabilitada" id="inp_plazahabilitada" placeholder="Ingrese los lugares habilitados" required="required" value='<?php echo set_value('aul_plazahabilitada') ?>'/>
             <p></p>
             <label for="lbl_carrera">Carrera: </label>
-             <select name='selcarrera' id='selcarrera'>
-             
-                    <?php foreach ($arrDatoscarreras as $car) : ?>
+            <select name='selcarrera' id='selcarrera'>
+
+                <?php foreach ($arrDatoscarreras as $car) : ?>
                     <option value="<?php echo $car->id_carrera; ?>"><?php echo $car->car_denominacion; ?>
 
                     </option><?php endforeach; ?>
             </select>   <a href="<?php echo base_url() ?>backend/carreras_control/carreras/">Insertar carrera</a>
-            <p></p><p></p>
-            <label for="lbl_plan">Plan de Estudio: </label>
-            <select name='selplan' id='selplan'>
-                    <?php foreach ($arrDatosplanes as $pla) : 
-                       ?>
-                
-                    <option value="<?php echo $pla->idplan ?>"><?php echo $pla->pla_denominacion ?>
-                    </option><?php endforeach; ?>    </select>   <a href="<?php echo base_url() ?>backend/insplan_control/planestudio/">Insertar Plan</a>
-            <p></p><p></p>
+
+            <label for="lbl_plan">Plan de Estudio</label>
+            <div class="wrapper">
+                <input type="text" name="selplan" id="selplan" maxlength="50" required="" onpaste="return false" class="autocompletar" placeholder="Escribe el Plan" />
+                <a href="<?php echo base_url() ?>backend/insplan_control/planestudio/">Insertar Plan</a>
+                <div class="contenedo"></div>
+            </div>
+
+
+
             <label for="idturno">Turno:</label>
             <select    name="idturno"  id="idturno" placeholder="Seleccione el Turno..."  required="" > 
                 <option value="" selected="selected">Seleccione un Turno</option>
@@ -71,7 +128,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
     </section>     
 
 
-<?php
+    <?php
 } else
     redirect(base_url('/frontend/usuarios_control/logueo/'));
 ?>

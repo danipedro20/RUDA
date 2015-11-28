@@ -106,6 +106,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
                             <input type="hidden" name="idcatedra[]" id="idcatedra" value='<?php echo $i->idcatedra; ?>'/>
                             <input type="hidden" name="idplan[]" id="idplan" value='<?php echo $i->idplan; ?>'/>
                             <input type="hidden" name="idtipo[]" id="idtipo" value='<?php echo $idtipo; ?>'/>
+                            <input type="hidden" name="idaula[]" id="idcatedra" value='<?php echo $idaula; ?>'/>
 
                         <?php endforeach; ?></tr>
                         </tbody>

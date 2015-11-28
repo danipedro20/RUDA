@@ -5,16 +5,16 @@
         <meta http-equiv="Expires" content="0" /> 
         <meta http-equiv="Pragma" content="no-cache" />
         <title><?php echo $titulo ?></title>
-        <link rel="shortcut icon" href="<?php echo base_url()?>/assets/back_end/img/favicon.ico">
-        <link rel="icon" type="image/gif" href="<?php echo base_url()?>/assets/back_end/img/animated_favicon1.gif">
-        <link href="<?php echo base_url() ?>/assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="<?php echo base_url()?>assets/back_end/img/favicon.ico">
+        <link rel="icon" type="image/gif" href="<?php echo base_url()?>assets/back_end/img/animated_favicon1.gif">
+        <link href="<?php echo base_url() ?>assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
         <script Language="JavaScript">
             if (history.forward(-1)) {
                 history.replace(history.forward(-1));
             }
         </script>
-        <script src="<?php echo base_url() ?>/assets/jquery.min.js"></script>
-        <script src="<?php echo base_url() ?>/assets/miniNotification.js"></script>
+        <script src="<?php echo base_url() ?>assets/jquery.min.js"></script>
+        <script src="<?php echo base_url() ?>assets/miniNotification.js"></script>
         <script type="text/javascript">
             $('#notification').miniNotification();
         </script>
@@ -36,7 +36,7 @@
     <body>
         <header>
             <section class="contenedor">
-                <a href="<?php echo base_url()?>backend/home/index"> <img id='logoruda' src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/> </a>
+                <a href="<?php echo base_url()?>backend/home/index"> <img id='logoruda' src='<?php echo base_url()?>assets/back_end/img/logoRuda.png'/> </a>
 
             </section>
         </header>

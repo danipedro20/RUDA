@@ -6,9 +6,9 @@
         <meta http-equiv="Pragma" content="no-cache" />
         <title><?php echo $titulo ?></title>
 
-        <link rel="shortcut icon" href="<?php echo base_url()?>/assets/back_end/img/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo base_url()?>assets/back_end/img/favicon.ico">
 
-        <link rel="icon" type="image/gif" href="<?php echo base_url()?>/assets/back_end/img/animated_favicon1.gif">
+        <link rel="icon" type="image/gif" href="<?php echo base_url()?>assets/back_end/img/animated_favicon1.gif">
 
         <link href="<?php echo base_url() ?>assets/back_end/css/backestilos.css" rel="stylesheet" type="text/css">
         <script src="<?php echo base_url() ?>assets/front_end/jquery/jquery.js"></script>
@@ -42,7 +42,7 @@
             <header>
                 <section class="contenedor">
 
-                     <a href="<?php echo base_url()?>backend/adhome/index2"> <img id='logoruda'src='<?php echo base_url()?>/assets/back_end/img/logoRuda.png'/></a>
+                     <a href="<?php echo base_url()?>backend/adhome/index2"> <img id='logoruda'src='<?php echo base_url()?>assets/back_end/img/logoRuda.png'/></a>
             </header>
             <nav>
                 <section class="contenedor">
@@ -53,6 +53,7 @@
                         <li><a href="<?php echo base_url() ?>backend/reg_aula/listar_aulas">Aulas</a></li>
                         <li><a href="<?php echo base_url() ?>backend/adhome/listar_profesores">Profesores</a></li>
                         <li><a href="<?php echo base_url() ?>backend/reporte_tareas/listar_tareas">Tareas</a></li>
+                         <li><a href="<?php echo base_url() ?>backend/backup_control/hacer_backup">Backup de BD</a></li>
                         <li><a href="<?php echo base_url() ?>frontend/usuarios_control/cerrar">Cerrar Sesión</a></li>
 
                     </ul>

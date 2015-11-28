@@ -1,0 +1,621 @@
+SET FOREIGN_KEY_CHECKS = 0;
+#
+# TABLE STRUCTURE FOR: asistencias
+#
+
+DROP TABLE IF EXISTS asistencias;
+
+CREATE TABLE `asistencias` (
+  `idasistencia` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador de la tabla',
+  `asi_estado` varchar(1) CHARACTER SET utf8 NOT NULL COMMENT 'Estado del alumno si esta prsente o ausente (P o A)',
+  `asi_fecha` date NOT NULL COMMENT 'Fecha Actual ',
+  `asi_justificacion` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT 'En caso que el alumno presente alguna justificacion por la ausencia',
+  `idcatedra` int(3) NOT NULL COMMENT 'Cátedra en la cual se llama asistencia',
+  `idusuario` int(10) NOT NULL COMMENT 'Usuario relacionado ala lista de asistencia',
+  `idaula` int(3) NOT NULL,
+  PRIMARY KEY (`idasistencia`),
+  KEY `fk_ASISTENCIAS_CATEDRAS1_idx` (`idcatedra`),
+  KEY `fk_ASISTENCIAS_USUARIOS1_idx` (`idusuario`),
+  KEY `fk_asistencias_aulas1_idx` (`idaula`),
+  CONSTRAINT `fk_asistencias_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ASISTENCIAS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ASISTENCIAS_USUARIOS1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalle de asistencias';
+
+#
+# TABLE STRUCTURE FOR: aulas
+#
+
+DROP TABLE IF EXISTS aulas;
+
+CREATE TABLE `aulas` (
+  `idaula` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador de la tabla',
+  `aul_denominacion` varchar(30) CHARACTER SET utf8 NOT NULL COMMENT 'denominacion o nombre del aula',
+  `aul_plazasdisponibles` int(2) NOT NULL COMMENT 'Lugares o plazas disponibles dentro del aula',
+  `aul_plazashabilitadas` int(2) NOT NULL COMMENT 'lugares o plazas que se habilitaron para el aula',
+  `id_carrera` int(3) DEFAULT NULL,
+  `idplan` int(3) DEFAULT NULL,
+  `idturno` varchar(1) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`idaula`),
+  KEY `fk_aulas_carreras1_idx` (`id_carrera`),
+  KEY `fk_aulas_plan_estudios1_idx` (`idplan`),
+  CONSTRAINT `fk_aulas_carreras1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_aulas_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalle de aulas';
+
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (4, 'Aula 1 Informatica Mañana', 96, 100, 3, 9, 'M');
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (5, 'Aula 1 Informática Tarde', 100, 100, 3, 9, 'N');
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (6, 'Aula 1 Informática Noche', 100, 100, 3, 9, 'T');
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (7, 'Aula 2 Informática Mañana', 100, 100, 3, 10, 'M');
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (8, 'Aula 2 Informática Tarde', 100, 100, 3, 10, 'T');
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (9, 'Aula 2 Informática Noche', 100, 100, 3, 10, 'N');
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (10, 'Aula 3 Informática Mañana', 100, 100, 3, 11, 'M');
+INSERT INTO aulas (`idaula`, `aul_denominacion`, `aul_plazasdisponibles`, `aul_plazashabilitadas`, `id_carrera`, `idplan`, `idturno`) VALUES (12, 'Aula 3 Informática Noche', 100, 100, 3, 11, 'N');
+
+
+#
+# TABLE STRUCTURE FOR: baneo
+#
+
+DROP TABLE IF EXISTS baneo;
+
+CREATE TABLE `baneo` (
+  `idbaneo` int(10) NOT NULL AUTO_INCREMENT,
+  `bamotivo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `bafechainicio` date NOT NULL,
+  `bafechafin` date NOT NULL,
+  `baestado` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `idusuario` int(10) NOT NULL,
+  PRIMARY KEY (`idbaneo`),
+  KEY `fk_baneo_usuarios1_idx` (`idusuario`),
+  CONSTRAINT `fk_baneo_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+INSERT INTO baneo (`idbaneo`, `bamotivo`, `bafechainicio`, `bafechafin`, `baestado`, `idusuario`) VALUES (1, 'Prueba', '2015-11-13', '2015-11-13', 'desactivado', 13);
+INSERT INTO baneo (`idbaneo`, `bamotivo`, `bafechainicio`, `bafechafin`, `baestado`, `idusuario`) VALUES (2, '444', '2015-11-13', '2015-11-13', 'desactivado', 13);
+
+
+#
+# TABLE STRUCTURE FOR: carreras
+#
+
+DROP TABLE IF EXISTS carreras;
+
+CREATE TABLE `carreras` (
+  `id_carrera` int(3) NOT NULL AUTO_INCREMENT COMMENT 'campo identificador de la tabla',
+  `car_denominacion` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT 'nombre o denominación de la carrera',
+  PRIMARY KEY (`id_carrera`),
+  UNIQUE KEY `denominacion_UNIQUE` (`car_denominacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalle de carreras';
+
+INSERT INTO carreras (`id_carrera`, `car_denominacion`) VALUES (3, 'Ingeniería en Informática');
+INSERT INTO carreras (`id_carrera`, `car_denominacion`) VALUES (4, 'Licenciatura en Diseño Gráfico');
+
+
+#
+# TABLE STRUCTURE FOR: cate_plan
+#
+
+DROP TABLE IF EXISTS cate_plan;
+
+CREATE TABLE `cate_plan` (
+  `idplan` int(3) NOT NULL COMMENT 'Campo identificador de la Tabla',
+  `idcatedra` int(3) NOT NULL COMMENT 'Campo identificador de la Tabla',
+  `diascatedra` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`idplan`,`idcatedra`),
+  KEY `fk_CATEDRAS_has_PLAN_ESTUDIOS_PLAN_ESTUDIOS1_idx` (`idplan`),
+  KEY `fk_CATEDRAS_has_PLAN_ESTUDIOS_CATEDRAS1_idx` (`idcatedra`),
+  CONSTRAINT `fk_CATEDRAS_has_PLAN_ESTUDIOS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CATEDRAS_has_PLAN_ESTUDIOS_PLAN_ESTUDIOS1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registtro y Detalle de cátedras y Planes de estudios';
+
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (9, 1, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (9, 2, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (10, 5, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (10, 6, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (10, 7, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (10, 8, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (11, 9, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (11, 10, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (11, 11, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (11, 12, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (12, 13, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (12, 14, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (12, 15, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (12, 16, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (13, 17, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (13, 18, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (13, 40, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (13, 41, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (14, 19, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (14, 20, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (14, 21, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (15, 22, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (15, 23, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (15, 24, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (15, 25, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (16, 26, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (16, 27, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (16, 28, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (16, 42, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (17, 29, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (17, 30, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (17, 31, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (17, 33, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (18, 32, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (18, 34, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (19, 35, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (19, 36, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (19, 37, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (20, 38, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (20, 43, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (20, 44, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (21, 45, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (21, 46, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (21, 47, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (21, 48, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (22, 49, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (22, 50, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (22, 51, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (22, 56, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (23, 52, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (23, 53, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (23, 54, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (23, 55, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (24, 57, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (24, 58, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (24, 59, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (25, 60, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (25, 61, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (25, 62, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (26, 63, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (26, 64, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (26, 65, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (28, 69, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (28, 70, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (28, 71, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (29, 72, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (29, 73, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (29, 74, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (30, 75, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (30, 76, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (30, 77, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (31, 78, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (31, 79, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (31, 80, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (32, 81, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (32, 82, 'Lunes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (32, 83, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (33, 84, 'Martes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (33, 85, 'Miercoles');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (33, 86, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (34, 87, 'Jueves');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (34, 88, 'Viernes');
+INSERT INTO cate_plan (`idplan`, `idcatedra`, `diascatedra`) VALUES (34, 89, 'Lunes');
+
+
+#
+# TABLE STRUCTURE FOR: catedras
+#
+
+DROP TABLE IF EXISTS catedras;
+
+CREATE TABLE `catedras` (
+  `idcatedra` int(3) NOT NULL AUTO_INCREMENT COMMENT 'campo de identificador de la tabla',
+  `cat_denominacion` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT 'Nombre o denominacion de la cátedra',
+  `cat_diascatedra` varchar(20) COLLATE utf8_spanish_ci NOT NULL COMMENT 'Días que se desarrollara la cátedra',
+  PRIMARY KEY (`idcatedra`)
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de cátedras';
+
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (1, 'Introducción ala Informática', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (2, 'Análisis Matemático I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (5, 'Análisis Matemático II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (6, 'Estructura de Datos I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (7, 'Introducción ala Programación', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (8, 'Ingles Técnico II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (9, 'Matemática Discreta', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (10, 'Estructura de Datos II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (11, 'Diseño y Construcción de Páginas Web (HTML)', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (12, 'Ingles Técnico III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (13, 'Laboratorio I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (14, 'Base de Datos I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (15, 'Física I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (16, 'Fundamento ala P.O.O', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (17, 'Geometría Analítica', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (18, 'Laboratorio II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (19, 'Maso terapia Practico III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (20, 'Sistema y Métodos', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (21, 'Trabajo Final de Programación', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (22, 'Sistemas I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (23, 'Probabilidad y Estadística', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (24, 'Ingenieria del Software I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (25, 'Redes e Internet', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (26, 'Sistemas Operativos', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (27, 'Ingenieria del Software II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (28, 'Seguridad en Redes ', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (29, 'Organizacion de Empresas', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (30, 'Sistemas II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (31, 'Calculo Numérico', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (32, 'Arquitectura de Ordenadores', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (33, 'Base de Datos III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (34, 'Diseño Web Avanzado', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (35, 'Metodología de la Investigación', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (36, 'Gestión de Proyecto Informatico', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (37, 'Sistemas III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (38, 'Seguridad y Auditoria Informática', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (40, 'Física II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (41, 'Contabilidad', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (42, 'Ética Profesional', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (43, 'Evaluación de Sistemas Informáticos', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (44, 'Presentación y Defensa del Sistema Desarrollado', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (45, 'Ingeniería del Conocimiento I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (46, 'Lenguaje y Autómata', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (47, 'Gestión de Calidad', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (48, 'Tutoria I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (49, 'Ingeniería del Conocimiento II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (50, 'Compiladores I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (51, 'Inteligencia Artificial I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (52, 'Compiladores II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (53, 'Inteligencia Artificial II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (54, 'Sistema Paralelo y Distribuido', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (55, 'Tutoria III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (56, 'Tutoria II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (57, 'Diseño Gráfico I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (58, 'Gráfica Digital I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (59, 'Taller de Diseño Gráfico I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (60, 'Diseño Gráfico II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (61, 'Gráfica Digital II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (62, 'Taller de Diseño Gráfico II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (63, 'Historia del Arte y el Diseño I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (64, 'Diseño Gráfico III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (65, 'Gráfica Digital III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (66, 'Historia del Arte y el Diseño II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (67, 'Gráfica Digital VI', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (68, 'Tipografía I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (69, 'Señalética', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (70, 'Gráfica Digital V', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (71, 'Tipografía III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (72, 'Métodos de impresión', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (73, 'Publicidad I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (74, 'Gráfica Digital VI', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (75, 'Fotografía I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (76, 'Publicidad II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (77, 'Gráfica Digital VII', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (78, 'Fotografía II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (79, 'Gráfica Digital VIII', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (80, 'Marketing', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (81, 'Packaging', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (82, 'Publicidad III', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (83, 'Diseño Editorial', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (84, 'Metodología de la Investigación I', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (85, 'Metodología de la Investigación II', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (86, 'Planeamiento Estratégico', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (87, 'Taller Audio Visual', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (88, 'Proyectos de Inversión ', '');
+INSERT INTO catedras (`idcatedra`, `cat_denominacion`, `cat_diascatedra`) VALUES (89, 'Campaña Gráfica y Presupuesto', '');
+
+
+#
+# TABLE STRUCTURE FOR: ci_sessions
+#
+
+DROP TABLE IF EXISTS ci_sessions;
+
+CREATE TABLE `ci_sessions` (
+  `session_id` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `user_agent` varchar(120) CHARACTER SET utf8 DEFAULT NULL,
+  `last_activity` int(10) DEFAULT NULL,
+  `user_data` text CHARACTER SET utf8,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+#
+# TABLE STRUCTURE FOR: comments
+#
+
+DROP TABLE IF EXISTS comments;
+
+CREATE TABLE `comments` (
+  `idcomentario` int(11) NOT NULL AUTO_INCREMENT,
+  `autor` varchar(45) CHARACTER SET utf8 NOT NULL,
+  `comentario` varchar(150) CHARACTER SET utf8 NOT NULL,
+  `fecha` datetime NOT NULL,
+  `idtarea` int(3) NOT NULL,
+  `ruta_archivo` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `nombre_archivo` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`idcomentario`),
+  KEY `fk_comments_tareas1_idx` (`idtarea`),
+  CONSTRAINT `fk_comments_tareas1` FOREIGN KEY (`idtarea`) REFERENCES `tareas` (`idtarea`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+#
+# TABLE STRUCTURE FOR: inscripcion
+#
+
+DROP TABLE IF EXISTS inscripcion;
+
+CREATE TABLE `inscripcion` (
+  `idinscripcion` int(10) NOT NULL AUTO_INCREMENT,
+  `ins_nombre` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `ins_nrocedula` int(10) unsigned NOT NULL,
+  `ins_direccion` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `ins_telefono` int(10) NOT NULL,
+  `ins_email` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `ins_password` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `ins_pregunta` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `ins_respuesta` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `ins_visto` int(1) NOT NULL,
+  `ins_turno` varchar(1) CHARACTER SET utf8 NOT NULL,
+  `idaula` int(3) NOT NULL,
+  `idplan` int(3) NOT NULL,
+  `id_carrera` int(3) NOT NULL,
+  PRIMARY KEY (`idinscripcion`),
+  KEY `fk_inscripcion_aulas1_idx` (`idaula`),
+  KEY `fk_inscripcion_plan_estudios1_idx` (`idplan`),
+  KEY `fk_inscripcion_carreras1_idx` (`id_carrera`),
+  CONSTRAINT `fk_inscripcion_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_inscripcion_carreras1` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id_carrera`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_inscripcion_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+#
+# TABLE STRUCTURE FOR: notas_examenes
+#
+
+DROP TABLE IF EXISTS notas_examenes;
+
+CREATE TABLE `notas_examenes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idcatedra` int(3) NOT NULL,
+  `idplan` int(3) NOT NULL,
+  `idusuario` int(10) NOT NULL,
+  `parcial` int(2) DEFAULT NULL,
+  `recuperatorio` int(2) DEFAULT NULL,
+  `primer_ordinario` int(2) DEFAULT NULL,
+  `segundo_ordinario` int(2) DEFAULT NULL,
+  `complementario` int(3) DEFAULT NULL,
+  `extraordinario` int(3) DEFAULT NULL,
+  `mesa_especial` int(3) DEFAULT NULL,
+  `idaula` int(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_notas_examenes_catedras1_idx` (`idcatedra`),
+  KEY `fk_notas_examenes_plan_estudios1_idx` (`idplan`),
+  KEY `fk_notas_examenes_usuarios1_idx` (`idusuario`),
+  KEY `fk_notas_examenes_aulas1_idx` (`idaula`),
+  CONSTRAINT `fk_notas_examenes_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notas_examenes_catedras1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notas_examenes_plan_estudios1` FOREIGN KEY (`idplan`) REFERENCES `plan_estudios` (`idplan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notas_examenes_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+#
+# TABLE STRUCTURE FOR: notas_tarea
+#
+
+DROP TABLE IF EXISTS notas_tarea;
+
+CREATE TABLE `notas_tarea` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `puntos_asignados` int(3) DEFAULT NULL,
+  `puntos_logrados` int(3) DEFAULT NULL,
+  `idcatedra` int(3) NOT NULL,
+  `idtarea` int(3) NOT NULL,
+  `idusuario` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_notas_tarea_catedras1_idx` (`idcatedra`),
+  KEY `fk_notas_tarea_tareas1_idx` (`idtarea`),
+  KEY `fk_notas_tarea_usuarios1_idx` (`idusuario`),
+  CONSTRAINT `fk_notas_tarea_catedras1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notas_tarea_tareas1` FOREIGN KEY (`idtarea`) REFERENCES `tareas` (`idtarea`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notas_tarea_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+#
+# TABLE STRUCTURE FOR: plan_estudios
+#
+
+DROP TABLE IF EXISTS plan_estudios;
+
+CREATE TABLE `plan_estudios` (
+  `idplan` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador de la tabla',
+  `pla_denominacion` varchar(30) CHARACTER SET utf8 NOT NULL COMMENT 'Nombre o denominación del Plan de Estudio',
+  `pla_fechainicio` date DEFAULT NULL,
+  `pla_fechafin` date DEFAULT NULL,
+  PRIMARY KEY (`idplan`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro de Plan de estudio para aulas';
+
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (9, 'Informática Primer Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (10, 'Informática Segundo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (11, 'Informática Tercer Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (12, 'Informática Cuarto Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (13, 'Informática Quinto Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (14, 'Informática Sexto Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (15, 'Informática Séptimo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (16, 'Informática Octavo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (17, 'Informática Noveno Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (18, 'Informática Décimo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (19, 'Informática Décimo 1er Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (20, 'Informática Décimo 2do Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (21, 'Informática Décimo 3er Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (22, 'Informática Décimo 4to Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (23, 'Informática Décimo 5to Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (24, 'Diseño Gráfico Primer Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (25, 'Diseño Gráfico Segundo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (26, 'Diseño Gráfico Tercer Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (28, 'Diseño Gráfico Quinto Módulo', '2015-11-01', '2015-11-23');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (29, 'Diseño Gráfico Sexto Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (30, 'Diseño Gráfico Séptimo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (31, 'Diseño Gráfico Octavo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (32, 'Diseño Gráfico Noveno Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (33, 'Diseño Gráfico Décimo Módulo', '2015-11-01', '2015-11-30');
+INSERT INTO plan_estudios (`idplan`, `pla_denominacion`, `pla_fechainicio`, `pla_fechafin`) VALUES (34, 'Diseño Gráfico Décimo 1er Módu', '2015-11-01', '2015-11-30');
+
+
+#
+# TABLE STRUCTURE FOR: recuperacion
+#
+
+DROP TABLE IF EXISTS recuperacion;
+
+CREATE TABLE `recuperacion` (
+  `idrecuperacion` int(10) NOT NULL AUTO_INCREMENT,
+  `recupregunta` varchar(100) CHARACTER SET utf8 NOT NULL COMMENT 'tabla para recuperacion de contraseña',
+  `recurespuesta` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `idusuario` int(10) NOT NULL,
+  PRIMARY KEY (`idrecuperacion`),
+  KEY `fk_RECUPERACION_USUARIOS1_idx` (`idusuario`),
+  CONSTRAINT `fk_RECUPERACION_USUARIOS1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+INSERT INTO recuperacion (`idrecuperacion`, `recupregunta`, `recurespuesta`, `idusuario`) VALUES (1, 'Cual es tu heroe Favorito', 'ec0e2603172c73a8b644bb9456c1ff6e', 23);
+INSERT INTO recuperacion (`idrecuperacion`, `recupregunta`, `recurespuesta`, `idusuario`) VALUES (2, 'Cual es tu heroe Favorito', 'af4f53decf756dd454d80e13351b1a55', 24);
+INSERT INTO recuperacion (`idrecuperacion`, `recupregunta`, `recurespuesta`, `idusuario`) VALUES (3, 'Cual es tu heroe Favorito', 'ec0e2603172c73a8b644bb9456c1ff6e', 27);
+
+
+#
+# TABLE STRUCTURE FOR: reset
+#
+
+DROP TABLE IF EXISTS reset;
+
+CREATE TABLE `reset` (
+  `idreset` int(2) NOT NULL AUTO_INCREMENT,
+  `token` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `idusuario` int(10) NOT NULL,
+  PRIMARY KEY (`idreset`),
+  KEY `fk_reset_usuarios1_idx` (`idusuario`),
+  CONSTRAINT `fk_reset_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+#
+# TABLE STRUCTURE FOR: tareas
+#
+
+DROP TABLE IF EXISTS tareas;
+
+CREATE TABLE `tareas` (
+  `idtarea` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador de la tabla',
+  `tar_descripcion` varchar(30) CHARACTER SET utf8 NOT NULL COMMENT 'Descripcion de la Tarea ',
+  `tar_fechaasignacion` date NOT NULL COMMENT 'Fecha en que la Tarea fue creada',
+  `tar_fechaentrega` date NOT NULL COMMENT 'Fecha de entrega de la Tarea',
+  `tar_puntostarea` int(2) NOT NULL COMMENT 'Puntos que se asigna a una Tarea',
+  `idcatedra` int(3) NOT NULL,
+  `idaula` int(3) NOT NULL,
+  `tar_nombrearchivo` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `tar_rutaarchivo` varchar(100) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`idtarea`),
+  KEY `fk_TAREAS_CATEDRAS1_idx` (`idcatedra`),
+  KEY `fk_tareas_aulas1_idx` (`idaula`),
+  CONSTRAINT `fk_tareas_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TAREAS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y Detalles de tareas';
+
+INSERT INTO tareas (`idtarea`, `tar_descripcion`, `tar_fechaasignacion`, `tar_fechaentrega`, `tar_puntostarea`, `idcatedra`, `idaula`, `tar_nombrearchivo`, `tar_rutaarchivo`) VALUES (1, 'fabricacion de mueble', '2015-11-18', '2015-11-20', 0, 1, 4, 'NULL', 'NULL');
+
+
+#
+# TABLE STRUCTURE FOR: tcalendario
+#
+
+DROP TABLE IF EXISTS tcalendario;
+
+CREATE TABLE `tcalendario` (
+  `idagenda` int(10) NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `evento` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `prioridad` varchar(1) COLLATE utf8_spanish_ci NOT NULL,
+  `idaula` int(3) NOT NULL,
+  `idusuario` int(10) NOT NULL,
+  PRIMARY KEY (`idagenda`),
+  KEY `fk_tcalendario_aulas1_idx` (`idaula`),
+  KEY `fk_tcalendario_usuarios1_idx` (`idusuario`),
+  CONSTRAINT `fk_tcalendario_aulas1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tcalendario_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+#
+# TABLE STRUCTURE FOR: usu_au
+#
+
+DROP TABLE IF EXISTS usu_au;
+
+CREATE TABLE `usu_au` (
+  `idusuario` int(10) NOT NULL COMMENT 'Campo identificador de la tabla',
+  `idaula` int(5) NOT NULL COMMENT 'Campo identificador de la tabla',
+  PRIMARY KEY (`idaula`,`idusuario`),
+  KEY `fk_USUARIOS_has_AULAS_AULAS1_idx` (`idaula`),
+  KEY `fk_USUARIOS_has_AULAS_USUARIOS1_idx` (`idusuario`),
+  CONSTRAINT `fk_USUARIOS_has_AULAS_AULAS1` FOREIGN KEY (`idaula`) REFERENCES `aulas` (`idaula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_USUARIOS_has_AULAS_USUARIOS1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='registro y detalle de aulas y usuarios';
+
+INSERT INTO usu_au (`idusuario`, `idaula`) VALUES (24, 5);
+INSERT INTO usu_au (`idusuario`, `idaula`) VALUES (27, 5);
+
+
+#
+# TABLE STRUCTURE FOR: usu_cate
+#
+
+DROP TABLE IF EXISTS usu_cate;
+
+CREATE TABLE `usu_cate` (
+  `idusuario` int(10) NOT NULL COMMENT 'Campo identificador de la tabla',
+  `idcatedra` int(3) NOT NULL COMMENT 'Campo identificador de la tabla',
+  PRIMARY KEY (`idcatedra`,`idusuario`),
+  KEY `fk_USUARIOS_has_CATEDRAS_CATEDRAS1_idx` (`idcatedra`),
+  KEY `fk_USUARIOS_has_CATEDRAS_USUARIOS1_idx` (`idusuario`),
+  CONSTRAINT `fk_USUARIOS_has_CATEDRAS_CATEDRAS1` FOREIGN KEY (`idcatedra`) REFERENCES `catedras` (`idcatedra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_USUARIOS_has_CATEDRAS_USUARIOS1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalle de usuarios y catedras';
+
+INSERT INTO usu_cate (`idusuario`, `idcatedra`) VALUES (13, 1);
+
+
+#
+# TABLE STRUCTURE FOR: usuarios
+#
+
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE `usuarios` (
+  `idusuario` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador de la tabla',
+  `usu_nombre` varchar(30) CHARACTER SET utf8 NOT NULL COMMENT 'Nombre y Apellido  del usuario',
+  `usu_nrocedula` int(10) NOT NULL COMMENT 'Número de cédula de identidad del usuario',
+  `usu_direccion` varchar(100) CHARACTER SET utf8 NOT NULL COMMENT 'Dirección actual del usuario',
+  `usu_telefono` int(10) NOT NULL COMMENT 'Número actual para contactar al usuario',
+  `usu_email` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT 'Correo electronico actual para contactar al usuario',
+  `usu_password` varchar(40) CHARACTER SET utf8 NOT NULL COMMENT 'Contraseña del usuario',
+  `idperfil` varchar(1) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`idusuario`),
+  UNIQUE KEY `nro_cedula_UNIQUE` (`usu_nrocedula`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci COMMENT='Registro y detalles de los usuarios';
+
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (12, 'admin', 12, 'Pai Perez', 123456789, 'admin@admin.com', '202cb962ac59075b964b07152d234b70', '1');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (13, 'Ing.Diego Casco', 123, 'Pai Perez', 123456789, 'diegocasco@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (14, 'Lic. Raquel Romero', 1234, 'Pai Perez', 12345678, 'raquelromero@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (15, 'Lic. Antonia Coronel', 12345, 'Pai Perez', 12345678, 'antoniacoronel@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (16, 'Lic. Bettina López', 123456, 'Pai Perez', 12345678, 'bettinalopez@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (17, 'Ing. Ever Casco', 1234567, 'Pai Perez', 12345678, 'evercasco@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (18, 'Ing. Ricardo Sosa', 12345678, 'Pai Perez', 12345678, 'ricardososa@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (19, 'Lic. Juan Alonzo', 123456789, 'Pai Perez', 12345678, 'juanalonzo@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (20, 'Lic. Carlos Martinez', 123456780, 'Pai Perez', 12345678, 'carlosmartinez@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (21, 'V.M José Flores', 1234567891, 'Pai Perez', 12345678, 'joseflores@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (22, 'Ing. Andrea Riego', 1234567892, 'Pai Perez', 12345678, 'andreariego@profesor.com', '202cb962ac59075b964b07152d234b70', '2');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (23, 'Ruben Toledo', 4345503, 'Magallanes 1947 casi Pozo Favorito', 971339788, 'toledorubendario91@gmail.com', '202cb962ac59075b964b07152d234b70', '3');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (24, 'Daniel Ferreira', 14785236, 'Luque', 123, 'dani@alumno.com', '202cb962ac59075b964b07152d234b70', '3');
+INSERT INTO usuarios (`idusuario`, `usu_nombre`, `usu_nrocedula`, `usu_direccion`, `usu_telefono`, `usu_email`, `usu_password`, `idperfil`) VALUES (27, 'Ruben Gonzalez', 870127, 'cerrocora', 1233, 'sonia.car90@gmail.com', '202cb962ac59075b964b07152d234b70', '3');
+
+
+#
+# TABLE STRUCTURE FOR: vista_asistencias
+#
+
+DROP TABLE IF EXISTS vista_asistencias;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_asistencias` AS select `usu`.`usu_nombre` AS `usu_nombre`,`usu`.`idusuario` AS `idusuario`,`ca`.`cat_denominacion` AS `cat_denominacion`,`au`.`aul_denominacion` AS `aul_denominacion`,if((`asi`.`asi_estado` = 'P'),'Presente','Ausente') AS `asi_estado`,`asi`.`asi_fecha` AS `asi_fecha`,`asi`.`idcatedra` AS `idcatedra`,`asi`.`asi_justificacion` AS `asi_justificacion`,`asi`.`idaula` AS `idaula` from (((`asistencias` `asi` join `usuarios` `usu` on((`usu`.`idusuario` = `asi`.`idusuario`))) join `catedras` `ca` on((`ca`.`idcatedra` = `asi`.`idcatedra`))) join `aulas` `au` on((`au`.`idaula` = `asi`.`idaula`)));
+
+utf8mb4_general_ci;
+

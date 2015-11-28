@@ -184,7 +184,7 @@ class Adhome extends CI_Controller {
 //                if ($query1->num_rows() > 0) {
                 $insert = $this->adhome_model->insert_profesor($a, $b, $c, $d, $e, $f);
                 //  $recuperacion = $this->adhome_model->insert_recuperacion($a, $g, $h);
-             //  $enviar = $this->adhome_model->enviar_correo($a, $z, $e, $g);
+            $enviar = $this->adhome_model->enviar_correo($a, $z, $e, $g);
 
 
 

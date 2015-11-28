@@ -33,9 +33,11 @@ class Catedras_model extends CI_Model {
     }
 
     public function elimicatedra($a) {
-        $tablas = array('usu_cate', 'tareas', 'cate_plan', 'catedras');
-        $this->db->where('idcatedra', $a);
-        $this->db->delete($tablas);
+          $this->db->where('idcatedra', $a);
+        $this->db->delete('catedras');
+        if ($this->db->_error_message()) {
+            return $data = 'Atencion!!! Nose puede borrar esta Catedra';
+        }
     }
 
     public function edicatedra($a,$d) {
@@ -66,7 +68,7 @@ join cate_plan as capa on ca.idcatedra=capa.idcatedra;");
     }
     
     public function lista_catedras() {
-        $consulta = $this->db->query("select * from catedras;");
+        $consulta = $this->db->query("select * from catedras");
         return $consulta->result();
     }
 

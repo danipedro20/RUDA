@@ -12,8 +12,8 @@ class Planestudio_control extends CI_Controller {
 
     public function plan() {
         $datos['titulo'] = 'Ruda - Crear Plan de estudios';
-        $datos['arrDatoscate'] = $this->planestudio_model->selcatedras();
-        $datos['arrDatosplan'] = $this->planestudio_model->selplan();
+        $datos['arrDatoscate'] = $this->planestudio_model->verlascatedras();
+
         $datos['contenido'] = 'plan_view';
         $this->load->view('plantillas/adplantilla', $datos);
     }
@@ -33,10 +33,10 @@ class Planestudio_control extends CI_Controller {
 
     public function plan_estudio() {
 
-        $a = $this->input->post('plan');
+        $a = $this->input->post('selplan');
         $b = $this->input->post('catedra');
         $c = $this->input->post('diascatedra');
-        $this->planestudio_model->inserplan($a, $b ,$c);
+        $this->planestudio_model->inserplan($a, $b, $c);
         redirect(base_url('/backend/planestudio_control/success_plan/'));
     }
 
@@ -114,7 +114,7 @@ class Planestudio_control extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-          $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 12);
 
         $this->pdf->Cell(40, 6, '', 0, 0, 'C');
         $this->pdf->Cell(100, 6, 'Lista de Planes/Catedras', 1, 0, 'C');

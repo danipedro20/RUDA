@@ -10,7 +10,7 @@ class Usuarios_control extends CI_Controller {
         $this->load->model('frontend/usuario_model');
 
 
-        //$this->load->model('frontend/usuario_model');
+       
     }
 
     public function logueo() {

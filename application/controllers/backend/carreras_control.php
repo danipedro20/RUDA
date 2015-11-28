@@ -8,7 +8,7 @@ class Carreras_control extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('backend/carreras_model');
-           $this->load->library('pdf');
+        $this->load->library('pdf');
     }
 
     public function vercarreras() {
@@ -87,13 +87,12 @@ class Carreras_control extends CI_Controller {
     }
 
     public function eliminar_carrera() {
-
-
         $id = $this->uri->segment(4);
-
-
-        $insert = $this->carreras_model->elimicarrera($id);
-        redirect(base_url('/backend/carreras_control/vercarreras/'));
+        $datos['titulo'] = 'Ruda - Ver Carreras';
+        $datos['error'] = $this->carreras_model->elimicarrera($id);
+        $datos['lista'] = $this->carreras_model->lista();
+        $datos['contenido'] = 'listar_carreras_view';
+        $this->load->view('plantillas/adplantilla', $datos);
     }
 
     function carreras_check($carrera) {
@@ -105,7 +104,8 @@ class Carreras_control extends CI_Controller {
             return TRUE;
         }
     }
-      public function reporte_carreras() {
+
+    public function reporte_carreras() {
 
 
         $plan = $this->carreras_model->lista();
@@ -129,7 +129,7 @@ class Carreras_control extends CI_Controller {
         /* Se define el titulo, márgenes izquierdo, derecho y
          * el color de relleno predeterminado
          */
-         $this->pdf->SetFont('Arial', 'B', 12);
+        $this->pdf->SetFont('Arial', 'B', 12);
 
         $this->pdf->Cell(40, 6, '', 0, 0, 'C');
         $this->pdf->Cell(100, 6, 'Lista de Carreras', 1, 0, 'C');
@@ -146,7 +146,7 @@ class Carreras_control extends CI_Controller {
 
         $this->pdf->Cell(15, 7, '#', 'TBL', 0, 'C', '1');
         $this->pdf->Cell(60, 7, 'Carreras', 'TBL', 0, 'C', '1');
-       
+
         $this->pdf->Ln(7);
         // La variable $x se utiliza para mostrar un número consecutivo
         $x = 1;
@@ -155,10 +155,10 @@ class Carreras_control extends CI_Controller {
             // se imprime el numero actual y despues se incrementa el valor de $x en uno
             $this->pdf->Cell(15, 5, $x++, 'TBLR', 0, 'C', 0);
             // Se imprimen los datos de cada Catedra
-           
+
 
             $this->pdf->Cell(60, 5, utf8_decode($i->car_denominacion), 'TBLR', 0, 'C', 0);
-           
+
             //Se agrega un salto de linea
             $this->pdf->Ln(5);
         }

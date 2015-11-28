@@ -26,10 +26,11 @@ class Carreras_model extends CI_Model {
     }
 
     public function elimicarrera($id) {
-
-        $tablas = array('aulas', 'carreras');
         $this->db->where('id_carrera', $id);
-        $this->db->delete($tablas);
+        $this->db->delete('carreras');
+        if ($this->db->_error_message()) {
+            return $data = 'Atencion!!! Nose puede borrar esta Carrera';
+        }
     }
 
     public function lista() {
@@ -41,7 +42,8 @@ class Carreras_model extends CI_Model {
         $consulta = $this->db->query("select * from carreras where id_carrera='$id';");
         return $consulta->row();
     }
-     function carreras_check($carreras) {
+
+    function carreras_check($carreras) {
         $this->db->where('car_denominacion', $carreras);
         $query = $this->db->get('carreras');
 
